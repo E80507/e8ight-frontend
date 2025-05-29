@@ -39,7 +39,7 @@ const CustomCheckboxField = <T extends FieldValues>({
         // 그룹 체크박스인 경우 배열에서 값 확인
         const isChecked = Array.isArray(field.value) 
           ? field.value?.includes(value)
-          : field.value;
+          : field.value === true;
 
         // 체크박스 변경 핸들러
         const handleChange = (checked: boolean) => {
@@ -57,33 +57,39 @@ const CustomCheckboxField = <T extends FieldValues>({
         };
 
         // 고유 ID 생성
-        const id = `checkbox-${name}-${value}`;
+        const id = `checkbox-${name}-${value || "single"}`;
 
         return (
           <FormItem className="flex flex-row items-center space-x-2">
-            <FormControl>
-              <div className="relative">
-                <input
-                  id={id}
-                  type="checkbox"
-                  checked={isChecked || false}
-                  onChange={(e) => handleChange(e.target.checked)}
-                  className="peer absolute opacity-0 w-[18px] h-[18px] cursor-pointer z-10"
-                  value={value}
-                  name={`${name}-${value}`}
-                />
-                <Check type={type} isChecked={isChecked || false} />
-              </div>
-            </FormControl>
-            {label && (
-              <label
-                htmlFor={id}
-                className="body-2 cursor-pointer select-none !mt-0 flex-1"
-              >
-                {label}
-                {isEssential && <span className="text-red-500 ml-1">*</span>}
-              </label>
-            )}
+            <label
+              htmlFor={id}
+              className="flex flex-1 items-center gap-2 cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                handleChange(!isChecked);
+              }}
+            >
+              <FormControl>
+                <div className="relative inline-block">
+                  <input
+                    id={id}
+                    type="checkbox"
+                    checked={isChecked || false}
+                    onChange={(e) => handleChange(e.target.checked)}
+                    className="peer absolute opacity-0 w-[18px] h-[18px] cursor-pointer z-10"
+                    value={value}
+                    name={`${name}-${value}`}
+                  />
+                  <Check type={type} isChecked={isChecked || false} />
+                </div>
+              </FormControl>
+              {label && (
+                <div className="select-none">
+                  {label}
+                  {isEssential && <span className="text-red-500 ml-1">*</span>}
+                </div>
+              )}
+            </label>
             {showMessage && <FormMessage />}
           </FormItem>
         );
