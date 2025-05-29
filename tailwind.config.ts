@@ -16,6 +16,7 @@ const config: Config = {
       },
       fontFamily: {
         gibson: ["var(--font-gibson)"],
+        pretendard: ["var(--font-pretendard)"],
       },
       colors: {
         primary: "hsl(var(--primary))",

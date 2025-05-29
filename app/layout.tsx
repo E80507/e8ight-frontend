@@ -36,6 +36,62 @@ const gibson = localFont({
   variable: "--font-gibson",
 });
 
+const pretendard = localFont({
+  src: [
+    {
+      path: "./fonts/Pretendard-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-Regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-Medium.woff",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-SemiBold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-SemiBold.woff",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-Bold.woff",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-ExtraBold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-ExtraBold.woff",
+      weight: "800",
+      style: "normal",
+    },
+  ],
+  variable: "--font-pretendard",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(SERVICE_URL),
   title: SERVICE_NAME,
@@ -78,7 +134,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${gibson.variable} w-screen min-w-full overflow-x-hidden bg-white font-gibson antialiased`}
+        className={`${gibson.variable} ${pretendard.variable} w-screen min-w-full overflow-x-hidden bg-white font-gibson antialiased`}
       >
         <div className="relative min-h-screen">{children}</div>
       </body>
