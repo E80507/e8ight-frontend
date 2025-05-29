@@ -12,9 +12,8 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        mobile: { max: "599px" },
-        tablet: { min: "600px", max: "1024px" },
-        web: { min: "1025px" },
+        tablet: "600px",
+        web: "1025px",
       },
       fontFamily: {
         gibson: ["var(--font-gibson)"],
@@ -124,6 +123,13 @@ const config: Config = {
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-gibson)",
         },
+        ".gibson-body-0": {
+          fontSize: "36px",
+          lineHeight: "160%",
+          fontWeight: "600",
+          letterSpacing: "-1.5%",
+          fontFamily: "var(--font-gibson)",
+        },
         ".gibson-body-1": {
           fontSize: "32px",
           lineHeight: "150%",
@@ -137,6 +143,62 @@ const config: Config = {
           fontWeight: "400",
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-gibson)",
+        },
+        ".pretendard-display-1": {
+          fontSize: "48px",
+          lineHeight: "150%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-display-2": {
+          fontSize: "40px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-display-3": {
+          fontSize: "32px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-h1-l": {
+          fontSize: "32px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-1.5%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-h1-m": {
+          fontSize: "24px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-title-s": {
+          fontSize: "14px",
+          lineHeight: "150%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-body-1": {
+          fontSize: "20px",
+          lineHeight: "200%",
+          fontWeight: "300",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-body-2": {
+          fontSize: "16px",
+          lineHeight: "150%",
+          fontWeight: "300",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
         },
         ".h1-l": {
           fontSize: "32px",
@@ -220,7 +282,11 @@ const config: Config = {
           lineHeight: "150%",
           fontWeight: "700",
           letterSpacing: "-0.3%",
-          fontFamily: "var(--font-pretendard)",
+        },
+        ".subtitle-l": {
+          fontSize: "18px",
+          lineHeight: "150%",
+          fontWeight: "600",
         },
         ".subtitle-m": {
           fontSize: "16px",
@@ -254,21 +320,18 @@ const config: Config = {
           lineHeight: "150%",
           fontWeight: "400",
           letterSpacing: "-0.3%",
-          fontFamily: "var(--font-pretendard)",
         },
         ".body-2": {
           fontSize: "16px",
           lineHeight: "150%",
           fontWeight: "400",
           letterSpacing: "-0.3%",
-          fontFamily: "var(--font-pretendard)",
         },
         ".body-3": {
           fontSize: "14px",
           lineHeight: "150%",
           fontWeight: "400",
           letterSpacing: "-0.3%",
-          fontFamily: "var(--font-pretendard)",
         },
         ".body-2-bold": {
           fontSize: "14px",
@@ -316,21 +379,18 @@ const config: Config = {
           lineHeight: "150%",
           fontWeight: "700",
           letterSpacing: "-0.3%",
-          fontFamily: "var(--font-pretendard)",
         },
         ".display-2": {
           fontSize: "40px",
           lineHeight: "160%",
           fontWeight: "700",
           letterSpacing: "-0.3%",
-          fontFamily: "var(--font-pretendard)",
         },
         ".display-3": {
           fontSize: "32px",
           lineHeight: "160%",
           fontWeight: "700",
           letterSpacing: "-0.3%",
-          fontFamily: "var(--font-pretendard)",
         },
         ".hide-scroll-bar": {
           "-ms-overflow-style": "none", // IE and Edge
