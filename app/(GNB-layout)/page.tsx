@@ -1,7 +1,6 @@
 "use client";
-
-import ArchiveSection from "./main/archive-section";
-import SubscriptionSection from "./main/subscription-section";
+import ArchiveSection from "@/app/main/archive-section";
+import SubscriptionSection from "../main/subscription-section";
 
 const Home = () => {
   return (
