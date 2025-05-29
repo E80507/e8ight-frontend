@@ -169,6 +169,13 @@ const config: Config = {
           fontWeight: "700",
           letterSpacing: "-0.3%",
         },
+        ".title-s": {
+          fontSize: "14px",
+          lineHeight: "150%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)"
+        },
         ".subtitle-m": {
           fontSize: "16px",
           lineHeight: "150%",
