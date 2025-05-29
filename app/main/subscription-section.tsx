@@ -21,12 +21,12 @@ const SubscriptionSection = () => {
         {/* 콘텐츠 */}
         <div className="relative z-10 flex flex-col justify-center items-center gap-[32px] h-full text-white text-center">
           <div className="flex flex-col gap-[17px]">
-            <h2 className="web:text-[36px] tablet:text-[32px] text-[24px] font-semibold leading-[160%] tracking-[-1.5%]">
+            <h2 className="web:gibson-heading-1 tablet:gibson-heading-2 gibson-heading-3">
               Global No.1<br />
               Digital Twin Platform
             </h2>
             
-            <p className="web:subtitle-l tablet:subtitle-m subtitle-s">뉴스레터를 구독하여 새로운 최신 테크 이야기를 만나보세요.</p>
+            <p className="web:pretendard-subtitle-l tablet:pretendard-subtitle-m pretendard-subtitle-s">뉴스레터를 구독하여 새로운 최신 테크 이야기를 만나보세요.</p>
           </div>
 
           <Form {...form}>
@@ -35,11 +35,11 @@ const SubscriptionSection = () => {
                 form={form}
                 name="email"
                 placeholder="이메일을 입력해주세요."
-                className="w-[328px] rounded-[100px] text-black"
+                className="w-[328px] rounded-[100px] text-black pretendard-body-2 px-[24px]"
               />
 
               <div className="flex justify-center mt-[32px]">
-                <Button type="submit" size="lg" variant="outline" shape="round" className="w-[160px]">
+                <Button type="submit" size="lg" variant="outline" shape="round" className="w-[160px] pretendard-title-s placeholder:text-[#C8C9D0]">
                   뉴스레터 신청하기
                 </Button>
               </div>
