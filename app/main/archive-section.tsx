@@ -28,7 +28,7 @@ const ArchiveSection = () => {
   return (
     <section className="web:py-[100px] web:px-[120px] py-[80px] tablet:px-[30px] px-[16px]">
       <div className="flex flex-col web:gap-[40px] tablet:gap-[32px] gap-[24px] mx-auto max-w-[1200px]">
-        <div className="web:h1-l tablet:h1-m h1-r">자료실</div>
+        <div className="web:pretendard-h1-l tablet:pretendard-h1-m pretendard-h1-r">자료실</div>
 
         <div className="grid web:grid-cols-2 web:gap-[24px] gap-[16px] grid-cols-1">
           {archiveData.map(({ id, title, bgImage }) => (
@@ -41,10 +41,10 @@ const ArchiveSection = () => {
 
               <div className="relative z-10 flex flex-col gap-[16px]">
                 <Image src="/svg/archive-logo.svg" alt="" width={68} height={29} className="-mt-px" />
-                <div className="h1-m text-white">{title}</div>
+                <div className="pretendard-h1-m text-white">{title}</div>
               </div>
 
-              <Button size="lg" variant="outline" shape="round" className="relative z-10 ml-auto tablet:w-[160px] tablet:h-[48px] w-[120px] h-[37px]" onClick={onClickPdfDownload}>
+              <Button size="lg" variant="outline" shape="round" className="pretendard-title-s relative z-10 ml-auto tablet:w-[160px] tablet:h-[48px] w-[120px] h-[37px]" onClick={onClickPdfDownload}>
                 PDF 다운로드
               </Button>
 
@@ -54,7 +54,7 @@ const ArchiveSection = () => {
         </div>
 
         <div className="flex justify-center">
-          <Button size="lg" variant="outline" shape="round" className="tablet:w-[160px] tablet:h-[48px] w-[120px] h-[37px]">
+          <Button size="lg" variant="outline" shape="round" className="pretendard-title-s tablet:w-[160px] tablet:h-[48px]">
             더보기
           </Button>
         </div>

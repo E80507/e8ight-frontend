@@ -123,8 +123,22 @@ const config: Config = {
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-gibson)",
         },
-        ".gibson-body-0": {
+        ".gibson-heading-1": {
           fontSize: "36px",
+          lineHeight: "160%",
+          fontWeight: "600",
+          letterSpacing: "-1.5%",
+          fontFamily: "var(--font-gibson)",
+        },
+        ".gibson-heading-2": {
+          fontSize: "32px",
+          lineHeight: "160%",
+          fontWeight: "600",
+          letterSpacing: "-1.5%",
+          fontFamily: "var(--font-gibson)",
+        },
+        ".gibson-heading-3": {
+          fontSize: "24px",
           lineHeight: "160%",
           fontWeight: "600",
           letterSpacing: "-1.5%",
