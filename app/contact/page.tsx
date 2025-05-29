@@ -9,6 +9,7 @@ import CustomTextareaField from "@/components/shared/form/custom-text-area-field
 import CustomSelectField from "@/components/shared/form/custom-select-field";
 import CustomEmailField from "@/components/shared/form/custom-email-field";
 import CustomCheckboxField from "@/components/shared/form/custom-checkbox-field";
+import CustomCheckboxGroupField from "@/components/shared/form/custom-checkbox-group-field";
 
 const ContactPage = () => {
   const { form, onSubmit } = usePostContact();
@@ -132,12 +133,17 @@ const ContactPage = () => {
               />
 
               {/* 관심 제품 */}
-              <CustomInputField
+              <CustomCheckboxGroupField
                 form={form}
                 name="interestedProduct"
-                placeholder="관심 있는 제품을 선택해주세요."
                 label="관심 제품"
                 isEssential={true}
+                options={[
+                  { label: "NDX PRO", value: "ndx-pro" },
+                  { label: "NFLOW", value: "nflow" },
+                  { label: "PIX4D", value: "pix4d" },
+                  { label: "기타", value: "other" }
+                ]}
               />
 
               {/* 문의 내용 */}

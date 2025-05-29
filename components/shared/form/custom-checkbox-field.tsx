@@ -8,7 +8,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "../../ui/form";
 import Check from "../check";
@@ -19,6 +18,8 @@ interface CustomCheckboxFieldProps<T extends FieldValues> {
   type?: "circle" | "square";
   label?: ReactNode;
   isEssential?: boolean;
+  value?: string;
+  showMessage?: boolean;
 }
 
 const CustomCheckboxField = <T extends FieldValues>({
@@ -27,33 +28,66 @@ const CustomCheckboxField = <T extends FieldValues>({
   type = "square",
   label,
   isEssential = false,
+  value,
+  showMessage = true,
 }: CustomCheckboxFieldProps<T>) => {
   return (
     <FormField
       control={form.control}
       name={name}
-      render={({ field }) => (
-        <FormItem className="flex flex-row items-start space-x-2">
-          <FormControl>
-            <div className="relative">
-              <input
-                type="checkbox"
-                checked={field.value}
-                onChange={field.onChange}
-                className="peer absolute opacity-0 w-[18px] h-[18px] cursor-pointer z-10"
-              />
-              <Check type={type} isChecked={field.value} />
-            </div>
-          </FormControl>
-          {label && (
-            <FormLabel className="body-3 cursor-pointer select-none !mt-0">
-              {label}
-              {isEssential && <span className="text-red-500 ml-1">*</span>}
-            </FormLabel>
-          )}
-          <FormMessage />
-        </FormItem>
-      )}
+      render={({ field }) => {
+        // 그룹 체크박스인 경우 배열에서 값 확인
+        const isChecked = Array.isArray(field.value) 
+          ? field.value?.includes(value)
+          : field.value;
+
+        // 체크박스 변경 핸들러
+        const handleChange = (checked: boolean) => {
+          if (value && Array.isArray(field.value)) {
+            // 그룹 체크박스인 경우 배열 업데이트
+            const currentValues = field.value || [];
+            const newValue = checked
+              ? [...currentValues, value]
+              : currentValues.filter((v: string) => v !== value);
+            field.onChange(newValue);
+          } else {
+            // 단일 체크박스인 경우 boolean 값 업데이트
+            field.onChange(checked);
+          }
+        };
+
+        // 고유 ID 생성
+        const id = `checkbox-${name}-${value}`;
+
+        return (
+          <FormItem className="flex flex-row items-center space-x-2">
+            <FormControl>
+              <div className="relative">
+                <input
+                  id={id}
+                  type="checkbox"
+                  checked={isChecked || false}
+                  onChange={(e) => handleChange(e.target.checked)}
+                  className="peer absolute opacity-0 w-[18px] h-[18px] cursor-pointer z-10"
+                  value={value}
+                  name={`${name}-${value}`}
+                />
+                <Check type={type} isChecked={isChecked || false} />
+              </div>
+            </FormControl>
+            {label && (
+              <label
+                htmlFor={id}
+                className="body-2 cursor-pointer select-none !mt-0 flex-1"
+              >
+                {label}
+                {isEssential && <span className="text-red-500 ml-1">*</span>}
+              </label>
+            )}
+            {showMessage && <FormMessage />}
+          </FormItem>
+        );
+      }}
     />
   );
 };
