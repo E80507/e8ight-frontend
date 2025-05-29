@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import CustomTextareaField from "@/components/shared/form/custom-text-area-field";
 import CustomSelectField from "@/components/shared/form/custom-select-field";
 import CustomEmailField from "@/components/shared/form/custom-email-field";
+import CustomCheckboxField from "@/components/shared/form/custom-checkbox-field";
 
 const ContactPage = () => {
   const { form, onSubmit } = usePostContact();
@@ -150,28 +151,19 @@ const ContactPage = () => {
               />
 
               {/* 개인정보 수집 동의 */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  {...form.register("agreeToPrivacyPolicy")}
-                  id="agreeToPrivacyPolicy"
-                />
-                <label htmlFor="agreeToPrivacyPolicy" className="body-3">
-                  <span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.
-                </label>
-              </div>
+              <CustomCheckboxField
+                form={form}
+                name="agreeToPrivacyPolicy"
+                label={<span><span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.</span>}
+                isEssential={true}
+              />
 
               {/* 마케팅 수신 동의 */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  {...form.register("agreeToReceiveMarketing")}
-                  id="agreeToReceiveMarketing"
-                />
-                <label htmlFor="agreeToReceiveMarketing" className="body-3">
-                  [선택] 이에이트 뉴스레터 수신에 동의합니다.
-                </label>
-              </div>
+              <CustomCheckboxField
+                form={form}
+                name="agreeToReceiveMarketing"
+                label="[선택] 이에이트 뉴스레터 수신에 동의합니다."
+              />
 
               <Button type="submit" shape="round">문의하기</Button>
             </form>
