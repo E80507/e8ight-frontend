@@ -25,6 +25,7 @@ interface CustomSelectFieldProps<T extends FieldValues> {
   label: string;
   defaultValue?: string;
   disabled?: boolean;
+  isEssential?: boolean; // 필수 입력 여부
 }
 
 const CustomSelectField = <T extends FieldValues>({
@@ -35,6 +36,7 @@ const CustomSelectField = <T extends FieldValues>({
   label,
   defaultValue,
   disabled,
+  isEssential
 }: CustomSelectFieldProps<T>) => {
   return (
     <FormField
@@ -44,7 +46,12 @@ const CustomSelectField = <T extends FieldValues>({
         <FormItem className="flex flex-col gap-3">
           <FormControl>
             <>
-              <FormLabel htmlFor={name}>{label}</FormLabel>
+              <FormLabel htmlFor={name}>
+                {label}
+                {isEssential && (
+                  <span className="ml-[2px] text-error">{`*`}</span>
+                )}
+              </FormLabel>
               <Select
                 onValueChange={field.onChange}
                 value={field.value}

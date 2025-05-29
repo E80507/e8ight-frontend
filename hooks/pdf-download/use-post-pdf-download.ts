@@ -3,13 +3,13 @@ import { toast } from "../use-toast";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ContactSchema } from "@/schema/contact";
+import { PdfDownloadSchema } from "@/schema/pdf-download";
 
-export const usePostContact = () => {
+export const usePostPdfDownload = () => {
   const [loading, setLoading] = useState(false); // 로딩 상태
   
-  const form = useForm<z.infer<typeof ContactSchema>>({
-    resolver: zodResolver(ContactSchema),
+  const form = useForm<z.infer<typeof PdfDownloadSchema>>({
+    resolver: zodResolver(PdfDownloadSchema),
   });
 
   const onSubmit = form.handleSubmit(async (data) => {

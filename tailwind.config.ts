@@ -28,6 +28,7 @@ const config: Config = {
         background: {
           DEFAULT: "hsl(var(--background))",
           alternative: "hsl(var(--background-alternative))",
+          natural: "hsl(var(--background-natural))",
         },
         foreground: "hsl(var(--foreground))",
         card: {
@@ -57,6 +58,7 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         "label-alternative": "hsl(var(--label-alternative))",
+        "label-normal": "hsl(var(--label-normal))",
         ring: "hsl(var(--ring))",
         chart: {
           "1": "hsl(var(--chart-1))",
@@ -266,6 +268,7 @@ const config: Config = {
           lineHeight: "150%",
           fontWeight: "400",
           letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
         },
         ".body-2-bold": {
           fontSize: "14px",
