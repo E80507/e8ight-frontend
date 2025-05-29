@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Drawer, DrawerContent, DrawerFooter } from "@/components/ui/drawer";
 import { IconButton } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import {
   TECH_INSIGHTS_PAGE,
   TECH_LIBRARY_PAGE,
   DOWNLOADS_PAGE,
+  CONTACT_PAGE,
 } from "@/constants/path";
 import { SERVICE_NAME } from "@/constants/service";
 import ExternalLinksNav from "@/components/shared/layout/external-links-nav";
@@ -24,6 +25,7 @@ const NAV_LINKS = [
 
 const GlobalNavBar = () => {
   const path = usePathname();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -58,7 +60,11 @@ const GlobalNavBar = () => {
               </Link>
             ))}
           </nav>
-          <Button size="lg" shape="round">
+          <Button 
+            size="lg" 
+            shape="round"
+            onClick={() => router.push(CONTACT_PAGE)}
+          >
             상담 문의
           </Button>
         </div>
