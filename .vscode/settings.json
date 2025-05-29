@@ -5,7 +5,11 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
@@ -23,4 +27,5 @@
     "PRINTTIE",
     "saled"
   ],
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
 }

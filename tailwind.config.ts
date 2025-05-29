@@ -101,6 +101,11 @@ const config: Config = {
     tailwindcssAnimate,
     plugin(function ({ addUtilities }) {
       addUtilities({
+        ".required::after": {
+          content: "'*'",
+          marginLeft: "0.25rem",
+          color: "#E82929",
+        },
         ".h1-l": {
           fontSize: "32px",
           lineHeight: "160%",
