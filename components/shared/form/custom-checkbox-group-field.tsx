@@ -11,10 +11,18 @@ import {
   FormMessage,
 } from "../../ui/form";
 import CustomCheckboxField from "./custom-checkbox-field";
+import CustomInputField from "./custom-input-field";
+import CustomSelectField from "./custom-select-field";
 
 interface CheckboxOption {
   label: ReactNode;
   value: string;
+  additionalField?: {
+    type: 'input' | 'select';
+    placeholder?: string;
+    selectOptions?: { value: string; text: string; }[];
+    fieldName: string;  // 추가 필드의 form 필드 이름
+  };
 }
 
 interface CustomCheckboxGroupFieldProps<T extends FieldValues> {
@@ -54,14 +62,36 @@ const CustomCheckboxGroupField = <T extends FieldValues>({
             )}
             <div className="flex flex-col gap-[24px]">
               {options.map((option) => (
-                <CustomCheckboxField
-                  key={option.value}
-                  form={form}
-                  name={name}
-                  label={option.label}
-                  value={option.value}
-                  showMessage={false}
-                />
+                <div key={option.value} className="flex flex-col gap-3">
+                  <CustomCheckboxField
+                    form={form}
+                    name={name}
+                    label={option.label}
+                    value={option.value}
+                    showMessage={false}
+                  />
+                  {/* 체크박스가 선택되었고 추가 필드가 있는 경우에만 표시 */}
+                  {field.value?.includes(option.value) && option.additionalField && (
+                    <div className="ml-8">
+                      {option.additionalField.type === 'input' && (
+                        <CustomInputField
+                          form={form}
+                          name={option.additionalField.fieldName as Path<T>}
+                          placeholder={option.additionalField.placeholder || ''}
+                        />
+                      )}
+                      {option.additionalField.type === 'select' && (
+                        <CustomSelectField
+                          form={form}
+                          name={option.additionalField.fieldName as Path<T>}
+                          placeholder={option.additionalField.placeholder || '선택해주세요'}
+                          selectValue={option.additionalField.selectOptions || []}
+                          label=""
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
             <FormMessage />
