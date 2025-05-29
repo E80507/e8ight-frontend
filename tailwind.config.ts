@@ -12,7 +12,9 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        web: "601px",
+        mobile: { max: '599px' },
+        tablet: { min: '600px', max: '1024px' },
+        web: { min: '1025px' },        
       },
       fontFamily: {
         gibson: ["var(--font-gibson)"],
