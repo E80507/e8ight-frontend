@@ -3,7 +3,7 @@
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { usePostSubscription } from "@/hooks/setting/use-post-subscription";
+import { usePostSubscription } from "@/hooks/subscription/use-post-subscription";
 
 const SubscriptionSection = () => {
   const { onSubmit, form } = usePostSubscription();
