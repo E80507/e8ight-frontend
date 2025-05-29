@@ -84,10 +84,10 @@ const CustomCheckboxField = <T extends FieldValues>({
                 </div>
               </FormControl>
               {label && (
-                <div className="select-none">
+                <label className="select-none pretendard-body-2">
                   {label}
                   {isEssential && <span className="text-red-500 ml-1">*</span>}
-                </div>
+                </label>
               )}
             </label>
             {showMessage && <FormMessage />}

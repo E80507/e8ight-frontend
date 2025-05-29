@@ -41,7 +41,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
               <div className="relative z-10 flex gap-[8px]">
                 <div className="h-[16px] w-[16px] rounded-full bg-[#70D5B2]" />
                 
-                <div className="h1-l text-[32px]">Global No.1<br/>Digital Twin Platform</div>
+                <div className="gibson-heading-2">Global No.1<br/>Digital Twin Platform</div>
               </div>
             </div>
 
@@ -116,7 +116,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                   <CustomCheckboxField
                     form={form}
                     name="agreeToPrivacyPolicy"
-                    label={<span className="body-3">
+                    label={<span className="pretendard-body-3">
                       <span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>
                       <span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.</span>
                     </span>}

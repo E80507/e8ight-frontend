@@ -97,7 +97,7 @@ const FormLabel = React.forwardRef<
       ref={ref}
       className={cn(
         // error && "text-destructive",
-        "button-m-cta web:subtitle-1",
+        "button-m-cta web:pretendard-subtitle-m",
         className,
       )}
       htmlFor={formItemId}
