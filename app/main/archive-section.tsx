@@ -54,7 +54,7 @@ const ArchiveSection = () => {
         </div>
 
         <div className="flex justify-center">
-          <Button size="lg" variant="outline" shape="round" className="pretendard-title-s tablet:w-[160px] tablet:h-[48px]">
+          <Button size="lg" variant="outline" shape="round" className="pretendard-title-s tablet:w-[160px] tablet:h-[48px] w-[120px] h-[37px]">
             더보기
           </Button>
         </div>
