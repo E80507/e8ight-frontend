@@ -13,9 +13,7 @@ const GlobalNavBarLayout = ({ children }: GlobalNavBarLayoutProps) => {
       <Loading>
         <div className="w-screen overflow-x-hidden">
           <GlobalNavBar />
-          <div className="relative min-h-screen desktop:mt-[139px]">
-            {children}
-          </div>
+          <div className="relative min-h-screen web:mt-[139px]">{children}</div>
           <GlobalFooter />
         </div>
       </Loading>

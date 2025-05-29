@@ -12,8 +12,8 @@ import {
 
 export default function GlobalFooter() {
   return (
-    <footer className="bg-background-alternative px-4 py-10 font-pretendard text-label-alternative caption2-400 desktop:px-[120px] desktop:py-[60px]">
-      <div className="flex flex-col justify-between gap-y-6 desktop:flex-row desktop:items-center desktop:gap-y-0">
+    <footer className="bg-background-alternative px-4 py-10 font-pretendard text-label-alternative caption2-400 web:px-[120px] web:py-[60px]">
+      <div className="flex flex-col justify-between gap-y-6 web:flex-row web:items-center web:gap-y-0">
         <Image
           src="/svg/logo-with-text.svg"
           alt="logo"
@@ -22,7 +22,7 @@ export default function GlobalFooter() {
         />
         <ActionButtons />
       </div>
-      <p className="mb-1 mt-[14px] desktop:mt-0">{COMPANY_NAME}</p>
+      <p className="mb-1 mt-[14px] web:mt-0">{COMPANY_NAME}</p>
       <div className="flex flex-col">
         <p>
           {PRIVACY_OFFICER.title} : {PRIVACY_OFFICER.name} | 개인정보처리방침{" "}
