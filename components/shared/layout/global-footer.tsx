@@ -10,7 +10,7 @@ import {
   BUSINESS_NUMBER,
 } from "@/constants/service";
 
-export default function GlobalFooter() {
+const GlobalFooter = () => {
   return (
     <footer className="bg-background-alternative px-4 py-10 font-pretendard text-label-alternative caption2-400 web:px-[120px] web:py-[60px]">
       <div className="flex flex-col justify-between gap-y-6 web:flex-row web:items-center web:gap-y-0">
@@ -43,4 +43,6 @@ export default function GlobalFooter() {
       </div>
     </footer>
   );
-}
+};
+
+export default GlobalFooter;
