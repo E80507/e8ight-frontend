@@ -5,6 +5,9 @@ import { Form } from "@/components/ui/form";
 import { usePostContact } from "@/hooks/contact/use-post-contact";
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { Button } from "@/components/ui/button";
+import CustomTextareaField from "@/components/shared/form/custom-text-area-field";
+import CustomSelectField from "@/components/shared/form/custom-select-field";
+import CustomEmailField from "@/components/shared/form/custom-email-field";
 
 const ContactPage = () => {
   const { form, onSubmit } = usePostContact();
@@ -32,7 +35,7 @@ const ContactPage = () => {
       <div className="max-w-[1200px] mx-auto rounded-[20px] overflow-hidden">
         {/* 배너 */}
         <div
-          className="relative overflow-hidden bg-cover bg-center px-[40px] py-[80px] h-[357px] bg-cover bg-center"
+          className="flex items-center relative overflow-hidden bg-cover bg-center px-[40px] py-[80px] h-[357px] bg-cover bg-center"
           style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
         >
           <div className="absolute inset-0 bg-white opacity-[0.21] z-0" />
@@ -61,7 +64,7 @@ const ContactPage = () => {
                 name="name"
                 placeholder="성함을 입력해주세요."
                 label="성함"
-                required={true}
+                isEssential={true}
               />
 
               {/* 직함 */}
@@ -70,7 +73,7 @@ const ContactPage = () => {
                 name="position"
                 placeholder="직함을 입력해주세요."
                 label="직함"
-                required={true}
+                isEssential={true}
               />
 
               {/* 회사명 */}
@@ -79,7 +82,7 @@ const ContactPage = () => {
                 name="company"
                 placeholder="회사명 또는 기관명을 입력해주세요."
                 label="회사명"
-                required={true}
+                isEssential={true}
               />
 
               {/* 부서 */}
@@ -88,7 +91,7 @@ const ContactPage = () => {
                 name="department"
                 placeholder="부서 또는 팀명을 입력해주세요."
                 label="부서"
-                required={true}
+                isEssential={true}
               />
 
               {/* 연락처 */}
@@ -97,26 +100,25 @@ const ContactPage = () => {
                 name="phone"
                 placeholder="연락처를 입력해주세요."
                 label="연락처"
-                required={true}
+                isEssential={true}
               />
 
               {/* 이메일 */}
-              <CustomInputField
+              <CustomEmailField
                 form={form}
                 name="email"
-                placeholder="이메일 주소를 입력해주세요."
+                placeholder="이메일 아이디를 입력해주세요."
                 label="이메일"
-                type="email"
-                required={true}
+                isEssential={true}
               />
 
               {/* 문의 유형 */}
-              <CustomInputField
+              <CustomSelectField
                 form={form}
                 name="inquiryType"
                 placeholder="문의 유형을 선택해주세요."
                 label="문의 유형"
-                required={true}
+                selectValue={[{value: '1', text: '문의'}, {value: '2', text: '제품 문의'}, {value: '3', text: '기타'}]}
               />
 
               {/* 산업 분야 */}
@@ -125,7 +127,7 @@ const ContactPage = () => {
                 name="industry"
                 placeholder="산업 분야를 선택해주세요."
                 label="산업 분야"
-                required={true}
+                isEssential={true}
               />
 
               {/* 관심 제품 */}
@@ -134,16 +136,17 @@ const ContactPage = () => {
                 name="interestedProduct"
                 placeholder="관심 있는 제품을 선택해주세요."
                 label="관심 제품"
-                required={true}
+                isEssential={true}
               />
 
               {/* 문의 내용 */}
-              <CustomInputField
+              <CustomTextareaField
                 form={form}
                 name="message"
                 placeholder="문의 내용을 입력해주세요."
                 label="문의 내용"
-                required={true}
+                isEssential={true}
+                textAreaClass="h-[180px]"
               />
 
               {/* 개인정보 수집 동의 */}
@@ -153,8 +156,8 @@ const ContactPage = () => {
                   {...form.register("agreeToPrivacyPolicy")}
                   id="agreeToPrivacyPolicy"
                 />
-                <label htmlFor="agreeToPrivacyPolicy">
-                  
+                <label htmlFor="agreeToPrivacyPolicy" className="body-3">
+                  <span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.
                 </label>
               </div>
 
@@ -165,8 +168,8 @@ const ContactPage = () => {
                   {...form.register("agreeToReceiveMarketing")}
                   id="agreeToReceiveMarketing"
                 />
-                <label htmlFor="agreeToReceiveMarketing">
-                  
+                <label htmlFor="agreeToReceiveMarketing" className="body-3">
+                  [선택] 이에이트 뉴스레터 수신에 동의합니다.
                 </label>
               </div>
 

@@ -27,7 +27,7 @@ interface CustomInputFieldProps<T extends FieldValues> {
   disabled?: boolean; // 비활성화 여부
   type?: "number" | "email" | "text" | "password" | "tel";
   className?: string; // 클래스명
-  required?: boolean; // 필수 입력 여부
+  isEssential?: boolean; // 필수 입력 여부
 }
 
 const CustomInputField = <T extends FieldValues>({
@@ -40,7 +40,7 @@ const CustomInputField = <T extends FieldValues>({
   disabled,
   type,
   className,
-  required
+  isEssential
 }: CustomInputFieldProps<T>) => {
   const [currentType, setCurrentType] = useState(type);
   const [isExposedPassword, setExposed] = useState(false);
@@ -80,9 +80,10 @@ const CustomInputField = <T extends FieldValues>({
         <FormItem>
           {label ? (
             <FormLabel className="mb-3 web:mb-2" htmlFor={name}>
-              <div className={cn("relative", required && "required")}>
-                {label}
-              </div>
+              {label}
+              {isEssential && (
+                  <span className="ml-[2px] text-error">{`*`}</span>
+              )}
             </FormLabel>
           ) : (
             <FormLabel htmlFor={name} />
