@@ -10,7 +10,7 @@ const CustomFileUploadField = ({
   return (
     <div>
       {label && (
-        <label className= "button-m-cta web:subtitle-1 mb-[12px] block"> 
+        <label className= "pretendard-subtitle-m mb-[12px] block"> 
           {label}
           {isEssential && (
             <span className="ml-[2px] text-error">{`*`}</span>

@@ -228,6 +228,26 @@ const config: Config = {
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-pretendard)",
         },
+        ".pretendard-subtitle-l": {
+          fontSize: "18px",
+          lineHeight: "150%",
+          fontWeight: "600",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-subtitle-m": {
+          fontSize: "16px",
+          lineHeight: "150%",
+          fontWeight: "600",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-subtitle-s": {
+          fontSize: "14px",
+          lineHeight: "150%",
+          fontWeight: "600",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
         ".h1-l": {
           fontSize: "32px",
           lineHeight: "160%",
