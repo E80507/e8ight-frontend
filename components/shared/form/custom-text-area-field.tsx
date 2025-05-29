@@ -3,6 +3,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
@@ -33,7 +34,7 @@ const CustomTextareaField = <T extends FieldValues>({
   textAreaClass,
 }: CustomTextareaFieldProps<T>) => {
   const [value, setValue] = useState("");
-  // const error = form.formState.errors[name];
+  const error = form.formState.errors[name];
 
   // 텍스트 변경 핸들러
   const onChangeTextarea = (
@@ -55,13 +56,13 @@ const CustomTextareaField = <T extends FieldValues>({
                 <FormLabel htmlFor={name}>
                   {label}
                   {isEssential && (
-                    <span className="ml-[2px] text-primary">{`*`}</span>
+                    <span className="ml-[2px] text-error">{`*`}</span>
                   )}
                 </FormLabel>
               )}
               <Textarea
                 {...field}
-                className={`${textAreaClass}`}
+                className={`${textAreaClass} ${error ? "border-destructive focus-visible:border-destructive" : ""}`}
                 onChange={(e) => onChangeTextarea(e.target.value, field)}
                 value={value || field.value}
                 placeholder={placeholder}
@@ -71,6 +72,8 @@ const CustomTextareaField = <T extends FieldValues>({
           {hasTextLength && (
             <span className="-mt-1 text-right caption">{`${value.length}/300`}</span>
           )}
+
+          <FormMessage />
         </FormItem>
       )}
     />
