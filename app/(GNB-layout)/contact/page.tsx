@@ -29,8 +29,8 @@ const ContactPage = () => {
             <div className="w-[16px] h-[16px] bg-[#70D5B2] rounded-full" />
             
             <div className="flex flex-col gap-[16px]">
-              <div className="h1-l">Global No.1<br/>Digital Twin Platform</div>
-              <div className="body-1">문의를 주시면 자세한 상담이 가능합니다.</div>
+              <div className="gibson-h1-l">Global No.1<br/>Digital Twin Platform</div>
+              <div className="pretendard-body-1">문의를 주시면 자세한 상담이 가능합니다.</div>
             </div>
           </div>
         </div>
@@ -171,7 +171,7 @@ const ContactPage = () => {
               <CustomCheckboxField
                 form={form}
                 name="agreeToPrivacyPolicy"
-                label={<span className="body-3"><span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.</span>}
+                label={<span className="pretendard-body-3"><span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.</span>}
                 isEssential={true}
               />
 
@@ -179,7 +179,7 @@ const ContactPage = () => {
               <CustomCheckboxField
                 form={form}
                 name="agreeToReceiveMarketing"
-                label={<span className="body-3">[선택] 이에이트 뉴스레터 수신에 동의합니다."</span>}
+                label={<span className="pretendard-body-3">[선택] 이에이트 뉴스레터 수신에 동의합니다."</span>}
               />
 
               {/* 문의하기 버튼 */}

@@ -193,6 +193,13 @@ const config: Config = {
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-pretendard)",
         },
+        ".pretendard-h1-r": {
+          fontSize: "20px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
         ".pretendard-title-s": {
           fontSize: "14px",
           lineHeight: "150%",
@@ -211,6 +218,13 @@ const config: Config = {
           fontSize: "16px",
           lineHeight: "150%",
           fontWeight: "300",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".pretendard-body-3": {
+          fontSize: "14px",
+          lineHeight: "150%",
+          fontWeight: "400",
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-pretendard)",
         },
