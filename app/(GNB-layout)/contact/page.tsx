@@ -78,21 +78,21 @@ const ContactPage = () => {
                 isEssential={true}
               />
 
-              {/* 회사명 */}
+              {/* 회사명/기관명 */}
               <CustomInputField
                 form={form}
                 name="company"
                 placeholder="회사명 또는 기관명을 입력해주세요."
-                label="회사명"
+                label="회사명/기관명"
                 isEssential={true}
               />
 
-              {/* 부서 */}
+              {/* 부서/팀 */}
               <CustomInputField
                 form={form}
                 name="department"
                 placeholder="부서 또는 팀명을 입력해주세요."
-                label="부서"
+                label="부서/팀"
                 isEssential={true}
               />
 
@@ -109,7 +109,7 @@ const ContactPage = () => {
               <CustomEmailField
                 form={form}
                 name="email"
-                placeholder="이메일 아이디를 입력해주세요."
+                placeholder="이메일"
                 label="이메일"
                 isEssential={true}
               />
@@ -171,6 +171,7 @@ const ContactPage = () => {
                 label="[선택] 이에이트 뉴스레터 수신에 동의합니다."
               />
 
+              {/* 문의하기 버튼 */}
               <Button type="submit" shape="round">문의하기</Button>
             </form>
           </Form>
