@@ -29,7 +29,7 @@ const GlobalNavBar = () => {
   return (
     <>
       {/* 데스크톱 GNB */}
-      <div className="fixed inset-x-0 z-50 hidden w-full flex-col bg-transparent px-[120px] py-4 font-pretendard desktop:flex">
+      <div className="fixed inset-x-0 z-50 hidden w-full flex-col bg-transparent px-[120px] py-4 font-pretendard web:flex">
         <div className="flex items-center justify-between">
           <Link prefetch={false} href="/">
             <Image
@@ -65,7 +65,7 @@ const GlobalNavBar = () => {
       </div>
 
       {/* 모바일 GNB */}
-      <div className="fixed inset-x-0 z-50 flex h-[67px] w-full items-center justify-between px-4 py-3 desktop:hidden">
+      <div className="fixed inset-x-0 z-50 flex h-[67px] w-full items-center justify-between px-4 py-3 web:hidden">
         <Link prefetch={false} href="/">
           <Image
             src="/svg/logo.svg"
