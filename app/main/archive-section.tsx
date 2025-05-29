@@ -2,6 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useState } from "react";
+import PdfDownloadModal from "../_components/modal/pdf-download-modal";
 
 const archiveData = [
   {
@@ -17,6 +19,12 @@ const archiveData = [
 ];
 
 const ArchiveSection = () => {
+  const [modal, setModal] = useState(false);
+
+  const onClickPdfDownload = () => {
+    setModal(true);
+  };
+
   return (
     <section className="web:py-[100px] web:px-[120px] py-[80px] tablet:px-[30px] px-[16px]">
       <div className="flex flex-col web:gap-[40px] tablet:gap-[32px] gap-[24px] mx-auto max-w-[1200px]">
@@ -36,9 +44,11 @@ const ArchiveSection = () => {
                 <div className="h1-m text-white">{title}</div>
               </div>
 
-              <Button size="lg" variant="outline" shape="round" className="relative z-10 ml-auto tablet:w-[160px] tablet:h-[48px] w-[120px] h-[37px]">
+              <Button size="lg" variant="outline" shape="round" className="relative z-10 ml-auto tablet:w-[160px] tablet:h-[48px] w-[120px] h-[37px]" onClick={onClickPdfDownload}>
                 PDF 다운로드
               </Button>
+
+              {modal && <PdfDownloadModal onClickClose={() => setModal(false)} />}
             </div>
           ))}
         </div>

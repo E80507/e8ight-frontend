@@ -100,13 +100,24 @@ const CustomEmailField = <T extends FieldValues>({
               />
               <span className="text-gray-500">@</span>
               {isCustomDomain ? (
-                <Input
-                  type="text"
-                  className="flex-1"
-                  placeholder="도메인 입력"
-                  onChange={(e) => handleCustomDomainChange(e.target.value, field)}
-                  value={customDomain}
-                />
+                <Select onValueChange={(value) => handleDomainSelect(value, field)}>
+                  <SelectTrigger className="flex-1">
+                    <Input
+                      type="text"
+                      className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      placeholder="직접 입력"
+                      onChange={(e) => handleCustomDomainChange(e.target.value, field)}
+                      value={customDomain}
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {EMAIL_DOMAINS.map((domain) => (
+                      <SelectItem key={domain} value={domain}>
+                        {domain}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               ) : (
                 <Select onValueChange={(value) => handleDomainSelect(value, field)} value={domain}>
                   <SelectTrigger className="flex-1">
