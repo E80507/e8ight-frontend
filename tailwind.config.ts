@@ -12,15 +12,22 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        web: "601px",
+        web: "600px",
+        desktop: "1025px",
       },
       fontFamily: {
         gibson: ["var(--font-gibson)"],
         pretendard: ["var(--font-pretendard)"],
       },
       colors: {
-        primary: "hsl(var(--primary))",
-        background: "hsl(var(--background))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          alternative: "hsl(var(--primary-alternative))",
+        },
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          alternative: "hsl(var(--background-alternative))",
+        },
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -48,6 +55,7 @@ const config: Config = {
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
+        "label-alternative": "hsl(var(--label-alternative))",
         ring: "hsl(var(--ring))",
         chart: {
           "1": "hsl(var(--chart-1))",
@@ -174,7 +182,7 @@ const config: Config = {
           lineHeight: "150%",
           fontWeight: "700",
           letterSpacing: "-0.3%",
-          fontFamily: "var(--font-pretendard)"
+          fontFamily: "var(--font-pretendard)",
         },
         ".subtitle-m": {
           fontSize: "16px",
@@ -256,6 +264,11 @@ const config: Config = {
           fontSize: "14px",
           lineHeight: "22.4px",
           fontWeight: "700",
+        },
+        ".caption2-400": {
+          fontSize: "12px",
+          lineHeight: "150%",
+          fontWeight: "500",
         },
         ".hide-scroll-bar": {
           "-ms-overflow-style": "none", // IE and Edge
