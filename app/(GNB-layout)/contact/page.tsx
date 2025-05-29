@@ -125,8 +125,35 @@ const ContactPage = () => {
                 options={[
                   { label: "NDX PRO", value: "ndx-pro" },
                   { label: "NFLOW", value: "nflow" },
-                  { label: "PIX4D", value: "pix4d" },
-                  { label: "기타", value: "other" }
+                  { 
+                    label: "PIX4D", 
+                    value: "pix4d",
+                    additionalField: {
+                      type: 'select',
+                      placeholder: '제품을 선택해주세요',
+                      fieldName: 'pix4dProduct',
+                      selectOptions: [
+                        { value: 'PIX4Dmatic', text: 'PIX4Dmatic' },
+                        { value: 'PIX4Dfields', text: 'PIX4Dfields' },
+                        { value: 'PIX4Dreact', text: 'PIX4Dreact' },
+                        { value: 'PIX4Dengine', text: 'PIX4Dengine' },
+                        { value: 'PIX4Dcloud', text: 'PIX4Dcloud' },
+                        { value: 'PIX4Dsurvey', text: 'PIX4Dsurvey' },
+                        { value: 'PIX4Dcapture', text: 'PIX4Dcapture Pro' },
+                        { value: 'PIX4Dcatch', text: 'PIX4Dcatch' },
+                        { value: 'Emlid RTK Device', text: 'Emlid RTK Device' },
+                      ]
+                    }
+                  },
+                  { 
+                    label: "기타", 
+                    value: "other",
+                    additionalField: {
+                      type: 'input',
+                      placeholder: '내용을 입력해주세요',
+                      fieldName: 'otherProduct'
+                    }
+                  }
                 ]}
               />
 
