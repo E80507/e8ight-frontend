@@ -1,14 +1,46 @@
-export const SERVICE_NAME = "PRINTTIE ADMIN";
-export const SERVICE_NAME_KR = "프린티 어드민";
-export const CEO_INFO = {
-  name: "대표자 : 이호석",
-  email: "이메일 : world1215@naver.com",
-};
-export const CEO_EMAIL = `world1215@naver.com`;
-export const LOCATION = `본사 | 대전광역시 서구 계룡로 566, 4층 219호(괴정동)`;
-export const BUSINESS_NUMBER = "사업자등록번호 | 586-51-00904";
-export const COPYRIGHT = "Copyright 2024 All right reserved by 프린트빌리언";
+export const SERVICE_NAME = "E8IGHT";
+export const SERVICE_NAME_KR = "이에이트";
+export const SERVICE_URL = "https://daggle.io"; // 서비스 주소, 수정 필요
+export const SERVICE_DESCRIPTION = ""; // 수정 필요
 
-export const SERVICE_URL = "https://www.printtie.com/";
-export const SERVICE_DESCRIPTION =
-  "멋진 그림을 공유하거나 원하는 굿즈로 소장하세요!";
+// 회사 정보
+export const COMPANY_NAME = "이에이트(주)";
+export const COMPANY_NAME_EN = "E8 Co.Ltd.";
+export const CEO_INFO = {
+  name: "김진현",
+  title: "대표자명",
+};
+export const PRIVACY_OFFICER = {
+  name: "정준희",
+  title: "개인정보보호책임자",
+};
+export const BUSINESS_NUMBER = "215-87-68656";
+export const CONTACT_INFO = {
+  email: "sales@e8ight.co.kr",
+  phone: "+82-2-6410-2800",
+};
+export const COMPANY_ADDRESS = {
+  zipCode: "05551",
+  address: "서울시 송파구 올림픽로 300 롯데월드타워 25F",
+  fullAddress: "05551 서울시 송파구 올림픽로 300 롯데월드타워 25F",
+};
+export const COPYRIGHT = "©2025 by E8 Co.Ltd.All right reserved.";
+
+// GNB 외부 링크
+export const GNB_EXTERNAL_LINKS = [
+  {
+    label: "NDXPRO",
+    href: "https://e8ight.co.kr/ndxpro",
+    target: "_blank",
+  },
+  {
+    label: "NFLOW",
+    href: "https://e8ight.co.kr/nflow",
+    target: "_blank",
+  },
+  {
+    label: "PIX4D",
+    href: "https://pix4dkorea.com/",
+    target: "_blank",
+  },
+];
