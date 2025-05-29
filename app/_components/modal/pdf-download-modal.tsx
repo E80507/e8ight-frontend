@@ -116,7 +116,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                   <CustomCheckboxField
                     form={form}
                     name="agreeToPrivacyPolicy"
-                    label={<span><span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.</span>}
+                    label={<span className="body-3"><span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.</span>}
                     isEssential={true}
                   />
 

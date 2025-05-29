@@ -21,7 +21,7 @@ const Check = ({ type, isChecked = false }: CheckProps) => {
           "transition-opacity duration-200",
           isChecked ? "opacity-0" : "opacity-100"
         )}
-        src="/svg/icon/check.svg"
+        src="/svg/icon/check-white.svg"
         alt="체크 아이콘"
         width={20}
         height={20}
@@ -31,7 +31,7 @@ const Check = ({ type, isChecked = false }: CheckProps) => {
           "absolute transition-opacity duration-200",
           isChecked ? "opacity-100" : "opacity-0"
         )}
-        src="/svg/icon/check-white.svg"
+        src="/svg/icon/check.svg"
         alt="체크 아이콘"
         width={20}
         height={20}
