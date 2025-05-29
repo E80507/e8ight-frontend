@@ -3,30 +3,24 @@ import CustomEmailField from "@/components/shared/form/custom-email-field";
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { usePostContact } from "@/hooks/contact/use-post-contact";
 import { useRef } from "react";
 import { X } from "lucide-react";
+import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
+import { usePostPdfDownload } from "@/hooks/pdf-download/use-post-pdf-download";
 
 interface PdfDownloadModalProps {
   onClickClose: () => void;
 }
 
 const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
-  const { form, onSubmit } = usePostContact();
+  const { form, onSubmit } = usePostPdfDownload();
   const formRef = useRef<HTMLFormElement>(null);
-
-  // 폼 제출 이벤트 핸들러
-  const handleSubmit = async (e: React.FormEvent) => {
-    console.log('Form Submit Triggered');
-    console.log('Current Form Values:', form.getValues());
-    console.log('Form Validation State:', form.formState);
-    await onSubmit(e);
-  };
 
   return (
     <div className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-black/70 px-5 py-[20px] web:py-[51px]">
       <div className="w-full max-w-[1200px] overflow-hidden rounded-[20px] bg-white">
         <div className="relative">
+          {/* 닫기 버튼 */}
           <Button
             variant="outline"
             size="icon"
@@ -35,6 +29,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
           >
             <X className="h-5 w-5" />
           </Button>
+
           <div className="max-h-[calc(100vh-40px)] overflow-y-auto web:max-h-[calc(100vh-102px)]">
             {/* 배너 */}
             <div
@@ -54,10 +49,15 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
             <div className="p-5 web:p-[40px]">
               <Form {...form}>
                 <form
-                  onSubmit={handleSubmit}
+                  onSubmit={onSubmit}
                   ref={formRef}
                   className="flex flex-col gap-[32px]"
                 >
+                  {/* 파일 업로드 */}
+                  <CustomFileUploadField
+                    label="다운로드 파일명"
+                  />
+
                   {/* 성함 */}
                   <CustomInputField
                     form={form}

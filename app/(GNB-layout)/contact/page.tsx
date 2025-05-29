@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Form } from "@/components/ui/form";
 import { usePostContact } from "@/hooks/contact/use-post-contact";
 import CustomInputField from "@/components/shared/form/custom-input-field";
@@ -14,23 +14,6 @@ import CustomCheckboxGroupField from "@/components/shared/form/custom-checkbox-g
 const ContactPage = () => {
   const { form, onSubmit } = usePostContact();
   const formRef = useRef<HTMLFormElement>(null);
-
-  // 폼 상태 변경 감지
-  useEffect(() => {
-    const subscription = form.watch((value) => {
-      console.log('Form Values Changed:', value);
-      console.log('Current Errors:', form.formState.errors);
-    });
-    return () => subscription.unsubscribe();
-  }, [form]);
-
-  // 폼 제출 이벤트 핸들러
-  const handleSubmit = async (e: React.FormEvent) => {
-    console.log('Form Submit Triggered');
-    console.log('Current Form Values:', form.getValues());
-    console.log('Form Validation State:', form.formState);
-    await onSubmit(e);
-  };
 
   return (
     <div className="px-[120px] py-[40px] bg-[#FBFBFC]">
@@ -56,7 +39,7 @@ const ContactPage = () => {
         <div className="p-[40px] bg-white">
           <Form {...form}>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={onSubmit}
               ref={formRef}
               className="flex flex-col gap-[32px]"
             >
@@ -121,6 +104,7 @@ const ContactPage = () => {
                 placeholder="문의 유형을 선택해주세요."
                 label="문의 유형"
                 selectValue={[{value: '1', text: '문의'}, {value: '2', text: '제품 문의'}, {value: '3', text: '기타'}]}
+                isEssential={true}
               />
 
               {/* 산업 분야 */}
