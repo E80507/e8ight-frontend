@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { LoadIcon } from "../shared/loading/loading";
 
 const buttonVariants = cva(
-  "flex w-full items-center justify-center whitespace-nowrap rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:text-black/40",
+  "flex w-full items-center justify-center whitespace-nowrap rounded-[100px] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:text-black/40",
   {
     variants: {
       variant: {
@@ -17,13 +17,19 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-12 px-[15px] heading-4",
-        sm: "h-[30px] max-w-max rounded-sm px-3 py-1 subtitle-3",
-        md: "h-[37px] px-6 py-2 button-m-cta",
-        lg: "h-[49px] rounded-md px-6 heading-4",
+        sm: "h-[30px] max-w-max px-3 py-1 subtitle-3",
+        md: "w-[80px] h-[37px] px-4 py-2 title-s",
+        lg: "w-[120px] lg:w-[160px] h-[48px] px-6 py-3 title-s",
+        cta: "w-[240px] h-[59px] title-s",
         icon: "size-9",
+      },
+      shape: {
+        round: "rounded-[100px]",
+        square: "rounded-[8px]",
       },
     },
     defaultVariants: {
+      shape: "square",
       variant: "default",
       size: "default",
     },
@@ -41,7 +47,7 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, variant, size, loading, loadColor, asChild = false, ...props },
+    { className, variant, size, shape, loading, loadColor, asChild = false, ...props },
     ref,
   ) => {
     const Comp = asChild ? Slot : "button";
@@ -52,7 +58,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <Comp
             disabled={loading}
             className={cn(
-              buttonVariants({ variant, size, className }),
+              buttonVariants({ variant, size, shape, className }),
               "relative",
               loadColor === "white" ? "disabled:border-primary/400" : "",
             )}
@@ -63,7 +69,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </Comp>
         ) : (
           <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
+            className={cn(buttonVariants({ variant, size, shape, className }))}
             ref={ref}
             {...props}
           />
