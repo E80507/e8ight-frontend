@@ -91,6 +91,42 @@ const config: Config = {
     tailwindcssAnimate,
     plugin(function ({ addUtilities }) {
       addUtilities({
+        ".h1-l": {
+          fontSize: "32px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-1.5%",
+        },
+        ".h1-m": {
+          fontSize: "24px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+        },
+        ".h1-r": {
+          fontSize: "20px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+        },
+        ".h1-s": {
+          fontSize: "18px",
+          lineHeight: "150%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+        },
+        ".h2-l": {
+          fontSize: "20px",
+          lineHeight: "160%",
+          fontWeight: "500",
+          letterSpacing: "-0.3%",
+        },
+        ".h2-m": {
+          fontSize: "18px",
+          lineHeight: "150%",
+          fontWeight: "500",
+          letterSpacing: "-0.3%",
+        },
         ".heading-1": {
           fontSize: "32px",
           lineHeight: "48px",
@@ -126,6 +162,24 @@ const config: Config = {
           lineHeight: "21.6px",
           fontWeight: "800",
         },
+        ".title-l": {
+          fontSize: "18px",
+          lineHeight: "150%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+        },
+        ".subtitle-m": {
+          fontSize: "16px",
+          lineHeight: "150%",
+          fontWeight: "600",
+          letterSpacing: "-0.3%",
+        },
+        ".subtitle-s": {
+          fontSize: "14px",
+          lineHeight: "150%",
+          fontWeight: "600",
+          letterSpacing: "-0.3%",
+        },
         ".subtitle-1": {
           fontSize: "16px",
           lineHeight: "24px",
@@ -142,14 +196,22 @@ const config: Config = {
           fontWeight: "700",
         },
         ".body-1": {
-          fontSize: "16px",
-          lineHeight: "24px",
+          fontSize: "18px",
+          lineHeight: "150%",
           fontWeight: "400",
+          letterSpacing: "-0.3%",
         },
         ".body-2": {
-          fontSize: "14px",
-          lineHeight: "21px",
+          fontSize: "16px",
+          lineHeight: "150%",
           fontWeight: "400",
+          letterSpacing: "-0.3%",
+        },
+        ".body-3": {
+          fontSize: "14px",
+          lineHeight: "150%",
+          fontWeight: "400",
+          letterSpacing: "-0.3%",
         },
         ".body-2-bold": {
           fontSize: "14px",
