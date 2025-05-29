@@ -12,8 +12,9 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        web: "600px",
-        desktop: "1025px",
+        mobile: { max: "599px" },
+        tablet: { min: "600px", max: "1024px" },
+        web: { min: "1025px" },
       },
       fontFamily: {
         gibson: ["var(--font-gibson)"],
@@ -216,12 +217,14 @@ const config: Config = {
           lineHeight: "150%",
           fontWeight: "400",
           letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
         },
         ".body-2": {
           fontSize: "16px",
           lineHeight: "150%",
           fontWeight: "400",
           letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
         },
         ".body-3": {
           fontSize: "14px",
@@ -269,6 +272,27 @@ const config: Config = {
           fontSize: "12px",
           lineHeight: "150%",
           fontWeight: "500",
+        },
+        ".display-1": {
+          fontSize: "48px",
+          lineHeight: "150%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".display-2": {
+          fontSize: "40px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
+        ".display-3": {
+          fontSize: "32px",
+          lineHeight: "160%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
         },
         ".hide-scroll-bar": {
           "-ms-overflow-style": "none", // IE and Edge
