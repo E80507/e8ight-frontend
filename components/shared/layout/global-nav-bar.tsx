@@ -28,10 +28,12 @@ const GlobalNavBar = () => {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const isContactPage = path === CONTACT_PAGE;
+
   return (
     <>
       {/* 데스크톱 GNB */}
-      <div className="hidden w-full flex-col bg-transparent px-[120px] py-4 font-pretendard web:flex">
+      <div className={`hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${isContactPage ? 'bg-[#FBFBFC]' : 'bg-transparent'}`}>
         <div className="flex items-center justify-between">
           <Link prefetch={false} href="/">
             <Image
@@ -71,7 +73,7 @@ const GlobalNavBar = () => {
       </div>
 
       {/* 모바일 GNB */}
-      <div className="z-50 flex h-[67px] w-full items-center justify-between px-4 py-3 web:hidden">
+      <div className={`z-50 flex h-[67px] w-full items-center justify-between px-4 py-3 web:hidden ${isContactPage ? 'bg-[#FBFBFC]' : 'bg-transparent'}`}>
         <Link prefetch={false} href="/">
           <Image
             src="/svg/logo.svg"
