@@ -50,6 +50,7 @@ const RAW_RUNTIME_STATE =
           ["class-variance-authority", "npm:0.7.0"],\
           ["clsx", "npm:2.1.1"],\
           ["date-fns", "npm:4.1.0"],\
+          ["embla-carousel-autoplay", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:8.6.0"],\
           ["embla-carousel-react", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:8.3.0"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:14.2.9"],\
@@ -3116,6 +3117,28 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["embla-carousel-autoplay", [\
+      ["npm:8.6.0", {\
+        "packageLocation": "../../.yarn/berry/cache/embla-carousel-autoplay-npm-8.6.0-a3f5feae4b-10c0.zip/node_modules/embla-carousel-autoplay/",\
+        "packageDependencies": [\
+          ["embla-carousel-autoplay", "npm:8.6.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:8.6.0", {\
+        "packageLocation": "./.yarn/__virtual__/embla-carousel-autoplay-virtual-5cf5d434a6/3/.yarn/berry/cache/embla-carousel-autoplay-npm-8.6.0-a3f5feae4b-10c0.zip/node_modules/embla-carousel-autoplay/",\
+        "packageDependencies": [\
+          ["embla-carousel-autoplay", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:8.6.0"],\
+          ["@types/embla-carousel", null],\
+          ["embla-carousel", null]\
+        ],\
+        "packagePeers": [\
+          "@types/embla-carousel",\
+          "embla-carousel"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["embla-carousel-react", [\
       ["npm:8.3.0", {\
         "packageLocation": "../../.yarn/berry/cache/embla-carousel-react-npm-8.3.0-33728edc9b-10c0.zip/node_modules/embla-carousel-react/",\
@@ -5908,6 +5931,7 @@ const RAW_RUNTIME_STATE =
           ["class-variance-authority", "npm:0.7.0"],\
           ["clsx", "npm:2.1.1"],\
           ["date-fns", "npm:4.1.0"],\
+          ["embla-carousel-autoplay", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:8.6.0"],\
           ["embla-carousel-react", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:8.3.0"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:14.2.9"],\
