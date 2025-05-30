@@ -1,5 +1,5 @@
 // 기술 콘텐츠
-export const TECH_INSIGHTS_PAGE = "/tech-insights";
+export const TECH_INSIGHTS_PAGE = "/tech-insight";
 export const TECH_LIBRARY_PAGE = "/tech-library";
 
 // 다운로드
