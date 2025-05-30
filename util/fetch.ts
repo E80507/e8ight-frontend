@@ -1,5 +1,3 @@
-import { LOGIN_PAGE } from "@/constants/path";
-
 export class CustomError extends Error {
   statusCode: number;
   constructor(statusCode: number, message: string) {

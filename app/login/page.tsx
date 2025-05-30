@@ -1,7 +1,6 @@
 "use client";
 import { SERVICE_NAME } from "@/constants/service";
 import Image from "next/image";
-import LoginForm from "./_components/login-form";
 
 const LoginPage = () => {
   return (
@@ -15,7 +14,6 @@ const LoginPage = () => {
         />
         <p className="heading-4">Admin</p>
       </div>
-      <LoginForm />
     </div>
   );
 };
