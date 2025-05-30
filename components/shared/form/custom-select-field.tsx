@@ -36,7 +36,7 @@ const CustomSelectField = <T extends FieldValues>({
   label,
   defaultValue,
   disabled,
-  isEssential
+  isEssential,
 }: CustomSelectFieldProps<T>) => {
   return (
     <FormField
