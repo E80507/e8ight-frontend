@@ -21,7 +21,7 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => (
   <Carousel
     opts={{ loop: true }}
     setApi={setApi}
-    className="web:w-[calc(100%-384px)] web:min-w-[379px] web:max-w-[482px] web:gap-y-6  flex aspect-[7/8] w-full flex-col gap-y-[26px]"
+    className="flex aspect-[7/8] w-full flex-col  gap-y-[26px] web:w-[calc(100%-384px)] web:min-w-[379px] web:max-w-[482px] web:gap-y-6"
     plugins={[
       Autoplay({
         delay: 3000,
@@ -30,9 +30,9 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => (
       }),
     ]}
   >
-    <div className="web:flex-col flex items-start justify-between gap-x-2">
-      <div className="web:hidden flex items-start gap-x-2">
-        <div className="bg-primary web:size-4 size-2 rounded-full" />
+    <div className="flex items-start justify-between gap-x-2 web:flex-col">
+      <div className="flex items-start gap-x-2 web:hidden">
+        <div className="size-2 rounded-full bg-primary web:size-4" />
         <h3 className="mobile:display-3 tablet:display-2 web:display-1">
           이에이트의 <br />
           기술 이야기를
