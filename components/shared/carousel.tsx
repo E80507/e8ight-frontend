@@ -12,7 +12,6 @@ import {
 interface CarouselBoxProps {
   setApi: (api: CarouselApi) => void;
   items: {
-    category: string;
     title: string;
     description: string;
   }[];
