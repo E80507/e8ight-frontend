@@ -4,7 +4,7 @@ import { ko } from "date-fns/locale";
 import React from "react";
 
 export const formatCaption: DateFormatter = (month, options) => {
-  return <>{format(month, "yyyy.MM", { locale: options?.locale })}</>;
+  return <>{format(month, "yyyy년 MM월", { locale: options?.locale })}</>;
 };
 
 export const formatWeekdayName: DateFormatter = (date) => {

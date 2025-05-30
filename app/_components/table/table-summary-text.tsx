@@ -11,7 +11,7 @@ const TableSummaryText = ({
   showCurrentDataLen = true,
 }: TableSummaryTextProps) => {
   return (
-    <div className="flex gap-[6px] subtitle-1">
+    <div className="flex gap-[6px] pretendard-subtitle-l">
       {showCurrentDataLen && (
         <>
           <span>{currentDataLen.toLocaleString()}건 조회</span>
