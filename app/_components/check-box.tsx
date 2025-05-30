@@ -1,15 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import FilterName from "./table/filter-name";
 
 interface CheckBoxProps {
-  noBottomBorder?: string; // 하단 보더 여부
+  noBottomBorder?: string;
   conditions: {
     value: string;
     label: string;
-  }[]; // 체크박스 조건
-  label?: string; // 라벨 이름
-  checkboxClass?: string; // 추가 CSS 클래스
-  handleChangeValue: (data: string) => void; // 값 변경 핸들러
+  }[];
+  label?: string;
+  checkboxClass?: string;
+  handleChangeValue: (data: string) => void;
 }
 
 const CheckBox = ({
@@ -19,6 +22,14 @@ const CheckBox = ({
   label,
   handleChangeValue,
 }: CheckBoxProps) => {
+  const [selected, setSelected] = useState(conditions[0]?.value ?? "");
+
+  const onChange = (val: string) => {
+    if (!val) return; // 빈 문자열로 선택 해제되는 경우 방지
+    setSelected(val);
+    handleChangeValue(val);
+  };
+
   return (
     <div
       className={`flex h-[72px] ${
@@ -28,8 +39,8 @@ const CheckBox = ({
       {label && <FilterName name={label} />}
       <div className="flex pl-5">
         <ToggleGroup
-          defaultValue={conditions[0]?.value}
-          onValueChange={handleChangeValue} // 값 변경 핸들러 연결
+          value={selected}
+          onValueChange={onChange}
           type="single"
           className="gap-[24px]"
         >
@@ -37,7 +48,6 @@ const CheckBox = ({
             <ToggleGroupItem
               key={condition.value}
               hasIcon
-              checkType="circle"
               value={condition.value}
               aria-label={condition.value}
             >
