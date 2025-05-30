@@ -33,9 +33,8 @@ const GlobalNavBar = () => {
   return (
     <>
       {/* 데스크톱 GNB */}
-      <div
-        className={`font-pretendard web:flex hidden w-full flex-col px-[120px] py-4 ${isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"}`}
-      >
+      <div className={`hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${isContactPage ? 'bg-[#FBFBFC]' : 'bg-transparent'}`}>
+      
         <div className="flex items-center justify-between">
           <Link prefetch={false} href="/">
             <Image
@@ -56,7 +55,7 @@ const GlobalNavBar = () => {
                 key={href}
                 prefetch={false}
                 href={href}
-                className={`title-l flex items-center gap-3 hover:underline ${
+                className={`flex items-center gap-3 title-l hover:underline ${
                   path === href ? "bg-[#353434]" : ""
                 }`}
               >
@@ -64,8 +63,8 @@ const GlobalNavBar = () => {
               </Link>
             ))}
           </nav>
-          <Button
-            size="lg"
+          <Button 
+            size="lg" 
             shape="round"
             onClick={() => router.push(CONTACT_PAGE)}
           >
@@ -75,9 +74,7 @@ const GlobalNavBar = () => {
       </div>
 
       {/* 모바일 GNB */}
-      <div
-        className={`web:hidden z-50 flex h-[67px] w-full items-center justify-between px-4 py-3 ${isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"}`}
-      >
+      <div className={`z-50 flex h-[67px] w-full items-center justify-between px-4 py-3 web:hidden ${isContactPage ? 'bg-[#FBFBFC]' : 'bg-transparent'}`}>
         <Link prefetch={false} href="/">
           <Image
             src="/svg/logo.svg"
@@ -99,13 +96,13 @@ const GlobalNavBar = () => {
 
       {/* 모바일 메뉴 Drawer */}
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <DrawerContent className="font-pretendard flex flex-col items-center justify-center gap-y-[59px] bg-white">
+        <DrawerContent className="flex flex-col items-center justify-center gap-y-[59px] bg-white font-pretendard">
           {NAV_LINKS.map(({ label, path: href }) => (
             <Link
               key={href}
               prefetch={false}
               href={href}
-              className={`h1-m flex items-center gap-3 ${
+              className={`flex items-center gap-3 h1-m ${
                 path === href ? "bg-[#353434]" : ""
               }`}
             >
