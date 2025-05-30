@@ -35,7 +35,7 @@ const GlobalNavBar = () => {
     <>
       {/* 홈페이지 데스크톱 GNB */}
       <div
-        className={`relative z-[999] hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${isContactPage ? "bg-[#FBFBFC]" : "max-w-[1440px] bg-transparent"}`}
+        className={`relative z-[999] hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${isContactPage ? "bg-[#FBFBFC]" : "max-w-[1440px] mx-auto bg-transparent"}`}
       >
         <div className="flex items-center justify-between">
           <Link prefetch={false} href="/">
