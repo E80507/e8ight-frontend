@@ -15,17 +15,10 @@ export default function HeroSection() {
   else if (pathname === "/downloads") title = "Downloads";
 
   return (
-    <div className="">
-      <div className="relative -z-10 mt-[-48px] h-[279px] tablet:h-[311px] web:mt-[-139px] web:h-[496px]">
-        <Image
-          src={"/images/bg-dashboard.webp"}
-          loading="eager"
-          alt={title}
-          fill
-          className="object-cover"
-        />
-      </div>
-
+    <div
+      className="bg-cover bg-center -z-10 mt-[-48px] h-[279px] tablet:h-[311px] web:mt-[-139px] web:h-[496px]"
+      style={{ backgroundImage: 'url("/images/bg-dashboard.webp")' }}
+    >
       <div className="absolute left-4 top-[76px] flex gap-x-2 tablet:top-[120px] web:left-[120px] web:top-[219px]">
         <div className="size-2 rounded-full bg-[#70D5B2] web:size-4" />
         <div>
