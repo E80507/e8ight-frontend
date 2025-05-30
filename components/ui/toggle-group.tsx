@@ -1,73 +1,76 @@
 "use client";
 
+import Image from "next/image";
 import * as React from "react";
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 import { toggleVariants } from "@/components/ui/toggle";
-import Check from "../shared/check";
+import Radio from "../radio";
 
-const ToggleGroupContext = React.createContext<
-  VariantProps<typeof toggleVariants>
->({
-  size: "default",
-  variant: "default",
-});
+const ToggleGroupContext = React.createContext<{
+  variant?: string;
+  size?: string;
+  value?: string;
+}>({});
+
+
 
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
     VariantProps<typeof toggleVariants>
->(({ className, variant, size, children, ...props }, ref) => (
+>(({ className, variant, size, value, onValueChange, children, ...props }, ref) => (
   <ToggleGroupPrimitive.Root
+    type="single"
+    value={value}
+    onValueChange={onValueChange}
     ref={ref}
     className={cn("flex items-center p-0 justify-center gap-3", className)}
     {...props}
   >
-    <ToggleGroupContext.Provider value={{ variant, size }}>
+    <ToggleGroupContext.Provider value={{ variant, size, value }}>
       {children}
     </ToggleGroupContext.Provider>
   </ToggleGroupPrimitive.Root>
 ));
 
-ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
+ToggleGroup.displayName = "ToggleGroup";
 
 const ToggleGroupItem = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &
     VariantProps<typeof toggleVariants> & {
-      checkType?: "circle" | "square";
       hasIcon?: boolean;
-      "data-state"?: "on" | "off";
     }
->(
-  (
-    { className, children, hasIcon, checkType, variant, size, ...props },
-    ref,
-  ) => {
-    const context = React.useContext(ToggleGroupContext);
+>(({ className, children, value, hasIcon, variant, size, ...props }, ref) => {
+  const context = React.useContext(ToggleGroupContext);
+  const isChecked = context.value === value; // ✅ value만 사용
 
-    return (
-      <ToggleGroupPrimitive.Item
-        ref={ref}
-        className={cn(
-          toggleVariants({
-            variant: context.variant || variant,
-            size: context.size || size,
-          }),
-          "w-full justify-start min-w-max p-0 [&[data-state='on']_div_img:first-child]:hidden subtitle-2 items-center flex gap-3 [&[data-state='on']_div]:bg-primary [&[data-state='on']_div]:border-none [&[data-state='on']_div_img:last-child]:block",
-          className,
-        )}
-        {...props}
-      >
-        {hasIcon && checkType && <Check type={checkType} />}
-        {children}
-      </ToggleGroupPrimitive.Item>
-    );
-  },
-);
+  return (
+    <ToggleGroupPrimitive.Item
+      ref={ref}
+      value={value}
+      className={cn(
+        toggleVariants({
+          variant: context.variant || variant,
+          size: context.size || size,
+        }),
+        "w-full justify-start min-w-max p-0 subtitle-2 items-center flex gap-3 relative",
+        className
+      )}
+      {...props}
+    >
+      {hasIcon && (
+        <Radio isChecked={isChecked} />
+      )}
+      {children}
+    </ToggleGroupPrimitive.Item>
+  );
+});
 
-ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;
+
+ToggleGroupItem.displayName = "ToggleGroupItem";
 
 export { ToggleGroup, ToggleGroupItem };
