@@ -40,8 +40,12 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
 
               <div className="relative z-10 flex gap-[8px]">
                 <div className="h-[16px] w-[16px] rounded-full bg-[#70D5B2]" />
-                
-                <div className="gibson-heading-2">Global No.1<br/>Digital Twin Platform</div>
+
+                <div className="gibson-heading-2">
+                  Global No.1
+                  <br />
+                  Digital Twin Platform
+                </div>
               </div>
             </div>
 
@@ -54,9 +58,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                   className="flex flex-col gap-[32px]"
                 >
                   {/* 파일 업로드 */}
-                  <CustomFileUploadField
-                    label="다운로드 파일명"
-                  />
+                  <CustomFileUploadField label="다운로드 파일명" />
 
                   {/* 성함 */}
                   <CustomInputField
@@ -116,16 +118,25 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                   <CustomCheckboxField
                     form={form}
                     name="agreeToPrivacyPolicy"
-                    label={<span className="pretendard-body-3">
-                      <span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>
-                      <span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.</span>
-                    </span>}
+                    label={
+                      <span className="pretendard-body-3">
+                        <span className="text-primary font-bold">
+                          [필수] 개인정보 수집 동의
+                        </span>
+                        <span>
+                          : 개인정보 수집 및 이용약관을 확인하였으며, 이에
+                          동의합니다.
+                        </span>
+                      </span>
+                    }
                     isEssential={true}
                     type="square"
                   />
 
                   {/* 다운로드 버튼 */}
-                  <Button type="submit" shape="round">다운로드</Button>
+                  <Button type="submit" shape="round">
+                    다운로드
+                  </Button>
                 </form>
               </Form>
             </div>

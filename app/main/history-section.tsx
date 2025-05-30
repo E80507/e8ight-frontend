@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 import CarouselBox from "@/components/shared/carousel";
-import { useGetCarouselData } from "@/hooks/main/use-get-carousel-data";
+// import { useGetCarouselData } from "@/hooks/main/use-get-carousel-data";
 import {
   TECH_INSIGHTS_PAGE,
   TECH_LIBRARY_PAGE,
@@ -60,7 +60,7 @@ const HistorySection = () => {
   }, [api]);
 
   return (
-    <section className="mx-auto max-w-[1440px] pt-[80px] mobile:px-4 tablet:px-[30px] web:px-[120px] web:py-[100px]">
+    <section className="mobile:px-4 mx-auto max-w-[1440px] pt-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
       <div className="flex flex-col gap-x-10 web:flex-row web:justify-between">
         {/* 텍스트 영역 */}
         <div className="flex min-w-0 grow flex-col web:h-[523px] web:min-w-[334px] web:max-w-[455px] web:justify-between">
@@ -82,7 +82,7 @@ const HistorySection = () => {
           {/* 텍스트 본문 */}
           <div>
             <div className="mb-8">
-              <p className="mb-4 text-primary mobile:subtitle-s tablet:subtitle-m web:subtitle-l">
+              <p className="mobile:subtitle-s mb-4 text-primary tablet:subtitle-m web:subtitle-l">
                 {items[current].title}
               </p>
               <p className="break-words leading-relaxed h2-r tablet:h2-l web:h2-l">

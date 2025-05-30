@@ -13,13 +13,13 @@ const Check = ({ type, isChecked = false }: CheckProps) => {
     <div
       className={cn(
         `${rounded} flex size-[18px] items-center justify-center transition-all`,
-        isChecked ? "bg-primary border-primary" : "bg-white border-gray-300"
+        isChecked ? "bg-primary border-primary" : "bg-white border-gray-300",
       )}
     >
       <Image
         className={cn(
           "transition-opacity duration-200",
-          isChecked ? "opacity-0" : "opacity-100"
+          isChecked ? "opacity-0" : "opacity-100",
         )}
         src="/svg/icon/check-white.svg"
         alt="체크 아이콘"
@@ -29,7 +29,7 @@ const Check = ({ type, isChecked = false }: CheckProps) => {
       <Image
         className={cn(
           "absolute transition-opacity duration-200",
-          isChecked ? "opacity-100" : "opacity-0"
+          isChecked ? "opacity-100" : "opacity-0",
         )}
         src="/svg/icon/check.svg"
         alt="체크 아이콘"

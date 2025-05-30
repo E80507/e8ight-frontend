@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { CONTACT_PAGE } from "@/constants/path";
 import { useRouter, usePathname } from "next/navigation";
 

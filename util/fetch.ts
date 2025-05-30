@@ -42,7 +42,6 @@ const postRefresh = async () => {
     document.cookie = `refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
     // 로컬 스토리지 유저 정보 삭제
     localStorage.removeItem("user");
-    window.location.href = LOGIN_PAGE;
     throw error instanceof CustomError
       ? error
       : new CustomError(500, "토큰 재발급 중 알 수 없는 오류가 발생했습니다.");
