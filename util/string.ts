@@ -7,6 +7,7 @@ import {
   PointUsageTransactionType,
 } from "@/app/api/dto/point";
 import { PrintStatus } from "@/app/api/dto/delivery";
+import { AdminCategory } from "@/app/api/dto/admin";
 
 // 닉네임 마스킹 처리 함수
 export const handleMaskName = (name: string, isName?: boolean): string => {
@@ -335,4 +336,20 @@ export const handlePrintStatusKRText = (status: PrintStatus) => {
       break;
   }
   return printStatusKR;
+};
+
+// 관리자 카테고리 영어 텍스트 반환 함수
+export const handleAdminCategoryText = (category: AdminCategory) => {
+  switch (category) {
+    case AdminCategory.LIBRARY:
+      return `Tech Library`;
+    case AdminCategory.INSIGHT:
+      return `Tech Insight`;
+    case AdminCategory.DX:
+      return `DX Simulation`;
+    case AdminCategory.DOWNLOADS:
+      return `Downloads`;
+    default:
+      return "-";
+  }
 };
