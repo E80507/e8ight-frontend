@@ -6,7 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import {
   formatCaption,
   formatWeekdayName,
@@ -54,17 +54,17 @@ const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
       <PopoverTrigger asChild>
         <button
           className={cn(
-            "w-[250px] rounded-sm border relative h-[30px] text-[15px] px-3 items-center justify-between text-left",
+            "w-[400px] rounded-sm border relative h-[48px] text-[15px] px-3 items-center justify-between text-left",
           )}
         >
-          <span className="flex gap-3 subtitle-3">
+          <span className="flex gap-[1px] subtitle-3">
             <input
               type="text"
               readOnly
               value={
                 range && range.from
-                  ? formattedDate(range.from, "INPUT_DATE")
-                  : "연도. 월. 일"
+                  ? `${formattedDate(range.from, "YEAR")}/${formattedDate(range.from, "MONTH")}/${formattedDate(range.from, "DAY")}`
+                  : "연도/월/일"
               }
               placeholder="Start date"
               className="max-w-[80px] bg-transparent focus:outline-none"
@@ -75,16 +75,17 @@ const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
               readOnly
               value={
                 range && range.to
-                  ? formattedDate(range.to, "INPUT_DATE")
-                  : "연도. 월. 일"
+                  ? `${formattedDate(range.to, "YEAR")}/${formattedDate(range.to, "MONTH")}/${formattedDate(range.to, "DAY")}`
+                  : "연도/월/일"
               }
               placeholder="End date"
               className="max-w-[80px] bg-transparent focus:outline-none"
             />
           </span>
-          <CalendarIcon className="absolute inset-y-0 right-0 my-auto ml-auto mr-3 size-[19px] text-black" />
+          <CalendarDays className="absolute inset-y-0 right-0 my-auto ml-auto mr-3 size-[19px] text-black" />
         </button>
       </PopoverTrigger>
+
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           formatters={{ formatCaption, formatWeekdayName }}
