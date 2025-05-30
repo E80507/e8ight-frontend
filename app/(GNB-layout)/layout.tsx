@@ -1,6 +1,6 @@
 import Loading from "@/components/shared/loading/loading";
 import GlobalNavBar from "@/components/shared/layout/global-nav-bar";
-import { Toaster } from "@/components/ui/toaster";
+// import { Toaster } from "@/components/ui/toaster";
 import GlobalFooter from "@/components/shared/layout/global-footer";
 
 interface GlobalNavBarLayoutProps {
@@ -17,7 +17,7 @@ const GlobalNavBarLayout = ({ children }: GlobalNavBarLayoutProps) => {
           <GlobalFooter />
         </div>
       </Loading>
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 };
