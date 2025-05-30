@@ -62,6 +62,7 @@ body {
     --radius: 10px;
     --black: 0 1% 6%;
     --error: 2 100% 50%;
+    --gray-strong: 214 4% 34%;
   }
   .dark {
     --background: 0 0% 100%;
