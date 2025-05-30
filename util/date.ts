@@ -10,7 +10,10 @@ const formattedDate = (
     | "SHORTENED_YEAR_TEXT_FULL" // 24년 01월 01일
     | "MONTH_DATE" // 24.01
     | "MONTH_DATE_TEXT" // 24년 01월
-    | "INPUT_DATE", // 2024-01-01
+    | "INPUT_DATE" // 2024-01-01
+    | "YEAR" // 2024
+    | "MONTH" // 01
+    | "DAY", // 01
 ) => {
   if (!utcValue) return "-";
 
@@ -57,6 +60,18 @@ const formattedDate = (
 
   if (type === "INPUT_DATE") {
     return `${year}-${month}-${day}`;
+  }
+
+  if (type === "YEAR") {
+    return `${year}`;
+  }
+
+  if (type === "MONTH") {
+    return `${month}`;
+  }
+
+  if (type === "DAY") {
+    return `${day}`;
   }
 
   return `${hours}:${minutes}:${seconds}`;

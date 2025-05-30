@@ -3,31 +3,31 @@ import { AdminRes, AdminCategory } from "./dto/admin";
 const mockTechBlogList: AdminRes[] = [
   {
     techBlogId: "blog_001",
-    createdAt: new Date().toISOString(),
+    createdAt: '2025-05-31',
     title: "디지털 트윈 기술의 미래",
     category: AdminCategory.LIBRARY,
-    writer: "John Doe",
+    writer: "김혜란",
   },
   {
     techBlogId: "blog_002",
-    createdAt: new Date(Date.now() - 86400000).toISOString(), // 하루 전
+    createdAt: '2025-05-31',
     title: "AI와 메타버스의 융합",
     category: AdminCategory.INSIGHT,
-    writer: "Jane Smith",
+    writer: "김혜란",
   },
   {
     techBlogId: "blog_003",
-    createdAt: new Date(Date.now() - 172800000).toISOString(), // 이틀 전
+    createdAt: '2025-05-31',
     title: "스마트 시티 구현 사례",
     category: AdminCategory.DX,
-    writer: "Kim Min Su",
+    writer: "김혜란",
   },
   {
     techBlogId: "blog_004",
-    createdAt: new Date(Date.now() - 259200000).toISOString(), // 3일 전
+    createdAt: '2025-05-31',
     title: "산업용 IoT 플랫폼",
     category: AdminCategory.DOWNLOADS,
-    writer: "Lee Ji Eun",
+    writer: "김혜란",
   },
 ];
 
