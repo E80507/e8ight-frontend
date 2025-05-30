@@ -66,9 +66,10 @@ const FilterSearchBox = ({
       />
 
       {/* 생성일자 */}
-      <div className="flex h-[54px] border">
-        <FilterName name="생성일자" />
-        <div className="relative flex w-[430px] items-center pl-5">
+      <div className="flex h-[72px] border">
+        <FilterName name="생성 일자" />
+        
+        <div className="relative flex w-[430px] items-center pl-[12px]">
           <CalendarDouble
             date={date}
             setDate={setDate}

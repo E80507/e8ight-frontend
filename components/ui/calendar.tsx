@@ -35,20 +35,20 @@ function Calendar({
           "text-muted-foreground rounded-md w-[30px] font-normal text-[0.8rem]",
         row: "flex my-[10px] w-full",
         cell: cn(
-          "relative subtitle-2 p-0 px-[9px] text-center subtitle-2 focus-within:relative focus-within:z-20",
-          "[&:has([aria-selected])]:bg-[#FF6668] [&:has([aria-selected])]:text-white",
+          "relative subtitle-2 text-center subtitle-2 focus-within:relative focus-within:z-20",
           props.mode === "range"
-            ? "[&:has(>.day-range-start)]:rounded-l-full [&:has(>.day-range-end)]:rounded-r-full [&:has(>.day-range-middle)]:bg-[#FF6668] [&:has(>.day-range-middle)]:text-white"
-            : "[&:has([aria-selected])]:rounded-full",
+            ? "[&:has(>.day-range-start)]:rounded-l-[8px] [&:has(>.day-range-end)]:rounded-r-[8px] [&:has(>.day-range-middle)]:bg-[#F2EDFD] [&:has(>.day-range-middle)]:text-white [&:has(>.day-range-start)]:pl-0 [&:has(>.day-range-start)]:ml-[9px] [&:has(>.day-range-start)]:pr-[9px] [&:has(>.day-range-end)]:px-0 [&:has(>.day-range-end)]:mr-[9px] [&:has(>.day-range-end)]:pl-[9px] [&:not(:has(>.day-range-start)):not(:has(>.day-range-end))]:px-[9px]"
+            : "[&:has([aria-selected])]:rounded-[8px] px-[9px]",
+          "[&:has([aria-selected])]:bg-[#F2EDFD] [&:has([aria-selected])]:text-white",
         ),
         day: cn("size-[30px] p-0 font-normal aria-selected:opacity-100"),
-        day_range_start: "day-range-start bg-[#FF6668] rounded-full text-white",
-        day_range_end: "day-range-end bg-[#FF6668] rounded-full text-white",
+        day_range_start: "day-range-start bg-[#6025E1] rounded-[8px] text-white",
+        day_range_end: "day-range-end bg-[#6025E1] rounded-[8px] text-white",
         day_selected: "text-primary-foreground hover:text-primary-foreground",
-        day_today: "border border-black rounded-[2px] text-accent-foreground",
+        day_today: "border border-black rounded-[8px] text-accent-foreground",
         day_outside: "day-outside text-muted-foreground",
         day_disabled: "text-muted-foreground opacity-50",
-        day_range_middle: "day-range-middle bg-[#FF6668] text-white",
+        day_range_middle: "day-range-middle bg-[#F2EDFD] text-black",
         day_hidden: "invisible",
         ...classNames,
       }}

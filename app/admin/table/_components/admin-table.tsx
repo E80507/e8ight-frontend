@@ -21,6 +21,8 @@ import {
   handleAdminCategoryText,
 } from "@/util/string";
 import { AdminRes } from "@/app/api/dto/admin";
+import Check from "@/components/shared/check";
+import formattedDate from "@/util/date";
 
 interface AdminTableProps {
   data: AdminRes[]; // 필터링 된 데이터
@@ -84,35 +86,46 @@ export function AdminTable({
             type="checkbox"
             checked={areAllPageItemsSelected()}
             onChange={handleSelectAll}
+            className="peer absolute opacity-0 w-[20px] h-[20px] cursor-pointer z-10"
           />
+          <Check type={'square'} isChecked={areAllPageItemsSelected()} />
         </div>
       ),
       cell: ({ row }) => (
+        <div className="my-auto flex items-center justify-center">
         <input
-          type="checkbox"
-          checked={selectedIds.includes(row.original.techBlogId)}
-          onChange={() => {
-            row.toggleSelected();
-            handleCheckboxChange(row.original.techBlogId);
-          }}
-        />
+            type="checkbox"
+            checked={selectedIds.includes(row.original.techBlogId)}
+            onChange={() => {
+              row.toggleSelected();
+              handleCheckboxChange(row.original.techBlogId);
+            }}
+            className="peer absolute opacity-0 w-[20px] h-[20px] cursor-pointer z-10"
+          />
+          <Check type={'square'} isChecked={selectedIds.includes(row.original.techBlogId)} />
+        </div>
       ),
+      size: 44,
     }),
     columnHelper.accessor("createdAt", {
-      cell: (data) => new Date(data.getValue()).toLocaleDateString(),
+      cell: (data) => formattedDate(data.getValue(), "INPUT_DATE"),
       header: "등록일",
+      size: 217,
     }),
     columnHelper.accessor("title", {
       cell: (data) => data.getValue(),
       header: "제목",
+      size: 556,
     }),
     columnHelper.accessor("category", {
       cell: (data) => handleAdminCategoryText(data.getValue()),
       header: "카테고리",
+      size: 217,
     }),
     columnHelper.accessor("writer", {
       cell: (data) => data.getValue(),
       header: "저자",
+      size: 160,
     }),
   ];
 
@@ -138,14 +151,13 @@ export function AdminTable({
   });
 
   return (
-    <Table className="min-w-[1500px]">
+    <Table>
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header, headerIndex) => {
               return (
                 <TableHead
-                  className={headerIndex === 0 ? "border-x" : "border-r"}
                   key={header.id + headerIndex}
                 >
                   {header.isPlaceholder
@@ -171,7 +183,7 @@ export function AdminTable({
               {row.getVisibleCells().map((cell, cellIndex) => (
                 <TableCell
                   size="sm"
-                  className={`${selectedIds.includes(row.original.purchasedArtworkId) ? "bg-[#FFF6F6]" : ""} ${cell.column.id === "content" ? "w-[330px]" : ""} ${cellIndex === 0 ? "border-x border-t" : "border-r border-t"} ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
+                  className={`h-[45px] ${selectedIds.includes(row.original.techBlogId) ? "bg-[#FFF6F6]" : ""} border-t ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
                   key={cell.id + cellIndex}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -182,7 +194,7 @@ export function AdminTable({
         ) : (
           <TableRow>
             <TableCell
-              className="h-[200px] subtitle-1"
+              className="h-[45px]"
               size="lg"
               colSpan={columns.length}
             >

@@ -21,7 +21,7 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   return (
     <div
-      className={`flex h-[54px] ${
+      className={`flex h-[72px] ${
         noBottomBorder ? "border-x" : "border-x border-b"
       } ${checkboxClass}`}
     >
@@ -31,17 +31,17 @@ const CheckBox = ({
           defaultValue={conditions[0]?.value}
           onValueChange={handleChangeValue} // 값 변경 핸들러 연결
           type="single"
-          className="gap-20"
+          className="gap-[24px]"
         >
           {conditions.map((condition) => (
             <ToggleGroupItem
               key={condition.value}
               hasIcon
-              checkType="square"
+              checkType="circle"
               value={condition.value}
               aria-label={condition.value}
             >
-              <p className="mt-px subtitle-2">{condition.label}</p>
+              <p className="mt-px subtitle-m">{condition.label}</p>
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
