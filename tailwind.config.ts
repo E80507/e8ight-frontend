@@ -159,6 +159,13 @@ const config: Config = {
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-gibson)",
         },
+        ".gibson-body-3": {
+          fontSize: "16px",
+          lineHeight: "150%",
+          fontWeight: "400",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-gibson)",
+        },
         ".pretendard-display-1": {
           fontSize: "48px",
           lineHeight: "150%",
@@ -248,12 +255,6 @@ const config: Config = {
           fontWeight: "600",
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-pretendard)",
-        ".gibson-body-3": {
-          fontSize: "16px",
-          lineHeight: "150%",
-          fontWeight: "400",
-          letterSpacing: "-0.3%",
-          fontFamily: "var(--font-gibson)",
         },
         ".h1-l": {
           fontSize: "32px",
@@ -343,11 +344,6 @@ const config: Config = {
           lineHeight: "150%",
           fontWeight: "700",
           letterSpacing: "-0.3%",
-        },
-        ".subtitle-l": {
-          fontSize: "18px",
-          lineHeight: "150%",
-          fontWeight: "600",
         },
         ".subtitle-l": {
           fontSize: "18px",
