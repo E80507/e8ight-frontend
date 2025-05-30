@@ -19,7 +19,7 @@ const ActionButtons = ({ className }: ActionButtonsProps) => {
       <Button
         size="lg"
         shape="round"
-        className="bg-black"
+        className="web:w-[160px] bg-black"
         onClick={() => router.push(CONTACT_PAGE)}
       >
         상담문의
@@ -28,14 +28,16 @@ const ActionButtons = ({ className }: ActionButtonsProps) => {
       <Button
         size="lg"
         shape="round"
-        className="bg-primary-alternative text-black"
-        onClick={() => setIsSubscriptionModalOpen(true)}
+        onClick={() => setIsSubscriptionModalOpen(true)} //뉴스 레터 모달 띄우기
+        className="bg-primary-alternative web:w-[160px] text-black"
       >
         뉴스레터 구독
       </Button>
 
       {isSubscriptionModalOpen && (
-        <SubscriptionModal onClickClose={() => setIsSubscriptionModalOpen(false)} />
+        <SubscriptionModal
+          onClickClose={() => setIsSubscriptionModalOpen(false)}
+        />
       )}
     </div>
   );
