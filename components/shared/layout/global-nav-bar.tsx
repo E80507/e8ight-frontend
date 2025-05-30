@@ -33,7 +33,11 @@ const GlobalNavBar = () => {
   return (
     <>
       {/* 데스크톱 GNB */}
+<<<<<<< HEAD
       <div className={`hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${isContactPage ? 'bg-[#FBFBFC]' : 'bg-transparent'}`}>
+=======
+      <div className="mx-auto hidden w-full max-w-[1440px] flex-col bg-transparent px-[120px] py-4 font-pretendard web:flex">
+>>>>>>> 714ca6e6e9d70e5fa2c8758c7df5e32fa565fe97
         <div className="flex items-center justify-between">
           <Link prefetch={false} href="/">
             <Image
