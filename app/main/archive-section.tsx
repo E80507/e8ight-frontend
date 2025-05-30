@@ -34,13 +34,28 @@ const ArchiveSection = () => {
           {archiveData.map(({ id, title, bgImage }) => (
             <div
               key={id}
-              className="relative flex flex-col justify-between p-[32px] border rounded-[20px] overflow-hidden bg-cover bg-center web:aspect-[1.39/1] tablet:aspect-[1.8/1] aspect-[1/1]"
-              style={{ backgroundImage: `url(${bgImage})` }}
+              className="relative flex flex-col justify-between p-[32px] border rounded-[20px] overflow-hidden web:aspect-[1.39/1] tablet:aspect-[1.8/1] aspect-[1/1]"
             >
+              <Image
+                src={bgImage}
+                alt={title}
+                fill
+                className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={90}
+              />
               <div className="absolute inset-0 bg-black opacity-[0.21] z-0" />
 
               <div className="relative z-10 flex flex-col gap-[16px]">
-                <Image src="/svg/archive-logo.svg" alt="" width={68} height={29} className="-mt-px" />
+                <Image 
+                  src="/svg/archive-logo.svg" 
+                  alt="" 
+                  width={68} 
+                  height={29} 
+                  className="-mt-px"
+                  loading="lazy"
+                />
                 <div className="pretendard-h1-m text-white">{title}</div>
               </div>
 
