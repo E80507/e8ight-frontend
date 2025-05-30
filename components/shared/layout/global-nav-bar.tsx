@@ -29,7 +29,7 @@ const GlobalNavBar = () => {
   return (
     <>
       {/* 데스크톱 GNB */}
-      <div className="hidden w-full flex-col bg-transparent px-[120px] py-4 font-pretendard web:flex">
+      <div className="mx-auto hidden w-full max-w-[1440px] flex-col bg-transparent px-[120px] py-4 font-pretendard web:flex">
         <div className="flex items-center justify-between">
           <Link prefetch={false} href="/">
             <Image
