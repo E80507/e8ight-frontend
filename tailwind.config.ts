@@ -69,6 +69,7 @@ const config: Config = {
         },
         black: "hsl(var(--black))",
         error: "hsl(var(--error))",
+        "gray-strong": "hsl(var(--gray-strong))",
       },
       borderRadius: {
         lg: "var(--radius)", // 10px
@@ -301,6 +302,12 @@ const config: Config = {
         },
         ".h2-r": {
           fontSize: "16px",
+          lineHeight: "150%",
+          fontWeight: "500",
+          letterSpacing: "-0.3%",
+        },
+        ".h2-s": {
+          fontSize: "14px",
           lineHeight: "150%",
           fontWeight: "500",
           letterSpacing: "-0.3%",

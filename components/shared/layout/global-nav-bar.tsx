@@ -29,12 +29,13 @@ const GlobalNavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isContactPage = path === CONTACT_PAGE;
+  const isHome = path === "/";
 
   return (
     <>
-      {/* 데스크톱 GNB */}
+      {/* 홈페이지 데스크톱 GNB */}
       <div
-        className={`font-pretendard web:flex hidden w-full flex-col px-[120px] py-4 ${isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"}`}
+        className={`relative z-[999] hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${isContactPage ? "bg-[#FBFBFC]" : "max-w-[1440px] mx-auto bg-transparent"}`}
       >
         <div className="flex items-center justify-between">
           <Link prefetch={false} href="/">
@@ -56,9 +57,7 @@ const GlobalNavBar = () => {
                 key={href}
                 prefetch={false}
                 href={href}
-                className={`title-l flex items-center gap-3 hover:underline ${
-                  path === href ? "bg-[#353434]" : ""
-                }`}
+                className={`flex items-center gap-3 title-l`}
               >
                 {label}
               </Link>
@@ -67,26 +66,44 @@ const GlobalNavBar = () => {
           <Button
             size="lg"
             shape="round"
+            className="w-[160px]"
             onClick={() => router.push(CONTACT_PAGE)}
           >
-            상담 문의
+            상담문의
           </Button>
         </div>
       </div>
 
-      {/* 모바일 GNB */}
+      {/* 홈페이지 모바일 GNB */}
       <div
-        className={`web:hidden z-50 flex h-[67px] w-full items-center justify-between px-4 py-3 ${isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"}`}
+        className={`relative z-[999] flex w-full items-center justify-between px-4 py-3 web:hidden ${isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"} ${isHome ? " h-[67px]" : "h-12"}`}
       >
-        <Link prefetch={false} href="/">
-          <Image
-            src="/svg/logo.svg"
-            alt={SERVICE_NAME}
-            width={64}
-            height={43}
-            priority
+        {isHome ? (
+          <Link prefetch={false} href="/">
+            <Image
+              src="/svg/logo.svg"
+              alt={SERVICE_NAME}
+              width={64}
+              height={43}
+              priority
+            />
+          </Link>
+        ) : (
+          <IconButton
+            src="/svg/icon/chevron-left.svg"
+            width={24}
+            height={24}
+            onClick={() => {
+              if (window.history.length > 1) {
+                router.back();
+              } else {
+                router.push("/");
+              }
+            }}
+            variant="normal"
+            size="sm"
           />
-        </Link>
+        )}
         <IconButton
           src={isMobileMenuOpen ? "/svg/icon/x.svg" : "/svg/icon/menu.svg"}
           width={24}
@@ -99,16 +116,9 @@ const GlobalNavBar = () => {
 
       {/* 모바일 메뉴 Drawer */}
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <DrawerContent className="font-pretendard flex flex-col items-center justify-center gap-y-[59px] bg-white">
+        <DrawerContent className="flex flex-col items-center justify-center gap-y-[59px] bg-white font-pretendard">
           {NAV_LINKS.map(({ label, path: href }) => (
-            <Link
-              key={href}
-              prefetch={false}
-              href={href}
-              className={`h1-m flex items-center gap-3 ${
-                path === href ? "bg-[#353434]" : ""
-              }`}
-            >
+            <Link key={href} prefetch={false} href={href} className={`h1-m`}>
               {label}
             </Link>
           ))}
