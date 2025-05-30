@@ -4,40 +4,22 @@ import { Button } from "@/components/ui/button";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 import CarouselBox from "@/components/shared/carousel";
-import { useGetCarouselData } from "@/hooks/main/use-get-carousel-data";
-import {
-  TECH_INSIGHTS_PAGE,
-  TECH_LIBRARY_PAGE,
-  DOWNLOADS_PAGE,
-} from "@/constants/path";
-import { useRouter } from "next/navigation";
 
 const HistorySection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const router = useRouter();
-  // const { data } = useGetCarouselData();
-
-  const handleCategoryClick = (category: string) => {
-    if (category === "tech-insights") router.push(TECH_INSIGHTS_PAGE);
-    else if (category === "downloads") router.push(DOWNLOADS_PAGE);
-    else router.push(TECH_LIBRARY_PAGE);
-  };
 
   const items = [
     {
-      category: "tech-insights",
       title: "Tech Insight",
       description:
         "Lorem ipsum dolor sit amet, labore natus. Numquam labore soluta quo corrupti",
     },
     {
-      category: "tech-library",
       title: "Tech Library",
       description: "우리가 만들어가는 혁신.",
     },
     {
-      category: "downloads",
       title: "Downloads",
       description: "기술과 사람의 연결.",
     },
@@ -90,12 +72,11 @@ const HistorySection = () => {
               </p>
             </div>
 
-            <Button
+            <Button // 외부 링크로 이동(추후 연결)
               size="lg"
               variant="outline"
               shape="round"
               className="hidden tablet:block"
-              onClick={() => handleCategoryClick(items[current].category)}
             >
               더보기
             </Button>
@@ -104,7 +85,6 @@ const HistorySection = () => {
               variant="outline"
               shape="round"
               className="tablet:hidden"
-              onClick={() => handleCategoryClick(items[current].category)}
             >
               더보기
             </Button>
