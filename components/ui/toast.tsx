@@ -6,7 +6,7 @@ import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { DELIVERY_PAGE } from "@/constants/path";
+import { CONTACT_PAGE } from "@/constants/path";
 
 const ToastProvider = ToastPrimitives.Provider;
 
@@ -26,13 +26,13 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
 
 const toastVariants = cva(
-  "group pointer-events-auto relative flex w-full items-center justify-between overflow-hidden rounded-md p-4 pr-6 transition-all toast-shadow data-[swipe=cancel]:translate-y-0 data-[swipe=end]:translate-y-[var(--radix-toast-swipe-end-y)] data-[swipe=move]:translate-y-[var(--radix-toast-swipe-move-y)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-bottom-full data-[state=open]:slide-in-from-bottom-full web:py-5 data-[state=open]:sm:slide-in-from-bottom-full",
+  "toast-shadow data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-bottom-full data-[state=open]:slide-in-from-bottom-full web:py-5 data-[state=open]:sm:slide-in-from-bottom-full group pointer-events-auto relative flex w-full items-center justify-between overflow-hidden rounded-md p-4 pr-6 transition-all data-[swipe=cancel]:translate-y-0 data-[swipe=end]:translate-y-[var(--radix-toast-swipe-end-y)] data-[swipe=move]:translate-y-[var(--radix-toast-swipe-move-y)] data-[swipe=move]:transition-none",
   {
     variants: {
       variant: {
         default: "bg-black text-white",
         destructive:
-          "group border-destructive bg-destructive text-destructive-foreground",
+          "border-destructive bg-destructive text-destructive-foreground group",
       },
     },
     defaultVariants: {
@@ -118,8 +118,8 @@ const ToastTitle = React.forwardRef<
       {children}
       {isOrderToast && (
         <Link
-          href={DELIVERY_PAGE}
-          className="ml-auto text-primary heading-6 web:heading-5"
+          href={CONTACT_PAGE}
+          className="text-primary heading-6 web:heading-5 ml-auto"
         >
           배송 신청
         </Link>
