@@ -4,6 +4,7 @@ import CustomInputField from "@/components/shared/form/custom-input-field";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { usePostSubscription } from "@/hooks/subscription/use-post-subscription";
+import Image from "next/image";
 
 const SubscriptionSection = () => {
   const { onSubmit, form } = usePostSubscription();
@@ -11,10 +12,17 @@ const SubscriptionSection = () => {
   return (
     <section>
       {/* 이미지 배경 카드 */}
-      <div
-        className="relative web:h-[520px] tablet:h-[503px] h-[474px] bg-cover bg-center"
-        style={{ backgroundImage: 'url("/images/subscription.webp")' }}
-      >
+      <div className="relative web:h-[520px] tablet:h-[503px] h-[474px] overflow-hidden">
+        <Image
+          src="/images/subscription.webp"
+          alt="Subscription background"
+          fill
+          className="object-cover"
+          loading="lazy"
+          sizes="100vw"
+          quality={90}
+        />
+
         {/* 오버레이 */}
         <div className="absolute inset-0 bg-gradient-to-t from-black to-black/0 z-0" />
 
