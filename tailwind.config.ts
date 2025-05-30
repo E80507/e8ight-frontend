@@ -57,7 +57,11 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         "label-alternative": "hsl(var(--label-alternative))",
+<<<<<<< HEAD
         "label-normal": "hsl(var(--label-normal))",
+=======
+        "label-natural": "hsl(var(--label-natural))",
+>>>>>>> 714ca6e6e9d70e5fa2c8758c7df5e32fa565fe97
         ring: "hsl(var(--ring))",
         chart: {
           "1": "hsl(var(--chart-1))",
@@ -158,6 +162,7 @@ const config: Config = {
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-gibson)",
         },
+<<<<<<< HEAD
         ".pretendard-display-1": {
           fontSize: "48px",
           lineHeight: "150%",
@@ -247,6 +252,14 @@ const config: Config = {
           fontWeight: "600",
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-pretendard)",
+=======
+        ".gibson-body-3": {
+          fontSize: "16px",
+          lineHeight: "150%",
+          fontWeight: "400",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-gibson)",
+>>>>>>> 714ca6e6e9d70e5fa2c8758c7df5e32fa565fe97
         },
         ".h1-l": {
           fontSize: "32px",
@@ -280,6 +293,12 @@ const config: Config = {
         },
         ".h2-m": {
           fontSize: "18px",
+          lineHeight: "150%",
+          fontWeight: "500",
+          letterSpacing: "-0.3%",
+        },
+        ".h2-r": {
+          fontSize: "16px",
           lineHeight: "150%",
           fontWeight: "500",
           letterSpacing: "-0.3%",
@@ -330,6 +349,11 @@ const config: Config = {
           lineHeight: "150%",
           fontWeight: "700",
           letterSpacing: "-0.3%",
+        },
+        ".subtitle-l": {
+          fontSize: "18px",
+          lineHeight: "150%",
+          fontWeight: "600",
         },
         ".subtitle-l": {
           fontSize: "18px",
