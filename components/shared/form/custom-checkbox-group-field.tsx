@@ -1,15 +1,6 @@
 import { ReactNode } from "react";
-import {
-  FieldValues,
-  Path,
-  UseFormReturn,
-} from "react-hook-form";
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../../ui/form";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
+import { FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
 import CustomCheckboxField from "./custom-checkbox-field";
 import CustomInputField from "./custom-input-field";
 import CustomSelectField from "./custom-select-field";
@@ -18,10 +9,10 @@ interface CheckboxOption {
   label: ReactNode;
   value: string;
   additionalField?: {
-    type: 'input' | 'select';
+    type: "input" | "select";
     placeholder?: string;
-    selectOptions?: { value: string; text: string; }[];
-    fieldName: string;  // 추가 필드의 form 필드 이름
+    selectOptions?: { value: string; text: string }[];
+    fieldName: string; // 추가 필드의 form 필드 이름
   };
 }
 
@@ -40,7 +31,7 @@ const CustomCheckboxGroupField = <T extends FieldValues>({
   options,
   label,
   isEssential = false,
-  className
+  className,
 }: CustomCheckboxGroupFieldProps<T>) => {
   return (
     <FormField
@@ -71,26 +62,34 @@ const CustomCheckboxGroupField = <T extends FieldValues>({
                     showMessage={false}
                   />
                   {/* 체크박스가 선택되었고 추가 필드가 있는 경우에만 표시 */}
-                  {field.value?.includes(option.value) && option.additionalField && (
-                    <div className="ml-8">
-                      {option.additionalField.type === 'input' && (
-                        <CustomInputField
-                          form={form}
-                          name={option.additionalField.fieldName as Path<T>}
-                          placeholder={option.additionalField.placeholder || ''}
-                        />
-                      )}
-                      {option.additionalField.type === 'select' && (
-                        <CustomSelectField
-                          form={form}
-                          name={option.additionalField.fieldName as Path<T>}
-                          placeholder={option.additionalField.placeholder || '선택해주세요'}
-                          selectValue={option.additionalField.selectOptions || []}
-                          label=""
-                        />
-                      )}
-                    </div>
-                  )}
+                  {field.value?.includes(option.value) &&
+                    option.additionalField && (
+                      <div className="ml-8">
+                        {option.additionalField.type === "input" && (
+                          <CustomInputField
+                            form={form}
+                            name={option.additionalField.fieldName as Path<T>}
+                            placeholder={
+                              option.additionalField.placeholder || ""
+                            }
+                          />
+                        )}
+                        {option.additionalField.type === "select" && (
+                          <CustomSelectField
+                            form={form}
+                            name={option.additionalField.fieldName as Path<T>}
+                            placeholder={
+                              option.additionalField.placeholder ||
+                              "선택해주세요"
+                            }
+                            selectValue={
+                              option.additionalField.selectOptions || []
+                            }
+                            label=""
+                          />
+                        )}
+                      </div>
+                    )}
                 </div>
               ))}
             </div>
@@ -102,4 +101,4 @@ const CustomCheckboxGroupField = <T extends FieldValues>({
   );
 };
 
-export default CustomCheckboxGroupField; 
+export default CustomCheckboxGroupField;
