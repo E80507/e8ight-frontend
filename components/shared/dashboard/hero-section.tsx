@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { CONTACT_PAGE } from "@/constants/path";
 import { useRouter, usePathname } from "next/navigation";
@@ -14,10 +15,16 @@ export default function HeroSection() {
   else if (pathname === "/downloads") title = "Downloads";
 
   return (
-    <div
-      className="-z-10 mt-[-48px] h-[279px] bg-cover bg-center tablet:h-[311px] web:mt-[-139px] web:h-[496px]"
-      style={{ backgroundImage: 'url("/images/bg-white.webp")' }}
-    >
+    <div className="relative -z-10 mt-[-48px] h-[279px] overflow-hidden tablet:h-[311px] web:mt-[-139px] web:h-[496px]">
+      <Image
+        src="/images/bg-white.webp"
+        alt={title}
+        fill
+        priority
+        className="object-cover"
+      />
+
+      {/* 콘텐츠 */}
       <div className="absolute left-4 top-[76px] flex gap-x-2 tablet:top-[120px] web:left-[120px] web:top-[219px]">
         <div className="size-2 rounded-full bg-[#70D5B2] web:size-4" />
         <div>
