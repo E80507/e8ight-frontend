@@ -21,7 +21,7 @@ const ContactPage = () => {
         {/* 배너 */}
         <div
           className="relative flex h-[357px] items-center overflow-hidden bg-cover bg-center px-[40px] py-[80px]"
-          style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
+          style={{ backgroundImage: `url("/images/bg-white.webp")` }}
         >
           <div className="absolute inset-0 z-0 bg-white opacity-[0.21]" />
 
