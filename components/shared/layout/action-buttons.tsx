@@ -19,7 +19,7 @@ const ActionButtons = ({ className }: ActionButtonsProps) => {
       <Button
         size="lg"
         shape="round"
-        className="web:w-[160px] bg-black"
+        className="bg-black web:w-[160px]"
         onClick={() => router.push(CONTACT_PAGE)}
       >
         상담문의
@@ -29,7 +29,7 @@ const ActionButtons = ({ className }: ActionButtonsProps) => {
         size="lg"
         shape="round"
         onClick={() => setIsSubscriptionModalOpen(true)} //뉴스 레터 모달 띄우기
-        className="bg-primary-alternative web:w-[160px] text-black"
+        className="bg-primary-alternative text-black web:w-[160px]"
       >
         뉴스레터 구독
       </Button>
