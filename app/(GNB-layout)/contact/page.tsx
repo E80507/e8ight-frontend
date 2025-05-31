@@ -17,26 +17,26 @@ const ContactPage = () => {
 
   return (
     <div className="web:px-[120px] web:py-[40px] tablet:px-[30px] tablet:py-[40px] bg-[#FBFBFC]">
-      <div className="max-w-[1200px] mx-auto rounded-[20px] overflow-hidden">
+      <div className="max-w-[1200px] mx-auto tablet:rounded-[20px] overflow-hidden">
         {/* 배너 */}
         <div
-          className="flex items-center relative overflow-hidden bg-cover bg-center px-[40px] py-[80px] h-[357px] bg-cover bg-center"
+          className="flex items-center relative overflow-hidden bg-cover bg-center px-[16px] pt-[60px] pb-[16px] tablet:px-[40px] tablet:py-[80px] web:h-[357px] tablet:h-[328px] h-[197px] bg-cover bg-center"
           style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
         >
           <div className="absolute inset-0 bg-white opacity-[0.21] z-0" />
 
           <div className="flex gap-[8px] relative z-10 ">
-            <div className="w-[16px] h-[16px] bg-[#70D5B2] rounded-full" />
+            <div className="tablet:w-[16px] tablet:h-[16px] w-[8px] h-[8px] bg-[#70D5B2] rounded-full" />
             
             <div className="flex flex-col gap-[16px]">
-              <div className="gibson-h1-l">Global No.1<br/>Digital Twin Platform</div>
-              <div className="pretendard-body-1">문의를 주시면 자세한 상담이 가능합니다.</div>
+              <div className="web:gibson-h1-l tablet:gibson-h1-m gibson-h1-s">Global No.1<br/>Digital Twin Platform</div>
+              <div className="web:pretendard-body-1 tablet:pretendard-body-2 pretendard-body-3">문의를 주시면 자세한 상담이 가능합니다.</div>
             </div>
           </div>
         </div>
 
         {/* 폼 영역 */}
-        <div className="p-[40px] bg-white">
+        <div className="pt-[16px] pb-[40px] px-[16px] tablet:p-[40px] bg-white">
           <Form {...form}>
             <form
               onSubmit={onSubmit}
@@ -179,7 +179,7 @@ const ContactPage = () => {
               <CustomCheckboxField
                 form={form}
                 name="agreeToReceiveMarketing"
-                label={<span className="pretendard-body-3">[선택] 이에이트 뉴스레터 수신에 동의합니다."</span>}
+                label={<span className="pretendard-body-3">[선택] 이에이트 뉴스레터 수신에 동의합니다.</span>}
               />
 
               {/* 문의하기 버튼 */}
