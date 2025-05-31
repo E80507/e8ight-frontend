@@ -17,36 +17,36 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-black/70 px-5 py-[20px] web:py-[51px]">
+    <div className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-black/70 p-[16px] web:py-[51px]">
       <div className="w-full max-w-[1200px] overflow-hidden rounded-[20px] bg-white">
         <div className="relative">
           {/* 닫기 버튼 */}
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-4 top-4 z-50 h-8 w-8 rounded-full hover:bg-accent"
+            className="absolute right-4 top-4 z-50 bg-transparent border-none"
             onClick={onClickClose}
           >
-            <X className="h-5 w-5" />
+            <X className="h-[24px] w-[24px] text-[#A7A9B4]" />
           </Button>
 
           <div className="max-h-[calc(100vh-40px)] overflow-y-auto web:max-h-[calc(100vh-102px)]">
             {/* 배너 */}
             <div
-              className="relative h-[216px] overflow-hidden bg-cover bg-center py-[80px] px-[30px]"
+              className="relative tablet:h-[216px] h-[204px] overflow-hidden bg-cover bg-center pt-[68px] px-[16px] tablet:py-[80px] tablet:px-[30px]"
               style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
             >
               <div className="absolute inset-0 z-0 bg-white opacity-[0.21]" />
 
               <div className="relative z-10 flex gap-[8px]">
-                <div className="h-[16px] w-[16px] rounded-full bg-[#70D5B2]" />
+                <div className="w-[8px] h-[8px] tablet:h-[16px] tablet:w-[16px] rounded-full bg-[#70D5B2]" />
                 
-                <div className="gibson-heading-2">Global No.1<br/>Digital Twin Platform</div>
+                <div className="tablet:gibson-heading-2 pretendard-h1-m">Global No.1<br/>Digital Twin Platform</div>
               </div>
             </div>
 
             {/* 폼 영역 */}
-            <div className="p-5 web:p-[40px]">
+            <div className="py-[40px] px-[16px] tablet:p-5 web:p-[40px]">
               <Form {...form}>
                 <form
                   onSubmit={onSubmit}
