@@ -24,22 +24,22 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-4 top-4 z-50 h-8 w-8 rounded-full hover:bg-accent"
+            className="absolute right-4 top-4 z-50 size-8 rounded-full hover:bg-accent"
             onClick={onClickClose}
           >
-            <X className="h-5 w-5" />
+            <X className="size-5" />
           </Button>
 
           <div className="max-h-[calc(100vh-40px)] overflow-y-auto web:max-h-[calc(100vh-102px)]">
             {/* 배너 */}
             <div
-              className="relative h-[216px] overflow-hidden bg-cover bg-center py-[80px] px-[30px]"
-              style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
+              className="relative h-[216px] overflow-hidden bg-cover bg-center px-[30px] py-[80px]"
+              style={{ backgroundImage: `url("/images/bg-white.webp")` }}
             >
               <div className="absolute inset-0 z-0 bg-white opacity-[0.21]" />
 
               <div className="relative z-10 flex gap-[8px]">
-                <div className="h-[16px] w-[16px] rounded-full bg-[#70D5B2]" />
+                <div className="size-[16px] rounded-full bg-[#70D5B2]" />
 
                 <div className="gibson-heading-2">
                   Global No.1
@@ -120,7 +120,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                     name="agreeToPrivacyPolicy"
                     label={
                       <span className="pretendard-body-3">
-                        <span className="text-primary font-bold">
+                        <span className="font-bold text-primary">
                           [필수] 개인정보 수집 동의
                         </span>
                         <span>
