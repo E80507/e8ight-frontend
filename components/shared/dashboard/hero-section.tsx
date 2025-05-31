@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CONTACT_PAGE } from "@/constants/path";
 import { useRouter, usePathname } from "next/navigation";
 
-export default function HeroSection() {
+const HeroSection = () => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -46,4 +46,6 @@ export default function HeroSection() {
       </div>
     </div>
   );
-}
+};
+
+export default HeroSection;
