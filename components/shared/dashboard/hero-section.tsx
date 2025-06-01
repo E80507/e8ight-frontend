@@ -22,6 +22,7 @@ const HeroSection = () => {
         fill
         priority
         className="object-cover"
+        sizes="(max-width:600px) 100vw, (max-width: 1025px) 50vw, 33vw"
       />
 
       {/* 콘텐츠 */}
