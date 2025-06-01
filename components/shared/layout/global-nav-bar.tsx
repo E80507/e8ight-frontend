@@ -128,19 +128,21 @@ const GlobalNavBar = () => {
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
         <DrawerTitle className="sr-only">메뉴 열기</DrawerTitle>
         <DrawerContent
-          className={`flex flex-col items-center justify-center gap-y-[59px] bg-white font-pretendard`}
+          className={`flex min-h-screen flex-col items-center bg-white ${isHome ? "pt-[67px]" : "pt-12"} font-pretendard`}
         >
-          {NAV_LINKS.map(({ label, path: href }) => (
-            <Link
-              key={href}
-              prefetch={false}
-              href={href}
-              className="h1-m"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {label}
-            </Link>
-          ))}
+          <div className="flex flex-1 flex-col items-center justify-center gap-y-[59px]">
+            {NAV_LINKS.map(({ label, path: href }) => (
+              <Link
+                key={href}
+                prefetch={false}
+                href={href}
+                className="h1-m"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
           <DrawerFooter className="flex flex-col py-10">
             <ActionButtons />
             <ExternalLinksNav />
