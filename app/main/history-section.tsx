@@ -19,14 +19,15 @@ const HistorySection = () => {
   // const { data } = useGetCarouselData();
 
   const handleCategoryClick = (category: string) => {
-    if (category === "tech-insights") router.push(TECH_INSIGHTS_PAGE);
+    if (category === "tech-insight") router.push(TECH_INSIGHTS_PAGE);
     else if (category === "downloads") router.push(DOWNLOADS_PAGE);
     else router.push(TECH_LIBRARY_PAGE);
   };
 
   const items = [
+    // 캐러셀 아이템 목데이터
     {
-      category: "tech-insights",
+      category: "tech-insight",
       title: "Tech Insight",
       description:
         "Lorem ipsum dolor sit amet, labore natus. Numquam labore soluta quo corrupti",
@@ -61,9 +62,9 @@ const HistorySection = () => {
 
   return (
     <section className="mx-auto max-w-[1440px] px-4 pt-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
-      <div className="flex flex-col gap-x-10 web:flex-row web:justify-between">
+      <div className="flex flex-col  web:flex-row web:justify-between web:gap-x-[21%]">
         {/* 텍스트 영역 */}
-        <div className="flex min-w-0 grow flex-col web:h-[523px] web:min-w-[334px] web:max-w-[455px] web:justify-between">
+        <div className="flex min-w-0 flex-col web:h-[523px] web:basis-[38%]  web:justify-between">
           <div className="hidden items-start gap-x-2 web:flex">
             <div className="size-4 rounded-full bg-primary" />
             <h3 className="display-1">
@@ -99,7 +100,7 @@ const HistorySection = () => {
             >
               더보기
             </Button>
-            <Button // 외부 링크로 이동(추후 연결)
+            <Button
               size="md"
               variant="outline"
               shape="round"
@@ -112,7 +113,7 @@ const HistorySection = () => {
         </div>
 
         {/* 캐러셀: web 이상에만 보이게 */}
-        <div className="hidden web:block">
+        <div className="hidden basis-[41%] web:block">
           <CarouselBox setApi={setApi} items={items} />
         </div>
       </div>

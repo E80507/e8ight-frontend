@@ -32,11 +32,11 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
     <Carousel
       opts={{ loop: true }}
       setApi={setApi}
-      className="flex aspect-[7/8] w-full flex-col  gap-y-[26px] web:w-[calc(100%-384px)] web:min-w-[379px] web:max-w-[482px] web:gap-y-6"
+      className="flex size-full flex-col gap-y-[26px] web:gap-y-0"
       plugins={[autoplayRef.current]}
       autoplayRef={autoplayRef}
     >
-      <div className="flex items-start justify-between gap-x-2 web:flex-col">
+      <div className="flex items-start justify-between gap-x-2 web:mb-6 web:flex-col">
         <div className="flex items-start gap-x-2 web:hidden">
           <div className="size-2 rounded-full bg-primary web:size-4" />
           <h3 className="display-3 tablet:display-2 web:display-1">
@@ -51,16 +51,16 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
           <CarouselNext className="border-none" />
         </div>
       </div>
-      <CarouselContent>
+      <CarouselContent className="flex-1">
         {items.map((_, i) => (
-          <CarouselItem key={i} className="w-full flex-none">
-            <div className="relative aspect-[7/8] w-full overflow-hidden rounded-[20px]">
+          <CarouselItem key={i}>
+            <div className="relative aspect-[7/8] size-full overflow-hidden rounded-[20px]">
               <Image
                 src="/images/history.webp"
                 alt="이미지"
                 fill
                 className="object-cover"
-                sizes="(max-width:600px) 100vw, (max-width: 1025px) 50vw, 33vw"
+                sizes="(max-width:600px) 100vw, (max-width: 1025px) 50vw, 33vw h-full"
                 priority
               />
             </div>
