@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
-import CarouselBox from "@/components/shared/carousel";
+import CarouselBox from "./carousel-box";
 // import { useGetCarouselData } from "@/hooks/main/use-get-carousel-data";
 import {
   TECH_INSIGHTS_PAGE,
