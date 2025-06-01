@@ -73,9 +73,7 @@ const Pagination = ({
           </>
         )}
 
-        <p className="flex items-center text-black caption">
-          {renderPageNumbers()}
-        </p>
+        <p className="flex items-center">{renderPageNumbers()}</p>
 
         {endPage < totalPages && (
           <>
