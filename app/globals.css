@@ -63,6 +63,7 @@ body {
     --black: 0 1% 6%;
     --error: 2 100% 50%;
     --gray-strong: 214 4% 34%;
+    --gray-700: 230 8% 40%;
   }
   .dark {
     --background: 0 0% 100%;

@@ -29,7 +29,7 @@ export const getPosts = async (data: GetPostsReq) => {
 };
 
 // 목 데이터 생성
-const allDummyPosts = Array.from({ length: 100 }, (_, i) => ({
+const allDummyPosts = Array.from({ length: 400 }, (_, i) => ({
   id: `${i + 1}`,
   title: `더미 게시물 ${i + 1}`,
   content: `이것은 더미 게시물 ${i + 1}의 내용입니다.`,
