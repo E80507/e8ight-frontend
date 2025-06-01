@@ -55,6 +55,8 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => (
               alt="이미지"
               fill
               className="object-cover"
+              sizes="(max-width:600px) 100vw, (max-width: 1025px) 50vw, 33vw"
+              priority
             />
           </div>
         </CarouselItem>
