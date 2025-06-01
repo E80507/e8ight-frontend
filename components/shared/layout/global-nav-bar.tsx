@@ -70,14 +70,16 @@ const GlobalNavBar = () => {
               </Link>
             ))}
           </nav>
-          <Button
-            size="lg"
-            shape="round"
-            className="w-[160px]"
-            onClick={() => router.push(CONTACT_PAGE)}
-          >
-            상담문의
-          </Button>
+          <Link href={CONTACT_PAGE} prefetch>
+            <Button
+              size="lg"
+              shape="round"
+              className="w-[160px]"
+              onClick={() => router.push(CONTACT_PAGE)}
+            >
+              상담문의
+            </Button>
+          </Link>
         </div>
       </header>
 
