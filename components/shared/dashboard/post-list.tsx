@@ -26,7 +26,7 @@ const PostList = ({ posts }: PostListProps) => {
   return (
     <section className="mt-6 flex flex-col  tablet:mt-10">
       <p className="mb-6 pretendard-h1-m tablet:mb-10">최신글</p>
-      <div className="grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 web:grid-cols-3 web:grid-rows-3">
+      <div className="grid grid-cols-1 gap-y-[60px] tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 web:grid-cols-3 web:grid-rows-3">
         {posts.map((post) => {
           const { id, thumbnail, title, createdAt } = post;
           return (
@@ -37,7 +37,7 @@ const PostList = ({ posts }: PostListProps) => {
                   alt={title}
                   fill
                   className="rounded-[20px] object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  sizes="(max-width: 600px) 100vw, (max-width: 1025px) 50vw, 33vw"
                 />
               </div>
               <div className="flex flex-col gap-y-2 px-3">
