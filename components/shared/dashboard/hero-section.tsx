@@ -15,7 +15,7 @@ const HeroSection = () => {
   else if (pathname === "/downloads") title = "Downloads";
 
   return (
-    <div className="relative -z-10 mt-[-48px] h-[279px] overflow-hidden tablet:h-[311px] web:mt-[-139px] web:h-[496px]">
+    <section className="relative -z-10 mt-[-48px] h-[279px] overflow-hidden tablet:h-[311px] web:mt-[-139px] web:h-[496px]">
       <Image
         src="/images/bg-white.webp"
         alt={title}
@@ -44,7 +44,7 @@ const HeroSection = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
