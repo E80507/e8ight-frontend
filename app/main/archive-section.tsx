@@ -26,17 +26,17 @@ const ArchiveSection = () => {
   };
 
   return (
-    <section className="web:py-[100px] web:px-[120px] py-[80px] tablet:px-[30px] px-[16px]">
-      <div className="flex flex-col web:gap-[40px] tablet:gap-[32px] gap-[24px] mx-auto max-w-[1200px]">
-        <div className="web:pretendard-h1-l tablet:pretendard-h1-m pretendard-h1-r">
+    <section className="px-[16px] py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-[24px] tablet:gap-[32px] web:gap-[40px]">
+        <div className="pretendard-h1-r tablet:pretendard-h1-m web:pretendard-h1-l">
           자료실
         </div>
 
-        <div className="grid web:grid-cols-2 web:gap-[24px] gap-[16px] grid-cols-1">
+        <div className="grid grid-cols-1 gap-[16px] web:grid-cols-2 web:gap-[24px]">
           {archiveData.map(({ id, title, bgImage }) => (
             <div
               key={id}
-              className="relative flex flex-col justify-between p-[32px] border rounded-[20px] overflow-hidden web:aspect-[1.39/1] tablet:aspect-[1.8/1] aspect-[1/1]"
+              className="relative flex aspect-[1/1] flex-col justify-between overflow-hidden rounded-[20px] border p-[32px] tablet:aspect-[1.8/1] web:aspect-[1.39/1]"
             >
               <Image
                 src={bgImage}
@@ -47,7 +47,7 @@ const ArchiveSection = () => {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 quality={90}
               />
-              <div className="absolute inset-0 bg-black opacity-[0.21] z-0" />
+              <div className="absolute inset-0 z-0 bg-black opacity-[0.21]" />
 
               <div className="relative z-10 flex flex-col gap-[16px]">
                 <Image
@@ -55,17 +55,17 @@ const ArchiveSection = () => {
                   alt=""
                   width={68}
                   height={29}
-                  className="-mt-px"
+                  className="-mt-px size-auto"
                   loading="lazy"
                 />
-                <div className="pretendard-h1-m text-white">{title}</div>
+                <div className="text-white pretendard-h1-m">{title}</div>
               </div>
 
               <Button
                 size="lg"
                 variant="outline"
                 shape="round"
-                className="pretendard-title-s relative z-10 ml-auto tablet:w-[160px] tablet:h-[48px] w-[120px] h-[37px]"
+                className="relative z-10 ml-auto h-[37px] w-[120px] pretendard-title-s tablet:h-[48px] tablet:w-[160px]"
                 onClick={onClickPdfDownload}
               >
                 PDF 다운로드
@@ -83,7 +83,7 @@ const ArchiveSection = () => {
             size="lg"
             variant="outline"
             shape="round"
-            className="pretendard-title-s tablet:w-[160px] tablet:h-[48px] w-[120px] h-[37px]"
+            className="h-[37px] w-[120px] pretendard-title-s tablet:h-[48px] tablet:w-[160px]"
           >
             더보기
           </Button>
