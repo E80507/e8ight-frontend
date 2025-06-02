@@ -43,6 +43,8 @@ const FilterSearchBox = ({
   // 카테고리 변경 핸들러
   const handleCategoryChange = (val: string) => {
     setSelectedCategory(val);
+    const params = getFilterParams(val, date);
+    onFilterChange(params);
     setSelectedIds([]); // 선택된 체크박스 초기화
   };
 
@@ -54,8 +56,10 @@ const FilterSearchBox = ({
         sortOrder: "DESC",
       };
 
-      if (category !== "all") {
+      if (category && category !== "all") {
         params.category = category as PostCategory;
+      } else {
+        params.category = undefined;
       }
 
       if (searchDate?.start && searchDate?.end) {
