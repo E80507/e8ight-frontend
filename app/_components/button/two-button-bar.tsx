@@ -13,9 +13,10 @@ interface TwoButtonBarProps {
     | "destructive"
     | "outline"
     | "outline-black";
-  size?: "md" | "sm" | "lg";
+  size?: "default" | "sm" | "lg" | "icon";
   disabled?: boolean;
 }
+
 const TwoButtonBar = ({
   firstBtnTxt,
   secondBtnTxt,
@@ -36,7 +37,7 @@ const TwoButtonBar = ({
         type="button"
         size={size ?? "default"}
         onClick={onClickFirstBtn ?? onClickBack}
-        variant={"outline"}
+        variant="outline"
       >
         {firstBtnTxt}
       </Button>
@@ -45,7 +46,7 @@ const TwoButtonBar = ({
         type="button"
         size={size ?? "default"}
         onClick={onClickSecondBtn}
-        variant={secondBtnVariant ?? "pink"}
+        variant={secondBtnVariant ?? "default"}
         disabled={disabled}
         className={disabled ? "bg-gray-300" : ""}
       >
