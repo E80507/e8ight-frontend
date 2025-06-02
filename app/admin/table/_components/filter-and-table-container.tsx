@@ -1,39 +1,42 @@
 import { useState } from "react";
-import { AdminRes } from "@/app/api/dto/admin";
-import TableContainer from "./table-container";
+import { PostsRequestParams } from "@/api/dto/post";
+import { usePosts } from "@/hooks/posts/use-posts";
+import { AdminTable } from "./admin-table";
 import FilterSearchBox from "./filter-search-box";
-import { usePagination } from "@/hooks/use-pagination";
 
-interface FilterAndTableContainerProps {
-  data: AdminRes[];
-}
+export function FilterAndTableContainer() {
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [params, setParams] = useState<PostsRequestParams>({
+    page: 1,
+    limit: 10,
+    sortOrder: "DESC",
+  });
 
-const FilterAndTableContainer = ({ data }: FilterAndTableContainerProps) => {
-  const [filteredData, setFilteredData] = useState(data);
-  const { currentData, currentPage, setCurrentPage, totalPages } =
-    usePagination({ data: filteredData, itemsPerPage: 10 });
-  const [selectedIds, setSelectedIds] = useState<string[]>([]); // 선택된 아이디 배열
+  const { posts, totalCount, isLoading, error } = usePosts(params);
+
+  const handleFilterChange = (newParams: PostsRequestParams) => {
+    setParams((prev) => ({
+      ...prev,
+      ...newParams,
+    }));
+  };
+
+  if (error) return <div>에러</div>;
+
+  if (isLoading) return <div>로딩 중...</div>;
 
   return (
-    <>
+    <div className="w-full">
       <FilterSearchBox
-        setCurrentPage={setCurrentPage}
-        data={data}
-        setFilteredData={setFilteredData}
+        onFilterChange={handleFilterChange}
         setSelectedIds={setSelectedIds}
       />
-
-      <TableContainer
+      <AdminTable
+        data={posts}
+        totalCount={totalCount}
         selectedIds={selectedIds}
         setSelectedIds={setSelectedIds}
-        totalData={filteredData}
-        currentData={currentData}
-        totalPages={totalPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
       />
-    </>
+    </div>
   );
-};
-
-export default FilterAndTableContainer;
+}

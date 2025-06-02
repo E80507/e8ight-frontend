@@ -17,25 +17,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { handleAdminCategoryText } from "@/util/string";
-import { AdminRes } from "@/app/api/dto/admin";
+import { handlePostCategoryText } from "@/util/string";
+import { Post } from "@/api/dto/post";
 import Check from "@/components/shared/check";
 import formattedDate from "@/util/date";
 
 interface AdminTableProps {
-  data: AdminRes[]; // 필터링 된 데이터
-  totalData: AdminRes[]; // 전체 데이터
-  // currentPage: number;
-  totalDataLength: number; // 총 데이터 수
+  data: Post[];
+  totalCount: number;
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export function AdminTable({
   data,
-  totalData,
-  // currentPage,
-  // totalDataLength,
+  totalCount,
   selectedIds,
   setSelectedIds,
 }: AdminTableProps) {
@@ -43,7 +39,7 @@ export function AdminTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-  const columnHelper = createColumnHelper<AdminRes>();
+  const columnHelper = createColumnHelper<Post>();
 
   // 단일 체크박스 핸들러
   const handleCheckboxChange = (rowId: string) => {
@@ -56,20 +52,21 @@ export function AdminTable({
 
   // 페이지 별 전체 선택 여부
   const areAllPageItemsSelected = () => {
-    if (totalData.length === 0) return false;
-    const currentPageIds = totalData.map((item) => item.techBlogId);
+    if (data.length === 0) return false;
+    const currentPageIds = data.map((item) => item.id);
+    console.log(totalCount);
     return currentPageIds.every((id) => selectedIds.includes(id));
   };
 
   // 전체 체크박스 핸들러
   const handleSelectAll = () => {
     if (areAllPageItemsSelected()) {
-      const currentPageIds = totalData.map((item) => item.techBlogId);
+      const currentPageIds = data.map((item) => item.id);
       setSelectedIds((prevSelected) =>
         prevSelected.filter((id) => !currentPageIds.includes(id)),
       );
     } else {
-      const currentPageIds = totalData.map((item) => item.techBlogId);
+      const currentPageIds = data.map((item) => item.id);
       setSelectedIds((prevSelected) => [...prevSelected, ...currentPageIds]);
     }
   };
@@ -93,16 +90,16 @@ export function AdminTable({
         <div className="my-auto flex items-center justify-center">
           <input
             type="checkbox"
-            checked={selectedIds.includes(row.original.techBlogId)}
+            checked={selectedIds.includes(row.original.id)}
             onChange={() => {
               row.toggleSelected();
-              handleCheckboxChange(row.original.techBlogId);
+              handleCheckboxChange(row.original.id);
             }}
             className="peer absolute opacity-0 size-[20px] cursor-pointer z-10"
           />
           <Check
             type={"square"}
-            isChecked={selectedIds.includes(row.original.techBlogId)}
+            isChecked={selectedIds.includes(row.original.id)}
           />
         </div>
       ),
@@ -119,12 +116,12 @@ export function AdminTable({
       size: 556,
     }),
     columnHelper.accessor("category", {
-      cell: (data) => handleAdminCategoryText(data.getValue()),
+      cell: (data) => handlePostCategoryText(data.getValue()),
       header: "카테고리",
       size: 217,
     }),
-    columnHelper.accessor("writer", {
-      cell: (data) => data.getValue(),
+    columnHelper.accessor("author", {
+      cell: (data) => data.getValue() || "-",
       header: "저자",
       size: 160,
     }),
@@ -182,7 +179,7 @@ export function AdminTable({
               {row.getVisibleCells().map((cell, cellIndex) => (
                 <TableCell
                   size="sm"
-                  className={`h-[45px] ${selectedIds.includes(row.original.techBlogId) ? "bg-[#FFF6F6]" : ""} border-t ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
+                  className={`h-[45px] ${selectedIds.includes(row.original.id) ? "bg-[#FFF6F6]" : ""} border-t ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
                   key={cell.id + cellIndex}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

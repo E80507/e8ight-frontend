@@ -1,0 +1,26 @@
+import { PostsRequestParams, PostsResponse } from "./dto/post";
+import { apiFetch } from "@/util/fetch";
+
+export const getPosts = async (
+  params: PostsRequestParams,
+): Promise<PostsResponse> => {
+  const queryParams = new URLSearchParams();
+
+  queryParams.append("page", params.page.toString());
+  queryParams.append("limit", params.limit.toString());
+
+  if (params.category) {
+    queryParams.append("category", params.category);
+  }
+  if (params.startDate) {
+    queryParams.append("startDate", params.startDate);
+  }
+  if (params.endDate) {
+    queryParams.append("endDate", params.endDate);
+  }
+  if (params.sortOrder) {
+    queryParams.append("sortOrder", params.sortOrder);
+  }
+
+  return apiFetch(`/posts?${queryParams.toString()}`);
+};
