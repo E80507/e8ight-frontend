@@ -5,7 +5,6 @@ import {
   ChevronsRightIcon,
 } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
-import { useEffect, useState } from "react";
 
 interface PaginationProps {
   currentPage: number;
@@ -18,21 +17,7 @@ const Pagination = ({
   totalPages,
   onPageChange,
 }: PaginationProps) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 600);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const maxPagesToShow = isMobile ? 5 : 10;
-
+  const maxPagesToShow = 10;
   const startPage =
     Math.floor((currentPage - 1) / maxPagesToShow) * maxPagesToShow + 1;
   const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
@@ -45,7 +30,7 @@ const Pagination = ({
           type="button"
           key={i}
           onClick={() => onPageChange(i)}
-          className={`h-6 min-w-[30px] text-center text-black pretendard-title-s ${currentPage === i ? "underline" : "text-label-alternative"}`}
+          className={`h-6 min-w-[30px] text-center ${currentPage === i ? "underline underline-offset-4 heading-6" : "caption"}`}
         >
           {i}
         </button>,
@@ -60,29 +45,31 @@ const Pagination = ({
   const goToNextPageSet = () => onPageChange(startPage + maxPagesToShow);
 
   return (
-    <div className="mt-6 flex w-full justify-center tablet:mt-[100px]">
-      <div className="flex w-full max-w-max gap-2 rounded-md text-gray-700">
-        {currentPage > 1 && startPage > maxPagesToShow && (
+    <div className="mt-6 flex w-full justify-center">
+      <div className="flex w-full max-w-max gap-2 rounded-md text-black">
+        {currentPage > 1 && startPage > 10 && (
           <>
             <button type="button" onClick={goToFirstPage}>
-              <ChevronsLeftIcon className="h-6 w-7" />
+              <ChevronsLeftIcon className="size-5 text-[#4F5565]" />
             </button>
             <button type="button" onClick={goToPreviousPageSet}>
-              <ChevronLeft className="size-6" />
+              <ChevronLeft className="size-5 text-[#4F5565]" />
             </button>
           </>
         )}
 
-        <p className="flex items-center">{renderPageNumbers()}</p>
+        <p className="flex items-center text-black caption">
+          {renderPageNumbers()}
+        </p>
 
         {endPage < totalPages && (
           <>
             <button type="button" onClick={goToNextPageSet}>
-              <ChevronRight className="h-6 w-7" />
+              <ChevronRight className="size-5 text-[#4F5565]" />
             </button>
             {endPage < totalPages && (
               <button type="button" onClick={goToLastPage}>
-                <ChevronsRightIcon className="size-6" />
+                <ChevronsRightIcon className="size-5 text-[#4F5565]" />
               </button>
             )}
           </>

@@ -2,11 +2,11 @@
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { usePostSubscription } from "@/hooks/subscription/use-post-subscription";
 import Image from "next/image";
 import { X } from "lucide-react";
 import OneButtonModal from "./one-button-modal";
 import { useState } from "react";
-import { usePostSubscription } from "@/hooks/subscription/use-post-subscription";
 
 interface SubscriptionModalProps {
   onClickClose: () => void;
@@ -32,7 +32,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
       <Form {...form}>
         <form
           onSubmit={handleSubmit}
-          className="relative w-full overflow-hidden rounded-[20px] tablet:w-[627px]"
+          className="tablet:w-[627px] w-full rounded-[20px] overflow-hidden relative"
         >
           <button
             type="button"
@@ -40,11 +40,11 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
             className="absolute right-[16px] top-[40px] z-20"
             aria-label="닫기 버튼"
           >
-            <X className="size-[24px] text-[#D6D7DC]" />
+            <X className="h-[24px] w-[24px] text-[#D6D7DC]" />
           </button>
 
           <div className="flex flex-col gap-5">
-            <div className="relative h-[423px] overflow-hidden px-[16px] pb-[60px] pt-[84px] tablet:h-[464px] tablet:px-[40px] tablet:pt-[84px]">
+            <div className="relative tablet:h-[464px] h-[423px] tablet:px-[40px] tablet:pt-[84px] px-[16px] pt-[84px] pb-[60px] overflow-hidden">
               <Image
                 src="/images/subscription.webp"
                 alt="Subscription background"
@@ -56,20 +56,17 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
               />
 
               {/* 오버레이 */}
-              <div className="absolute inset-0 z-0 bg-black/70" />
+              <div className="absolute inset-0 bg-black/70 z-0" />
 
               {/* 콘텐츠 */}
-              <div className="relative z-10 flex h-full flex-col items-center gap-[20px] text-center text-white tablet:gap-[32px]">
+              <div className="relative z-10 flex flex-col items-center tablet:gap-[32px] gap-[20px] h-full text-white text-center">
                 <div className="flex flex-col gap-[17px]">
-                  <h2 className="gibson-heading-3 tablet:gibson-heading-2 web:gibson-heading-1">
-                    Global No.1
-                    <br />
+                  <h2 className="web:gibson-heading-1 tablet:gibson-heading-2 gibson-heading-3">
+                    Global No.1<br />
                     Digital Twin Platform
                   </h2>
-
-                  <p className="pretendard-subtitle-s tablet:pretendard-subtitle-m web:pretendard-subtitle-l">
-                    뉴스레터를 구독하여 새로운 최신 테크 이야기를 만나보세요.
-                  </p>
+                  
+                  <p className="web:pretendard-subtitle-l tablet:pretendard-subtitle-m pretendard-subtitle-s">뉴스레터를 구독하여 새로운 최신 테크 이야기를 만나보세요.</p>
                 </div>
 
                 <div className="w-full">
@@ -77,17 +74,11 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
                     form={form}
                     name="email"
                     placeholder="이메일을 입력해주세요."
-                    className="mx-auto h-[48px] w-full rounded-[100px] px-[24px] text-black pretendard-body-2 tablet:w-[328px]"
+                    className="tablet:w-[328px] rounded-[100px] text-black pretendard-body-2 px-[24px] w-full h-[48px] mx-auto"
                   />
 
-                  <div className="mt-[20px] flex justify-center tablet:mt-[32px]">
-                    <Button
-                      type="submit"
-                      size="lg"
-                      variant="outline"
-                      shape="round"
-                      className="w-[160px] pretendard-title-s placeholder:text-[#C8C9D0]"
-                    >
+                  <div className="flex justify-center tablet:mt-[32px] mt-[20px]">
+                    <Button type="submit" size="lg" variant="outline" shape="round" className="w-[160px] pretendard-title-s placeholder:text-[#C8C9D0]">
                       뉴스레터 신청하기
                     </Button>
                   </div>

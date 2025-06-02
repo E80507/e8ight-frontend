@@ -20,7 +20,6 @@ const GlobalFooter = () => {
             alt="logo"
             width={110}
             height={37}
-            style={{ width: 110, height: 37 }}
           />
           <ActionButtons />
         </div>

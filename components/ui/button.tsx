@@ -151,8 +151,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
             alt={`${src}-icon`}
             width={width}
             height={height}
-            className={`${disabled ? "opacity-20" : "opacity-100"} `}
-            style={{ width: width, height: height }}
+            className={disabled ? "opacity-20" : "opacity-100"}
           />
         </Comp>
       </div>

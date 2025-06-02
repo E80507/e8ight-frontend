@@ -12,13 +12,7 @@ import {
   FormMessage,
 } from "../../ui/form";
 import { Input } from "../../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 import { useState } from "react";
 
 interface CustomEmailFieldProps<T extends FieldValues> {
@@ -33,10 +27,10 @@ interface CustomEmailFieldProps<T extends FieldValues> {
 
 const EMAIL_DOMAINS = [
   "gmail.com",
-  "naver.com",
+  "naver.com", 
   "daum.net",
   "hanmail.net",
-  "직접입력",
+  "직접입력"
 ];
 
 const CustomEmailField = <T extends FieldValues>({
@@ -46,7 +40,7 @@ const CustomEmailField = <T extends FieldValues>({
   label,
   disabled,
   className,
-  isEssential,
+  isEssential
 }: CustomEmailFieldProps<T>) => {
   const [emailId, setEmailId] = useState("");
   const [domain, setDomain] = useState("");
@@ -54,19 +48,13 @@ const CustomEmailField = <T extends FieldValues>({
   const [isCustomDomain, setIsCustomDomain] = useState(false);
   const error = form.formState.errors[name];
 
-  const handleEmailChange = (
-    value: string,
-    field: ControllerRenderProps<T, Path<T>>,
-  ) => {
+  const handleEmailChange = (value: string, field: ControllerRenderProps<T, Path<T>>) => {
     setEmailId(value);
     const fullEmail = value + "@" + (isCustomDomain ? customDomain : domain);
     field.onChange(fullEmail);
   };
 
-  const handleDomainSelect = (
-    value: string,
-    field: ControllerRenderProps<T, Path<T>>,
-  ) => {
+  const handleDomainSelect = (value: string, field: ControllerRenderProps<T, Path<T>>) => {
     if (value === "직접입력") {
       setIsCustomDomain(true);
       setDomain("");
@@ -78,10 +66,7 @@ const CustomEmailField = <T extends FieldValues>({
     }
   };
 
-  const handleCustomDomainChange = (
-    value: string,
-    field: ControllerRenderProps<T, Path<T>>,
-  ) => {
+  const handleCustomDomainChange = (value: string, field: ControllerRenderProps<T, Path<T>>) => {
     setCustomDomain(value);
     const fullEmail = emailId + "@" + value;
     field.onChange(fullEmail);
@@ -101,7 +86,7 @@ const CustomEmailField = <T extends FieldValues>({
               )}
             </FormLabel>
           )}
-
+     
           <FormControl>
             <div className="flex items-center gap-2">
               <Input
@@ -115,17 +100,13 @@ const CustomEmailField = <T extends FieldValues>({
               />
               <span className="text-gray-500">@</span>
               {isCustomDomain ? (
-                <Select
-                  onValueChange={(value) => handleDomainSelect(value, field)}
-                >
+                <Select onValueChange={(value) => handleDomainSelect(value, field)}>
                   <SelectTrigger className="flex-1">
                     <Input
                       type="text"
                       className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                       placeholder="직접 입력"
-                      onChange={(e) =>
-                        handleCustomDomainChange(e.target.value, field)
-                      }
+                      onChange={(e) => handleCustomDomainChange(e.target.value, field)}
                       value={customDomain}
                     />
                   </SelectTrigger>
@@ -138,10 +119,7 @@ const CustomEmailField = <T extends FieldValues>({
                   </SelectContent>
                 </Select>
               ) : (
-                <Select
-                  onValueChange={(value) => handleDomainSelect(value, field)}
-                  value={domain}
-                >
+                <Select onValueChange={(value) => handleDomainSelect(value, field)} value={domain}>
                   <SelectTrigger className="flex-1">
                     <SelectValue placeholder="선택" />
                   </SelectTrigger>
