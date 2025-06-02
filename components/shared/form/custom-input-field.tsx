@@ -13,9 +13,8 @@ import {
 } from "../../ui/form";
 import { Input } from "../../ui/input";
 import { handlePhoneNumberInput } from "@/util/number";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface CustomInputFieldProps<T extends FieldValues> {
   form: UseFormReturn<T>;
@@ -40,7 +39,7 @@ const CustomInputField = <T extends FieldValues>({
   disabled,
   type,
   className,
-  isEssential
+  isEssential,
 }: CustomInputFieldProps<T>) => {
   const [currentType, setCurrentType] = useState(type);
   const [isExposedPassword, setExposed] = useState(false);
@@ -82,7 +81,7 @@ const CustomInputField = <T extends FieldValues>({
             <FormLabel className="mb-3 web:mb-2" htmlFor={name}>
               {label}
               {isEssential && (
-                  <span className="ml-[2px] text-error">{`*`}</span>
+                <span className="ml-[2px] text-error">{`*`}</span>
               )}
             </FormLabel>
           ) : (
