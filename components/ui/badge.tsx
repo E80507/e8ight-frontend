@@ -12,7 +12,7 @@ const colorVariants = {
   green: "bg-[#C3E9E4]",
   blue: "bg-[#BDCDF4]",
   red: "bg-[#F4BDBD]",
-  yellow: "bg-[#FFE9A0]"
+  yellow: "bg-[#FFE9A0]",
 };
 
 const Badge = ({ text, color, className }: BadgeProps) => {
@@ -21,7 +21,7 @@ const Badge = ({ text, color, className }: BadgeProps) => {
       className={cn(
         "inline-flex items-center justify-center py-[4px] px-[8px] rounded-[8px] pretendard-subtitle-s",
         colorVariants[color],
-        className
+        className,
       )}
     >
       {text}
@@ -29,4 +29,4 @@ const Badge = ({ text, color, className }: BadgeProps) => {
   );
 };
 
-export default Badge; 
+export default Badge;

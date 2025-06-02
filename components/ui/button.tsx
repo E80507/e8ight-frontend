@@ -4,35 +4,36 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { LoadIcon } from "../shared/loading/loading";
 import Image from "next/image";
-
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "flex w-full items-center justify-center whitespace-nowrap rounded-[100px] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:text-black/40",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        default: "bg-primary text-white disabled:bg-primary/10",
+        pink: "bg-[#FF6668] text-white",
+        destructive: "bg-destructive text-destructive-foreground",
+        outline: "border bg-white text-black disabled:bg-gray-100",
+        "outline-black": "border border-black disabled:border-gray-300",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-12 px-[15px] heading-4",
+        sm: "h-[30px] max-w-max px-3 py-1 subtitle-3",
+        md: "w-[80px] h-[37px] px-4 py-2 title-s",
+        lg: "w-[120px] lg:w-[160px] h-[48px] px-6 py-3 title-s",
+        cta: "w-[240px] h-[59px] title-s",
+        icon: "size-9",
+      },
+      shape: {
+        round: "rounded-[100px]",
+        square: "rounded-[8px]",
       },
     },
     defaultVariants: {
+      shape: "square",
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -45,19 +46,48 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      shape,
+      loading,
+      loadColor,
+      asChild = false,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "button";
+
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+      <>
+        {loading ? (
+          <Comp
+            disabled={loading}
+            className={cn(
+              buttonVariants({ variant, size, shape, className }),
+              "relative",
+              loadColor === "white" ? "disabled:border-primary/400" : "",
+            )}
+            ref={ref}
+            {...props}
+          >
+            <LoadIcon type="button" color={loadColor ?? "red"} />
+          </Comp>
+        ) : (
+          <Comp
+            className={cn(buttonVariants({ variant, size, shape, className }))}
+            ref={ref}
+            {...props}
+          />
+        )}
+      </>
     );
-  }
+  },
 );
 Button.displayName = "Button";
-
 const iconButtonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap transition-colors",
   {
@@ -79,7 +109,6 @@ const iconButtonVariants = cva(
     },
   },
 );
-
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof iconButtonVariants> {
@@ -128,4 +157,5 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   },
 );
 IconButton.displayName = "IconButton";
+
 export { Button, buttonVariants, IconButton };

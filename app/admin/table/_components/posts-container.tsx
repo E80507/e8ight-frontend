@@ -67,7 +67,7 @@ export function PostsContainer() {
         selectedCount={selectedIds.length}
         onDelete={handleDelete}
       />
-      
+
       <AdminTable
         data={displayPosts}
         totalCount={displayCount}

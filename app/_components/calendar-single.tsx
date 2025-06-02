@@ -47,7 +47,7 @@ const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
       const { from, to } = newRange;
       setRange({ from, to });
       setDate({ start: from, end: to });
-      
+
       // 시작일과 종료일이 모두 선택되었을 때 팝업을 닫습니다
       if (from && to) {
         setOpen(false);
