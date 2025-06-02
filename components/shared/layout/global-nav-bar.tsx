@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/drawer";
 import { IconButton, Button } from "@/components/ui/button";
 import {
-  TECH_INSIGHTS_PAGE,
+  TECH_INSIGHT_PAGE,
   TECH_LIBRARY_PAGE,
   DOWNLOADS_PAGE,
   CONTACT_PAGE,
@@ -24,7 +24,7 @@ import ActionButtons from "@/components/shared/layout/action-buttons";
 
 const NAV_LINKS = [
   { label: "Tech Library", path: TECH_LIBRARY_PAGE },
-  { label: "Tech Insight", path: TECH_INSIGHTS_PAGE },
+  { label: "Tech Insight", path: TECH_INSIGHT_PAGE },
   { label: "Downloads", path: DOWNLOADS_PAGE },
 ];
 
@@ -78,7 +78,7 @@ const GlobalNavBar = () => {
     <>
       {/* 홈페이지 데스크톱 GNB */}
       <header
-        className={`relative z-100 hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${
+        className={`z-100 relative hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${
           isContactPage
             ? "bg-[#FBFBFC]"
             : "mx-auto max-w-[1440px] bg-transparent"
@@ -124,7 +124,7 @@ const GlobalNavBar = () => {
 
       {/* 홈페이지 모바일 GNB */}
       <header
-        className={`pointer-events-auto relative z-100 flex w-full items-center justify-between px-4 py-3 web:hidden ${
+        className={`z-100 pointer-events-auto relative flex w-full items-center justify-between px-4 py-3 web:hidden ${
           isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"
         } ${isHome ? "h-[67px]" : "h-12"}`}
       >

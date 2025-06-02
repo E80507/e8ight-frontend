@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import CarouselBox from "./carousel-box";
 // import { useGetCarouselData } from "@/hooks/main/use-get-carousel-data";
 import {
-  TECH_INSIGHTS_PAGE,
+  TECH_INSIGHT_PAGE,
   TECH_LIBRARY_PAGE,
   DOWNLOADS_PAGE,
 } from "@/constants/path";
@@ -19,7 +19,7 @@ const HistorySection = () => {
   // const { data } = useGetCarouselData();
 
   const handleCategoryClick = (category: string) => {
-    if (category === "tech-insight") router.push(TECH_INSIGHTS_PAGE);
+    if (category === "tech-insight") router.push(TECH_INSIGHT_PAGE);
     else if (category === "downloads") router.push(DOWNLOADS_PAGE);
     else router.push(TECH_LIBRARY_PAGE);
   };
