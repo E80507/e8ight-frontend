@@ -15,18 +15,18 @@ const CreatePostPage = () => {
   });
 
   return (
-    <div className="flex flex-col gap-y-8 p-10 max-w-[1200px] mx-auto">
-      <div className="items-center justify-between hidden web:flex">
-        <h1 className="web:pretendard-title-l pretendard-title-m">
+    <div className="mx-auto flex max-w-[1200px] flex-col gap-y-8 p-10">
+      <div className="hidden items-center justify-between web:flex">
+        <h1 className="pretendard-title-m web:pretendard-title-l">
           컨텐츠 추가
         </h1>
         <Button size="lg" className="w-[97px]">
           게시하기
         </Button>
       </div>
-      <form className="flex flex-col gap-[32px] mb-3">
+      <form className="mb-3 flex flex-col gap-[32px]">
         <FormProvider {...form}>
-          <div className="w-[177px] pretandard-subtitle-m">
+          <div className="w-[177px] pretendard-subtitle-m">
             <CustomSelectField
               selectValue={POST_CATEGORIES}
               form={form}
