@@ -4,13 +4,13 @@ import Loading from "@/components/shared/loading/loading";
 import FilterAndTableContainer from "./filter-and-table-container";
 
 const DailyControllerAndFilterBoxContainer = () => {
-  const [date, setDate] = useState(new Date());
+  const [date] = useState(new Date());
   const { data } = useGetTechBlogList(
     date.getFullYear(),
     date.getMonth() + 1,
     date.getDate(),
   );
-  
+
   if (!data) return null;
 
   return (
