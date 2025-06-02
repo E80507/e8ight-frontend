@@ -1,25 +1,12 @@
-import { useGetTechBlogList } from "@/hooks/admin/use-get-tech-blog-list";
-import { useState } from "react";
+import { FilterAndTableContainer } from "./filter-and-table-container";
 import Loading from "@/components/shared/loading/loading";
-import FilterAndTableContainer from "./filter-and-table-container";
 
-const DailyControllerAndFilterBoxContainer = () => {
-  const [date] = useState(new Date());
-  const { data } = useGetTechBlogList(
-    date.getFullYear(),
-    date.getMonth() + 1,
-    date.getDate(),
-  );
-
-  if (!data) return null;
-
+export default function DailyControllerAndFilterBoxContainer() {
   return (
     <div className="flex flex-col gap-10">
       <Loading>
-        <FilterAndTableContainer data={data} />
+        <FilterAndTableContainer />
       </Loading>
     </div>
   );
-};
-
-export default DailyControllerAndFilterBoxContainer;
+}
