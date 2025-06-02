@@ -4,6 +4,7 @@ import HeroSection from "@/app/main/hero-section";
 import ArchiveSection from "@/app/main/archive-section";
 import SubscriptionSection from "../main/subscription-section";
 import HistorySection from "../main/history-section";
+import Link from "next/link";
 
 const Home = () => {
   return (
@@ -16,6 +17,8 @@ const Home = () => {
       <ArchiveSection />
       {/* 구독 세션 */}
       <SubscriptionSection />
+
+      <Link href="/admin">관리자 페이지</Link>
     </div>
   );
 };
