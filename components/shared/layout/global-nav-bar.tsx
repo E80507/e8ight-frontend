@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -35,6 +35,15 @@ const GlobalNavBar = () => {
   const clickTimer = useRef<NodeJS.Timeout>();
   const clickTimeRef = useRef<number>(0);
 
+  useEffect(() => {
+    if (clickCount === 1) {
+      router.push("/");
+    } else if (clickCount >= 5) {
+      router.push("/admin");
+      setClickCount(0);
+    }
+  }, [clickCount, router]);
+
   const handleLogoClick = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
@@ -42,16 +51,8 @@ const GlobalNavBar = () => {
       const now = Date.now();
       if (now - clickTimeRef.current > 2000) {
         setClickCount(1);
-        router.push("/");
       } else {
-        setClickCount((prev) => {
-          const newCount = prev + 1;
-          if (newCount >= 5) {
-            router.push("/admin");
-            return 0;
-          }
-          return newCount;
-        });
+        setClickCount((prev) => prev + 1);
       }
 
       clickTimeRef.current = now;
@@ -66,7 +67,7 @@ const GlobalNavBar = () => {
 
       console.log(clickCount);
     },
-    [router],
+    [clickCount],
   );
 
   const isContactPage = path === CONTACT_PAGE;
