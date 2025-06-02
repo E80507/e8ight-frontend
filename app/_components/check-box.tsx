@@ -24,7 +24,9 @@ const CheckBox = ({
   handleChangeValue,
   defaultValue,
 }: CheckBoxProps) => {
-  const [selected, setSelected] = useState(defaultValue ?? conditions[0]?.value ?? "");
+  const [selected, setSelected] = useState(
+    defaultValue ?? conditions[0]?.value ?? "",
+  );
 
   const onChange = (val: string) => {
     if (!val) return; // 빈 문자열로 선택 해제되는 경우 방지
