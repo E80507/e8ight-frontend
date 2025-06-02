@@ -39,7 +39,7 @@ const OneButtonModal = ({
   // };
 
   return ReactDOM.createPortal(
-    <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/60 px-5">
+    <div className="fixed inset-0 z-[102] flex items-center justify-center bg-black/60 px-5">
       <div className="flex w-full max-w-[350px] flex-col rounded-[12px] bg-white">
         <div
           className={cn(

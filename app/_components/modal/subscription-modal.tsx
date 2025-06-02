@@ -28,7 +28,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-101 flex items-center justify-center bg-black/70 px-[16px]">
+    <div className="fixed inset-0 z-[101] flex items-center justify-center bg-black/70 px-[16px]">
       <Form {...form}>
         <form
           onSubmit={handleSubmit}
