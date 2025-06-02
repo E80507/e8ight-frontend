@@ -22,3 +22,22 @@ export const ADMIN_CATEGORY_ARRAY = [
     value: AdminCategory.DOWNLOADS,
   },
 ];
+
+export const POST_CATEGORIES = [
+  {
+    value: "Tech Library",
+    text: AdminCategory.LIBRARY,
+  },
+  {
+    value: "Tech Insight",
+    text: AdminCategory.INSIGHT,
+  },
+  {
+    value: "DX Simulation",
+    text: AdminCategory.DX,
+  },
+  {
+    value: "Downloads",
+    text: AdminCategory.DOWNLOADS,
+  },
+];

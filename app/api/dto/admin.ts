@@ -13,3 +13,16 @@ export interface AdminRes {
   category: AdminCategory; // 카테고리
   writer: string; // 저자
 }
+
+export interface PostReq {
+  title: string;
+  content: string;
+  thumbnail: string;
+  author?: string;
+  mainImage?: string;
+  category: AdminCategory;
+  tags: string[];
+  keywords: string[];
+  linkUrl: string;
+  fileIds: string[];
+}
