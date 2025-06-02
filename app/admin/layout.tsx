@@ -1,7 +1,6 @@
 import Loading from "@/components/shared/loading/loading";
-import GlobalNavBar from "@/components/shared/layout/global-nav-bar";
+import AdminNavBar from "@/components/shared/layout/admin-nav-bar";
 // import { Toaster } from "@/components/ui/toaster";
-import GlobalFooter from "@/components/shared/layout/global-footer";
 
 interface GlobalNavBarLayoutProps {
   children: React.ReactNode;
@@ -12,9 +11,10 @@ const GlobalNavBarLayout = ({ children }: GlobalNavBarLayoutProps) => {
     <>
       <Loading>
         <div className="w-screen overflow-x-hidden">
-          <GlobalNavBar />
-          <div className="relative">{children}</div>
-          <GlobalFooter />
+          <AdminNavBar />
+          <div className="relative min-h-screen bg-background-alternative">
+            {children}
+          </div>
         </div>
       </Loading>
       {/* <Toaster /> */}
