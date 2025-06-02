@@ -8,7 +8,6 @@ import useEmblaCarousel, {
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import Autoplay from "embla-carousel-autoplay";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -20,7 +19,6 @@ type CarouselProps = {
   plugins?: CarouselPlugin;
   orientation?: "horizontal" | "vertical";
   setApi?: (api: CarouselApi) => void;
-  autoplayRef?: React.RefObject<ReturnType<typeof Autoplay>>;
 };
 
 type CarouselContextProps = {
@@ -30,7 +28,6 @@ type CarouselContextProps = {
   scrollNext: () => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
-  autoplayRef?: React.RefObject<ReturnType<typeof Autoplay>>;
 } & CarouselProps;
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
@@ -57,7 +54,6 @@ const Carousel = React.forwardRef<
       plugins,
       className,
       children,
-      autoplayRef,
       ...props
     },
     ref,
@@ -136,7 +132,6 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
-          autoplayRef,
         }}
       >
         <div
@@ -203,12 +198,8 @@ const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { scrollPrev, canScrollPrev, autoplayRef } = useCarousel();
+  const { scrollPrev, canScrollPrev } = useCarousel();
 
-  const handleClick = () => {
-    scrollPrev();
-    autoplayRef?.current?.reset(); // 타이머 초기화
-  };
   return (
     <Button
       ref={ref}
@@ -216,7 +207,7 @@ const CarouselPrevious = React.forwardRef<
       size={size}
       className={className}
       disabled={!canScrollPrev}
-      onClick={handleClick}
+      onClick={scrollPrev}
       {...props}
     >
       <ChevronLeftIcon className="size-8" />
@@ -230,12 +221,8 @@ const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { scrollNext, canScrollNext, autoplayRef } = useCarousel();
+  const { scrollNext, canScrollNext } = useCarousel();
 
-  const handleClick = () => {
-    scrollNext();
-    autoplayRef?.current?.reset(); // 타이머 초기화
-  };
   return (
     <Button
       ref={ref}
@@ -243,7 +230,7 @@ const CarouselNext = React.forwardRef<
       size={size}
       className={className}
       disabled={!canScrollNext}
-      onClick={handleClick}
+      onClick={scrollNext}
       {...props}
     >
       <ChevronRightIcon className="size-8" />
