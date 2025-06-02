@@ -17,7 +17,7 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      "fixed bottom-0 inset-x-0 mx-auto z-[100] flex max-h-screen w-full flex-col-reverse px-4 web:px-0 pb-10 sm:flex-col max-w-[500px]",
+      "fixed inset-x-0 bottom-0 z-[100] mx-auto flex max-h-screen w-full max-w-[500px] flex-col-reverse px-4 pb-10 sm:flex-col web:px-0",
       className,
     )}
     {...props}
@@ -26,7 +26,7 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
 
 const toastVariants = cva(
-  "toast-shadow data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-bottom-full data-[state=open]:slide-in-from-bottom-full web:py-5 data-[state=open]:sm:slide-in-from-bottom-full group pointer-events-auto relative flex w-full items-center justify-between overflow-hidden rounded-md p-4 pr-6 transition-all data-[swipe=cancel]:translate-y-0 data-[swipe=end]:translate-y-[var(--radix-toast-swipe-end-y)] data-[swipe=move]:translate-y-[var(--radix-toast-swipe-move-y)] data-[swipe=move]:transition-none",
+  "group pointer-events-auto relative flex w-full items-center justify-between overflow-hidden rounded-md p-4 pr-6 transition-all toast-shadow data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-bottom-full data-[state=open]:slide-in-from-bottom-full web:py-5 data-[state=open]:sm:slide-in-from-bottom-full data-[swipe=cancel]:translate-y-0 data-[swipe=end]:translate-y-[var(--radix-toast-swipe-end-y)] data-[swipe=move]:translate-y-[var(--radix-toast-swipe-move-y)] data-[swipe=move]:transition-none",
   {
     variants: {
       variant: {
@@ -110,7 +110,7 @@ const ToastTitle = React.forwardRef<
     <ToastPrimitives.Title
       ref={ref}
       className={cn(
-        "heading-6 web:heading-4 [&+div]:button-s-cta flex items-center gap-3",
+        "flex items-center gap-3 heading-6 web:heading-4 [&+div]:button-s-cta",
         className,
       )}
       {...props}
@@ -119,7 +119,7 @@ const ToastTitle = React.forwardRef<
       {isOrderToast && (
         <Link
           href={CONTACT_PAGE}
-          className="text-primary heading-6 web:heading-5 ml-auto"
+          className="ml-auto text-primary heading-6 web:heading-5"
         >
           배송 신청
         </Link>
