@@ -40,8 +40,12 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
 
               <div className="relative z-10 flex gap-[8px]">
                 <div className="w-[8px] h-[8px] tablet:h-[16px] tablet:w-[16px] rounded-full bg-[#70D5B2]" />
-                
-                <div className="tablet:gibson-heading-2 pretendard-h1-m">Global No.1<br/>Digital Twin Platform</div>
+
+                <div className="tablet:gibson-heading-2 pretendard-h1-m">
+                  Global No.1
+                  <br />
+                  Digital Twin Platform
+                </div>
               </div>
             </div>
 

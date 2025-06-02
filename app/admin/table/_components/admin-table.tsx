@@ -17,9 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  handleAdminCategoryText,
-} from "@/util/string";
+import { handleAdminCategoryText } from "@/util/string";
 import { AdminRes } from "@/app/api/dto/admin";
 import Check from "@/components/shared/check";
 import formattedDate from "@/util/date";
@@ -27,7 +25,7 @@ import formattedDate from "@/util/date";
 interface AdminTableProps {
   data: AdminRes[]; // 필터링 된 데이터
   totalData: AdminRes[]; // 전체 데이터
-  currentPage: number;
+  // currentPage: number;
   totalDataLength: number; // 총 데이터 수
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
@@ -36,8 +34,8 @@ interface AdminTableProps {
 export function AdminTable({
   data,
   totalData,
-  currentPage,
-  totalDataLength,
+  // currentPage,
+  // totalDataLength,
   selectedIds,
   setSelectedIds,
 }: AdminTableProps) {
@@ -86,23 +84,26 @@ export function AdminTable({
             type="checkbox"
             checked={areAllPageItemsSelected()}
             onChange={handleSelectAll}
-            className="peer absolute opacity-0 w-[20px] h-[20px] cursor-pointer z-10"
+            className="peer absolute opacity-0 size-[20px] cursor-pointer z-10"
           />
-          <Check type={'square'} isChecked={areAllPageItemsSelected()} />
+          <Check type={"square"} isChecked={areAllPageItemsSelected()} />
         </div>
       ),
       cell: ({ row }) => (
         <div className="my-auto flex items-center justify-center">
-        <input
+          <input
             type="checkbox"
             checked={selectedIds.includes(row.original.techBlogId)}
             onChange={() => {
               row.toggleSelected();
               handleCheckboxChange(row.original.techBlogId);
             }}
-            className="peer absolute opacity-0 w-[20px] h-[20px] cursor-pointer z-10"
+            className="peer absolute opacity-0 size-[20px] cursor-pointer z-10"
           />
-          <Check type={'square'} isChecked={selectedIds.includes(row.original.techBlogId)} />
+          <Check
+            type={"square"}
+            isChecked={selectedIds.includes(row.original.techBlogId)}
+          />
         </div>
       ),
       size: 44,
@@ -157,9 +158,7 @@ export function AdminTable({
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header, headerIndex) => {
               return (
-                <TableHead
-                  key={header.id + headerIndex}
-                >
+                <TableHead key={header.id + headerIndex}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -172,7 +171,7 @@ export function AdminTable({
           </TableRow>
         ))}
       </TableHeader>
-      
+
       <TableBody>
         {table.getRowModel().rows?.length ? (
           table.getRowModel().rows.map((row, rowIndex) => (
@@ -193,11 +192,7 @@ export function AdminTable({
           ))
         ) : (
           <TableRow>
-            <TableCell
-              className="h-[45px]"
-              size="lg"
-              colSpan={columns.length}
-            >
+            <TableCell className="h-[45px]" size="lg" colSpan={columns.length}>
               데이터가 존재하지 않습니다.
             </TableCell>
           </TableRow>

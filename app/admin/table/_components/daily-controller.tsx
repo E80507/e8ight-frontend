@@ -42,7 +42,7 @@ const DayController = ({ date, setDate }: DayControllerProps) => {
         <button onClick={onClickPrev}>
           <ChevronLeft size={24} />
         </button>
-        
+
         <p className="heading-4">{dateText}</p>
 
         <button disabled={isNextDisabled} onClick={onClickNext}>

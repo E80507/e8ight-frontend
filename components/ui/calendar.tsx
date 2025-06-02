@@ -42,7 +42,8 @@ function Calendar({
           "[&:has([aria-selected])]:bg-[#F2EDFD] [&:has([aria-selected])]:text-white",
         ),
         day: cn("size-[30px] p-0 font-normal aria-selected:opacity-100"),
-        day_range_start: "day-range-start bg-[#6025E1] rounded-[8px] text-white",
+        day_range_start:
+          "day-range-start bg-[#6025E1] rounded-[8px] text-white",
         day_range_end: "day-range-end bg-[#6025E1] rounded-[8px] text-white",
         day_selected: "text-primary-foreground hover:text-primary-foreground",
         day_today: "border border-black rounded-[8px] text-accent-foreground",
