@@ -15,6 +15,7 @@ const buttonVariants = cva(
         destructive: "bg-destructive text-destructive-foreground",
         outline: "border bg-white text-black disabled:bg-gray-100",
         "outline-black": "border border-black disabled:border-gray-300",
+        none: "border-none bg-transparent",
       },
       size: {
         default: "h-12 px-[15px] heading-4",

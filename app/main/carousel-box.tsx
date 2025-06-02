@@ -53,7 +53,7 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
       </div>
       <CarouselContent className="flex-1">
         {items.map((_, i) => (
-          <CarouselItem key={i}>
+          <CarouselItem key={i} className="pl-4">
             <div className="relative aspect-[7/8] size-full overflow-hidden rounded-[20px]">
               <Image
                 src="/images/history.webp"
