@@ -1,6 +1,15 @@
 import { ReactNode } from "react";
-import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { FormControl, FormField, FormItem, FormMessage } from "../../ui/form";
+import {
+  FieldValues,
+  Path,
+  UseFormReturn,
+} from "react-hook-form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../../ui/form";
 import Check from "../check";
 
 interface CustomCheckboxFieldProps<T extends FieldValues> {
@@ -28,7 +37,7 @@ const CustomCheckboxField = <T extends FieldValues>({
       name={name}
       render={({ field }) => {
         // 그룹 체크박스인 경우 배열에서 값 확인
-        const isChecked = Array.isArray(field.value)
+        const isChecked = Array.isArray(field.value) 
           ? field.value?.includes(value)
           : field.value === true;
 
@@ -89,4 +98,4 @@ const CustomCheckboxField = <T extends FieldValues>({
   );
 };
 
-export default CustomCheckboxField;
+export default CustomCheckboxField; 

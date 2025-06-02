@@ -4,13 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerFooter,
-  DrawerTitle,
-} from "@/components/ui/drawer";
-import { IconButton, Button } from "@/components/ui/button";
+import { Drawer, DrawerContent, DrawerFooter } from "@/components/ui/drawer";
+import { IconButton } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   TECH_INSIGHTS_PAGE,
   TECH_LIBRARY_PAGE,
@@ -22,9 +18,9 @@ import ExternalLinksNav from "@/components/shared/layout/external-links-nav";
 import ActionButtons from "@/components/shared/layout/action-buttons";
 
 const NAV_LINKS = [
-  { label: "Tech Library", path: TECH_LIBRARY_PAGE },
-  { label: "Tech Insight", path: TECH_INSIGHTS_PAGE },
-  { label: "Downloads", path: DOWNLOADS_PAGE },
+  { label: "Tech Library", path: `${TECH_LIBRARY_PAGE}` },
+  { label: "Tech Insight", path: `${TECH_INSIGHTS_PAGE}` },
+  { label: "Downloads", path: `${DOWNLOADS_PAGE}` },
 ];
 
 const GlobalNavBar = () => {
@@ -38,15 +34,11 @@ const GlobalNavBar = () => {
   return (
     <>
       {/* 홈페이지 데스크톱 GNB */}
-      <header
-        className={`relative z-[999] hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${
-          isContactPage
-            ? "bg-[#FBFBFC]"
-            : "mx-auto max-w-[1440px] bg-transparent"
-        }`}
+      <div
+        className={`relative z-[999] hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${isContactPage ? "bg-[#FBFBFC]" : "max-w-[1440px] mx-auto bg-transparent"}`}
       >
         <div className="flex items-center justify-between">
-          <Link href="/">
+          <Link prefetch={false} href="/">
             <Image
               src="/svg/logo.svg"
               alt={SERVICE_NAME}
@@ -63,34 +55,31 @@ const GlobalNavBar = () => {
             {NAV_LINKS.map(({ label, path: href }) => (
               <Link
                 key={href}
+                prefetch={false}
                 href={href}
-                className="flex items-center gap-3 title-l"
+                className={`flex items-center gap-3 title-l`}
               >
                 {label}
               </Link>
             ))}
           </nav>
-          <Link href={CONTACT_PAGE} prefetch>
-            <Button
-              size="lg"
-              shape="round"
-              className="w-[160px]"
-              onClick={() => router.push(CONTACT_PAGE)}
-            >
-              상담문의
-            </Button>
-          </Link>
+          <Button
+            size="lg"
+            shape="round"
+            className="w-[160px]"
+            onClick={() => router.push(CONTACT_PAGE)}
+          >
+            상담문의
+          </Button>
         </div>
-      </header>
+      </div>
 
       {/* 홈페이지 모바일 GNB */}
-      <header
-        className={`pointer-events-auto relative z-[999] flex w-full items-center justify-between px-4 py-3 web:hidden ${
-          isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"
-        } ${isHome ? "h-[67px]" : "h-12"}`}
+      <div
+        className={`relative z-[999] flex w-full items-center justify-between px-4 py-3 web:hidden ${isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"} ${isHome ? " h-[67px]" : "h-12"}`}
       >
         {isHome ? (
-          <Link href="/">
+          <Link prefetch={false} href="/">
             <Image
               src="/svg/logo.svg"
               alt={SERVICE_NAME}
@@ -123,26 +112,16 @@ const GlobalNavBar = () => {
           variant="normal"
           size="sm"
         />
-      </header>
+      </div>
 
+      {/* 모바일 메뉴 Drawer */}
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <DrawerTitle className="sr-only">메뉴 열기</DrawerTitle>
-        <DrawerContent
-          className={`flex min-h-screen flex-col items-center bg-white ${isHome ? "pt-[67px]" : "pt-12"} font-pretendard`}
-        >
-          <div className="flex flex-1 flex-col items-center justify-center gap-y-[59px]">
-            {NAV_LINKS.map(({ label, path: href }) => (
-              <Link
-                key={href}
-                prefetch={false}
-                href={href}
-                className="h1-m"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
+        <DrawerContent className="flex flex-col items-center justify-center gap-y-[59px] bg-white font-pretendard">
+          {NAV_LINKS.map(({ label, path: href }) => (
+            <Link key={href} prefetch={false} href={href} className={`h1-m`}>
+              {label}
+            </Link>
+          ))}
           <DrawerFooter className="flex flex-col py-10">
             <ActionButtons />
             <ExternalLinksNav />

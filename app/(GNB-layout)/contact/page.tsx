@@ -23,7 +23,7 @@ const ContactPage = () => {
           className="flex items-center relative overflow-hidden bg-cover bg-center px-[16px] pt-[60px] pb-[16px] tablet:px-[40px] tablet:py-[80px] web:h-[357px] tablet:h-[328px] h-[197px] bg-cover bg-center"
           style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
         >
-          <div className="absolute inset-0 z-0 bg-white opacity-[0.21]" />
+          <div className="absolute inset-0 bg-white opacity-[0.21] z-0" />
 
           <div className="flex gap-[8px] relative z-10 ">
             <div className="tablet:w-[16px] tablet:h-[16px] w-[8px] h-[8px] bg-[#70D5B2] rounded-full" />
@@ -103,11 +103,7 @@ const ContactPage = () => {
                 name="inquiryType"
                 placeholder="문의 유형을 선택해주세요."
                 label="문의 유형"
-                selectValue={[
-                  { value: "1", text: "문의" },
-                  { value: "2", text: "제품 문의" },
-                  { value: "3", text: "기타" },
-                ]}
+                selectValue={[{value: '1', text: '문의'}, {value: '2', text: '제품 문의'}, {value: '3', text: '기타'}]}
                 isEssential={true}
               />
 
@@ -129,35 +125,35 @@ const ContactPage = () => {
                 options={[
                   { label: "NDX PRO", value: "ndx-pro" },
                   { label: "NFLOW", value: "nflow" },
-                  {
-                    label: "PIX4D",
+                  { 
+                    label: "PIX4D", 
                     value: "pix4d",
                     additionalField: {
-                      type: "select",
-                      placeholder: "제품을 선택해주세요",
-                      fieldName: "pix4dProduct",
+                      type: 'select',
+                      placeholder: '제품을 선택해주세요',
+                      fieldName: 'pix4dProduct',
                       selectOptions: [
-                        { value: "PIX4Dmatic", text: "PIX4Dmatic" },
-                        { value: "PIX4Dfields", text: "PIX4Dfields" },
-                        { value: "PIX4Dreact", text: "PIX4Dreact" },
-                        { value: "PIX4Dengine", text: "PIX4Dengine" },
-                        { value: "PIX4Dcloud", text: "PIX4Dcloud" },
-                        { value: "PIX4Dsurvey", text: "PIX4Dsurvey" },
-                        { value: "PIX4Dcapture", text: "PIX4Dcapture Pro" },
-                        { value: "PIX4Dcatch", text: "PIX4Dcatch" },
-                        { value: "Emlid RTK Device", text: "Emlid RTK Device" },
-                      ],
-                    },
+                        { value: 'PIX4Dmatic', text: 'PIX4Dmatic' },
+                        { value: 'PIX4Dfields', text: 'PIX4Dfields' },
+                        { value: 'PIX4Dreact', text: 'PIX4Dreact' },
+                        { value: 'PIX4Dengine', text: 'PIX4Dengine' },
+                        { value: 'PIX4Dcloud', text: 'PIX4Dcloud' },
+                        { value: 'PIX4Dsurvey', text: 'PIX4Dsurvey' },
+                        { value: 'PIX4Dcapture', text: 'PIX4Dcapture Pro' },
+                        { value: 'PIX4Dcatch', text: 'PIX4Dcatch' },
+                        { value: 'Emlid RTK Device', text: 'Emlid RTK Device' },
+                      ]
+                    }
                   },
-                  {
-                    label: "기타",
+                  { 
+                    label: "기타", 
                     value: "other",
                     additionalField: {
-                      type: "input",
-                      placeholder: "내용을 입력해주세요",
-                      fieldName: "otherProduct",
-                    },
-                  },
+                      type: 'input',
+                      placeholder: '내용을 입력해주세요',
+                      fieldName: 'otherProduct'
+                    }
+                  }
                 ]}
               />
 
@@ -175,14 +171,7 @@ const ContactPage = () => {
               <CustomCheckboxField
                 form={form}
                 name="agreeToPrivacyPolicy"
-                label={
-                  <span className="pretendard-body-3">
-                    <span className="font-bold text-primary">
-                      [필수] 개인정보 수집 동의
-                    </span>
-                    : 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.
-                  </span>
-                }
+                label={<span className="pretendard-body-3"><span className="text-primary font-bold">[필수] 개인정보 수집 동의</span>: 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.</span>}
                 isEssential={true}
               />
 
@@ -194,9 +183,7 @@ const ContactPage = () => {
               />
 
               {/* 문의하기 버튼 */}
-              <Button type="submit" shape="round">
-                문의하기
-              </Button>
+              <Button type="submit" shape="round">문의하기</Button>
             </form>
           </Form>
         </div>

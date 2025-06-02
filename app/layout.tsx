@@ -23,7 +23,7 @@ const gibson = localFont({
       style: "normal",
     },
     {
-      path: "./fonts/Gibson-SemiBold.woff2",
+      path: "./fonts/Gibson-Semibold.woff2",
       weight: "600",
       style: "normal",
     },
