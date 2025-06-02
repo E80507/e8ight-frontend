@@ -70,6 +70,7 @@ const config: Config = {
         black: "hsl(var(--black))",
         error: "hsl(var(--error))",
         "gray-strong": "hsl(var(--gray-strong))",
+        "gray-700": "hsl(var(--gray-700))",
       },
       borderRadius: {
         lg: "var(--radius)", // 10px

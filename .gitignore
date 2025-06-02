@@ -40,3 +40,4 @@ next-env.d.ts
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
+.pnp.cjs
