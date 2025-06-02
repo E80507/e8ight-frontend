@@ -15,7 +15,7 @@ export const apiFetch = async (
   options: RequestInit = {},
   responseType: "json" | "blob" = "json", // 기본 응답 타입
 ) => {
-  const baseUrl = "api"; //process.env.NEXT_PUBLIC_SERVER_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
   const fullUrl = `${baseUrl}${url}`;
 
   const headers = {
