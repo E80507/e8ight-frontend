@@ -43,7 +43,7 @@ const TableContainer = ({
         selectedIds={selectedIds}
         setSelectedIds={setSelectedIds}
         data={currentData}
-        currentPage={currentPage}
+        // currentPage={currentPage}
         totalData={totalData}
         totalDataLength={totalData.length}
       />
