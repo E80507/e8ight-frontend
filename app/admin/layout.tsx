@@ -6,7 +6,7 @@ interface GlobalNavBarLayoutProps {
   children: React.ReactNode;
 }
 
-const GlobalNavBarLayout = ({ children }: GlobalNavBarLayoutProps) => {
+const AdminLayout = ({ children }: GlobalNavBarLayoutProps) => {
   return (
     <>
       <Loading>
@@ -21,4 +21,4 @@ const GlobalNavBarLayout = ({ children }: GlobalNavBarLayoutProps) => {
     </>
   );
 };
-export default GlobalNavBarLayout;
+export default AdminLayout;

@@ -11,7 +11,7 @@ const AdminNavBar = () => {
       <Link
         type="button"
         href={ADMIN_PAGE}
-        className="flex items-center font-gibson h2-r"
+        className="flex items-center"
         prefetch
       >
         <Image
@@ -21,7 +21,7 @@ const AdminNavBar = () => {
           height={43}
           priority
         />
-        <span className="font-gibson">E8 Admin</span>
+        <span className="font-gibson h2-r">E8 Admin</span>
       </Link>
 
       {/* 오른쪽: 버튼 + 햄버거 아이콘 */}
