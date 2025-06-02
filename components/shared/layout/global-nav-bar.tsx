@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -31,6 +31,35 @@ const GlobalNavBar = () => {
   const path = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const clickTimer = useRef<NodeJS.Timeout>();
+
+  const handleLogoClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setClickCount((prev) => {
+      const newCount = prev + 1;
+      
+      if (clickTimer.current) {
+        clearTimeout(clickTimer.current);
+      }
+      
+      clickTimer.current = setTimeout(() => {
+        setClickCount(0);
+      }, 2000);
+
+      if (newCount >= 5) {
+        setClickCount(0);
+        router.push("/admin");
+        return 0;
+      }
+      
+      if (newCount === 1) {
+        router.push("/");
+      }
+      
+      return newCount;
+    });
+  }, [router]);
 
   const isContactPage = path === CONTACT_PAGE;
   const isHome = path === "/";
@@ -46,7 +75,7 @@ const GlobalNavBar = () => {
         }`}
       >
         <div className="flex items-center justify-between">
-          <Link href="/">
+          <button type="button" onClick={handleLogoClick}>
             <Image
               src="/svg/logo.svg"
               alt={SERVICE_NAME}
@@ -54,7 +83,7 @@ const GlobalNavBar = () => {
               height={43}
               priority
             />
-          </Link>
+          </button>
           <ExternalLinksNav />
         </div>
 
@@ -90,7 +119,7 @@ const GlobalNavBar = () => {
         } ${isHome ? "h-[67px]" : "h-12"}`}
       >
         {isHome ? (
-          <Link href="/">
+          <Link href="/" onClick={handleLogoClick}>
             <Image
               src="/svg/logo.svg"
               alt={SERVICE_NAME}

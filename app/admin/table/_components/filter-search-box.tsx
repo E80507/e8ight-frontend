@@ -1,4 +1,4 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect, Dispatch, SetStateAction, useCallback } from "react";
 import CheckBox from "@/app/_components/check-box";
 import SearchBar from "@/app/_components/search-bar";
 import { AdminRes } from "@/app/api/dto/admin";
@@ -33,7 +33,7 @@ const FilterSearchBox = ({
     setSelectedIds([]); // 선택된 체크박스 초기화
   };
 
-  const filterData = () => {
+  const filterData = useCallback(() => {
     setCurrentPage(1); // 페이지 초기화
     let filtered = data;
 
@@ -63,11 +63,11 @@ const FilterSearchBox = ({
     }
 
     setFilteredData(filtered);
-  };
+  }, [keyword, selectedCategoryType, date, data, setFilteredData, setCurrentPage]);
 
   useEffect(() => {
     filterData();
-  }, [keyword, selectedCategoryType, date, data, filterData]);
+  }, [filterData]);
 
   return (
     <div className="w-full">
