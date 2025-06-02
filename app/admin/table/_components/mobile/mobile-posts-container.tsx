@@ -15,16 +15,6 @@ const MobilePostsContainer = () => {
     sortOrder: "DESC",
   });
 
-  useEffect(() => {
-    console.log(params);
-    setParams({
-      ...params,
-      page: 1,
-      limit: 10,
-      sortOrder: "DESC",
-    });
-  }, [params]);
-
   const { posts, totalCount, isLoading, error } = usePosts(params);
 
   // 전체 선택 여부 확인
@@ -50,7 +40,10 @@ const MobilePostsContainer = () => {
   };
 
   const handleFilterClick = () => {
-    // 필터 클릭 핸들러 구현
+    setParams({
+      ...params,
+      page: 1,
+    });
   };
 
   // 페이지 변경이나 필터 변경 시 선택 초기화
