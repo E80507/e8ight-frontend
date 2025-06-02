@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import QuillEditor from "@/components/QuillEditor";
+import dynamic from "next/dynamic";
+// import QuillEditor from "@/components/QuillEditor";
+const QuillEditor = dynamic(() => import("@/components/QuillEditor"), {
+  ssr: false,
+});
 
 export default function QuillTestPage() {
   const [content, setContent] = useState("");

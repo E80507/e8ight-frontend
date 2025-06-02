@@ -4,7 +4,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -60,9 +60,10 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 10px;
-    --black: 0 1% 6%;
+    --black: 0 0% 0%;
     --error: 2 100% 50%;
     --gray-strong: 214 4% 34%;
+    --gray-700: 230 8% 40%;
   }
   .dark {
     --background: 0 0% 100%;

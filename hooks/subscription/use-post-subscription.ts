@@ -12,18 +12,17 @@ export const usePostSubscription = () => {
 
   const [loading, setLoading] = useState(false); // 로딩 상태
 
-  const onSubmit = form.handleSubmit(async (data) => {
+  const onSubmit = form.handleSubmit(async () => {
     setLoading(true); // 로딩 시작
-    
+
     try {
       // 0.4초 대기
       await new Promise((resolve) => setTimeout(resolve, 400));
-
     } catch (err: unknown) {
       if (!err) return;
       toast({
         title: "잠시 후 다시 시도해주세요",
-        icon: "light",
+        // icon: "light",
       });
     } finally {
       setLoading(false); // 로딩 종료
