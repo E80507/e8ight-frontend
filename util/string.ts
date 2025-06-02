@@ -8,6 +8,7 @@ import {
 } from "@/app/api/dto/point";
 import { PrintStatus } from "@/app/api/dto/delivery";
 import { AdminCategory } from "@/app/api/dto/admin";
+import { PostCategory } from "@/api/dto/post";
 
 // 닉네임 마스킹 처리 함수
 export const handleMaskName = (name: string, isName?: boolean): string => {
@@ -351,5 +352,21 @@ export const handleAdminCategoryText = (category: AdminCategory) => {
       return `Downloads`;
     default:
       return "-";
+  }
+};
+
+// 포스트 카테고리 텍스트 반환 함수
+export const handlePostCategoryText = (category: PostCategory) => {
+  switch (category) {
+    case "LIBRARY":
+      return "Tech Library";
+    case "INSIGHT":
+      return "Tech Insight";
+    case "DX":
+      return "DX Simulation";
+    case "DOWNLOADS":
+      return "Downloads";
+    default:
+      return category;
   }
 };

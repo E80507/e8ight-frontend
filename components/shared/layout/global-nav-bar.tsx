@@ -124,7 +124,7 @@ const GlobalNavBar = () => {
 
       {/* 홈페이지 모바일 GNB */}
       <header
-        className={`pointer-events-auto relative z-100 flex w-full items-center justify-between px-4 py-3 web:hidden ${
+        className={`pointer-events-auto relative z-[100] flex w-full items-center justify-between px-4 py-3 web:hidden ${
           isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"
         } ${isHome ? "h-[67px]" : "h-12"}`}
       >
