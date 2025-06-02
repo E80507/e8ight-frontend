@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { PostsRequestParams } from "@/api/dto/post";
+import { Post, PostsRequestParams } from "@/api/dto/post";
 import { usePosts } from "@/hooks/posts/use-posts";
 import { AdminTable } from "./admin-table";
 import FilterSearchBox from "./filter-search-box";
@@ -12,6 +12,8 @@ export function PostsContainer() {
     limit: 10,
     sortOrder: "DESC",
   });
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   const { posts, totalCount, isLoading, error, mutate } = usePosts(params);
 
@@ -20,6 +22,12 @@ export function PostsContainer() {
       ...prev,
       ...newParams,
     }));
+    setIsFiltering(false);
+  }, []);
+
+  const handleSearch = useCallback((filtered: Post[]) => {
+    setFilteredPosts(filtered);
+    setIsFiltering(true);
   }, []);
 
   const handleDelete = useCallback(async () => {
@@ -29,9 +37,7 @@ export function PostsContainer() {
       ) {
         try {
           console.log("Delete posts:", selectedIds);
-
           await mutate();
-
           setSelectedIds([]);
         } catch (error) {
           console.error("Failed to delete posts:", error);
@@ -45,20 +51,25 @@ export function PostsContainer() {
 
   if (isLoading) return <div>로딩 중...</div>;
 
+  const displayPosts = isFiltering ? filteredPosts : posts;
+  const displayCount = isFiltering ? filteredPosts.length : totalCount;
+
   return (
     <div className="w-full">
       <FilterSearchBox
         onFilterChange={handleFilterChange}
         setSelectedIds={setSelectedIds}
+        posts={posts}
+        onSearch={handleSearch}
       />
       <TableControlBox
-        totalCount={totalCount}
+        totalCount={displayCount}
         selectedCount={selectedIds.length}
         onDelete={handleDelete}
       />
       <AdminTable
-        data={posts}
-        totalCount={totalCount}
+        data={displayPosts}
+        totalCount={displayCount}
         selectedIds={selectedIds}
         setSelectedIds={setSelectedIds}
       />
