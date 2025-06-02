@@ -23,9 +23,7 @@ export const usePatchDelivery = (id: string, savedData: DeliveryDetailRes) => {
     },
   });
 
-  const handlePatchDelivery = async (
-    formValues: z.infer<typeof deliveryPatchSchema>,
-  ) => {
+  const handlePatchDelivery = async (formValues: z.infer<typeof deliveryPatchSchema>) => {
     if (
       (formValues.deliveryAddress === undefined ||
         savedData.deliveryAddress === formValues.deliveryAddress) &&

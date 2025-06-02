@@ -1,8 +1,5 @@
 import { getArtworkListWithPagination } from "@/app/api/artwork";
-import {
-  ArtworkPaginationReq,
-  ArtworkPaginationRes,
-} from "@/app/api/dto/artwork";
+import { ArtworkPaginationReq, ArtworkPaginationRes } from "@/app/api/dto/artwork";
 import { wrapPromise } from "@/util/wrap-promise";
 import { useEffect, useState } from "react";
 
@@ -15,14 +12,7 @@ export const useGetArtworkList = (req: ArtworkPaginationReq) => {
   useEffect(() => {
     const newRes = wrapPromise(getArtworkListWithPagination(req));
     setRes(newRes);
-  }, [
-    req.page,
-    req.keyword,
-    req.artworkStatus,
-    req.isBlocked,
-    req.startDate,
-    req.endDate,
-  ]);
+  }, [req.page, req.keyword, req.artworkStatus, req.isBlocked, req.startDate, req.endDate]);
 
   const data = result ? result.get() : null;
 
