@@ -217,6 +217,13 @@ const config: Config = {
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-pretendard)",
         },
+        ".pretendard-title-m": {
+          fontSize: "16px",
+          lineHeight: "150%",
+          fontWeight: "600",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
         ".pretendard-title-s": {
           fontSize: "14px",
           lineHeight: "150%",
