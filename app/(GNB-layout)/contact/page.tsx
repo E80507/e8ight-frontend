@@ -27,10 +27,16 @@ const ContactPage = () => {
 
           <div className="flex gap-[8px] relative z-10 ">
             <div className="tablet:w-[16px] tablet:h-[16px] w-[8px] h-[8px] bg-[#70D5B2] rounded-full" />
-            
+
             <div className="flex flex-col gap-[16px]">
-              <div className="web:gibson-h1-l tablet:gibson-h1-m gibson-h1-s">Global No.1<br/>Digital Twin Platform</div>
-              <div className="web:pretendard-body-1 tablet:pretendard-body-2 pretendard-body-3">문의를 주시면 자세한 상담이 가능합니다.</div>
+              <div className="web:gibson-h1-l tablet:gibson-h1-m gibson-h1-s">
+                Global No.1
+                <br />
+                Digital Twin Platform
+              </div>
+              <div className="web:pretendard-body-1 tablet:pretendard-body-2 pretendard-body-3">
+                문의를 주시면 자세한 상담이 가능합니다.
+              </div>
             </div>
           </div>
         </div>
@@ -190,7 +196,11 @@ const ContactPage = () => {
               <CustomCheckboxField
                 form={form}
                 name="agreeToReceiveMarketing"
-                label={<span className="pretendard-body-3">[선택] 이에이트 뉴스레터 수신에 동의합니다.</span>}
+                label={
+                  <span className="pretendard-body-3">
+                    [선택] 이에이트 뉴스레터 수신에 동의합니다.
+                  </span>
+                }
               />
 
               {/* 문의하기 버튼 */}

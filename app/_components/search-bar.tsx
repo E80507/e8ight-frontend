@@ -27,7 +27,7 @@ const SearchBar = ({ placeholder, setKeyword }: SearchBarProps) => {
   return (
     <div className="flex h-[72px] border border-[#EEEFF1]">
       <FilterName name="상세 검색" />
-      
+
       <div className="flex items-center gap-2">
         <div className="relative flex w-[430px] items-center pl-[12px]">
           <SearchIcon className="absolute inset-y-0 left-0 my-auto ml-[26px] size-6 text-[#D6D7DC]" />
@@ -41,7 +41,9 @@ const SearchBar = ({ placeholder, setKeyword }: SearchBarProps) => {
           />
         </div>
 
-        <Button variant={"outline"} size={"lg"} className="w-[84px]">초기화</Button>  
+        <Button variant={"outline"} size={"lg"} className="w-[84px]">
+          초기화
+        </Button>
       </div>
     </div>
   );

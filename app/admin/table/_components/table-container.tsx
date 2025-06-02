@@ -31,7 +31,7 @@ const TableContainer = ({
       setCurrentPage(Number(prev));
     }
   }, [prev, setCurrentPage]);
-  
+
   return (
     <div className="flex flex-col gap-[15px] overflow-x-auto">
       <TableSummaryBox

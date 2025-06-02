@@ -3,7 +3,11 @@ import { wrapPromise } from "@/util/wrap-promise";
 import { useEffect, useState } from "react";
 import { AdminRes } from "@/app/api/dto/admin";
 
-export const useGetTechBlogList = (year: number, month: number, day: number) => {
+export const useGetTechBlogList = (
+  year: number,
+  month: number,
+  day: number,
+) => {
   const [result, setRes] = useState<{
     get: () => AdminRes[] | null;
   } | null>(null);

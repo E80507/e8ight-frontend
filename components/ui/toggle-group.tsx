@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import * as React from "react";
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { type VariantProps } from "class-variance-authority";
@@ -10,31 +9,34 @@ import { toggleVariants } from "@/components/ui/toggle";
 import Radio from "../radio";
 
 const ToggleGroupContext = React.createContext<{
-  variant?: string;
-  size?: string;
-  value?: string;
-}>({});
-
-
+  size: "default" | "sm" | "lg";
+}>({
+  size: "default",
+});
 
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
     VariantProps<typeof toggleVariants>
->(({ className, variant, size, value, onValueChange, children, ...props }, ref) => (
-  <ToggleGroupPrimitive.Root
-    type="single"
-    value={value}
-    onValueChange={onValueChange}
-    ref={ref}
-    className={cn("flex items-center p-0 justify-center gap-3", className)}
-    {...props}
-  >
-    <ToggleGroupContext.Provider value={{ variant, size, value }}>
-      {children}
-    </ToggleGroupContext.Provider>
-  </ToggleGroupPrimitive.Root>
-));
+>(
+  (
+    { className, variant, size, value, onValueChange, children, ...props },
+    ref,
+  ) => (
+    <ToggleGroupPrimitive.Root
+      type="single"
+      value={value}
+      onValueChange={onValueChange}
+      ref={ref}
+      className={cn("flex items-center p-0 justify-center gap-3", className)}
+      {...props}
+    >
+      <ToggleGroupContext.Provider value={{ variant, size, value }}>
+        {children}
+      </ToggleGroupContext.Provider>
+    </ToggleGroupPrimitive.Root>
+  ),
+);
 
 ToggleGroup.displayName = "ToggleGroup";
 
@@ -58,18 +60,15 @@ const ToggleGroupItem = React.forwardRef<
           size: context.size || size,
         }),
         "w-full justify-start min-w-max p-0 subtitle-2 items-center flex gap-3 relative",
-        className
+        className,
       )}
       {...props}
     >
-      {hasIcon && (
-        <Radio isChecked={isChecked} />
-      )}
+      {hasIcon && <Radio isChecked={isChecked} />}
       {children}
     </ToggleGroupPrimitive.Item>
   );
 });
-
 
 ToggleGroupItem.displayName = "ToggleGroupItem";
 
