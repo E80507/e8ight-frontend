@@ -16,6 +16,7 @@ import {
   TECH_LIBRARY_PAGE,
   DOWNLOADS_PAGE,
   CONTACT_PAGE,
+  ADMIN_PAGE,
 } from "@/constants/path";
 import { SERVICE_NAME } from "@/constants/service";
 import ExternalLinksNav from "@/components/shared/layout/external-links-nav";
@@ -39,7 +40,7 @@ const GlobalNavBar = () => {
     if (clickCount === 1) {
       router.push("/");
     } else if (clickCount >= 5) {
-      router.push("/admin");
+      router.push(ADMIN_PAGE);
       setClickCount(0);
     }
   }, [clickCount, router]);
