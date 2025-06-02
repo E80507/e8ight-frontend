@@ -12,7 +12,8 @@ interface CheckBoxProps {
   }[];
   label?: string;
   checkboxClass?: string;
-  handleChangeValue: (data: string) => void;
+  handleChangeValue: (value: string) => void;
+  defaultValue?: string;
 }
 
 const CheckBox = ({
@@ -21,8 +22,9 @@ const CheckBox = ({
   conditions,
   label,
   handleChangeValue,
+  defaultValue,
 }: CheckBoxProps) => {
-  const [selected, setSelected] = useState(conditions[0]?.value ?? "");
+  const [selected, setSelected] = useState(defaultValue ?? conditions[0]?.value ?? "");
 
   const onChange = (val: string) => {
     if (!val) return; // 빈 문자열로 선택 해제되는 경우 방지

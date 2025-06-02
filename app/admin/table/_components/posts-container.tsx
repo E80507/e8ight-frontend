@@ -48,7 +48,6 @@ export function PostsContainer() {
   }, [selectedIds, mutate]);
 
   if (error) return <div>에러</div>;
-
   if (isLoading) return <div>로딩 중...</div>;
 
   const displayPosts = isFiltering ? filteredPosts : posts;
@@ -62,11 +61,13 @@ export function PostsContainer() {
         posts={posts}
         onSearch={handleSearch}
       />
+
       <TableControlBox
         totalCount={displayCount}
         selectedCount={selectedIds.length}
         onDelete={handleDelete}
       />
+      
       <AdminTable
         data={displayPosts}
         totalCount={displayCount}

@@ -25,6 +25,7 @@ type CalendarDoubleProps = {
 };
 
 const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
+  const [open, setOpen] = useState(false);
   const [range, setRange] = useState<
     | {
         from: Date | undefined;
@@ -46,15 +47,20 @@ const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
       const { from, to } = newRange;
       setRange({ from, to });
       setDate({ start: from, end: to });
+      
+      // 시작일과 종료일이 모두 선택되었을 때 팝업을 닫습니다
+      if (from && to) {
+        setOpen(false);
+      }
     }
   };
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <button
+        <div
           className={cn(
-            "w-[400px] rounded-sm border relative h-[48px] text-[15px] px-3 items-center justify-between text-left",
+            "w-[400px] rounded-sm border relative h-[48px] text-[15px] px-3 flex items-center justify-between cursor-pointer",
           )}
         >
           <span className="flex gap-[1px] subtitle-3">
@@ -67,7 +73,7 @@ const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
                   : "연도/월/일"
               }
               placeholder="Start date"
-              className="max-w-[80px] bg-transparent focus:outline-none"
+              className="max-w-[80px] bg-transparent focus:outline-none cursor-pointer"
             />
             <span>~</span>
             <input
@@ -79,11 +85,11 @@ const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
                   : "연도/월/일"
               }
               placeholder="End date"
-              className="max-w-[80px] bg-transparent focus:outline-none"
+              className="max-w-[80px] bg-transparent focus:outline-none cursor-pointer"
             />
           </span>
           <CalendarDays className="absolute inset-y-0 right-0 my-auto ml-auto mr-3 size-[19px] text-black" />
-        </button>
+        </div>
       </PopoverTrigger>
 
       <PopoverContent className="w-auto p-0" align="start">

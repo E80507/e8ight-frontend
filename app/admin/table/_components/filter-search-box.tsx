@@ -94,27 +94,36 @@ const FilterSearchBox = ({
     setSelectedIds([]); // 선택된 체크박스 초기화
   };
 
-  // 날짜 변경시 API 호출
-  useEffect(() => {
-    const params = getFilterParams(selectedCategory, date);
-    onFilterChange(params);
-  }, [date, selectedCategory, getFilterParams, onFilterChange]);
+  // 날짜 변경 핸들러
+  const handleDateChange = (newDate: searchDate) => {
+    setDate(newDate);
+    // 시작일과 종료일이 모두 선택된 경우에만 API 호출
+    if (newDate?.start && newDate?.end) {
+      const params = getFilterParams(selectedCategory, newDate);
+      onFilterChange(params);
+      setSelectedIds([]);
+    }
+  };
 
   return (
     <div className="w-full">
+      {/* 검색어 */}
       <SearchBar placeholder="제목, 저자" setKeyword={setKeyword} />
 
+      {/* 생성일자 */}
       <div className="flex h-[72px] border">
         <FilterName name="생성 일자" />
         <div className="relative flex w-[430px] items-center pl-[12px]">
-          <CalendarDouble date={date} setDate={setDate} />
+          <CalendarDouble date={date} setDate={handleDateChange} />
         </div>
       </div>
 
+      {/* 카테고리 */}
       <CheckBox
-        label={"카테고리"}
+        label="카테고리"
         conditions={POST_CATEGORIES}
         handleChangeValue={handleCategoryChange}
+        defaultValue={selectedCategory}
       />
     </div>
   );
