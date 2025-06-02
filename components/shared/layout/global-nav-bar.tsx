@@ -33,34 +33,38 @@ const GlobalNavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const clickTimer = useRef<NodeJS.Timeout>();
+  const clickTimeRef = useRef<number>(0);
 
   const handleLogoClick = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
+
+      const now = Date.now();
+      if (now - clickTimeRef.current > 2000) {
+        setClickCount(1);
+        router.push("/");
+      } else {
+        setClickCount((prev) => {
+          const newCount = prev + 1;
+          if (newCount >= 5) {
+            router.push("/admin");
+            return 0;
+          }
+          return newCount;
+        });
+      }
+
+      clickTimeRef.current = now;
+
+      if (clickTimer.current) {
+        clearTimeout(clickTimer.current);
+      }
+
+      clickTimer.current = setTimeout(() => {
+        setClickCount(0);
+      }, 2000);
+
       console.log(clickCount);
-      setClickCount((prev) => {
-        const newCount = prev + 1;
-
-        if (clickTimer.current) {
-          clearTimeout(clickTimer.current);
-        }
-
-        clickTimer.current = setTimeout(() => {
-          setClickCount(0);
-        }, 2000);
-
-        if (newCount >= 5) {
-          setClickCount(0);
-          router.push("/admin");
-          return 0;
-        }
-
-        if (newCount === 1) {
-          router.push("/");
-        }
-
-        return newCount;
-      });
     },
     [router],
   );
