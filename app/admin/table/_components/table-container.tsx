@@ -3,7 +3,38 @@ import { AdminTable } from "./admin-table";
 import TableSummaryBox from "./table-summary-box";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { AdminRes } from "@/app/api/dto/admin";
+import { AdminRes, AdminCategory } from "@/app/api/dto/admin";
+import { Post, PostCategory } from "@/api/dto/post";
+
+const adminToPostCategory = (category: AdminCategory): PostCategory => {
+  switch (category) {
+    case AdminCategory.LIBRARY:
+      return "LIBRARY";
+    case AdminCategory.INSIGHT:
+      return "INSIGHT";
+    case AdminCategory.DX:
+      return "DX";
+    case AdminCategory.DOWNLOADS:
+      return "DOWNLOADS";
+  }
+};
+
+const mapAdminResToPost = (adminRes: AdminRes): Post => ({
+  id: adminRes.techBlogId,
+  createdAt: adminRes.createdAt,
+  title: adminRes.title,
+  category: adminToPostCategory(adminRes.category),
+  author: adminRes.writer,
+  updatedAt: adminRes.createdAt,
+  deletedAt: null,
+  content: "",
+  thumbnail: "",
+  mainImage: "",
+  tags: [],
+  keywords: [],
+  linkUrl: "",
+  fileIds: null,
+});
 
 interface TableContainerProps {
   totalData: AdminRes[];
@@ -32,6 +63,8 @@ const TableContainer = ({
     }
   }, [prev, setCurrentPage]);
 
+  const mappedCurrentData = currentData.map(mapAdminResToPost);
+
   return (
     <div className="flex flex-col gap-[15px] overflow-x-auto">
       <TableSummaryBox
@@ -42,10 +75,8 @@ const TableContainer = ({
       <AdminTable
         selectedIds={selectedIds}
         setSelectedIds={setSelectedIds}
-        data={currentData}
-        // currentPage={currentPage}
-        totalData={totalData}
-        totalDataLength={totalData.length}
+        data={mappedCurrentData}
+        totalCount={totalData.length}
       />
 
       {totalData.length > 0 && (
@@ -58,4 +89,5 @@ const TableContainer = ({
     </div>
   );
 };
+
 export default TableContainer;
