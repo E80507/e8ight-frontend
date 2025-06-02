@@ -1,7 +1,7 @@
 "use client";
 
 import { PostsContainer } from "./table/_components/posts-container";
-import MobilePostsContainer from "./table/_components/mobile/mobile-posts-container"
+import MobilePostsContainer from "./table/_components/mobile/mobile-posts-container";
 
 export default function AdminPage() {
   return (
