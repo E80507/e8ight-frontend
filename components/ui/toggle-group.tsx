@@ -8,30 +8,65 @@ import { cn } from "@/lib/utils";
 import { toggleVariants } from "@/components/ui/toggle";
 import Radio from "../radio";
 
-const ToggleGroupContext = React.createContext<{
-  size: "default" | "sm" | "lg";
-}>({
+type ToggleSize = "default" | "sm" | "lg";
+type ToggleVariant = "default" | "outline";
+
+interface ToggleGroupContextValue {
+  size: ToggleSize;
+  variant?: ToggleVariant;
+  value?: string;
+}
+
+const ToggleGroupContext = React.createContext<ToggleGroupContextValue>({
   size: "default",
 });
 
+type BaseToggleGroupProps = Omit<
+  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>,
+  "type" | "value" | "onValueChange" | "defaultValue"
+> &
+  VariantProps<typeof toggleVariants>;
+
+interface SingleToggleGroupProps extends BaseToggleGroupProps {
+  type?: "single";
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+}
+
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
-    VariantProps<typeof toggleVariants>
+  SingleToggleGroupProps
 >(
   (
-    { className, variant, size, value, onValueChange, children, ...props },
+    {
+      className,
+      variant,
+      size = "default",
+      value,
+      onValueChange,
+      defaultValue,
+      children,
+      ...props
+    },
     ref,
   ) => (
     <ToggleGroupPrimitive.Root
+      ref={ref}
       type="single"
       value={value}
+      defaultValue={defaultValue}
       onValueChange={onValueChange}
-      ref={ref}
       className={cn("flex items-center p-0 justify-center gap-3", className)}
       {...props}
     >
-      <ToggleGroupContext.Provider value={{ variant, size, value }}>
+      <ToggleGroupContext.Provider
+        value={{
+          size: size as ToggleSize,
+          variant: variant as ToggleVariant | undefined,
+          value,
+        }}
+      >
         {children}
       </ToggleGroupContext.Provider>
     </ToggleGroupPrimitive.Root>
@@ -48,7 +83,7 @@ const ToggleGroupItem = React.forwardRef<
     }
 >(({ className, children, value, hasIcon, variant, size, ...props }, ref) => {
   const context = React.useContext(ToggleGroupContext);
-  const isChecked = context.value === value; // ✅ value만 사용
+  const isChecked = context.value === value;
 
   return (
     <ToggleGroupPrimitive.Item
@@ -56,8 +91,8 @@ const ToggleGroupItem = React.forwardRef<
       value={value}
       className={cn(
         toggleVariants({
-          variant: context.variant || variant,
-          size: context.size || size,
+          variant: (context.variant || variant || "default") as ToggleVariant,
+          size: (context.size || size || "default") as ToggleSize,
         }),
         "w-full justify-start min-w-max p-0 subtitle-2 items-center flex gap-3 relative",
         className,
