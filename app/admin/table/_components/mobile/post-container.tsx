@@ -7,7 +7,7 @@ import FloatingAddButton from "./post-add-button";
 import PostSearchBar from "./post-search-bar";
 import PostFilterBar from "./post-filter-bar";
 
-const PostContainer = () => {
+const MobilePostContainer = () => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [params, setParams] = useState<PostsRequestParams>({
     page: 1,
@@ -110,4 +110,4 @@ const PostContainer = () => {
   );
 };
 
-export default PostContainer;
+export default MobilePostContainer;

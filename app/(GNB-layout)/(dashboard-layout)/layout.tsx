@@ -32,6 +32,7 @@ const DashboardLayout = () => {
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={setCurrentPage}
+            className="tablet:mt-[100px]"
           />
         )}
       </div>
