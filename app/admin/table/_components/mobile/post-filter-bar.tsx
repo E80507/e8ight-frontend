@@ -21,11 +21,11 @@ interface PostFilterBarProps {
   onFilterChange: (params: Partial<PostsRequestParams>) => void;
 }
 
-const PostFilterBar = ({ 
-  totalCount, 
+const PostFilterBar = ({
+  totalCount,
   posts,
   onFilteredDataChange,
-  onFilterChange 
+  onFilterChange,
 }: PostFilterBarProps) => {
   const [date, setDate] = useState<searchDate>({
     start: undefined,
@@ -40,7 +40,7 @@ const PostFilterBar = ({
   };
 
   // 필터링 로직
-  const filterPosts = (keyword: string, selectedCategory: string) => {
+  const filterPosts = (keyword: string) => {
     let filtered = [...posts];
 
     // 검색어 필터링
@@ -49,7 +49,7 @@ const PostFilterBar = ({
       filtered = filtered.filter(
         (post) =>
           post.title?.toLowerCase().includes(searchLower) ||
-          post.author?.toLowerCase().includes(searchLower)
+          post.author?.toLowerCase().includes(searchLower),
       );
     }
 
@@ -59,7 +59,7 @@ const PostFilterBar = ({
   // 검색어 변경 핸들러
   const handleSearch = (keyword: string) => {
     setSearchTerm(keyword);
-    filterPosts(keyword, category);
+    filterPosts(keyword);
   };
 
   // 필터 적용 핸들러
@@ -73,14 +73,14 @@ const PostFilterBar = ({
       const endDate = new Date(date.end);
       endDate.setHours(9, 0, 0, 0);
 
-      const startDateStr = startDate.toISOString().split('T')[0];
-      const endDateStr = endDate.toISOString().split('T')[0];
+      const startDateStr = startDate.toISOString().split("T")[0];
+      const endDateStr = endDate.toISOString().split("T")[0];
 
-      console.log('Date Debug Mobile:', {
+      console.log("Date Debug Mobile:", {
         originalStart: startDate,
         originalEnd: endDate,
         formattedStart: startDateStr,
-        formattedEnd: endDateStr
+        formattedEnd: endDateStr,
       });
 
       filterParams.startDate = startDateStr;
@@ -99,10 +99,10 @@ const PostFilterBar = ({
 
     // API 필터 적용
     onFilterChange(filterParams);
-    
+
     // 검색어 기반 프론트엔드 필터링
     if (searchTerm) {
-      filterPosts(searchTerm, category);
+      filterPosts(searchTerm);
     }
   };
 
@@ -110,7 +110,7 @@ const PostFilterBar = ({
     <div className="flex flex-col gap-[16px] px-[16px]">
       <div className="flex items-center justify-between">
         <p className="pretendard-subtitle-m">총 {totalCount}건</p>
-        
+
         {/* 필터 시트 */}
         <Sheet>
           <SheetTrigger asChild>
@@ -134,7 +134,7 @@ const PostFilterBar = ({
                   <label className="pretendard-body-3 text-[#5E616E]">
                     생성 일자
                   </label>
-                  
+
                   <CalendarDouble
                     date={date}
                     setDate={handleDateChange}
@@ -177,10 +177,7 @@ const PostFilterBar = ({
       </div>
 
       {/* 검색바 */}
-      <SearchBar 
-        placeholder="제목, 저자" 
-        setKeyword={handleSearch}
-      />
+      <SearchBar placeholder="제목, 저자" setKeyword={handleSearch} />
     </div>
   );
 };
