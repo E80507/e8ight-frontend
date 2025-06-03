@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { Post, PostsRequestParams } from "@/api/dto/post";
+import { PostsRequestParams } from "@/api/dto/post";
 import MobileListItem from "./post-item";
 import { usePost } from "@/hooks/post/use-post";
 import FloatingAddButton from "./post-add-button";
@@ -18,11 +18,7 @@ const MobilePostContainer = () => {
   });
 
   // 게시물 목록 조회
-  const {
-    posts: allPosts = [],
-    isLoading,
-    error,
-  } = usePost(params);
+  const { posts: allPosts = [], isLoading, error } = usePost(params);
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
@@ -60,7 +56,7 @@ const MobilePostContainer = () => {
 
   const currentPagePosts = allPosts.slice(
     (params.page - 1) * params.limit,
-    params.page * params.limit
+    params.page * params.limit,
   );
 
   return (

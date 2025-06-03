@@ -11,7 +11,7 @@ export const usePost = (params: PostsRequestParams) => {
       revalidateIfStale: false,
       shouldRetryOnError: false,
       dedupingInterval: 2000,
-    }
+    },
   );
 
   return {
