@@ -33,7 +33,7 @@ const PostFilterBar = ({
 
     // API 필터링을 위한 카테고리 값 전달
     if (category === POST_CATEGORIES[0].value) {
-      // "전체" 카테고리인 경우
+      // 전체 카테고리인 경우
       onFilterChange({ category: undefined });
     } else {
       onFilterChange({ category: category as PostCategory });
@@ -44,6 +44,7 @@ const PostFilterBar = ({
   const filterPosts = (keyword: string) => {
     let filtered = [...posts];
 
+    console.log("posts 키워드", keyword);
     // 검색어 필터링
     if (keyword) {
       const searchLower = keyword.toLowerCase();
@@ -54,7 +55,7 @@ const PostFilterBar = ({
       );
     }
 
-    console.log("filtered 뭐지", filtered);
+    console.log("filtered: ", filtered);
 
     onFilteredDataChange(filtered);
   };
@@ -69,7 +70,6 @@ const PostFilterBar = ({
     setDate(newDate);
 
     if (newDate?.start && newDate?.end) {
-      // timezone 보정을 위해 시간을 설정
       const startDate = new Date(newDate.start);
       startDate.setHours(9, 0, 0, 0);
       const endDate = new Date(newDate.end);

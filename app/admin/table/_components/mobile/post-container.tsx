@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { PostsRequestParams } from "@/api/dto/post";
+import { Post, PostsRequestParams } from "@/api/dto/post";
 import MobileListItem from "./post-item";
 import { usePost } from "@/hooks/post/use-post";
 import FloatingAddButton from "./post-add-button";
@@ -16,20 +16,25 @@ const MobilePostContainer = () => {
     limit: 10,
     sortOrder: "DESC",
   });
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
 
   // 게시물 목록 조회
   const {
     posts: allPosts = [],
-    // totalCount,
     isLoading,
     error,
   } = usePost(params);
 
-  // 전체 페이지 수 계산
-  const totalPages = Math.ceil((allPosts?.length || 0) / params.limit);
+  // allPosts가 변경될 때마다 filteredPosts 초기화
+  useEffect(() => {
+    setFilteredPosts(allPosts);
+  }, [allPosts]);
 
-  // 현재 페이지의 게시물
-  const currentPagePosts = allPosts?.slice(
+  // 전체 페이지 수 계산 (필터링된 데이터 기준)
+  const totalPages = Math.ceil((filteredPosts?.length || 0) / params.limit);
+
+  // 현재 페이지의 게시물 (필터링된 데이터에서 계산)
+  const currentPagePosts = filteredPosts?.slice(
     (params.page - 1) * params.limit,
     params.page * params.limit,
   );
@@ -55,9 +60,9 @@ const MobilePostContainer = () => {
   };
 
   // 필터링 결과 처리
-  const handleFilteredDataChange = () => {
-    // 필터링된 결과로 API 호출하도록 params 업데이트
-    setParams((prev) => ({ ...prev, page: 1 }));
+  const handleFilteredDataChange = (filtered: Post[]) => {
+    setFilteredPosts(filtered);
+    setParams(prev => ({ ...prev, page: 1 })); // 필터링 시 첫 페이지로 이동
   };
 
   // 개별 선택/해제 핸들러
@@ -81,7 +86,7 @@ const MobilePostContainer = () => {
     <div className="md:hidden flex flex-col gap-[16px] bg-white">
       {/* 필터 바 */}
       <PostFilterBar
-        totalCount={allPosts.length}
+        totalCount={filteredPosts.length}
         posts={allPosts}
         onFilteredDataChange={handleFilteredDataChange}
         onFilterChange={handleFilterChange}
