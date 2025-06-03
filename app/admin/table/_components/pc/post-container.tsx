@@ -15,17 +15,23 @@ const PostContainer = () => {
     limit: 10,
     sortOrder: "DESC",
   });
+
+  // 게시물 목록 조회
   const { posts, totalCount, isLoading, error } = usePosts(params);
+  
+  // 전체 페이지 수 계산
+  const totalPages = Math.ceil(totalCount / params.limit);
 
-  if (isLoading) return <div>로딩중...</div>;
-  if (error) return <div>에러</div>;
-
+  // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
     setParams((prev) => ({
       ...prev,
       page: typeof page === 'function' ? page(prev.page) : page,
     }));
   };
+
+  if (isLoading) return <div>로딩중...</div>;
+  if (error) return <div>에러</div>;
 
   return (
     <div className="hidden md:flex flex-col gap-10 max-w-[1194px] mx-auto p-10">
@@ -37,7 +43,6 @@ const PostContainer = () => {
         {/* 툴바 */}
         <PostTableToolbar totalCount={totalCount} />
 
-        {/* 테이블 */}  
         <div className="flex flex-col gap-[40px]">
           {/* 테이블 */}
           <PostTable
@@ -50,7 +55,7 @@ const PostContainer = () => {
           {/* 페이지네이션 */}
           <Pagination
             currentPage={params.page}
-            totalPages={totalCount}
+            totalPages={totalPages}
             onPageChange={handlePageChange}
           />
         </div>
