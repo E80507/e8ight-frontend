@@ -14,6 +14,11 @@ const PostFilterBar = () => {
   const onChange = (val: string) => {
     if (!val) return; // 빈 문자열로 선택 해제되는 경우 방지
     setSelected(val);
+    
+    // 전체를 선택한 경우 필터링하지 않음
+    if (val === "전체") {
+      return;
+    }
   };
 
   // 날짜 변경 핸들러
@@ -28,7 +33,7 @@ const PostFilterBar = () => {
     <div className="border border-[#EEEFF1]">
       {/* 검색어 */}
       <div className="flex items-center bg-white">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] h-[72px] bg-[#EEEFF1] pretendard-title-s">
+        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
           상세검색
         </div>
 
@@ -39,7 +44,7 @@ const PostFilterBar = () => {
 
       {/* 생성 일자 */}
       <div className="flex items-center bg-white border-t border-b border-[#EEEFF1]">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] h-[72px] bg-[#EEEFF1] pretendard-title-s">
+        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
           생성 일자
         </div>
 
@@ -50,16 +55,16 @@ const PostFilterBar = () => {
 
       {/* 카테고리 */}
       <div className="flex items-center bg-white">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] h-[72px] bg-[#EEEFF1] pretendard-title-s">
+        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
           카테고리
         </div>
 
-        <div className="px-[16px]">
+        <div className="px-[16px] flex-1">
           <ToggleGroup
             value={selected}
             onValueChange={onChange}
             type="single"
-            className="gap-[24px]"
+            className="gap-x-[24px] flex-wrap"
           >
             {POST_CATEGORIES.map((condition) => (
               <ToggleGroupItem
@@ -67,8 +72,9 @@ const PostFilterBar = () => {
                 hasIcon
                 value={condition.value}
                 aria-label={condition.value}
+                className="w-fit justify-start"
               >
-                <p className="mt-px subtitle-m">{condition.value}</p>
+                <p className="mt-px subtitle-m whitespace-nowrap">{condition.value}</p>
               </ToggleGroupItem>
             ))}
           </ToggleGroup>

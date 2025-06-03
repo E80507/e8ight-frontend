@@ -54,10 +54,10 @@ const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
       <PopoverTrigger asChild>
         <button
           className={cn(
-            "w-[250px] rounded-sm border relative h-[30px] text-[15px] px-3 items-center justify-between text-left",
+            "w-[400px] rounded-sm border relative h-[48px] text-[15px] px-3 items-center justify-between text-left",
           )}
         >
-          <span className="flex gap-3 subtitle-3">
+          <span className="flex gap-3 pretendar-body-2">
             <input
               type="text"
               readOnly
