@@ -78,7 +78,7 @@ const GlobalNavBar = () => {
     <>
       {/* 홈페이지 데스크톱 GNB */}
       <header
-        className={`relative z-[100] hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${
+        className={`z-100 relative hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${
           isContactPage
             ? "bg-[#FBFBFC]"
             : "mx-auto max-w-[1440px] bg-transparent"
