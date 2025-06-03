@@ -1,24 +1,27 @@
 import Loading from "@/components/shared/loading/loading";
-import GlobalNavBar from "@/components/shared/layout/global-nav-bar";
+import AdminNavBar from "@/components/shared/layout/admin-nav-bar";
 // import { Toaster } from "@/components/ui/toaster";
-import GlobalFooter from "@/components/shared/layout/global-footer";
+import AdminAuthGate from "./_components/admin-auth-gate";
 
 interface GlobalNavBarLayoutProps {
   children: React.ReactNode;
 }
 
-const GlobalNavBarLayout = ({ children }: GlobalNavBarLayoutProps) => {
+const AdminLayout = ({ children }: GlobalNavBarLayoutProps) => {
   return (
     <>
       <Loading>
         <div className="w-screen overflow-x-hidden">
-          <GlobalNavBar />
-          <div className="relative">{children}</div>
-          <GlobalFooter />
+          <AdminAuthGate>
+            <AdminNavBar />
+            <div className="relative min-h-screen bg-background-alternative">
+              {children}
+            </div>
+          </AdminAuthGate>
         </div>
       </Loading>
       {/* <Toaster /> */}
     </>
   );
 };
-export default GlobalNavBarLayout;
+export default AdminLayout;

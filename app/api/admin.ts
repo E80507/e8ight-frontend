@@ -1,4 +1,5 @@
-import { AdminRes, AdminCategory } from "./dto/admin";
+import { AdminRes, AdminCategory, PostReq } from "./dto/admin";
+import { apiFetch } from "@/util/fetch";
 
 const mockTechBlogList: AdminRes[] = [
   {
@@ -47,4 +48,18 @@ export const getTechBlogList = async (): Promise<AdminRes[]> => {
     throw new Error("테크 블로그 목록 조회에 실패했습니다.");
   }
   */
+};
+
+// 포스트 게시
+export const postTechBlog = async (data: PostReq) => {
+  try {
+    const res = await apiFetch(`/posts`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    return res;
+  } catch (err) {
+    console.error(err);
+    throw new Error("포스트 게시에 실패했습니다.");
+  }
 };

@@ -1,15 +1,18 @@
 "use client";
 
-import DailyControllerAndFilterBoxContainer from "@/app/admin/table/_components/daily-controller-and-filter-box-container";
-import Loading from "@/components/shared/loading/loading";
+import PostContainer from "./table/_components/pc/post-container";
+import MobilePostContainer from "./table/_components/mobile/post-container";
 
 const AdminPage = () => {
   return (
-    <div className="flex flex-col gap-10 p-10 max-w-[1200px] mx-auto">
-      <Loading>
-        <DailyControllerAndFilterBoxContainer />
-      </Loading>
-    </div>
+    <>
+      {/* pc 화면 */}
+      <PostContainer />
+
+      {/* 모바일 화면  */}
+      <MobilePostContainer />
+    </>
   );
 };
+
 export default AdminPage;
