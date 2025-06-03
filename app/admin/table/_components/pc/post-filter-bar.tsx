@@ -5,10 +5,6 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { POST_CATEGORIES } from "@/constants/admin";
 
 const PostFilterBar = () => {
-  const [date, setDate] = useState<searchDate>({
-    start: undefined,
-    end: undefined,
-  });
   const [selected, setSelected] = useState(POST_CATEGORIES[0]?.value);
 
   const onChange = (val: string) => {
@@ -20,6 +16,11 @@ const PostFilterBar = () => {
       return;
     }
   };
+
+  const [date, setDate] = useState<searchDate>({
+    start: undefined,
+    end: undefined,
+  });
 
   // 날짜 변경 핸들러
   const handleDateChange = (newDate: searchDate) => {
@@ -68,13 +69,13 @@ const PostFilterBar = () => {
           >
             {POST_CATEGORIES.map((condition) => (
               <ToggleGroupItem
-                key={condition.value}
+                key={condition.label}
                 hasIcon
                 value={condition.value}
-                aria-label={condition.value}
+                aria-label={condition.label}
                 className="w-fit justify-start"
               >
-                <p className="mt-px subtitle-m whitespace-nowrap">{condition.value}</p>
+                <p className="mt-px subtitle-m whitespace-nowrap">{condition.label}</p>
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
