@@ -64,7 +64,7 @@ const OneButtonModal = ({
           })}
         >
           {isOriginal ? (
-            <Button size={"lg"} onClick={onClickConfirm} className="w-full">
+            <Button onClick={onClickConfirm} className="w-full h-[48px]">
               {buttonText}
             </Button>
           ) : (
