@@ -10,7 +10,7 @@ const PostFilterBar = () => {
   const onChange = (val: string) => {
     if (!val) return; // 빈 문자열로 선택 해제되는 경우 방지
     setSelected(val);
-    
+
     // 전체를 선택한 경우 필터링하지 않음
     if (val === "전체") {
       return;
@@ -69,13 +69,15 @@ const PostFilterBar = () => {
           >
             {POST_CATEGORIES.map((condition) => (
               <ToggleGroupItem
-                key={condition.label}
+                key={condition.text}
                 hasIcon
                 value={condition.value}
-                aria-label={condition.label}
+                aria-label={condition.text}
                 className="w-fit justify-start"
               >
-                <p className="mt-px subtitle-m whitespace-nowrap">{condition.label}</p>
+                <p className="mt-px subtitle-m whitespace-nowrap">
+                  {condition.text}
+                </p>
               </ToggleGroupItem>
             ))}
           </ToggleGroup>

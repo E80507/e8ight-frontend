@@ -8,7 +8,11 @@ interface PostTableToolbarProps {
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const PostTableToolbar = ({ posts, selectedIds, setSelectedIds }: PostTableToolbarProps) => {
+const PostTableToolbar = ({
+  posts,
+  selectedIds,
+  setSelectedIds,
+}: PostTableToolbarProps) => {
   // 전체 선택 여부 확인
   const isAllSelected =
     posts.length > 0 && posts.every((post) => selectedIds.includes(post.id));
@@ -51,7 +55,7 @@ const PostTableToolbar = ({ posts, selectedIds, setSelectedIds }: PostTableToolb
         선택 삭제
       </button>
     </div>
-  )   
+  );
 };
 
 export default PostTableToolbar;

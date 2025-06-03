@@ -3,23 +3,23 @@ import { PostCategory } from "@/api/dto/post";
 
 export const POST_CATEGORIES = [
   {
-    label: "전체",
+    text: "전체",
     value: "",
   },
   {
-    label: "Tech Library",
+    text: "Tech Library",
     value: "LIBRARY" as PostCategory,
   },
   {
-    label: "Tech Insight",
+    text: "Tech Insight",
     value: "INSIGHT" as PostCategory,
   },
   {
-    label: "DX Simulation",
+    text: "DX Simulation",
     value: "DX" as PostCategory,
   },
   {
-    label: "Downloads",
+    text: "Downloads",
     value: "DOWNLOADS" as PostCategory,
   },
 ];

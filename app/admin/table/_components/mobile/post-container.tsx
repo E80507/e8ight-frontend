@@ -28,13 +28,13 @@ const MobilePostContainer = () => {
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
     setParams((prev) => ({
       ...prev,
-      page: typeof page === 'function' ? page(prev.page) : page,
+      page: typeof page === "function" ? page(prev.page) : page,
     }));
   };
 
   // 필터 변경 핸들러
   const handleFilterChange = (filterParams: Partial<PostsRequestParams>) => {
-    setParams(prev => ({
+    setParams((prev) => ({
       ...prev,
       ...filterParams,
       page: 1, // 필터 변경 시 첫 페이지로 이동
@@ -70,7 +70,11 @@ const MobilePostContainer = () => {
       />
 
       {/* 선택 영역 */}
-      <PostTableToolbar posts={posts} selectedIds={selectedIds} setSelectedIds={setSelectedIds} />
+      <PostTableToolbar
+        posts={posts}
+        selectedIds={selectedIds}
+        setSelectedIds={setSelectedIds}
+      />
 
       <div>
         {/* 게시물 리스트 */}
