@@ -30,6 +30,7 @@ const PostFilterBar = ({
     end: undefined,
   });
   const [category, setCategory] = useState<string>("전체");
+  const [isOpen, setIsOpen] = useState(false);
 
   // 날짜 변경 핸들러
   const handleDateChange = (newDate: searchDate) => {
@@ -50,13 +51,6 @@ const PostFilterBar = ({
       const startDateStr = startDate.toISOString().split("T")[0];
       const endDateStr = endDate.toISOString().split("T")[0];
 
-      console.log("Date Debug Mobile:", {
-        originalStart: startDate,
-        originalEnd: endDate,
-        formattedStart: startDateStr,
-        formattedEnd: endDateStr,
-      });
-
       filterParams.startDate = startDateStr;
       filterParams.endDate = endDateStr;
     }
@@ -73,6 +67,9 @@ const PostFilterBar = ({
 
     // API 필터 적용
     onFilterChange(filterParams);
+    
+    // Sheet 닫기
+    setIsOpen(false);
   };
 
   return (
@@ -80,8 +77,7 @@ const PostFilterBar = ({
       <div className="flex items-center justify-between">
         <p className="pretendard-subtitle-m">총 {totalCount}건</p>
 
-        {/* 필터 시트 */}
-        <Sheet>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <button type="button" className="hover:opacity-80">
               <ListFilter />
