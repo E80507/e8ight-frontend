@@ -43,7 +43,12 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
         />
       </div>
 
-      <Button variant={"outline"} size={"lg"} className="max-w-[84px]" onClick={handleReset}>
+      <Button
+        variant={"outline"}
+        size={"lg"}
+        className="max-w-[84px]"
+        onClick={handleReset}
+      >
         초기화
       </Button>
     </div>
