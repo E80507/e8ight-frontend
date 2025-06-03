@@ -22,19 +22,19 @@ import { Post } from "@/api/dto/post";
 import Check from "@/components/shared/check";
 import formattedDate from "@/util/date";
 
-interface AdminTableProps {
+interface PostTableProps {
   data: Post[];
   totalCount: number;
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export function AdminTable({
+export function PostTable({
   data,
   totalCount,
   selectedIds,
   setSelectedIds,
-}: AdminTableProps) {
+}: PostTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -149,7 +149,7 @@ export function AdminTable({
   });
 
   return (
-    <Table>
+    <Table className="bg-white">
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
