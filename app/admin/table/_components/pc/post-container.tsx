@@ -3,7 +3,7 @@
 import { usePost } from "@/hooks/post/use-post";
 import { PostTable } from "./post-table";
 import { useState, Dispatch, SetStateAction } from "react";
-import { Post, PostCategory, PostsRequestParams } from "@/api/dto/post";
+import { PostCategory, PostsRequestParams } from "@/api/dto/post";
 import PostTableToolbar from "./post-table-toolbar";
 import PostFilterBar from "./post-filter-bar";
 import Pagination from "@/app/_components/pagination";
@@ -18,11 +18,7 @@ const PostContainer = () => {
   });
 
   // 게시물 목록 조회
-  const {
-    posts: allPosts = [],
-    isLoading,
-    error,
-  } = usePost(params);
+  const { posts: allPosts = [], isLoading, error } = usePost(params);
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
@@ -38,9 +34,9 @@ const PostContainer = () => {
     if (filterParams.startDate && filterParams.endDate) {
       const startDate = new Date(filterParams.startDate);
       const endDate = new Date(filterParams.endDate);
-      
+
       // 현재 데이터에서 해당 날짜 범위에 데이터가 있는지 확인
-      const hasDataInRange = allPosts.some(post => {
+      const hasDataInRange = allPosts.some((post) => {
         const postDate = new Date(post.createdAt);
         return postDate >= startDate && postDate <= endDate;
       });
@@ -61,7 +57,7 @@ const PostContainer = () => {
   // 카테고리 변경 핸들러
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
-    
+
     if (category === "all") {
       handleFilterChange({ category: undefined });
     } else {
@@ -90,7 +86,10 @@ const PostContainer = () => {
         <div className="flex flex-col gap-[40px]">
           {/* 테이블 */}
           <PostTable
-            data={allPosts.slice((params.page - 1) * params.limit, params.page * params.limit)}
+            data={allPosts.slice(
+              (params.page - 1) * params.limit,
+              params.page * params.limit,
+            )}
             selectedIds={selectedIds}
             setSelectedIds={setSelectedIds}
             totalCount={allPosts.length}

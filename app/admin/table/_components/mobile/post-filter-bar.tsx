@@ -20,11 +20,7 @@ interface PostFilterBarProps {
   onFilterChange: (params: Partial<PostsRequestParams>) => void;
 }
 
-const PostFilterBar = ({
-  totalCount,
-  posts,
-  onFilterChange,
-}: PostFilterBarProps) => {
+const PostFilterBar = ({ totalCount, onFilterChange }: PostFilterBarProps) => {
   const [date, setDate] = useState<searchDate>({
     start: undefined,
     end: undefined,
@@ -67,7 +63,7 @@ const PostFilterBar = ({
 
     // API 필터 적용
     onFilterChange(filterParams);
-    
+
     // Sheet 닫기
     setIsOpen(false);
   };

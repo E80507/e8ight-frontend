@@ -46,14 +46,14 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
     if (from && to) {
       setDate({
         start: from,
-        end: to
+        end: to,
       });
       setIsOpen(false);
     } else if (from) {
       // 시작일만 선택된 경우 팝오버 유지
       setDate({
         start: from,
-        end: undefined
+        end: undefined,
       });
     }
   };
