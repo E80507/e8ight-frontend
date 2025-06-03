@@ -49,7 +49,30 @@ export const useDashboardPosts = () => {
         page: currentPage,
         limit: itemsPerPage,
       });
-      // setPosts(res.posts);
+      setPosts(
+        res.posts.map(
+          (post): Post => ({
+            id: post.id,
+            title: post.title,
+            content: post.content,
+            thumbnail: post.thumbnail,
+            category: post.category,
+            author: post.author ?? "",
+            mainImage: post.mainImage,
+            tags: post.tags,
+            keywords: post.keywords,
+            linkUrl: post.linkUrl,
+            fileUrls:
+              "fileUrls" in post && Array.isArray(post.fileUrls)
+                ? post.fileUrls
+                : [],
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
+            deletedAt: post.deletedAt || "",
+          }),
+        ),
+      );
+
       setTotalPages(res.totalPages);
     };
     fetchInitialPosts();
@@ -60,7 +83,30 @@ export const useDashboardPosts = () => {
       query: value,
       // searchFields: ["TITLE"], 실제 api에선 필요
     });
-    // setPosts(res.posts);
+    setPosts(
+      res.posts.map(
+        (post): Post => ({
+          id: post.id,
+          title: post.title,
+          content: post.content,
+          thumbnail: post.thumbnail,
+          category: post.category,
+          author: post.author ?? "",
+          mainImage: post.mainImage,
+          tags: post.tags,
+          keywords: post.keywords,
+          linkUrl: post.linkUrl,
+          fileUrls:
+            "fileUrls" in post && Array.isArray(post.fileUrls)
+              ? post.fileUrls
+              : [],
+          createdAt: post.createdAt,
+          updatedAt: post.updatedAt,
+          deletedAt: post.deletedAt || "",
+        }),
+      ),
+    );
+
     setCurrentPage(1);
     setTotalPages(res.totalPages);
     setKeyword(value);
