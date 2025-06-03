@@ -43,17 +43,21 @@ const MobilePostContainer = () => {
 
   // 필터 변경 핸들러
   const handleFilterChange = (filterParams: Partial<PostsRequestParams>) => {
-    setParams((prev) => ({
-      ...prev,
-      ...filterParams,
-      page: 1, // 필터 변경 시 첫 페이지로 이동
-    }));
+    setParams(prev => {
+      const newParams = { ...prev, ...filterParams, page: 1 };
+      // 필터가 제거된 경우 해당 필드 삭제
+      if (!filterParams.category) delete newParams.category;
+      if (!filterParams.startDate) delete newParams.startDate;
+      if (!filterParams.endDate) delete newParams.endDate;
+      return newParams;
+    });
   };
 
   // 필터링 결과 처리
   const handleFilteredDataChange = (newFilteredPosts: typeof allPosts) => {
     setFilteredPosts(newFilteredPosts);
-    setParams(prev => ({ ...prev, page: 1 })); // 필터링 시 첫 페이지로 이동
+    // 페이지를 1로 리셋
+    setParams(prev => ({ ...prev, page: 1 }));
   };
 
   // 개별 선택/해제 핸들러
@@ -72,7 +76,10 @@ const MobilePostContainer = () => {
 
   // API로부터 새 데이터를 받으면 필터링된 데이터도 업데이트
   useEffect(() => {
-    setFilteredPosts(allPosts);
+    if (allPosts) {
+      // 검색어 필터링이 적용되지 않은 경우에만 전체 데이터로 업데이트
+      setFilteredPosts(prev => prev.length === 0 ? allPosts : prev);
+    }
   }, [allPosts]);
 
   if (isLoading) return <div>로딩중...</div>;

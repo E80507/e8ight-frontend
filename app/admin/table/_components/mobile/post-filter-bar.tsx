@@ -39,7 +39,7 @@ const PostFilterBar = ({
     setDate(newDate);
   };
 
-  // 프론트엔드 필터링 로직
+  // 필터링 로직
   const filterPosts = (keyword: string, selectedCategory: string) => {
     let filtered = [...posts];
 
@@ -67,11 +67,24 @@ const PostFilterBar = ({
     const filterParams: Partial<PostsRequestParams> = {};
 
     // 날짜 필터
-    if (date?.start) {
-      filterParams.startDate = date.start.toISOString();
-    }
-    if (date?.end) {
-      filterParams.endDate = date.end.toISOString();
+    if (date?.start && date?.end) {
+      const startDate = new Date(date.start);
+      startDate.setHours(9, 0, 0, 0);
+      const endDate = new Date(date.end);
+      endDate.setHours(9, 0, 0, 0);
+
+      const startDateStr = startDate.toISOString().split('T')[0];
+      const endDateStr = endDate.toISOString().split('T')[0];
+
+      console.log('Date Debug Mobile:', {
+        originalStart: startDate,
+        originalEnd: endDate,
+        formattedStart: startDateStr,
+        formattedEnd: endDateStr
+      });
+
+      filterParams.startDate = startDateStr;
+      filterParams.endDate = endDateStr;
     }
 
     // 카테고리 필터
@@ -84,7 +97,13 @@ const PostFilterBar = ({
       filterParams.category = undefined;
     }
 
+    // API 필터 적용
     onFilterChange(filterParams);
+    
+    // 검색어 기반 프론트엔드 필터링
+    if (searchTerm) {
+      filterPosts(searchTerm, category);
+    }
   };
 
   return (
@@ -115,6 +134,7 @@ const PostFilterBar = ({
                   <label className="pretendard-body-3 text-[#5E616E]">
                     생성 일자
                   </label>
+                  
                   <CalendarDouble
                     date={date}
                     setDate={handleDateChange}
