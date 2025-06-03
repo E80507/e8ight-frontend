@@ -36,9 +36,9 @@ const ShortRow = ({
         {buttonText === "배송 취소" && (
           <Button
             type="button"
-            variant="outline-black"
+            variant="outline"
             size="sm"
-            className="ml-2 rounded px-2 py-1"
+            className="ml-2 rounded px-2 py-1 border-black"
             onClick={onClick}
           >
             배송 취소
