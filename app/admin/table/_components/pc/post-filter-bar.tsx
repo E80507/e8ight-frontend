@@ -67,7 +67,7 @@ const PostFilterBar = ({
   return (
     <div className="flex flex-col border border-[#EEEFF1]">
       {/* 검색어 */}
-      <div className="flex h-[72px]">
+      <div className="flex h-[72px] bg-white">
         <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           상세검색
         </div>
@@ -77,7 +77,7 @@ const PostFilterBar = ({
       </div>
 
       {/* 생성 일자 */}
-      <div className="flex h-[72px] border-t border-b border-[#EEEFF1]">
+      <div className="flex h-[72px] border-t border-b border-[#EEEFF1] bg-white">
         <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           생성 일자
         </div>
@@ -87,7 +87,7 @@ const PostFilterBar = ({
       </div>
 
       {/* 카테고리 */}
-      <div className="flex h-[72px]">
+      <div className="flex h-[72px] bg-white">
         <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           카테고리
         </div>
