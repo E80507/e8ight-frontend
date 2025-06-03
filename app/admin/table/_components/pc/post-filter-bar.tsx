@@ -1,72 +1,30 @@
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import SearchBar from "./post-search-bar";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { POST_CATEGORIES } from "@/constants/admin";
 import { Post, PostCategory, PostsRequestParams } from "@/api/dto/post";
+import Radio from "@/components/radio";
 
 interface PostFilterBarProps {
   posts: Post[];
-  onFilteredDataChange: (filteredPosts: Post[]) => void;
+  currentCategory: string;
+  onCategoryChange: (category: string) => void;
   onFilterChange: (params: Partial<PostsRequestParams>) => void;
 }
 
 const PostFilterBar = ({
   posts,
-  onFilteredDataChange,
+  currentCategory,
+  onCategoryChange,
   onFilterChange,
 }: PostFilterBarProps) => {
-  const [selected, setSelected] = useState(POST_CATEGORIES[0].value);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // 검색어 변경 핸들러
-  const handleSearch = (keyword: string) => {
-    setSearchTerm(keyword);
-    filterPosts(keyword);
-  };
-
-  // 카테고리 변경 핸들러
-  const onChangeCategory = (category: string) => {
-    if (!category) return;
-    setSelected(category);
-    filterPosts(searchTerm);
-
-    // API 필터링을 위한 카테고리 값 전달
-    if (category === POST_CATEGORIES[0].value) {
-      // 전체 카테고리인 경우
-      onFilterChange({ category: undefined });
-    } else {
-      onFilterChange({ category: category as PostCategory });
-    }
-  };
-
-  // 필터링 로직
-  const filterPosts = (keyword: string) => {
-    let filtered = [...posts];
-
-    console.log("posts 키워드", keyword);
-    // 검색어 필터링
-    if (keyword) {
-      const searchLower = keyword.toLowerCase();
-      filtered = filtered.filter(
-        (post) =>
-          post.title?.toLowerCase().includes(searchLower) ||
-          post.author?.toLowerCase().includes(searchLower),
-      );
-    }
-
-    console.log("filtered: ", filtered);
-
-    onFilteredDataChange(filtered);
-  };
-
   const [date, setDate] = useState<searchDate>({
     start: undefined,
     end: undefined,
   });
 
   // 날짜 변경 핸들러
-  const handleDateChange = (newDate: searchDate) => {
+  const handleDateChange = useCallback((newDate: searchDate) => {
     setDate(newDate);
 
     if (newDate?.start && newDate?.end) {
@@ -90,7 +48,7 @@ const PostFilterBar = ({
         endDate: endDateStr,
       });
     }
-  };
+  }, [onFilterChange]);
 
   return (
     <div className="border border-[#EEEFF1]">
@@ -101,7 +59,7 @@ const PostFilterBar = ({
         </div>
 
         <div className="px-[16px]">
-          <SearchBar placeholder="제목, 저자" setKeyword={handleSearch} />
+          <SearchBar placeholder="제목, 저자" setKeyword={() => {}} />
         </div>
       </div>
 
@@ -123,26 +81,20 @@ const PostFilterBar = ({
         </div>
 
         <div className="px-[16px] flex-1">
-          <ToggleGroup
-            value={selected}
-            onValueChange={onChangeCategory}
-            type="single"
-            className="gap-x-[24px] flex-wrap"
-          >
+          <div className="flex flex-wrap gap-x-6">
             {POST_CATEGORIES.map((condition) => (
-              <ToggleGroupItem
+              <button
                 key={condition.value}
-                hasIcon
-                value={condition.value}
-                aria-label={condition.text}
-                className="w-fit justify-start"
+                onClick={() => onCategoryChange(condition.value)}
+                className="flex items-center gap-3 py-2 hover:bg-gray-50 transition-colors"
               >
-                <p className="mt-px subtitle-m whitespace-nowrap">
+                <Radio isChecked={currentCategory === condition.value} />
+                <span className="mt-px subtitle-m whitespace-nowrap">
                   {condition.text}
-                </p>
-              </ToggleGroupItem>
+                </span>
+              </button>
             ))}
-          </ToggleGroup>
+          </div>
         </div>
       </div>
     </div>

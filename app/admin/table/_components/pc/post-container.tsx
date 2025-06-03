@@ -2,20 +2,20 @@
 
 import { usePost } from "@/hooks/post/use-post";
 import { PostTable } from "./post-table";
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { Post, PostsRequestParams } from "@/api/dto/post";
+import { useState, Dispatch, SetStateAction } from "react";
+import { Post, PostCategory, PostsRequestParams } from "@/api/dto/post";
 import PostTableToolbar from "./post-table-toolbar";
 import PostFilterBar from "./post-filter-bar";
 import Pagination from "@/app/_components/pagination";
 
 const PostContainer = () => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [currentCategory, setCurrentCategory] = useState<string>("all");
   const [params, setParams] = useState<PostsRequestParams>({
     page: 1,
     limit: 10,
     sortOrder: "DESC",
   });
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
 
   // 게시물 목록 조회
   const {
@@ -23,20 +23,6 @@ const PostContainer = () => {
     isLoading,
     error,
   } = usePost(params);
-
-  // allPosts가 변경될 때마다 filteredPosts 초기화
-  useEffect(() => {
-    setFilteredPosts(allPosts);
-  }, [allPosts]);
-
-  // 전체 페이지 수 계산 (필터링된 데이터 기준)
-  const totalPages = Math.ceil((filteredPosts?.length || 0) / params.limit);
-
-  // 현재 페이지의 게시물 (필터링된 데이터에서 계산)
-  const currentPagePosts = filteredPosts?.slice(
-    (params.page - 1) * params.limit,
-    params.page * params.limit,
-  );
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
@@ -55,10 +41,15 @@ const PostContainer = () => {
     }));
   };
 
-  // 필터링 결과 처리
-  const handleFilteredDataChange = (filtered: Post[]) => {
-    setFilteredPosts(filtered);
-    setParams(prev => ({ ...prev, page: 1 })); // 필터링 시 첫 페이지로 이동
+  // 카테고리 변경 핸들러
+  const handleCategoryChange = (category: string) => {
+    setCurrentCategory(category);
+    
+    if (category === "all") {
+      handleFilterChange({ category: undefined });
+    } else {
+      handleFilterChange({ category: category as PostCategory });
+    }
   };
 
   if (isLoading) return <div>로딩중...</div>;
@@ -69,28 +60,29 @@ const PostContainer = () => {
       {/* 필터 */}
       <PostFilterBar
         posts={allPosts}
-        onFilteredDataChange={handleFilteredDataChange}
+        currentCategory={currentCategory}
+        onCategoryChange={handleCategoryChange}
         onFilterChange={handleFilterChange}
       />
 
       {/* 테이블 */}
       <div className="flex flex-col gap-[16px]">
         {/* 툴바 */}
-        <PostTableToolbar totalCount={filteredPosts.length} />
+        <PostTableToolbar totalCount={allPosts.length} />
 
         <div className="flex flex-col gap-[40px]">
           {/* 테이블 */}
           <PostTable
-            data={currentPagePosts}
+            data={allPosts.slice((params.page - 1) * params.limit, params.page * params.limit)}
             selectedIds={selectedIds}
             setSelectedIds={setSelectedIds}
-            totalCount={filteredPosts.length}
+            totalCount={allPosts.length}
           />
 
           {/* 페이지네이션 */}
           <Pagination
             currentPage={params.page}
-            totalPages={totalPages}
+            totalPages={Math.ceil(allPosts.length / params.limit)}
             onPageChange={handlePageChange}
           />
         </div>

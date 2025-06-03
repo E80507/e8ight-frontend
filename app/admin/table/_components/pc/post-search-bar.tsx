@@ -40,6 +40,7 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
           value={inputValue}
           onChange={onChangeValue} // 입력값 업데이트
           onKeyDown={handleKeyDown} // Enter 키 감지
+          disabled={true}
         />
       </div>
 

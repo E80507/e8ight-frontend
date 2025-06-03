@@ -65,8 +65,6 @@ const GlobalNavBar = () => {
       clickTimer.current = setTimeout(() => {
         setClickCount(0);
       }, 2000);
-
-      console.log(clickCount);
     },
     [clickCount],
   );
