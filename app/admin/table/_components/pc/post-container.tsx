@@ -18,7 +18,7 @@ const PostContainer = () => {
 
   // 게시물 목록 조회
   const { posts, totalCount, isLoading, error } = usePosts(params);
-  
+
   // 전체 페이지 수 계산
   const totalPages = Math.ceil(totalCount / params.limit);
 
@@ -26,7 +26,7 @@ const PostContainer = () => {
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
     setParams((prev) => ({
       ...prev,
-      page: typeof page === 'function' ? page(prev.page) : page,
+      page: typeof page === "function" ? page(prev.page) : page,
     }));
   };
 
