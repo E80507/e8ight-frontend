@@ -1,47 +1,25 @@
 import { AdminCategory } from "@/app/api/dto/admin";
-
-export const ADMIN_CATEGORY_ARRAY = [
-  {
-    label: "전체",
-    value: "all",
-  },
-  {
-    label: "Tech Library",
-    value: AdminCategory.LIBRARY,
-  },
-  {
-    label: "Tech Insight",
-    value: AdminCategory.INSIGHT,
-  },
-  {
-    label: "DX Simulation",
-    value: AdminCategory.DX,
-  },
-  {
-    label: "Downloads",
-    value: AdminCategory.DOWNLOADS,
-  },
-];
+import { PostCategory } from "@/api/dto/post";
 
 export const POST_CATEGORIES = [
   {
-    value: "전체",
-    text: "",
+    label: "전체",
+    value: "",
   },
   {
-    value: "Tech Library",
-    text: AdminCategory.LIBRARY,
+    label: "Tech Library",
+    value: "LIBRARY" as PostCategory,
   },
   {
-    value: "Tech Insight",
-    text: AdminCategory.INSIGHT,
+    label: "Tech Insight",
+    value: "INSIGHT" as PostCategory,
   },
   {
-    value: "DX Simulation",
-    text: AdminCategory.DX,
+    label: "DX Simulation",
+    value: "DX" as PostCategory,
   },
   {
-    value: "Downloads",
-    text: AdminCategory.DOWNLOADS,
+    label: "Downloads",
+    value: "DOWNLOADS" as PostCategory,
   },
 ];

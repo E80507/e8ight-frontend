@@ -22,9 +22,10 @@ export type searchDate =
 type CalendarDoubleProps = {
   date: searchDate;
   setDate: (data: searchDate) => void;
+  className?: string;
 };
 
-const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
+const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
   const [range, setRange] = useState<
     | {
         from: Date | undefined;
@@ -55,6 +56,7 @@ const CalendarDouble = ({ date, setDate }: CalendarDoubleProps) => {
         <button
           className={cn(
             "w-[400px] rounded-sm border relative h-[48px] text-[15px] px-3 items-center justify-between text-left",
+            className
           )}
         >
           <span className="flex gap-3 pretendar-body-2">
