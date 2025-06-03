@@ -1,5 +1,7 @@
 import Image from "next/image";
 import formattedDate from "@/util/date";
+import Link from "next/link";
+import { DETAIL_POST_PAGE } from "@/constants/path";
 
 interface Post {
   id: string;
@@ -30,7 +32,7 @@ const PostList = ({ posts }: PostListProps) => {
         {posts.map((post) => {
           const { id, thumbnail, title, createdAt } = post;
           return (
-            <div key={id} className="w-full">
+            <Link key={id} href={`${DETAIL_POST_PAGE}/${id}`}>
               <div className="relative mb-4 aspect-[3/2] w-full">
                 <Image
                   src={thumbnail}
@@ -46,7 +48,7 @@ const PostList = ({ posts }: PostListProps) => {
                 </p>
                 <p className="font-pretendard h2-m tablet:h2-l">{title}</p>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
