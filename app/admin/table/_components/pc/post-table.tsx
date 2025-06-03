@@ -24,14 +24,14 @@ import formattedDate from "@/util/date";
 
 interface PostTableProps {
   data: Post[];
-  totalCount: number;
+  // totalCount: number;
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export function PostTable({
   data,
-  totalCount,
+  // totalCount,
   selectedIds,
   setSelectedIds,
 }: PostTableProps) {
@@ -54,7 +54,6 @@ export function PostTable({
   const areAllPageItemsSelected = () => {
     if (data.length === 0) return false;
     const currentPageIds = data.map((item) => item.id);
-    console.log(totalCount);
     return currentPageIds.every((id) => selectedIds.includes(id));
   };
 

@@ -22,7 +22,7 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
   };
 
   // 카테고리 변경 핸들러
-  const onChange = (category: string) => {
+  const onChangeCategory = (category: string) => {
     if (!category) return;
     setSelected(category);
     filterPosts(searchTerm, category);
@@ -49,7 +49,7 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
       );
     }
 
-    // 카테고리 필터링은 이미 API에서 처리됨
+    console.log("filtered 뭐지", filtered);
 
     onFilteredDataChange(filtered);
   };
@@ -123,7 +123,7 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
         <div className="px-[16px] flex-1">
           <ToggleGroup
             value={selected}
-            onValueChange={onChange}
+            onValueChange={onChangeCategory}
             type="single"
             className="gap-x-[24px] flex-wrap"
           >
