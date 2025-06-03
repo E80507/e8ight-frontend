@@ -49,7 +49,7 @@ export const useDashboardPosts = () => {
         page: currentPage,
         limit: itemsPerPage,
       });
-      setPosts(res.posts);
+      // setPosts(res.posts);
       setTotalPages(res.totalPages);
     };
     fetchInitialPosts();
@@ -60,7 +60,7 @@ export const useDashboardPosts = () => {
       query: value,
       // searchFields: ["TITLE"], 실제 api에선 필요
     });
-    setPosts(res.posts);
+    // setPosts(res.posts);
     setCurrentPage(1);
     setTotalPages(res.totalPages);
     setKeyword(value);
