@@ -87,7 +87,7 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
           <CalendarIcon className="absolute inset-y-0 right-0 my-auto ml-auto mr-3 size-[19px] text-black" />
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent className="w-auto p-0 z-[999]" align="start">
         <Calendar
           formatters={{ formatCaption, formatWeekdayName }}
           mode="range"

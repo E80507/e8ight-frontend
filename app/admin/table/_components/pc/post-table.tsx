@@ -179,7 +179,7 @@ export function PostTable({
               {row.getVisibleCells().map((cell, cellIndex) => (
                 <TableCell
                   size="sm"
-                  className={`h-[45px] ${selectedIds.includes(row.original.id) ? "bg-[#FFF6F6]" : ""} border-t ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
+                  className={`h-[45px] ${selectedIds.includes(row.original.id) ? "bg-[#F7FEFD]" : ""} border-t ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
                   key={cell.id + cellIndex}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -1,10 +1,9 @@
-import { AdminCategory } from "@/app/api/dto/admin";
 import { PostCategory } from "@/api/dto/post";
 
 export const POST_CATEGORIES = [
   {
     text: "전체",
-    value: "",
+    value: "all",
   },
   {
     text: "Tech Library",

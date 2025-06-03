@@ -28,10 +28,10 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
     filterPosts(searchTerm, category);
 
     // API 필터링을 위한 카테고리 값 전달
-    if (category && category !== "") {
-      onFilterChange({ category: category as PostCategory });
-    } else {
+    if (category === POST_CATEGORIES[0].value) {  // "전체" 카테고리인 경우
       onFilterChange({ category: undefined });
+    } else {
+      onFilterChange({ category: category as PostCategory });
     }
   };
 
@@ -64,9 +64,25 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
     setDate(newDate);
 
     if (newDate?.start && newDate?.end) {
+      // timezone 보정을 위해 시간을 설정
+      const startDate = new Date(newDate.start);
+      startDate.setHours(9, 0, 0, 0);
+      const endDate = new Date(newDate.end);
+      endDate.setHours(9, 0, 0, 0);
+
+      const startDateStr = startDate.toISOString().split('T')[0];
+      const endDateStr = endDate.toISOString().split('T')[0];
+      
+      console.log('Date Debug PC:', {
+        originalStart: startDate,
+        originalEnd: endDate,
+        formattedStart: startDateStr,
+        formattedEnd: endDateStr
+      });
+
       onFilterChange({
-        startDate: newDate.start.toISOString(),
-        endDate: newDate.end.toISOString(),
+        startDate: startDateStr,
+        endDate: endDateStr
       });
     }
   };
