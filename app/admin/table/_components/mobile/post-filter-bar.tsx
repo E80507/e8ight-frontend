@@ -44,7 +44,7 @@ const PostFilterBar = ({ totalCount, onFilterChange }: PostFilterBarProps) => {
 
     // 카테고리 필터
     if (category && category !== "전체") {
-      const selectedCategory = POST_CATEGORIES.find(c => c.label === category);
+      const selectedCategory = POST_CATEGORIES.find((c) => c.text === category);
       if (selectedCategory?.value) {
         filterParams.category = selectedCategory.value as PostCategory;
       }
@@ -80,21 +80,29 @@ const PostFilterBar = ({ totalCount, onFilterChange }: PostFilterBarProps) => {
             <div className="flex flex-col gap-[24px]">
               {/* 생성 일자 필터 */}
               <div className="flex flex-col gap-[8px]">
-                <label className="pretendard-body-3 text-[#5E616E]">생성 일자</label>
-                <CalendarDouble date={date} setDate={handleDateChange} className="w-full" />
+                <label className="pretendard-body-3 text-[#5E616E]">
+                  생성 일자
+                </label>
+                <CalendarDouble
+                  date={date}
+                  setDate={handleDateChange}
+                  className="w-full"
+                />
               </div>
 
               {/* 카테고리 필터 */}
               <div className="flex flex-col gap-[8px]">
-                <label className="pretendard-body-3 text-[#5E616E]">카테고리</label>
+                <label className="pretendard-body-3 text-[#5E616E]">
+                  카테고리
+                </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   className="w-full h-[48px] px-3 border rounded-sm focus:outline-none"
                 >
                   {POST_CATEGORIES.map((option) => (
-                    <option key={option.value} value={option.label}>
-                      {option.label}
+                    <option key={option.value} value={option.text}>
+                      {option.text}
                     </option>
                   ))}
                 </select>

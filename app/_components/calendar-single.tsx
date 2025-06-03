@@ -56,7 +56,7 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
         <button
           className={cn(
             "w-[400px] rounded-sm border relative h-[48px] text-[15px] px-3 items-center justify-between text-left",
-            className
+            className,
           )}
         >
           <span className="flex gap-3 pretendar-body-2">
