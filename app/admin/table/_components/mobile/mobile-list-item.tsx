@@ -11,14 +11,19 @@ const categoryMap: Record<string, BadgeColor> = {
   DOWNLOADS: "yellow",
 };
 
-interface PostItemProps {
+interface MobileListItemProps {
   post: Post;
   isFirst?: boolean;
   isSelected?: boolean;
   onSelect?: () => void;
 }
 
-const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
+const MobileListItem = ({
+  post,
+  isFirst,
+  isSelected,
+  onSelect,
+}: MobileListItemProps) => {
   return (
     <div
       className={`flex flex-col gap-[14px] py-[24px] px-[16px] border-b border-[#EEEFF1] ${isFirst ? "border-t" : ""}`}
@@ -54,4 +59,4 @@ const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
   );
 };
 
-export default PostItem;
+export default MobileListItem;

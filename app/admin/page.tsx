@@ -1,18 +1,20 @@
 "use client";
 
-import PostContainer from "./table/_components/pc/post-container";
-import MobilePostContainer from "./table/_components/mobile/post-container";
+import { PostsContainer } from "./table/_components/posts-container";
+import MobilePostsContainer from "./table/_components/mobile/mobile-posts-container";
 
-const AdminPage = () => {
+export default function AdminPage() {
   return (
-    <>
+    <div className="flex flex-col gap-10 tablet:p-10 max-w-[1200px] mx-auto">
       {/* pc 화면 */}
-      <PostContainer />
+      <div className="hidden md:block">
+        <PostsContainer />
+      </div>
 
       {/* 모바일 화면  */}
-      <MobilePostContainer />
-    </>
+      <div className="block md:hidden">
+        <MobilePostsContainer />
+      </div>
+    </div>
   );
-};
-
-export default AdminPage;
+}

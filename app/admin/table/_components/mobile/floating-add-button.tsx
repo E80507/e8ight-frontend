@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 
-const PostAddButton = () => {
+const FloatingAddButton = () => {
   return (
     <button
       type="button"
@@ -11,4 +11,4 @@ const PostAddButton = () => {
   );
 };
 
-export default PostAddButton;
+export default FloatingAddButton;
