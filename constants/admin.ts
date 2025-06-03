@@ -25,6 +25,10 @@ export const ADMIN_CATEGORY_ARRAY = [
 
 export const POST_CATEGORIES = [
   {
+    value: "전체",
+    text: "",
+  },
+  {
     value: "Tech Library",
     text: AdminCategory.LIBRARY,
   },
