@@ -7,3 +7,7 @@ export const accountPostSchema = z.object({
   role: z.enum([AdminRole.ADMIN, AdminRole.SUPER_ADMIN]),
   name: z.string({ required_error: "이름을 입력해주세요" }).min(1),
 });
+
+export const adminAuthSchema = z.object({
+  code: z.string().min(1, "올바른 인증 코드를 입력해주세요."),
+});
