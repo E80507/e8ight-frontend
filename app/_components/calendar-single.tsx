@@ -26,34 +26,43 @@ type CalendarDoubleProps = {
 };
 
 const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
-  const [range, setRange] = useState<
-    | {
-        from: Date | undefined;
-        to: Date | undefined;
-      }
-    | undefined
-    | DateRange
-  >({
+  const [range, setRange] = useState<DateRange | undefined>({
     from: date?.start,
     to: date?.end,
   });
+  const [isOpen, setIsOpen] = useState(false);
 
   // 현재 날짜
   const currentDate = new Date();
 
   // 날짜 변경 핸들러
-  const onSelectRange = (newRange: undefined | DateRange) => {
-    if (newRange) {
-      const { from, to } = newRange;
-      setRange({ from, to });
-      setDate({ start: from, end: to });
+  const onSelectRange = (newRange: DateRange | undefined) => {
+    if (!newRange) return;
+
+    const { from, to } = newRange;
+    setRange(newRange);
+
+    // 시작일과 종료일이 모두 선택된 경우에만 상태 업데이트하고 팝오버 닫기
+    if (from && to) {
+      setDate({
+        start: from,
+        end: to
+      });
+      setIsOpen(false);
+    } else if (from) {
+      // 시작일만 선택된 경우 팝오버 유지
+      setDate({
+        start: from,
+        end: undefined
+      });
     }
   };
 
   return (
-    <Popover>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <button
+          type="button"
           className={cn(
             "w-[400px] rounded-sm border relative h-[48px] text-[15px] px-3 items-center justify-between text-left",
             className,
@@ -64,7 +73,7 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
               type="text"
               readOnly
               value={
-                range && range.from
+                range?.from
                   ? formattedDate(range.from, "INPUT_DATE")
                   : "연도. 월. 일"
               }
@@ -76,7 +85,7 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
               type="text"
               readOnly
               value={
-                range && range.to
+                range?.to
                   ? formattedDate(range.to, "INPUT_DATE")
                   : "연도. 월. 일"
               }
@@ -91,7 +100,7 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
         <Calendar
           formatters={{ formatCaption, formatWeekdayName }}
           mode="range"
-          disabled={(date) => date > currentDate} // 현재 날짜 이후는 선택 불가
+          disabled={(date) => date > currentDate}
           selected={range}
           onSelect={onSelectRange}
           initialFocus

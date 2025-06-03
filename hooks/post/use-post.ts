@@ -3,11 +3,15 @@ import { getPosts } from "@/api/posts";
 import { PostsRequestParams, PostsResponse } from "@/api/dto/post";
 
 export const usePost = (params: PostsRequestParams) => {
-  const queryKey = ["posts", params];
-
   const { data, error, isLoading, mutate } = useSWR<PostsResponse>(
-    queryKey,
+    ["posts", JSON.stringify(params)],
     () => getPosts(params),
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      shouldRetryOnError: false,
+      dedupingInterval: 2000,
+    }
   );
 
   return {
