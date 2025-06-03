@@ -16,7 +16,11 @@ const PostTableToolbar = ({ totalCount }: PostTableToolbarProps) => {
           삭제하기
         </Button>
 
-        <Button size={"lg"} className="max-w-[97px]" onClick={() => router.push(CREATE_POST_PAGE)}>
+        <Button
+          size={"lg"}
+          className="max-w-[97px]"
+          onClick={() => router.push(CREATE_POST_PAGE)}
+        >
           추가하기
         </Button>
       </div>

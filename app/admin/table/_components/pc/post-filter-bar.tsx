@@ -11,24 +11,29 @@ interface PostFilterBarProps {
   onFilterChange: (params: Partial<PostsRequestParams>) => void;
 }
 
-const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilterBarProps) => {
+const PostFilterBar = ({
+  posts,
+  onFilteredDataChange,
+  onFilterChange,
+}: PostFilterBarProps) => {
   const [selected, setSelected] = useState(POST_CATEGORIES[0].value);
   const [searchTerm, setSearchTerm] = useState("");
 
   // 검색어 변경 핸들러
   const handleSearch = (keyword: string) => {
     setSearchTerm(keyword);
-    filterPosts(keyword, selected);
+    filterPosts(keyword);
   };
 
   // 카테고리 변경 핸들러
   const onChangeCategory = (category: string) => {
     if (!category) return;
     setSelected(category);
-    filterPosts(searchTerm, category);
+    filterPosts(searchTerm);
 
     // API 필터링을 위한 카테고리 값 전달
-    if (category === POST_CATEGORIES[0].value) {  // "전체" 카테고리인 경우
+    if (category === POST_CATEGORIES[0].value) {
+      // "전체" 카테고리인 경우
       onFilterChange({ category: undefined });
     } else {
       onFilterChange({ category: category as PostCategory });
@@ -36,7 +41,7 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
   };
 
   // 필터링 로직
-  const filterPosts = (keyword: string, category: string) => {
+  const filterPosts = (keyword: string) => {
     let filtered = [...posts];
 
     // 검색어 필터링
@@ -45,7 +50,7 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
       filtered = filtered.filter(
         (post) =>
           post.title?.toLowerCase().includes(searchLower) ||
-          post.author?.toLowerCase().includes(searchLower)
+          post.author?.toLowerCase().includes(searchLower),
       );
     }
 
@@ -70,19 +75,19 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
       const endDate = new Date(newDate.end);
       endDate.setHours(9, 0, 0, 0);
 
-      const startDateStr = startDate.toISOString().split('T')[0];
-      const endDateStr = endDate.toISOString().split('T')[0];
-      
-      console.log('Date Debug PC:', {
+      const startDateStr = startDate.toISOString().split("T")[0];
+      const endDateStr = endDate.toISOString().split("T")[0];
+
+      console.log("Date Debug PC:", {
         originalStart: startDate,
         originalEnd: endDate,
         formattedStart: startDateStr,
-        formattedEnd: endDateStr
+        formattedEnd: endDateStr,
       });
 
       onFilterChange({
         startDate: startDateStr,
-        endDate: endDateStr
+        endDate: endDateStr,
       });
     }
   };
@@ -96,10 +101,7 @@ const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilt
         </div>
 
         <div className="px-[16px]">
-          <SearchBar 
-            placeholder="제목, 저자" 
-            setKeyword={handleSearch}
-          />
+          <SearchBar placeholder="제목, 저자" setKeyword={handleSearch} />
         </div>
       </div>
 
