@@ -21,7 +21,9 @@ interface PostItemProps {
 const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
   return (
     <div
-      className={`flex flex-col gap-[14px] py-[24px] px-[16px] border-b border-[#EEEFF1] ${isFirst ? "border-t" : ""}`}
+      className={`flex flex-col gap-[14px] py-[24px] px-[16px] border-b border-[#EEEFF1] ${
+        isFirst ? "border-t" : ""
+      } ${isSelected ? "bg-[#F7FEFD]" : ""}`}
     >
       {/* 카테고리 */}
       <div className="flex items-center gap-[14px]">
