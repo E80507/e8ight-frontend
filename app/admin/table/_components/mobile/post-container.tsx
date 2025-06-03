@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { PostsRequestParams } from "@/api/dto/post";
+import { Post, PostsRequestParams } from "@/api/dto/post";
 import MobileListItem from "./post-item";
-import { usePosts } from "@/hooks/posts/use-posts";
+import { usePost } from "@/hooks/post/use-post";
 import FloatingAddButton from "./post-add-button";
 import PostSearchBar from "./post-search-bar";
 import PostFilterBar from "./post-filter-bar";
@@ -19,16 +19,13 @@ const MobilePostContainer = () => {
   });
 
   // 게시물 목록 조회
-  const { posts: allPosts, totalCount, isLoading, error } = usePosts(params);
-  
-  // 필터링된 게시물 상태
-  const [filteredPosts, setFilteredPosts] = useState(allPosts);
+  const { posts: allPosts = [], totalCount, isLoading, error } = usePost(params);
 
   // 전체 페이지 수 계산 
-  const totalPages = Math.ceil((filteredPosts?.length || 0) / params.limit);
+  const totalPages = Math.ceil((allPosts?.length || 0) / params.limit);
 
   // 현재 페이지의 게시물
-  const currentPagePosts = filteredPosts?.slice(
+  const currentPagePosts = allPosts?.slice(
     (params.page - 1) * params.limit,
     params.page * params.limit
   );
@@ -54,9 +51,8 @@ const MobilePostContainer = () => {
   };
 
   // 필터링 결과 처리
-  const handleFilteredDataChange = (newFilteredPosts: typeof allPosts) => {
-    setFilteredPosts(newFilteredPosts);
-    // 페이지를 1로 리셋
+  const handleFilteredDataChange = (newFilteredPosts: Post[]) => {
+    // 필터링된 결과로 API 호출하도록 params 업데이트
     setParams(prev => ({ ...prev, page: 1 }));
   };
 
@@ -74,14 +70,6 @@ const MobilePostContainer = () => {
     setSelectedIds([]);
   }, [params]);
 
-  // API로부터 새 데이터를 받으면 필터링된 데이터도 업데이트
-  useEffect(() => {
-    if (allPosts) {
-      // 검색어 필터링이 적용되지 않은 경우에만 전체 데이터로 업데이트
-      setFilteredPosts(prev => prev.length === 0 ? allPosts : prev);
-    }
-  }, [allPosts]);
-
   if (isLoading) return <div>로딩중...</div>;
   if (error) return <div>에러</div>;
 
@@ -89,7 +77,7 @@ const MobilePostContainer = () => {
     <div className="md:hidden flex flex-col gap-[16px] bg-white">
       {/* 필터 바 */}
       <PostFilterBar
-        totalCount={filteredPosts.length}
+        totalCount={allPosts.length}
         posts={allPosts}
         onFilteredDataChange={handleFilteredDataChange}
         onFilterChange={handleFilterChange}

@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { getPosts } from "@/api/posts";
 import { PostsRequestParams, PostsResponse } from "@/api/dto/post";
 
-export const usePosts = (params: PostsRequestParams) => {
+export const usePost = (params: PostsRequestParams) => {
   const queryKey = ["posts", params];
 
   const { data, error, isLoading, mutate } = useSWR<PostsResponse>(
