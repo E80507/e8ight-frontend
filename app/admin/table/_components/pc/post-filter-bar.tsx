@@ -3,18 +3,55 @@ import { useState } from "react";
 import SearchBar from "./post-search-bar";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { POST_CATEGORIES } from "@/constants/admin";
+import { Post, PostCategory, PostsRequestParams } from "@/api/dto/post";
 
-const PostFilterBar = () => {
-  const [selected, setSelected] = useState(POST_CATEGORIES[0]?.value);
+interface PostFilterBarProps {
+  posts: Post[];
+  onFilteredDataChange: (filteredPosts: Post[]) => void;
+  onFilterChange: (params: Partial<PostsRequestParams>) => void;
+}
 
-  const onChange = (val: string) => {
-    if (!val) return; // 빈 문자열로 선택 해제되는 경우 방지
-    setSelected(val);
+const PostFilterBar = ({ posts, onFilteredDataChange, onFilterChange }: PostFilterBarProps) => {
+  const [selected, setSelected] = useState(POST_CATEGORIES[0].value);
+  const [searchTerm, setSearchTerm] = useState("");
 
-    // 전체를 선택한 경우 필터링하지 않음
-    if (val === "전체") {
-      return;
+  // 검색어 변경 핸들러
+  const handleSearch = (keyword: string) => {
+    setSearchTerm(keyword);
+    filterPosts(keyword, selected);
+  };
+
+  // 카테고리 변경 핸들러
+  const onChange = (category: string) => {
+    if (!category) return;
+    setSelected(category);
+    filterPosts(searchTerm, category);
+
+    // API 필터링을 위한 카테고리 값 전달
+    if (category && category !== "") {
+      onFilterChange({ category: category as PostCategory });
+    } else {
+      onFilterChange({ category: undefined });
     }
+  };
+
+  // 필터링 로직
+  const filterPosts = (keyword: string, category: string) => {
+    let filtered = [...posts];
+
+    // 검색어 필터링
+    if (keyword) {
+      const searchLower = keyword.toLowerCase();
+      filtered = filtered.filter(
+        (post) =>
+          post.title?.toLowerCase().includes(searchLower) ||
+          post.author?.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // 카테고리 필터링은 이미 API에서 처리됨
+
+    onFilteredDataChange(filtered);
   };
 
   const [date, setDate] = useState<searchDate>({
@@ -27,6 +64,10 @@ const PostFilterBar = () => {
     setDate(newDate);
 
     if (newDate?.start && newDate?.end) {
+      onFilterChange({
+        startDate: newDate.start.toISOString(),
+        endDate: newDate.end.toISOString(),
+      });
     }
   };
 
@@ -39,7 +80,10 @@ const PostFilterBar = () => {
         </div>
 
         <div className="px-[16px]">
-          <SearchBar placeholder="제목, 저자" setKeyword={() => {}} />
+          <SearchBar 
+            placeholder="제목, 저자" 
+            setKeyword={handleSearch}
+          />
         </div>
       </div>
 
@@ -69,7 +113,7 @@ const PostFilterBar = () => {
           >
             {POST_CATEGORIES.map((condition) => (
               <ToggleGroupItem
-                key={condition.text}
+                key={condition.value}
                 hasIcon
                 value={condition.value}
                 aria-label={condition.text}

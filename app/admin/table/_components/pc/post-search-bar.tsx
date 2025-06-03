@@ -23,6 +23,12 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
     }
   };
 
+  // 초기화 핸들러
+  const handleReset = () => {
+    setInputValue("");
+    setKeyword("");
+  };
+
   return (
     <div className="flex items-center gap-[8px]">
       <div className="relative flex items-center w-[400px]">
@@ -37,7 +43,7 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
         />
       </div>
 
-      <Button variant={"outline"} size={"lg"} className="max-w-[84px]">
+      <Button variant={"outline"} size={"lg"} className="max-w-[84px]" onClick={handleReset}>
         초기화
       </Button>
     </div>
