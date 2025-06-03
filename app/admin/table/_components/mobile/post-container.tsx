@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { PostsRequestParams } from "@/api/dto/post";
 import MobileListItem from "./post-item";
@@ -30,12 +32,13 @@ const MobilePostContainer = () => {
     }));
   };
 
-  // 필터 클릭 핸들러
-  const handleFilterClick = () => {
-    setParams({
-      ...params,
-      page: 1,
-    });
+  // 필터 변경 핸들러
+  const handleFilterChange = (filterParams: Partial<PostsRequestParams>) => {
+    setParams(prev => ({
+      ...prev,
+      ...filterParams,
+      page: 1, // 필터 변경 시 첫 페이지로 이동
+    }));
   };
 
   // 개별 선택/해제 핸들러
@@ -63,7 +66,7 @@ const MobilePostContainer = () => {
       {/* 필터 버튼 */}
       <PostFilterBar
         totalCount={totalCount}
-        onFilterClick={handleFilterClick}
+        onFilterChange={handleFilterChange}
       />
 
       {/* 선택 영역 */}
