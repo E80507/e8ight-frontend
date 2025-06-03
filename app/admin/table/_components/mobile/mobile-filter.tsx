@@ -9,12 +9,12 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 
-interface PostFilterBarProps {
+interface MobileFilterProps {
   totalCount: number;
   onFilterClick: () => void;
 }
 
-const PostFilterBar = ({ totalCount, onFilterClick }: PostFilterBarProps) => {
+const MobileFilter = ({ totalCount, onFilterClick }: MobileFilterProps) => {
   const handleApply = () => {
     onFilterClick();
   };
@@ -61,4 +61,4 @@ const PostFilterBar = ({ totalCount, onFilterClick }: PostFilterBarProps) => {
   );
 };
 
-export default PostFilterBar;
+export default MobileFilter;

@@ -3,12 +3,12 @@ import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface PostSearchBarProps {
+interface MobileSearchBarProps {
   placeholder: string;
   setKeyword: (val: string) => void;
 }
 
-const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
+const MobileSearchBar = ({ placeholder, setKeyword }: MobileSearchBarProps) => {
   const [inputValue, setInputValue] = useState("");
 
   // 인풋 변경 핸들러
@@ -44,4 +44,4 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
   );
 };
 
-export default PostSearchBar;
+export default MobileSearchBar;
