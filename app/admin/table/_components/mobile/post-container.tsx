@@ -16,7 +16,6 @@ const MobilePostContainer = () => {
     limit: 10,
     sortOrder: "DESC",
   });
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
 
   // 게시물 목록 조회
   const {
@@ -24,20 +23,6 @@ const MobilePostContainer = () => {
     isLoading,
     error,
   } = usePost(params);
-
-  // allPosts가 변경될 때마다 filteredPosts 초기화
-  useEffect(() => {
-    setFilteredPosts(allPosts);
-  }, [allPosts]);
-
-  // 전체 페이지 수 계산 (필터링된 데이터 기준)
-  const totalPages = Math.ceil((filteredPosts?.length || 0) / params.limit);
-
-  // 현재 페이지의 게시물 (필터링된 데이터에서 계산)
-  const currentPagePosts = filteredPosts?.slice(
-    (params.page - 1) * params.limit,
-    params.page * params.limit,
-  );
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
@@ -49,20 +34,11 @@ const MobilePostContainer = () => {
 
   // 필터 변경 핸들러
   const handleFilterChange = (filterParams: Partial<PostsRequestParams>) => {
-    setParams((prev) => {
-      const newParams = { ...prev, ...filterParams, page: 1 };
-      // 필터가 제거된 경우 해당 필드 삭제
-      if (!filterParams.category) delete newParams.category;
-      if (!filterParams.startDate) delete newParams.startDate;
-      if (!filterParams.endDate) delete newParams.endDate;
-      return newParams;
-    });
-  };
-
-  // 필터링 결과 처리
-  const handleFilteredDataChange = (filtered: Post[]) => {
-    setFilteredPosts(filtered);
-    setParams(prev => ({ ...prev, page: 1 })); // 필터링 시 첫 페이지로 이동
+    setParams((prev) => ({
+      ...prev,
+      ...filterParams,
+      page: 1, // 필터 변경 시 첫 페이지로 이동
+    }));
   };
 
   // 개별 선택/해제 핸들러
@@ -82,13 +58,17 @@ const MobilePostContainer = () => {
   if (isLoading) return <div>로딩중...</div>;
   if (error) return <div>에러</div>;
 
+  const currentPagePosts = allPosts.slice(
+    (params.page - 1) * params.limit,
+    params.page * params.limit
+  );
+
   return (
-    <div className="md:hidden flex flex-col gap-[16px] bg-white">
+    <div className="md:hidden flex flex-col gap-[16px] bg-white min-h-screen">
       {/* 필터 바 */}
       <PostFilterBar
-        totalCount={filteredPosts.length}
+        totalCount={allPosts.length}
         posts={allPosts}
-        onFilteredDataChange={handleFilteredDataChange}
         onFilterChange={handleFilterChange}
       />
 
@@ -114,7 +94,7 @@ const MobilePostContainer = () => {
         {/* 페이지네이션 */}
         <Pagination
           currentPage={params.page}
-          totalPages={totalPages}
+          totalPages={Math.ceil(allPosts.length / params.limit)}
           onPageChange={handlePageChange}
           className="py-[24px]"
         />
