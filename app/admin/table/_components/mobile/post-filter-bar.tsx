@@ -17,14 +17,12 @@ import SearchBar from "./post-search-bar";
 interface PostFilterBarProps {
   totalCount: number;
   posts: Post[];
-  onFilteredDataChange: (filteredPosts: Post[]) => void;
   onFilterChange: (params: Partial<PostsRequestParams>) => void;
 }
 
 const PostFilterBar = ({
   totalCount,
   posts,
-  onFilteredDataChange,
   onFilterChange,
 }: PostFilterBarProps) => {
   const [date, setDate] = useState<searchDate>({
@@ -32,34 +30,10 @@ const PostFilterBar = ({
     end: undefined,
   });
   const [category, setCategory] = useState<string>("전체");
-  const [searchTerm, setSearchTerm] = useState("");
 
   // 날짜 변경 핸들러
   const handleDateChange = (newDate: searchDate) => {
     setDate(newDate);
-  };
-
-  // 필터링 로직
-  const filterPosts = (keyword: string) => {
-    let filtered = [...posts];
-
-    // 검색어 필터링
-    if (keyword) {
-      const searchLower = keyword.toLowerCase();
-      filtered = filtered.filter(
-        (post) =>
-          post.title?.toLowerCase().includes(searchLower) ||
-          post.author?.toLowerCase().includes(searchLower),
-      );
-    }
-
-    onFilteredDataChange(filtered);
-  };
-
-  // 검색어 변경 핸들러
-  const handleSearch = (keyword: string) => {
-    setSearchTerm(keyword);
-    filterPosts(keyword);
   };
 
   // 필터 적용 핸들러
@@ -99,11 +73,6 @@ const PostFilterBar = ({
 
     // API 필터 적용
     onFilterChange(filterParams);
-
-    // 검색어 기반 프론트엔드 필터링
-    if (searchTerm) {
-      filterPosts(searchTerm);
-    }
   };
 
   return (
@@ -177,7 +146,7 @@ const PostFilterBar = ({
       </div>
 
       {/* 검색바 */}
-      <SearchBar placeholder="제목, 저자" setKeyword={handleSearch} />
+      <SearchBar placeholder="제목, 저자" setKeyword={() => {}} />
     </div>
   );
 };
