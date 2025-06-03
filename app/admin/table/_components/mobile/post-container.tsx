@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { PostsRequestParams } from "@/api/dto/post";
-import MobileSearchBar from "./mobile-search";
-import MobileListItem from "./mobile-list-item";
+import MobileListItem from "./post-item";
 import { usePosts } from "@/hooks/posts/use-posts";
-import MobileFilter from "./mobile-filter";
 import Check from "@/components/shared/check";
-import FloatingAddButton from "./floating-add-button";
+import FloatingAddButton from "./post-add-button";
+import PostSearchBar from "./post-search-bar";
+import PostFilterBar from "./post-filter-bar";
 
-const MobilePostsContainer = () => {
+const PostContainer = () => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [params, setParams] = useState<PostsRequestParams>({
     page: 1,
@@ -55,12 +55,15 @@ const MobilePostsContainer = () => {
   if (error) return <div>에러</div>;
 
   return (
-    <div className="flex flex-col gap-[16px]">
+    <div className="md:hidden flex flex-col gap-[16px] bg-white">
       {/* 검색 바 */}
-      <MobileSearchBar placeholder="제목, 저자" setKeyword={() => {}} />
+      <PostSearchBar placeholder="제목, 저자" setKeyword={() => {}} />
 
       {/* 필터 버튼 */}
-      <MobileFilter totalCount={totalCount} onFilterClick={handleFilterClick} />
+      <PostFilterBar
+        totalCount={totalCount}
+        onFilterClick={handleFilterClick}
+      />
 
       {/* 선택 영역 */}
       <div className="flex items-center justify-between px-[16px]">
@@ -107,4 +110,4 @@ const MobilePostsContainer = () => {
   );
 };
 
-export default MobilePostsContainer;
+export default PostContainer;
