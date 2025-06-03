@@ -51,36 +51,33 @@ const PostFilterBar = ({
   }, [onFilterChange]);
 
   return (
-    <div className="border border-[#EEEFF1]">
+    <div className="flex flex-col border border-[#EEEFF1]">
       {/* 검색어 */}
-      <div className="flex items-center bg-white">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
+      <div className="flex h-[72px]">
+        <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           상세검색
         </div>
-
-        <div className="px-[16px]">
+        <div className="flex-1 flex items-center px-[16px]">
           <SearchBar placeholder="제목, 저자" setKeyword={() => {}} />
         </div>
       </div>
 
       {/* 생성 일자 */}
-      <div className="flex items-center bg-white border-t border-b border-[#EEEFF1]">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
+      <div className="flex h-[72px] border-t border-b border-[#EEEFF1]">
+        <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           생성 일자
         </div>
-
-        <div className="px-[16px]">
+        <div className="flex-1 flex items-center px-[16px]">
           <CalendarDouble date={date} setDate={handleDateChange} />
         </div>
       </div>
 
       {/* 카테고리 */}
-      <div className="flex items-center bg-white">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
+      <div className="flex h-[72px]">
+        <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           카테고리
         </div>
-
-        <div className="px-[16px] flex-1">
+        <div className="flex-1 flex items-center px-[16px]">
           <div className="flex flex-wrap gap-x-6">
             {POST_CATEGORIES.map((condition) => (
               <button
