@@ -34,6 +34,23 @@ const PostContainer = () => {
 
   // 필터 변경 핸들러
   const handleFilterChange = (filterParams: Partial<PostsRequestParams>) => {
+    // 날짜 필터의 경우, 데이터가 없을 때 필터를 적용하지 않음
+    if (filterParams.startDate && filterParams.endDate) {
+      const startDate = new Date(filterParams.startDate);
+      const endDate = new Date(filterParams.endDate);
+      
+      // 현재 데이터에서 해당 날짜 범위에 데이터가 있는지 확인
+      const hasDataInRange = allPosts.some(post => {
+        const postDate = new Date(post.createdAt);
+        return postDate >= startDate && postDate <= endDate;
+      });
+
+      if (!hasDataInRange) {
+        console.log("No data in selected date range");
+        return;
+      }
+    }
+
     setParams((prev) => ({
       ...prev,
       ...filterParams,
