@@ -22,6 +22,7 @@ export default function QuillEditor({
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const lastContentRef = useRef<string>("");
 
   useEffect(() => {
     setIsMounted(true);
@@ -83,30 +84,30 @@ export default function QuillEditor({
 
     // 텍스트 변경 이벤트 리스너
     quillRef.current.on("text-change", () => {
-      if (quillRef.current && onChange) {
-        const content = quillRef.current.root.innerHTML;
+      if (!quillRef.current || !onChange) return;
+
+      const html = quillRef.current.root.innerHTML;
+      const content = html === "<p><br></p>" ? "" : html;
+
+      if (content !== lastContentRef.current) {
+        lastContentRef.current = content;
         onChange(content);
       }
     });
-
-    return () => {
-      if (quillRef.current) {
-        quillRef.current.off("text-change");
-      }
-    };
   }, [isMounted, placeholder, onChange]);
 
-  // 값 변경 처리 (별도 useEffect)
   useEffect(() => {
-    if (!quillRef.current || !value) return;
+    if (!quillRef.current) return;
 
-    const currentContent = quillRef.current.root.innerHTML;
-    if (currentContent !== value) {
-      const selection = quillRef.current.getSelection();
-      quillRef.current.clipboard.dangerouslyPasteHTML(value);
-      if (selection) {
-        quillRef.current.setSelection(selection);
-      }
+    const editor = quillRef.current;
+    const html = editor.root.innerHTML;
+    const content = value || "";
+
+    if (content !== lastContentRef.current && content !== html) {
+      const selection = editor.getSelection();
+      editor.clipboard.dangerouslyPasteHTML(content);
+      if (selection) editor.setSelection(selection);
+      lastContentRef.current = content;
     }
   }, [value]);
 

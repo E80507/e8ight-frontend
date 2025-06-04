@@ -110,9 +110,13 @@ const ManageModal = ({
       selected.filter((v: string) => v !== item.content),
     );
   };
+
   const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
+      const selectedItems = options.filter(
+        (item) => form.getValues(modalType)?.includes(item.content) || false,
+      );
       // 1. 추가된 항목 API 요청
       for (const content of addedItems) {
         const payload = { content };
@@ -137,8 +141,9 @@ const ManageModal = ({
       // 3. 저장 후 초기화
       form.setValue(
         modalType,
-        options.map((item) => item.content),
+        selectedItems.map((item) => item.content),
       );
+
       setIsSetting(false);
       setIsAdding(false);
       setAddedItems([]);
