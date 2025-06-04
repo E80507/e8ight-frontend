@@ -1,7 +1,8 @@
 "use client";
 
+import useSWR from "swr";
 import { useState, useEffect } from "react";
-import { fetchPostsByTitle, getPosts } from "@/app/api/dashboard";
+import { fetchPostsBySearch, getPosts } from "@/app/api/dashboard";
 
 export interface Post {
   id: string;
@@ -20,11 +21,30 @@ export interface Post {
   deletedAt: string;
 }
 
+// fetcher 함수
+const fetcher = async (
+  keyword: string,
+  page: number,
+  limit: number,
+): Promise<{ posts: Post[]; totalPages: number }> => {
+  if (keyword) {
+    return await fetchPostsBySearch({
+      query: keyword,
+      searchFields: ["TITLE", "KEYWORDS"],
+      page,
+      limit,
+    });
+  } else {
+    return await getPosts({
+      page,
+      limit,
+    });
+  }
+};
+
 export const useDashboardPosts = () => {
   const [keyword, setKeyword] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [posts, setPosts] = useState<Post[]>([]);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
   useEffect(() => {
@@ -38,36 +58,29 @@ export const useDashboardPosts = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const fetchInitialPosts = async () => {
-      const res = await getPosts({
-        page: currentPage,
-        limit: itemsPerPage,
-      });
-      setPosts(res.posts);
-      setTotalPages(res.totalPages);
-    };
-    fetchInitialPosts();
-  }, [currentPage, itemsPerPage]);
+  // SWR key는 keyword, page, limit 조합
+  const { data, mutate, isLoading, error } = useSWR(
+    [keyword, currentPage, itemsPerPage],
+    ([k, p, l]) => fetcher(k, p, l),
+    { keepPreviousData: true },
+  );
 
-  const handleSearch = async (value: string) => {
-    const res = await fetchPostsByTitle({
-      query: value,
-      searchFields: ["TITLE"],
-    });
-    setPosts(res.posts);
-    setCurrentPage(1);
-    setTotalPages(res.totalPages);
+  // 검색 실행 시 keyword + page 초기화 → re-fetch 유도
+  const handleSearch = (value: string) => {
     setKeyword(value);
+    setCurrentPage(1);
   };
 
   return {
     keyword,
     setKeyword,
     handleSearch,
-    posts,
+    posts: data?.posts ?? [],
     currentPage,
-    totalPages,
+    totalPages: data?.totalPages ?? 1,
     setCurrentPage,
+    isLoading,
+    error,
+    mutate,
   };
 };

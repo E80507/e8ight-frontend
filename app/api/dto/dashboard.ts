@@ -2,6 +2,8 @@
 export interface SearchReq {
   query: string;
   searchFields: string[];
+  page: number;
+  limit: number;
 }
 
 // 포스트 전체 조회
