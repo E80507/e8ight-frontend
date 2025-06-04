@@ -21,4 +21,4 @@ export const useDeletePosts = () => {
   return {
     deletePosts: handleDeletePosts,
   };
-}; 
+};

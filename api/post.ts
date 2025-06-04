@@ -11,9 +11,9 @@ export const deletePost = async (postId: string) => {
 };
 
 export const deletePosts = async (postIds: string[]) => {
-  const promises = postIds.map(id => deletePost(id));
+  const promises = postIds.map((id) => deletePost(id));
   return Promise.all(promises);
-}; 
+};
 
 export const getPosts = async (
   params: PostsRequestParams,
