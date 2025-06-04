@@ -11,22 +11,19 @@ const categoryMap: Record<string, BadgeColor> = {
   DOWNLOADS: "yellow",
 };
 
-interface MobileListItemProps {
+interface PostItemProps {
   post: Post;
   isFirst?: boolean;
   isSelected?: boolean;
   onSelect?: () => void;
 }
 
-const MobileListItem = ({
-  post,
-  isFirst,
-  isSelected,
-  onSelect,
-}: MobileListItemProps) => {
+const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
   return (
     <div
-      className={`flex flex-col gap-[14px] py-[24px] px-[16px] border-b border-[#EEEFF1] ${isFirst ? "border-t" : ""}`}
+      className={`flex flex-col gap-[14px] py-[24px] px-[16px] border-b border-[#EEEFF1] ${
+        isFirst ? "border-t" : ""
+      } ${isSelected ? "bg-[#F7FEFD]" : ""}`}
     >
       {/* 카테고리 */}
       <div className="flex items-center gap-[14px]">
@@ -50,7 +47,7 @@ const MobileListItem = ({
         <div className="text-[#474953] pretendard-body-3">
           {formattedDate(post?.createdAt, "INPUT_DATE")}
         </div>
-        <span className="text-[#474953]">|</span>
+        <span className="relative before:absolute before:content-[''] before:w-[1px] before:h-[14px] before:bg-[#474953] before:top-1/2 before:-translate-y-1/2" />
         <div className="text-[#474953] pretendard-body-3">
           {post?.author || "-"}
         </div>
@@ -59,4 +56,4 @@ const MobileListItem = ({
   );
 };
 
-export default MobileListItem;
+export default PostItem;

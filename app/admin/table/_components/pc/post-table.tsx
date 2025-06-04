@@ -22,19 +22,19 @@ import { Post } from "@/api/dto/post";
 import Check from "@/components/shared/check";
 import formattedDate from "@/util/date";
 
-interface AdminTableProps {
+interface PostTableProps {
   data: Post[];
   totalCount: number;
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export function AdminTable({
+export function PostTable({
   data,
   totalCount,
   selectedIds,
   setSelectedIds,
-}: AdminTableProps) {
+}: PostTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -52,9 +52,8 @@ export function AdminTable({
 
   // 페이지 별 전체 선택 여부
   const areAllPageItemsSelected = () => {
-    if (data.length === 0) return false;
+    if (totalCount === 0) return false;
     const currentPageIds = data.map((item) => item.id);
-    console.log(totalCount);
     return currentPageIds.every((id) => selectedIds.includes(id));
   };
 
@@ -149,7 +148,7 @@ export function AdminTable({
   });
 
   return (
-    <Table>
+    <Table className="bg-white">
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
@@ -179,7 +178,7 @@ export function AdminTable({
               {row.getVisibleCells().map((cell, cellIndex) => (
                 <TableCell
                   size="sm"
-                  className={`h-[45px] ${selectedIds.includes(row.original.id) ? "bg-[#FFF6F6]" : ""} border-t ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
+                  className={`h-[45px] ${selectedIds.includes(row.original.id) ? "bg-[#F7FEFD]" : ""} border-t ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
                   key={cell.id + cellIndex}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -189,8 +188,12 @@ export function AdminTable({
           ))
         ) : (
           <TableRow>
-            <TableCell className="h-[45px]" size="lg" colSpan={columns.length}>
-              데이터가 존재하지 않습니다.
+            <TableCell
+              className="h-[398px] pretendard-body-1 text-[#A7A9B4]"
+              size="lg"
+              colSpan={columns.length}
+            >
+              등록된 게시글이 없습니다.
             </TableCell>
           </TableRow>
         )}

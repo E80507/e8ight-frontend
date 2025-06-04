@@ -8,6 +8,7 @@ interface TwoButtonModalProps {
   buttonText: string; // 버튼 텍스트
   onClickFirstBtn: () => void; // 버튼 핸들러
   onClickSecondBtn: () => void; // 버튼 핸들러
+  className?: string; // 모달 클래스명
 }
 
 const TwoButtonModal = ({
@@ -16,7 +17,8 @@ const TwoButtonModal = ({
   loading,
   buttonText,
   onClickFirstBtn,
-  onClickSecondBtn,
+  onClickSecondBtn, 
+  className,
 }: TwoButtonModalProps) => {
   // body overflow 설정
   useEffect(() => {
@@ -31,11 +33,11 @@ const TwoButtonModal = ({
 
   return (
     <div className="fixed inset-0 z-10 flex items-center justify-center overflow-hidden bg-black/70">
-      <div className="w-[642px] rounded-[20px] bg-white p-8">
+      <div className="w-[400px] rounded-[20px] bg-white p-8">
         <div className="flex flex-col items-end gap-3">
-          <div className="mr-auto flex flex-col gap-2">
+          <div className="mr-auto flex flex-col gap-2 text-center">
             <p className="heading-3">{title}</p>
-            {desc && <p className="body-1">{desc}</p>}
+            {desc && <p className="body-1 break-words">{desc}</p>}
           </div>
           <TwoButtonBar
             loading={loading}
