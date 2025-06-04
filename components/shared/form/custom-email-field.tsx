@@ -32,11 +32,11 @@ interface CustomEmailFieldProps<T extends FieldValues> {
 }
 
 const EMAIL_DOMAINS = [
+  "직접입력",
   "gmail.com",
   "naver.com",
   "daum.net",
   "hanmail.net",
-  "직접입력",
 ];
 
 const CustomEmailField = <T extends FieldValues>({
@@ -114,46 +114,31 @@ const CustomEmailField = <T extends FieldValues>({
                 value={emailId}
               />
               <span className="text-gray-500">@</span>
-              {isCustomDomain ? (
-                <Select
-                  onValueChange={(value) => handleDomainSelect(value, field)}
-                >
-                  <SelectTrigger className="flex-1">
+              <Select
+                onValueChange={(value) => handleDomainSelect(value, field)}
+                value={isCustomDomain ? "직접입력" : domain}
+              >
+                <SelectTrigger className="flex-1">
+                  {isCustomDomain ? (
                     <Input
                       type="text"
                       className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                       placeholder="직접 입력"
-                      onChange={(e) =>
-                        handleCustomDomainChange(e.target.value, field)
-                      }
+                      onChange={(e) => handleCustomDomainChange(e.target.value, field)}
                       value={customDomain}
                     />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {EMAIL_DOMAINS.map((domain) => (
-                      <SelectItem key={domain} value={domain}>
-                        {domain}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              ) : (
-                <Select
-                  onValueChange={(value) => handleDomainSelect(value, field)}
-                  value={domain}
-                >
-                  <SelectTrigger className="flex-1">
-                    <SelectValue placeholder="선택" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {EMAIL_DOMAINS.map((domain) => (
-                      <SelectItem key={domain} value={domain}>
-                        {domain}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
+                  ) : (
+                    <SelectValue />
+                  )}
+                </SelectTrigger>
+                <SelectContent>
+                  {EMAIL_DOMAINS.map((domain) => (
+                    <SelectItem key={domain} value={domain}>
+                      {domain}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </FormControl>
 
