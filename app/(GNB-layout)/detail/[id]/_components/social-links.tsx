@@ -4,10 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 const SOCIAL_LINKS = [
-  { icon: "linkedin", alt: "LinkedIn", link: "https://kr.linkedin.com/company/e8korea" },
+  {
+    icon: "linkedin",
+    alt: "LinkedIn",
+    link: "https://kr.linkedin.com/company/e8korea",
+  },
   { icon: "blog", alt: "Blog", link: "https://blog.naver.com/e8korea" },
   { icon: "youtube", alt: "YouTube", link: "https://www.youtube.com/e8korea" },
-  { icon: "instagram", alt: "Instagram", link: "https://www.instagram.com/e8_officialkr/" },
+  {
+    icon: "instagram",
+    alt: "Instagram",
+    link: "https://www.instagram.com/e8_officialkr/",
+  },
 ];
 
 export default function SocialLinks() {
@@ -19,8 +27,8 @@ export default function SocialLinks() {
 
       <div className="flex items-center tablet:gap-[40px] gap-[24px]">
         {SOCIAL_LINKS.map((social) => (
-          <Link 
-            key={social.icon} 
+          <Link
+            key={social.icon}
             href={social.link}
             target="_blank"
             rel="noopener noreferrer"
@@ -36,4 +44,4 @@ export default function SocialLinks() {
       </div>
     </div>
   );
-} 
+}
