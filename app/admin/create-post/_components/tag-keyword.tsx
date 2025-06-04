@@ -22,11 +22,13 @@ const TagKeyword = ({
     e.preventDefault();
     setModalType(type);
   };
+  const selectedTags = form.watch("tags") ?? [];
+  const selectedKeywords = form.watch("keywords") ?? [];
 
   return (
     <>
       <div>
-        <div className="mb-3 flex items-center justify-between web:mb-0 web:justify-start">
+        <div className="flex items-center justify-between web:mb-0 web:justify-start">
           <p className="pretendard-subtitle-m web:mb-3">태그</p>
           <Button
             size="lg"
@@ -40,18 +42,18 @@ const TagKeyword = ({
           </Button>
         </div>
         <div className="flex gap-x-3">
-          {tags && tags.length > 0 && (
+          {selectedTags.length > 0 ? (
             <div className="flex flex-col flex-wrap items-center gap-x-2 gap-y-3 web:flex-row web:gap-y-0">
-              {tags.map((tag: { id: string; content: string }) => (
+              {selectedTags.map((tag) => (
                 <Badge
-                  key={tag.id}
-                  text={tag.content}
+                  key={tag}
+                  text={tag}
                   color="default"
                   className="h-10 px-4 py-2 pretendard-body-2"
                 />
               ))}
             </div>
-          )}
+          ) : null}
           <Button
             size="lg"
             variant="outline"
@@ -65,9 +67,9 @@ const TagKeyword = ({
         </div>
       </div>
       <div>
-        <div className="mb-3 flex items-center justify-between web:mb-0 web:justify-start">
-          <p className="pretendard-subtitle-m">
-            키워드{" "}
+        <div className="flex items-center justify-between web:mb-0 web:justify-start">
+          <p className="pretendard-subtitle-m web:mb-3">
+            검색 키워드{" "}
             <span className="text-label-natural pretendard-body-3">
               (최대 5개)
             </span>
@@ -84,19 +86,18 @@ const TagKeyword = ({
           </Button>
         </div>
         <div className="flex gap-x-3">
-          {keywords && keywords.length > 0 && (
-            <div className="flex flex-col flex-wrap items-center gap-x-2 gap-y-3 web:flex-row web:gap-y-0">
-              {keywords.map((keyword: { id: string; content: string }) => (
+          {selectedKeywords.length > 0 ? (
+            <div className="flex flex-col flex-wrap items-center gap-x-2 gap-y-3 web:flex-row web:gap-x-3 web:gap-y-0">
+              {selectedKeywords.map((keyword) => (
                 <Badge
-                  key={keyword.id}
-                  text={keyword.content}
+                  key={keyword}
+                  text={keyword}
                   color="default"
                   className="h-10 px-4 py-2 pretendard-body-2"
                 />
               ))}
             </div>
-          )}
-
+          ) : null}
           <Button
             size="lg"
             variant="outline"
