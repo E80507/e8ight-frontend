@@ -1,5 +1,6 @@
 import { PostsRequestParams, PostsResponse } from "./dto/post";
 import { apiFetch } from "@/util/fetch";
+import { Post } from "@/types/post";
 
 export const deletePost = async (postId: string) => {
   return apiFetch(`/posts/${postId}`, {
@@ -40,4 +41,8 @@ export const getPosts = async (
   }
 
   return apiFetch(`/posts?${queryParams.toString()}`);
+};
+
+export const getPostDetail = async (id: string): Promise<Post> => {
+  return apiFetch(`/posts/${id}`);
 };
