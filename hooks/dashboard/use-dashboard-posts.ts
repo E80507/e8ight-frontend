@@ -1,12 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-  // fetchPostsByTitle,
-  // getPosts,
-  mockFetchPostsByTitle,
-  mockGetPosts,
-} from "@/app/api/dashboard";
+import { fetchPostsByTitle, getPosts } from "@/app/api/dashboard";
 
 export interface Post {
   id: string;
@@ -45,7 +40,7 @@ export const useDashboardPosts = () => {
 
   useEffect(() => {
     const fetchInitialPosts = async () => {
-      const res = await mockGetPosts({
+      const res = await getPosts({
         page: currentPage,
         limit: itemsPerPage,
       });
@@ -56,9 +51,9 @@ export const useDashboardPosts = () => {
   }, [currentPage, itemsPerPage]);
 
   const handleSearch = async (value: string) => {
-    const res = await mockFetchPostsByTitle({
+    const res = await fetchPostsByTitle({
       query: value,
-      // searchFields: ["TITLE"], 실제 api에선 필요
+      searchFields: ["TITLE"],
     });
     setPosts(res.posts);
     setCurrentPage(1);
