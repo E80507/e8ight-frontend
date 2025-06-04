@@ -93,10 +93,7 @@ const PostFilterBar = ({
             </button>
           </SheetTrigger>
 
-          <SheetContent
-            side="bottom"
-            className="bg-white rounded-t-[12px]"
-          >
+          <SheetContent side="bottom" className="bg-white rounded-t-[12px]">
             <SheetHeader>
               <SheetTitle className="pretendard-title-m">필터 설정</SheetTitle>
             </SheetHeader>

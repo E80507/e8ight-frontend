@@ -85,9 +85,7 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
               type="text"
               readOnly
               value={
-                range?.to
-                  ? formattedDate(range.to, "INPUT_DATE")
-                  : "연도-월-일"
+                range?.to ? formattedDate(range.to, "INPUT_DATE") : "연도-월-일"
               }
               placeholder="End date"
               className="max-w-[100px] bg-transparent focus:outline-none"
