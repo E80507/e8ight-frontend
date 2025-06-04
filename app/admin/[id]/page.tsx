@@ -6,6 +6,7 @@ import { usePostDetail } from "@/hooks/post/use-post-detail";
 import { useRouter } from "next/navigation";
 import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
+import Image from "next/image";
 
 interface AdminDetailPageProps {
   params: { id: string };
@@ -133,7 +134,15 @@ const AdminDetailPage = ({ params }: AdminDetailPageProps) => {
             </div>
 
             <div className="flex items-center px-[20px] py-[16px] pretendard-subtitle-s flex-1">
-              <div className="bg-gray-100 max-w-[442px] w-full tablet:h-[210px] h-[152px]"></div>
+              <div className="bg-gray-100 tablet:max-w-[442px] w-full tablet:h-[210px] h-[152px] relative overflow-hidden">
+                <Image
+                  src={post?.mainImage || ""}
+                  alt={post?.title || "썸네일 이미지"}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
           </div>
         )}
@@ -145,7 +154,15 @@ const AdminDetailPage = ({ params }: AdminDetailPageProps) => {
           </div>
 
           <div className="flex items-center px-[20px] py-[16px] pretendard-subtitle-s flex-1">
-            <div className="bg-gray-100 w-full tablet:h-[210px] h-[100px]"></div>
+            <div className="bg-gray-100 w-full tablet:h-[210px] h-[100px] relative overflow-hidden">
+              <Image
+                src={post?.thumbnail || ""}
+                alt={post?.title || "썸네일 이미지"}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
           </div>
         </div>
 
