@@ -5,7 +5,7 @@ import MobilePostsContainer from "./table/_components/mobile/mobile-posts-contai
 
 export default function AdminPage() {
   return (
-    <div className="flex flex-col gap-10 tablet:p-10 max-w-[1200px] mx-auto">
+    <div className="mx-auto flex max-w-[1200px] flex-col gap-10 tablet:p-10">
       {/* pc 화면 */}
       <div className="hidden md:block">
         <PostsContainer />
