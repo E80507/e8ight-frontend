@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
 import { shareUrl } from "@/utils/share";
 import formattedDate from "@/util/date";
+import QuillViewer from "@/components/QuillViewer";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -57,7 +58,9 @@ const DetailPage = () => {
           </div>
         </div>
 
-        <div className="tablet:mt-[40px] mt-[24px]">{post?.content}</div>
+        <div className="tablet:mt-[40px] mt-[24px]">
+          <QuillViewer content={post?.content} />
+        </div>
 
         <div className="flex flex-col tablet:gap-[24px] gap-[12px] tablet:mt-[40px] mt-[24px]">
           <div className="tablet:pretendard-subtitle-l pretendard-subtitle-s text-[#A7A9B4]">
