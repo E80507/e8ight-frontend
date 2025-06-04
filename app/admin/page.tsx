@@ -1,20 +1,11 @@
-"use client";
+import AdminClient from "./table/admin-client";
 
-import { PostsContainer } from "./table/_components/posts-container";
-import MobilePostsContainer from "./table/_components/mobile/mobile-posts-container";
-
-export default function AdminPage() {
+const AdminPage = () => {
   return (
-    <div className="mx-auto flex max-w-[1200px] flex-col gap-10 tablet:p-10">
-      {/* pc 화면 */}
-      <div className="hidden md:block">
-        <PostsContainer />
-      </div>
-
-      {/* 모바일 화면  */}
-      <div className="block md:hidden">
-        <MobilePostsContainer />
-      </div>
-    </div>
+    <>
+      <AdminClient />
+    </>
   );
-}
+};
+
+export default AdminPage;

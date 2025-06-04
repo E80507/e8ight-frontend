@@ -11,12 +11,14 @@ interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: Dispatch<SetStateAction<number>>;
+  className?: string;
 }
 
 const Pagination = ({
   currentPage,
   totalPages,
   onPageChange,
+  className,
 }: PaginationProps) => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -60,7 +62,7 @@ const Pagination = ({
   const goToNextPageSet = () => onPageChange(startPage + maxPagesToShow);
 
   return (
-    <div className="mt-6 flex w-full justify-center tablet:mt-[100px]">
+    <div className={`${className} flex w-full justify-center`}>
       <div className="flex w-full max-w-max gap-2 rounded-md text-gray-700">
         {currentPage > 1 && startPage > maxPagesToShow && (
           <>
