@@ -20,7 +20,7 @@ export const usePostSubscribe = (onSuccess?: () => void) => {
       await new Promise((resolve) => setTimeout(resolve, 400));
       const response = await postSubscribe(email);
       console.log("Response message:", response.message);
-      
+
       if (response.message === "뉴스레터가 성공적으로 구독되었습니다.") {
         console.log("Calling onSuccess callback");
         onSuccess?.();
