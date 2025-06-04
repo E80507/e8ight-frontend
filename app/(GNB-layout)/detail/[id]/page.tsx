@@ -7,6 +7,7 @@ import { Share2Icon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
 import { shareUrl } from "@/utils/share";
+import formattedDate from "@/util/date";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -30,7 +31,7 @@ const DetailPage = () => {
           </p>
 
           <div className="flex items-center gap-[8px] mt-[16px] tablet:pretendard-body-2 pretendard-body-3 text-[#A7A9B4]">
-            <span>생성일 백엔드분께 요청</span>
+            <span>{formattedDate(post?.createdAt, "INPUT_DATE")}</span>
             <span className="before:content-[''] before:inline-block before:w-[1px] before:h-[14px] before:bg-[#A7A9B4] before:mx-2"></span>
             <span>저자: {post?.author}</span>
           </div>
@@ -65,12 +66,17 @@ const DetailPage = () => {
 
           <div className="flex items-center tablet:gap-[40px] gap-[24px]">
             {[
-              { icon: "linkedin", alt: "LinkedIn" },
-              { icon: "blog", alt: "Blog" },
-              { icon: "youtube", alt: "YouTube" },
-              { icon: "instagram", alt: "Instagram" },
+              { icon: "linkedin", alt: "LinkedIn", link: "https://kr.linkedin.com/company/e8korea" },
+              { icon: "blog", alt: "Blog", link: "https://blog.naver.com/e8korea" },
+              { icon: "youtube", alt: "YouTube", link: "https://www.youtube.com/e8korea" },
+              { icon: "instagram", alt: "Instagram", link: "https://www.instagram.com/e8_officialkr/" },
             ].map((social) => (
-              <Link key={social.icon} href="/">
+              <Link 
+                key={social.icon} 
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={`/svg/icon/${social.icon}.svg`}
                   alt={social.alt}
