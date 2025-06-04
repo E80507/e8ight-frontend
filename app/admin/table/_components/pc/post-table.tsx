@@ -24,14 +24,14 @@ import formattedDate from "@/util/date";
 
 interface PostTableProps {
   data: Post[];
-  // totalCount: number;
+  totalCount: number;
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export function PostTable({
   data,
-  // totalCount,
+  totalCount,
   selectedIds,
   setSelectedIds,
 }: PostTableProps) {
@@ -52,7 +52,7 @@ export function PostTable({
 
   // 페이지 별 전체 선택 여부
   const areAllPageItemsSelected = () => {
-    if (data.length === 0) return false;
+    if (totalCount === 0) return false;
     const currentPageIds = data.map((item) => item.id);
     return currentPageIds.every((id) => selectedIds.includes(id));
   };
@@ -188,8 +188,12 @@ export function PostTable({
           ))
         ) : (
           <TableRow>
-            <TableCell className="h-[45px]" size="lg" colSpan={columns.length}>
-              데이터가 존재하지 않습니다.
+            <TableCell
+              className="h-[398px] pretendard-body-1 text-[#A7A9B4]"
+              size="lg"
+              colSpan={columns.length}
+            >
+              등록된 게시글이 없습니다.
             </TableCell>
           </TableRow>
         )}

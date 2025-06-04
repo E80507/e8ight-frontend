@@ -8,6 +8,10 @@ export const postS3PresignedUrl = async (
   try {
     const res = await apiFetch("/s3/upload/presigned-url", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.NEXT_PUBLIC_ADMIN_KEY as string,
+      },
       body: JSON.stringify(req),
     });
     return res;

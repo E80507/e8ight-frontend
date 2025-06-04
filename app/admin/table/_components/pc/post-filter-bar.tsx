@@ -1,148 +1,116 @@
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
-import { useState } from "react";
-import SearchBar from "./post-search-bar";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { POST_CATEGORIES } from "@/constants/admin";
-import { Post, PostCategory, PostsRequestParams } from "@/api/dto/post";
+import { useCallback, useState, useRef } from "react";
+import { ADMIN_POST_CATEGORIES } from "@/constants/admin";
+import { PostsRequestParams } from "@/api/dto/post";
+import Radio from "@/components/radio";
+import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {
-  posts: Post[];
-  onFilteredDataChange: (filteredPosts: Post[]) => void;
-  onFilterChange: (params: Partial<PostsRequestParams>) => void;
+  currentCategory: string;
+  onCategoryChange: (category: string) => void;
+  onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
+  handleKeywordChange: (keyword: string) => void;
 }
 
 const PostFilterBar = ({
-  posts,
-  onFilteredDataChange,
+  currentCategory,
+  onCategoryChange,
   onFilterChange,
+  handleKeywordChange,
 }: PostFilterBarProps) => {
-  const [selected, setSelected] = useState(POST_CATEGORIES[0].value);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // 검색어 변경 핸들러
-  const handleSearch = (keyword: string) => {
-    setSearchTerm(keyword);
-    filterPosts(keyword);
-  };
-
-  // 카테고리 변경 핸들러
-  const onChangeCategory = (category: string) => {
-    if (!category) return;
-    setSelected(category);
-    filterPosts(searchTerm);
-
-    // API 필터링을 위한 카테고리 값 전달
-    if (category === POST_CATEGORIES[0].value) {
-      // "전체" 카테고리인 경우
-      onFilterChange({ category: undefined });
-    } else {
-      onFilterChange({ category: category as PostCategory });
-    }
-  };
-
-  // 필터링 로직
-  const filterPosts = (keyword: string) => {
-    let filtered = [...posts];
-
-    // 검색어 필터링
-    if (keyword) {
-      const searchLower = keyword.toLowerCase();
-      filtered = filtered.filter(
-        (post) =>
-          post.title?.toLowerCase().includes(searchLower) ||
-          post.author?.toLowerCase().includes(searchLower),
-      );
-    }
-
-    console.log("filtered 뭐지", filtered);
-
-    onFilteredDataChange(filtered);
-  };
-
   const [date, setDate] = useState<searchDate>({
     start: undefined,
     end: undefined,
   });
 
+  // 이전 날짜 상태를 저장하는 ref
+  const prevDateRef = useRef<searchDate>(date);
+
   // 날짜 변경 핸들러
-  const handleDateChange = (newDate: searchDate) => {
-    setDate(newDate);
+  const handleDateChange = useCallback(
+    (newDate: searchDate) => {
+      // 상태 업데이트
+      setDate(newDate);
 
-    if (newDate?.start && newDate?.end) {
-      // timezone 보정을 위해 시간을 설정
-      const startDate = new Date(newDate.start);
-      startDate.setHours(9, 0, 0, 0);
-      const endDate = new Date(newDate.end);
-      endDate.setHours(9, 0, 0, 0);
+      // 시작일과 종료일이 모두 있을 때만 필터 적용
+      if (newDate?.start && newDate?.end) {
+        const startDate = new Date(newDate.start);
+        startDate.setHours(9, 0, 0, 0);
+        const endDate = new Date(newDate.end);
+        endDate.setHours(9, 0, 0, 0);
 
-      const startDateStr = startDate.toISOString().split("T")[0];
-      const endDateStr = endDate.toISOString().split("T")[0];
+        const startDateStr = startDate.toISOString().split("T")[0];
+        const endDateStr = endDate.toISOString().split("T")[0];
 
-      console.log("Date Debug PC:", {
-        originalStart: startDate,
-        originalEnd: endDate,
-        formattedStart: startDateStr,
-        formattedEnd: endDateStr,
-      });
+        // 이전 날짜와 동일한 경우 필터 적용하지 않음
+        if (
+          prevDateRef.current?.start?.getTime() === startDate.getTime() &&
+          prevDateRef.current?.end?.getTime() === endDate.getTime()
+        ) {
+          return;
+        }
 
-      onFilterChange({
-        startDate: startDateStr,
-        endDate: endDateStr,
-      });
-    }
-  };
+        // 현재 날짜를 이전 날짜로 저장
+        prevDateRef.current = {
+          start: startDate,
+          end: endDate,
+        };
+
+        onFilterChange({
+          startDate: startDateStr,
+          endDate: endDateStr,
+        });
+      }
+    },
+    [onFilterChange],
+  );
 
   return (
-    <div className="border border-[#EEEFF1]">
+    <div className="flex flex-col border border-[#EEEFF1]">
       {/* 검색어 */}
-      <div className="flex items-center bg-white">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
+      <div className="flex h-[72px] bg-white">
+        <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           상세검색
         </div>
-
-        <div className="px-[16px]">
-          <SearchBar placeholder="제목, 저자" setKeyword={handleSearch} />
+        <div className="flex-1 flex items-center px-[16px]">
+          <PostSearchBar
+            placeholder="제목, 저자"
+            setKeyword={handleKeywordChange}
+          />
         </div>
       </div>
 
       {/* 생성 일자 */}
-      <div className="flex items-center bg-white border-t border-b border-[#EEEFF1]">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
+      <div className="flex h-[72px] border-t border-b border-[#EEEFF1] bg-white">
+        <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           생성 일자
         </div>
-
-        <div className="px-[16px]">
+        <div className="flex-1 flex items-center px-[16px]">
           <CalendarDouble date={date} setDate={handleDateChange} />
         </div>
       </div>
 
       {/* 카테고리 */}
-      <div className="flex items-center bg-white">
-        <div className="flex items-center py-[12px] px-[16px] w-[160px] min-h-[72px] bg-[#EEEFF1] pretendard-title-s">
+      <div className="flex h-[72px] bg-white">
+        <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           카테고리
         </div>
-
-        <div className="px-[16px] flex-1">
-          <ToggleGroup
-            value={selected}
-            onValueChange={onChangeCategory}
-            type="single"
-            className="gap-x-[24px] flex-wrap"
-          >
-            {POST_CATEGORIES.map((condition) => (
-              <ToggleGroupItem
+        <div className="flex-1 flex items-center px-[16px]">
+          <div className="flex flex-wrap gap-x-6">
+            {ADMIN_POST_CATEGORIES.map((condition) => (
+              <button
                 key={condition.value}
-                hasIcon
-                value={condition.value}
-                aria-label={condition.text}
-                className="w-fit justify-start"
+                type="button"
+                onClick={() => onCategoryChange(condition.value)}
+                className="flex items-center gap-3 py-2 hover:bg-gray-50 transition-colors"
               >
-                <p className="mt-px subtitle-m whitespace-nowrap">
+                <Radio isChecked={currentCategory === condition.value} />
+                <span className="mt-px subtitle-m whitespace-nowrap">
                   {condition.text}
-                </p>
-              </ToggleGroupItem>
+                </span>
+              </button>
             ))}
-          </ToggleGroup>
+          </div>
         </div>
       </div>
     </div>

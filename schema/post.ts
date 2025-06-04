@@ -1,24 +1,28 @@
 import { z } from "zod";
 
-// File 타입을 안전하게 처리하기 위한 커스텀 검증
-const fileSchema = z.custom<File>((value) => {
-  // SSR 환경에서는 검증 스킵
-  if (typeof window === "undefined") return true;
-  return value instanceof File;
-}, "파일을 업로드해주세요.");
-
 export const PostFormSchema = z.object({
-  title: z.string({ required_error: "제목을 입력해주세요." }),
+  title: z
+    .string({ required_error: "제목을 입력해주세요." })
+    .min(1, { message: "제목은 최소 1자 이상이어야 합니다." }),
 
-  category: z.string({ required_error: "카테고리 입력해주세요." }),
+  category: z
+    .string({ required_error: "카테고리를 입력해주세요." })
+    .min(1, { message: "카테고리는 최소 1자 이상이어야 합니다." }),
 
-  content: z.string({ required_error: "내용을 입력해주세요." }),
+  content: z.string().optional(),
 
-  thumbnail: fileSchema,
+  thumbnail:
+    typeof window === "undefined"
+      ? z.any()
+      : z.instanceof(File, { message: "썸네일 이미지를 업로드해주세요." }),
 
-  author: z.string({ required_error: "저자를 입력해주세요." }),
+  author: z
+    .string({ required_error: "저자를 입력해주세요." })
+    .min(1, { message: "저자는 최소 1자 이상이어야 합니다." }),
 
-  mainImage: z.string({ required_error: "메인 이미지를 입력해주세요." }),
+  mainImage: z.string().optional(),
 
-  tags: z.array(z.string({ required_error: "태그를 입력해주세요." })),
+  // tags, keywords는 검사에서 제외
+  tags: z.array(z.string()).optional(),
+  keywords: z.array(z.string()).optional(),
 });

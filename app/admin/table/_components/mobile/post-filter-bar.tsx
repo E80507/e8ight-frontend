@@ -10,56 +10,31 @@ import {
 import { Button } from "@/components/ui/button";
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
 import { useState } from "react";
-import { POST_CATEGORIES } from "@/constants/admin";
-import { Post, PostCategory, PostsRequestParams } from "@/api/dto/post";
-import SearchBar from "./post-search-bar";
+import { ADMIN_POST_CATEGORIES } from "@/constants/admin";
+import { PostCategory, PostsRequestParams } from "@/api/dto/post";
+import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {
   totalCount: number;
-  posts: Post[];
-  onFilteredDataChange: (filteredPosts: Post[]) => void;
-  onFilterChange: (params: Partial<PostsRequestParams>) => void;
+  onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
+  handleKeywordChange: (keyword: string) => void;
 }
 
 const PostFilterBar = ({
   totalCount,
-  posts,
-  onFilteredDataChange,
   onFilterChange,
+  handleKeywordChange,
 }: PostFilterBarProps) => {
   const [date, setDate] = useState<searchDate>({
     start: undefined,
     end: undefined,
   });
   const [category, setCategory] = useState<string>("전체");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   // 날짜 변경 핸들러
   const handleDateChange = (newDate: searchDate) => {
     setDate(newDate);
-  };
-
-  // 필터링 로직
-  const filterPosts = (keyword: string) => {
-    let filtered = [...posts];
-
-    // 검색어 필터링
-    if (keyword) {
-      const searchLower = keyword.toLowerCase();
-      filtered = filtered.filter(
-        (post) =>
-          post.title?.toLowerCase().includes(searchLower) ||
-          post.author?.toLowerCase().includes(searchLower),
-      );
-    }
-
-    onFilteredDataChange(filtered);
-  };
-
-  // 검색어 변경 핸들러
-  const handleSearch = (keyword: string) => {
-    setSearchTerm(keyword);
-    filterPosts(keyword);
   };
 
   // 필터 적용 핸들러
@@ -76,20 +51,15 @@ const PostFilterBar = ({
       const startDateStr = startDate.toISOString().split("T")[0];
       const endDateStr = endDate.toISOString().split("T")[0];
 
-      console.log("Date Debug Mobile:", {
-        originalStart: startDate,
-        originalEnd: endDate,
-        formattedStart: startDateStr,
-        formattedEnd: endDateStr,
-      });
-
       filterParams.startDate = startDateStr;
       filterParams.endDate = endDateStr;
     }
 
     // 카테고리 필터
     if (category && category !== "전체") {
-      const selectedCategory = POST_CATEGORIES.find((c) => c.text === category);
+      const selectedCategory = ADMIN_POST_CATEGORIES.find(
+        (c) => c.text === category,
+      );
       if (selectedCategory?.value) {
         filterParams.category = selectedCategory.value as PostCategory;
       }
@@ -100,10 +70,8 @@ const PostFilterBar = ({
     // API 필터 적용
     onFilterChange(filterParams);
 
-    // 검색어 기반 프론트엔드 필터링
-    if (searchTerm) {
-      filterPosts(searchTerm);
-    }
+    // Sheet 닫기
+    setIsOpen(false);
   };
 
   return (
@@ -111,8 +79,7 @@ const PostFilterBar = ({
       <div className="flex items-center justify-between">
         <p className="pretendard-subtitle-m">총 {totalCount}건</p>
 
-        {/* 필터 시트 */}
-        <Sheet>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <button type="button" className="hover:opacity-80">
               <ListFilter />
@@ -152,7 +119,7 @@ const PostFilterBar = ({
                     onChange={(e) => setCategory(e.target.value)}
                     className="w-full h-[48px] px-3 border rounded-sm focus:outline-none"
                   >
-                    {POST_CATEGORIES.map((option) => (
+                    {ADMIN_POST_CATEGORIES.map((option) => (
                       <option key={option.value} value={option.text}>
                         {option.text}
                       </option>
@@ -177,7 +144,10 @@ const PostFilterBar = ({
       </div>
 
       {/* 검색바 */}
-      <SearchBar placeholder="제목, 저자" setKeyword={handleSearch} />
+      <PostSearchBar
+        placeholder="제목, 저자"
+        setKeyword={handleKeywordChange}
+      />
     </div>
   );
 };

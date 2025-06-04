@@ -57,7 +57,7 @@ const ToggleGroup = React.forwardRef<
       value={value}
       defaultValue={defaultValue}
       onValueChange={onValueChange}
-      className={cn("flex items-center p-0", className)}
+      className={cn("flex items-center p-0 justify-center gap-3", className)}
       {...props}
     >
       <ToggleGroupContext.Provider
