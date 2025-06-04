@@ -7,18 +7,14 @@ import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import CustomCheckboxField from "@/components/shared/form/custom-checkbox-field";
 import { FormMessage } from "@/components/ui/form";
-import { createKeyword } from "@/app/api/admin";
-import { createTag } from "@/app/api/admin";
-import { deleteTag, deleteKeyword } from "@/app/api/admin";
+import {
+  createKeyword,
+  createTag,
+  deleteKeyword,
+  deleteTag,
+} from "@/app/api/admin";
 import { mutate } from "swr";
 import { cn } from "@/lib/utils";
-
-interface ManageModalProps {
-  modalType: "tags" | "keywords";
-  form: UseFormReturn<z.infer<typeof PostFormSchema>>;
-  setModalType: (modalType: "tags" | "keywords" | null) => void;
-  options: OptionItem[];
-}
 
 export interface OptionItem {
   id: string;
@@ -28,19 +24,36 @@ export interface OptionItem {
   deletedAt: string | null;
 }
 
+interface ManageModalProps {
+  modalType: "tags" | "keywords";
+  form: UseFormReturn<z.infer<typeof PostFormSchema>>;
+  setModalType: (modalType: "tags" | "keywords" | null) => void;
+  options: OptionItem[];
+}
+
 const ManageModal = ({
   modalType,
   form,
   setModalType,
   options: defaultOptions,
 }: ManageModalProps) => {
+  const [options, setOptions] = useState<OptionItem[]>([]);
+  const [originalOptions, setOriginalOptions] = useState<OptionItem[]>([]);
+  const [originalSelected, setOriginalSelected] = useState<string[]>([]);
   const [isSetting, setIsSetting] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [newItem, setNewItem] = useState("");
-  const [options, setOptions] = useState<OptionItem[]>(defaultOptions);
-  const [error, setError] = useState<string | null>(null);
   const [addedItems, setAddedItems] = useState<string[]>([]);
   const [deletedItemIds, setDeletedItemIds] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (modalType) {
+      setOptions(defaultOptions);
+      setOriginalOptions(defaultOptions);
+      setOriginalSelected(form.getValues(modalType) || []);
+    }
+  }, [modalType]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -49,49 +62,53 @@ const ManageModal = ({
     };
   }, []);
 
-  const data = form.watch(modalType);
-
-  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    // 모달 내용이 아닌 바깥 영역 클릭 시만 닫기
-    if (event.target === event.currentTarget) {
-      setModalType(null);
-      setIsSetting(false);
-      setIsAdding(false);
-    }
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) handleCancel();
   };
 
-  const handleAddItem = async () => {
-    const trimmedItem = newItem.trim();
-    if (!trimmedItem) return false;
+  const handleCancel = () => {
+    setOptions(originalOptions);
+    form.setValue(modalType, originalSelected);
+    setIsSetting(false);
+    setIsAdding(false);
+    setAddedItems([]);
+    setDeletedItemIds([]);
+    setModalType(null);
+  };
 
-    if (trimmedItem.length < 2 || trimmedItem.length >= 15) {
+  const handleAddItem = () => {
+    const trimmed = newItem.trim();
+    if (!trimmed) return;
+
+    if (trimmed.length < 2 || trimmed.length >= 15) {
       setError("내용을 최소 2자 이상 15자 미만 입력해주세요.");
-      return false;
+      return;
     }
 
-    if (options.some((item) => item.content === trimmedItem)) {
+    if (options.some((item) => item.content === trimmed)) {
       setError("이미 존재하는 항목입니다.");
-      return false;
+      return;
     }
 
-    const newOption = {
+    const newOption: OptionItem = {
       id: `temp-id-${Date.now()}`,
-      content: trimmedItem,
+      content: trimmed,
       createdAt: "",
       updatedAt: "",
       deletedAt: null,
     };
 
     setOptions((prev) => [...prev, newOption]);
-    setAddedItems((prev) => [...prev, trimmedItem]);
+    setAddedItems((prev) => [...prev, trimmed]);
 
     const selected = form.getValues(modalType) || [];
-    if (!selected.includes(trimmedItem)) {
-      form.setValue(modalType, [...selected, trimmedItem]);
+    if (!selected.includes(trimmed)) {
+      form.setValue(modalType, [...selected, trimmed]);
     }
 
     setNewItem("");
     setError(null);
+    setIsAdding(false);
   };
 
   const handleDeleteItem = (id: string) => {
@@ -99,7 +116,6 @@ const ManageModal = ({
     if (!item) return;
 
     setOptions((prev) => prev.filter((o) => o.id !== id));
-
     if (!id.startsWith("temp-id")) {
       setDeletedItemIds((prev) => [...prev, id]);
     }
@@ -107,38 +123,28 @@ const ManageModal = ({
     const selected = form.getValues(modalType) || [];
     form.setValue(
       modalType,
-      selected.filter((v: string) => v !== item.content),
+      selected.filter((v) => v !== item.content),
     );
   };
 
   const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const selectedItems = options.filter(
-        (item) => form.getValues(modalType)?.includes(item.content) || false,
-      );
-      // 1. 추가된 항목 API 요청
       for (const content of addedItems) {
-        const payload = { content };
-        if (modalType === "tags") {
-          await createTag(payload);
-        } else {
-          await createKeyword(payload);
-        }
+        if (modalType === "tags") await createTag({ content });
+        else await createKeyword({ content });
       }
 
-      // 2. 삭제된 항목 API 요청
       for (const id of deletedItemIds) {
-        if (modalType === "tags") {
-          await deleteTag({ id });
-        } else {
-          await deleteKeyword({ id });
-        }
+        if (modalType === "tags") await deleteTag({ id });
+        else await deleteKeyword({ id });
       }
 
       mutate(modalType);
 
-      // 3. 저장 후 초기화
+      const selectedItems = options.filter((item) =>
+        form.getValues(modalType)?.includes(item.content),
+      );
       form.setValue(
         modalType,
         selectedItems.map((item) => item.content),
@@ -154,7 +160,9 @@ const ManageModal = ({
       setError("저장 중 오류가 발생했습니다.");
     }
   };
-  console.log(!isSetting);
+
+  const data = form.watch(modalType);
+
   return (
     <div
       className="fixed inset-0 z-[102] flex items-center justify-center bg-black/60"
@@ -174,20 +182,11 @@ const ManageModal = ({
                 size="md"
                 className="w-[57px]"
                 variant="outline"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsSetting(false);
-                  setModalType(null);
-                  form.setValue(modalType, []);
-                }}
+                onClick={handleCancel}
               >
                 취소
               </Button>
-              <Button
-                size="md"
-                className="w-[57px]"
-                onClick={(e) => handleSave(e)}
-              >
+              <Button size="md" className="w-[57px]" onClick={handleSave}>
                 저장
               </Button>
             </div>
@@ -196,96 +195,102 @@ const ManageModal = ({
               size="md"
               className="w-[65px]"
               variant="outline"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsSetting(true);
-              }}
+              onClick={() => setIsSetting(true)}
             >
               설정
             </Button>
           )}
         </div>
-        <>
-          {data?.length === 0 && options.length === 0 && !isAdding && (
-            <p className="text-center text-label-assistive pretendard-body-2">
-              추가된 {modalType === "tags" ? "태그" : "검색어"}가 없습니다.
-            </p>
-          )}
-          {options.length > 0 && (
-            <div className="flex flex-col gap-y-6">
-              {options.map((item) => (
-                <div
-                  key={item.content}
-                  className={cn(
-                    "flex items-center justify-between gap-x-2",
-                    !isSetting && "pointer-events-none",
-                  )}
-                >
-                  <CustomCheckboxField
-                    form={form}
-                    name={modalType}
-                    value={item.content}
-                    label={item.content}
-                  />
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (!isSetting) return;
-                      if (isSetting) handleDeleteItem(item.id);
-                    }}
-                    className="whitespace-nowrap text-label-assistive pretendard-body-2"
-                  >
-                    삭제
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
 
-          {/* 추가 입력창 */}
-          {isSetting && isAdding && (
-            <div className="flex flex-col gap-y-2">
-              <div className="flex gap-2">
-                <div className="size-5">
-                  <CustomCheckboxField
-                    form={form}
-                    name={modalType}
-                    value={newItem}
-                  />
-                </div>
-                <label htmlFor={modalType} className="w-full">
-                  <input
-                    id={modalType}
-                    value={newItem}
-                    onChange={(e) => setNewItem(e.target.value)}
-                    className={`flex w-full rounded-md border border-black/10 px-4 py-3 transition-colors pretendard-body-2 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[#8B909C] focus-visible:border-black focus-visible:outline-none focus-visible:ring-0 disabled:mt-3 disabled:cursor-not-allowed disabled:bg-black/10 disabled:text-black/40 web:mb-0 ${error ? "border-error ring-1 focus-visible:border-error" : ""}`}
-                    placeholder={`새로운 ${modalType === "tags" ? "태그" : "검색어"} 입력해주세요.`}
-                  />
-                </label>
+        {data?.length === 0 && options.length === 0 && !isAdding && (
+          <p className="text-center text-label-assistive pretendard-body-2">
+            추가된 {modalType === "tags" ? "태그" : "검색어"}가 없습니다.
+          </p>
+        )}
+
+        {options.length > 0 && (
+          <div className="flex flex-col gap-y-6">
+            {options.map((item) => (
+              <div
+                key={item.content}
+                className={cn(
+                  "flex items-center justify-between gap-x-2",
+                  !isSetting && "pointer-events-none",
+                )}
+              >
+                <CustomCheckboxField
+                  form={form}
+                  name={modalType}
+                  value={item.content}
+                  label={item.content}
+                />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (isSetting) handleDeleteItem(item.id);
+                  }}
+                  className="whitespace-nowrap text-label-assistive pretendard-body-2"
+                >
+                  삭제
+                </button>
               </div>
-              <FormMessage className="ml-6 pretendard-subtitle-s">
-                {error}
-              </FormMessage>
+            ))}
+          </div>
+        )}
+
+        {isSetting && isAdding && (
+          <div className="flex flex-col gap-y-2">
+            <div className="flex gap-2">
+              <div className="size-5">
+                <CustomCheckboxField
+                  form={form}
+                  name={modalType}
+                  value={newItem}
+                />
+              </div>
+              <label htmlFor={modalType} className="w-full">
+                <input
+                  id={modalType}
+                  value={newItem}
+                  onChange={(e) => setNewItem(e.target.value)}
+                  className={`flex w-full rounded-md border border-black/10 px-4 py-3 transition-colors pretendard-body-2 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[#8B909C] focus-visible:border-black focus-visible:outline-none focus-visible:ring-0 disabled:mt-3 disabled:cursor-not-allowed disabled:bg-black/10 disabled:text-black/40 ${
+                    error
+                      ? "border-error ring-1 focus-visible:border-error"
+                      : ""
+                  }`}
+                  placeholder={`새로운 ${modalType === "tags" ? "태그" : "검색어"} 입력해주세요.`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleAddItem();
+                    }
+                  }}
+                />
+              </label>
             </div>
-          )}
-          <Button
-            size="lg"
-            variant="outline"
-            disabled={!isSetting}
-            className="w-full pretendard-subtitle-l"
-            onClick={(e) => {
-              e.preventDefault();
-              if (isAdding) {
-                handleAddItem();
-                setIsAdding(false);
-              } else {
-                setIsAdding(true);
-              }
-            }}
-          >
-            {!isSetting ? "선택완료" : "추가하기"}
-          </Button>
-        </>
+            <FormMessage className="ml-6 pretendard-subtitle-s">
+              {error}
+            </FormMessage>
+          </div>
+        )}
+
+        <Button
+          size="lg"
+          variant="outline"
+          disabled={!isSetting}
+          className="w-full pretendard-subtitle-l"
+          onClick={(e) => {
+            e.preventDefault();
+            if (!isAdding) {
+              setIsAdding(true);
+              return;
+            }
+
+            handleAddItem();
+          }}
+        >
+          {!isSetting ? "선택완료" : "추가하기"}
+        </Button>
       </div>
     </div>
   );
