@@ -15,6 +15,7 @@ interface MobilePostContainerProps {
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
   handleMobileFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handlePageChange: React.Dispatch<React.SetStateAction<number>>;
+  handleKeywordChange: (keyword: string) => void;
   params: PostsRequestParams;
   totalCount: number;
   handleSelectItem: (id: string) => void;
@@ -27,6 +28,7 @@ const MobilePostContainer = ({
   setSelectedIds,
   handleMobileFilterChange,
   handlePageChange,
+  handleKeywordChange,
   params,
   totalCount,
   handleSelectItem,
@@ -37,8 +39,8 @@ const MobilePostContainer = ({
         {/* 필터 바 */}
         <PostFilterBar
           totalCount={allPosts.length}
-          posts={allPosts}
           onFilterChange={handleMobileFilterChange}
+          handleKeywordChange={handleKeywordChange}
         />
 
         {/* 선택 영역 */}

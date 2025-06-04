@@ -1,25 +1,26 @@
 import { AdminCategory } from "@/app/api/dto/admin";
+import { PostCategory } from "@/api/dto/post";
 
-export const ADMIN_CATEGORY_ARRAY = [
+export const ADMIN_POST_CATEGORIES = [
   {
-    label: "전체",
+    text: "전체",
     value: "all",
   },
   {
-    label: "Tech Library",
-    value: AdminCategory.LIBRARY,
+    text: "Tech Library",
+    value: "LIBRARY" as PostCategory,
   },
   {
-    label: "Tech Insight",
-    value: AdminCategory.INSIGHT,
+    text: "Tech Insight",
+    value: "INSIGHT" as PostCategory,
   },
   {
-    label: "DX Simulation",
-    value: AdminCategory.DX,
+    text: "DX Simulation",
+    value: "DX" as PostCategory,
   },
   {
-    label: "Downloads",
-    value: AdminCategory.DOWNLOADS,
+    text: "Downloads",
+    value: "DOWNLOADS" as PostCategory,
   },
 ];
 

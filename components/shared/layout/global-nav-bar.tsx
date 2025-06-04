@@ -21,6 +21,8 @@ import {
 import { SERVICE_NAME } from "@/constants/service";
 import ExternalLinksNav from "@/components/shared/layout/external-links-nav";
 import ActionButtons from "@/components/shared/layout/action-buttons";
+import { Share2Icon } from "lucide-react";
+import { shareUrl } from "@/utils/share";
 
 const NAV_LINKS = [
   { label: "Tech Library", path: TECH_LIBRARY_PAGE },
@@ -73,6 +75,7 @@ const GlobalNavBar = () => {
 
   const isContactPage = path === CONTACT_PAGE;
   const isHome = path === "/";
+  const isDetailPage = path?.includes("/detail/");
 
   return (
     <>
@@ -154,14 +157,27 @@ const GlobalNavBar = () => {
             size="sm"
           />
         )}
-        <IconButton
-          src={isMobileMenuOpen ? "/svg/icon/x.svg" : "/svg/icon/menu.svg"}
-          width={24}
-          height={24}
-          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          variant="normal"
-          size="sm"
-        />
+
+        <div className="flex items-center gap-[24px]">
+          {/* 공유하기 */}
+          {isDetailPage && (
+            <button
+              type="button"
+              onClick={() => shareUrl(window.location.href)}
+            >
+              <Share2Icon />
+            </button>
+          )}
+
+          <IconButton
+            src={isMobileMenuOpen ? "/svg/icon/x.svg" : "/svg/icon/menu.svg"}
+            width={24}
+            height={24}
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            variant="normal"
+            size="sm"
+          />
+        </div>
       </header>
 
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
