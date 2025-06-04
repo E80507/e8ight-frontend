@@ -34,7 +34,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
         <button
           type="button"
           onClick={onClickClose}
-          className="absolute right-[16px] top-[40px] z-20"
+          className="absolute tablet:right-[40px] top-[40px] right-[18px] tablet:top-[40px] z-20"
           aria-label="닫기 버튼"
         >
           <X className="size-[24px] text-[#D6D7DC]" />
