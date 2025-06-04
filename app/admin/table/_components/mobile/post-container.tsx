@@ -39,7 +39,6 @@ const MobilePostContainer = ({
         {/* 필터 바 */}
         <PostFilterBar
           totalCount={allPosts.length}
-          posts={allPosts}
           onFilterChange={handleMobileFilterChange}
           handleKeywordChange={handleKeywordChange}
         />

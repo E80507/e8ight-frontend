@@ -35,7 +35,6 @@ const PostContainer = ({
     <div className="hidden md:flex flex-col gap-10 max-w-[1194px] mx-auto p-10">
       {/* 필터 */}
       <PostFilterBar
-        posts={allPosts}
         currentCategory={currentCategory}
         onCategoryChange={handleCategoryChange}
         onFilterChange={handleFilterChange}

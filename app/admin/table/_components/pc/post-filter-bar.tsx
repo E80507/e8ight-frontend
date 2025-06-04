@@ -1,13 +1,11 @@
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
 import { useCallback, useState, useRef } from "react";
-import SearchBar from "./post-search-bar";
 import { POST_CATEGORIES } from "@/constants/admin";
-import { Post, PostsRequestParams } from "@/api/dto/post";
+import { PostsRequestParams } from "@/api/dto/post";
 import Radio from "@/components/radio";
 import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {
-  posts: Post[];
   currentCategory: string;
   onCategoryChange: (category: string) => void;
   onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
@@ -15,7 +13,6 @@ interface PostFilterBarProps {
 }
 
 const PostFilterBar = ({
-  posts,
   currentCategory,
   onCategoryChange,
   onFilterChange,
@@ -76,7 +73,10 @@ const PostFilterBar = ({
           상세검색
         </div>
         <div className="flex-1 flex items-center px-[16px]">
-          <PostSearchBar placeholder="제목, 저자" setKeyword={handleKeywordChange} />
+          <PostSearchBar
+            placeholder="제목, 저자"
+            setKeyword={handleKeywordChange}
+          />
         </div>
       </div>
 

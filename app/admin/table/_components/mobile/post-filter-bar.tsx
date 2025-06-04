@@ -11,19 +11,17 @@ import { Button } from "@/components/ui/button";
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
 import { useState } from "react";
 import { POST_CATEGORIES } from "@/constants/admin";
-import { Post, PostCategory, PostsRequestParams } from "@/api/dto/post";
+import { PostCategory, PostsRequestParams } from "@/api/dto/post";
 import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {
   totalCount: number;
-  posts: Post[];
   onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handleKeywordChange: (keyword: string) => void;
 }
 
 const PostFilterBar = ({
   totalCount,
-  posts,
   onFilterChange,
   handleKeywordChange,
 }: PostFilterBarProps) => {
@@ -144,7 +142,10 @@ const PostFilterBar = ({
       </div>
 
       {/* 검색바 */}
-      <PostSearchBar placeholder="제목, 저자" setKeyword={handleKeywordChange} />
+      <PostSearchBar
+        placeholder="제목, 저자"
+        setKeyword={handleKeywordChange}
+      />
     </div>
   );
 };
