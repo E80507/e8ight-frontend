@@ -67,6 +67,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:18.3.1"],\
           ["react-hook-form", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:7.53.0"],\
           ["react-quill", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:2.0.0"],\
+          ["swr", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:2.3.3"],\
           ["tailwind-merge", "npm:2.5.2"],\
           ["tailwindcss", "npm:3.4.10"],\
           ["tailwindcss-animate", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:1.0.7"],\
@@ -3044,6 +3045,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["dequal", [\
+      ["npm:2.0.3", {\
+        "packageLocation": "../../.yarn/berry/cache/dequal-npm-2.0.3-53a630c60e-10c0.zip/node_modules/dequal/",\
+        "packageDependencies": [\
+          ["dequal", "npm:2.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["detect-node-es", [\
       ["npm:1.1.0", {\
         "packageLocation": "../../.yarn/berry/cache/detect-node-es-npm-1.1.0-2ad57e0b50-10c0.zip/node_modules/detect-node-es/",\
@@ -5948,6 +5958,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:18.3.1"],\
           ["react-hook-form", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:7.53.0"],\
           ["react-quill", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:2.0.0"],\
+          ["swr", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:2.3.3"],\
           ["tailwind-merge", "npm:2.5.2"],\
           ["tailwindcss", "npm:3.4.10"],\
           ["tailwindcss-animate", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:1.0.7"],\
@@ -6800,6 +6811,30 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["swr", [\
+      ["npm:2.3.3", {\
+        "packageLocation": "../../.yarn/berry/cache/swr-npm-2.3.3-c41d411b37-10c0.zip/node_modules/swr/",\
+        "packageDependencies": [\
+          ["swr", "npm:2.3.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:2.3.3", {\
+        "packageLocation": "./.yarn/__virtual__/swr-virtual-3f75b75ea5/3/.yarn/berry/cache/swr-npm-2.3.3-c41d411b37-10c0.zip/node_modules/swr/",\
+        "packageDependencies": [\
+          ["swr", "virtual:85f830961c7744eaaea94c66ffb793b029c06948d23008e25cdba9e2a680e8ceff250cf18a497e4dddddfe08e7705f225c0be80194fefbbde70a1c8d07808b6a#npm:2.3.3"],\
+          ["@types/react", "npm:18.3.5"],\
+          ["dequal", "npm:2.0.3"],\
+          ["react", "npm:18.3.1"],\
+          ["use-sync-external-store", "virtual:3f75b75ea5600f26cf7f146a57df2eea882efde87a6973b43a4dd321d38402c2b62d15864965282f2a56739a3861c67e855a4eb87cc49cf1700fb3d417dbed90#npm:1.5.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["synckit", [\
       ["npm:0.9.1", {\
         "packageLocation": "../../.yarn/berry/cache/synckit-npm-0.9.1-2153077746-10c0.zip/node_modules/synckit/",\
@@ -7177,6 +7212,28 @@ const RAW_RUNTIME_STATE =
           ["detect-node-es", "npm:1.1.0"],\
           ["react", "npm:18.3.1"],\
           ["tslib", "npm:2.7.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["use-sync-external-store", [\
+      ["npm:1.5.0", {\
+        "packageLocation": "../../.yarn/berry/cache/use-sync-external-store-npm-1.5.0-556c6970f1-10c0.zip/node_modules/use-sync-external-store/",\
+        "packageDependencies": [\
+          ["use-sync-external-store", "npm:1.5.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:3f75b75ea5600f26cf7f146a57df2eea882efde87a6973b43a4dd321d38402c2b62d15864965282f2a56739a3861c67e855a4eb87cc49cf1700fb3d417dbed90#npm:1.5.0", {\
+        "packageLocation": "./.yarn/__virtual__/use-sync-external-store-virtual-f3e9fa08e5/3/.yarn/berry/cache/use-sync-external-store-npm-1.5.0-556c6970f1-10c0.zip/node_modules/use-sync-external-store/",\
+        "packageDependencies": [\
+          ["use-sync-external-store", "virtual:3f75b75ea5600f26cf7f146a57df2eea882efde87a6973b43a4dd321d38402c2b62d15864965282f2a56739a3861c67e855a4eb87cc49cf1700fb3d417dbed90#npm:1.5.0"],\
+          ["@types/react", "npm:18.3.5"],\
+          ["react", "npm:18.3.1"]\
         ],\
         "packagePeers": [\
           "@types/react",\
