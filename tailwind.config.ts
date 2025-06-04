@@ -59,6 +59,7 @@ const config: Config = {
         "label-alternative": "hsl(var(--label-alternative))",
         "label-normal": "hsl(var(--label-normal))",
         "label-natural": "hsl(var(--label-natural))",
+        "label-assistive": "hsl(var(--label-assistive))",
         ring: "hsl(var(--ring))",
         chart: {
           "1": "hsl(var(--chart-1))",
@@ -71,6 +72,9 @@ const config: Config = {
         error: "hsl(var(--error))",
         "gray-strong": "hsl(var(--gray-strong))",
         "gray-700": "hsl(var(--gray-700))",
+        "line-normal": "hsl(var(--line-normal))",
+        "component-natural": "hsl(var(--component-natural))",
+        "component-alternative": "hsl(var(--component-alternative))",
       },
       borderRadius: {
         lg: "var(--radius)", // 10px
@@ -485,6 +489,9 @@ const config: Config = {
         },
         ".toast-shadow": {
           boxShadow: "0px 12px 20px 0px #C4C4C440",
+        },
+        ".post-form-container": {
+          boxShadow: "10px 14px 30px 0px #8B8B8B40",
         },
       });
     }),

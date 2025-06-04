@@ -51,6 +51,7 @@ body {
     --border: 217 10% 93%;
     --input: 0 0% 94%;
     --label-alternative: 231 8% 68%;
+    --label-assistive: 233 8% 80%;
     --label-normal: 231 6% 29%;
     --label-natural: 229 8% 40%;
     --ring: 0 0% 3.9%;
@@ -61,9 +62,13 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 10px;
     --black: 0 0% 0%;
-    --error: 2 100% 50%;
+    --error: 0 85% 44%;
     --gray-strong: 214 4% 34%;
     --gray-700: 230 8% 40%;
+    --component-natural: 230 8% 85%;
+    --component-alternative: 240 10% 96%;
+    --line-normal: 220 10% 94%;
+    --line-natural: 220 8% 85%;
   }
   .dark {
     --background: 0 0% 100%;
@@ -92,6 +97,7 @@ body {
     --chart-5: 340 75% 55%;
     --black: 0 1% 6%;
     --error: 2 100% 50%;
+    --line-normal: 220 10% 94%;
   }
 }
 
@@ -110,4 +116,46 @@ span {
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
+}
+
+.ql-image,
+.ql-bold {
+  width: 28px !important;
+  height: 28px !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+}
+
+.ql-picker-label {
+  color: #a7a9b4 !important;
+}
+
+.ql-snow {
+  padding: 0 !important;
+}
+
+.ql-formats {
+  margin-right: 0 !important;
+  padding: 12px !important;
+  border-right: 1px solid #eeeff1 !important;
+}
+
+.ql-toolbar {
+  border-radius: 4px 4px 0 0 !important;
+}
+
+.ql-editor {
+  padding: 0 !important;
+  font-family: "Pretendard", sans-serif !important;
+  font-size: 16px !important;
+  line-height: 150% !important;
+  padding: 12px !important;
+  font-weight: 400 !important;
+}
+.ql-editor::placeholder {
+  font-family: "Pretendard", sans-serif !important;
+  font-size: 16px !important;
+  line-height: 150% !important;
+  padding: 12px !important;
+  font-weight: 400 !important;
 }

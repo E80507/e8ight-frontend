@@ -11,6 +11,7 @@ interface CustomCheckboxFieldProps<T extends FieldValues> {
   isEssential?: boolean;
   value?: string;
   showMessage?: boolean;
+  disabled?: boolean;
 }
 
 const CustomCheckboxField = <T extends FieldValues>({
@@ -54,7 +55,7 @@ const CustomCheckboxField = <T extends FieldValues>({
           <FormItem className="flex flex-row items-center space-x-2">
             <label
               htmlFor={id}
-              className="flex flex-1 items-center gap-2 cursor-pointer"
+              className="flex flex-1 cursor-pointer items-center gap-2"
               onClick={(e) => {
                 e.preventDefault();
                 handleChange(!isChecked);
@@ -67,7 +68,7 @@ const CustomCheckboxField = <T extends FieldValues>({
                     type="checkbox"
                     checked={isChecked || false}
                     onChange={(e) => handleChange(e.target.checked)}
-                    className="peer absolute opacity-0 w-[20px] h-[20px] tablet:w-[24px] tablet:h-[24px] cursor-pointer z-10"
+                    className="peer absolute z-10 size-[20px] cursor-pointer rounded-[2px] opacity-0 tablet:size-[24px]"
                     value={value}
                     name={`${name}-${value}`}
                   />
@@ -77,7 +78,7 @@ const CustomCheckboxField = <T extends FieldValues>({
               {label && (
                 <label className="select-none pretendard-body-2">
                   {label}
-                  {isEssential && <span className="text-red-500 ml-1">*</span>}
+                  {isEssential && <span className="ml-1 text-red-500">*</span>}
                 </label>
               )}
             </label>
