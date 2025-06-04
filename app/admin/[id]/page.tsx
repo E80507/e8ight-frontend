@@ -3,11 +3,28 @@
 import QuillViewer from "@/components/QuillViewer";
 import { Button } from "@/components/ui/button";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useDeletePosts } from "@/hooks/post/use-delete-posts";
+import { usePost } from "@/hooks/post/use-post";
+import { mutate } from "swr";
 
 const AdminDetailPage = () => {
+  const router = useRouter();
   const { id } = useParams();
   const { post, isLoading, isError } = usePostDetail(id as string);
+  const { deletePosts } = useDeletePosts();
+
+  // 삭제하기
+  const handleDelete = async () => {
+    const confirmed = confirm("해당 게시글을 삭제하시나요?\n\n삭제된 게시글은 다시 복구할 수 없으며, 해당 카테고리 목록에서 제외됩니다.");
+    if (confirmed) {
+      const success = await deletePosts([id as string]);
+      if (success) {
+        await mutate((key) => typeof key === 'string' && key.startsWith('posts'));
+        router.push("/admin");
+      }
+    }
+  };
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러</div>;
@@ -41,7 +58,11 @@ const AdminDetailPage = () => {
         <h3 className="pretendard-title-l">게시글 상세정보</h3>
 
         <div className="flex items-center gap-[8px]">
-          <Button variant="outline" className="h-[48px] w-[97px]">
+          <Button 
+            variant="outline" 
+            className="h-[48px] w-[97px]" 
+            onClick={handleDelete}
+          >
             삭제하기
           </Button>
           <Button className="h-[48px] w-[97px]">수정하기</Button>
