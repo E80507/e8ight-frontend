@@ -17,7 +17,7 @@ const HistorySection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const router = useRouter();
-  const { data } = useSWR("carouselData", getHistoryData);
+  const { data } = useSWR("historyData", getHistoryData);
 
   const handleCategoryClick = (category: string) => {
     if (category === "tech-insight") router.push(TECH_INSIGHT_PAGE);

@@ -11,12 +11,9 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { useEffect, useRef, useState } from "react";
 import formattedDate from "@/util/date";
-
-type Item = {
-  createdAt: string;
-  description: string;
-  image: string;
-};
+import { getSimulationData } from "../api/main";
+import useSWR from "swr";
+import { SiumlationRes } from "../api/dto/main";
 
 const SimulationSection = () => {
   const router = useRouter();
@@ -27,35 +24,39 @@ const SimulationSection = () => {
       stopOnMouseEnter: false,
     }),
   );
+  const { data } = useSWR<SiumlationRes[]>("simluationData", () =>
+    getSimulationData(),
+  );
 
-  const items = [
-    // 캐러셀 아이템 목데이터
-    {
-      createdAt: new Date().toISOString(),
-      description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
-      image: "/images/dummy-dashboard.webp",
-    },
-    {
-      createdAt: new Date().toISOString(),
-      description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
-      image: "/images/dummy-dashboard.webp",
-    },
-    {
-      createdAt: new Date().toISOString(),
-      description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
-      image: "/images/dummy-dashboard.webp",
-    },
-    {
-      createdAt: new Date().toISOString(),
-      description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
-      image: "/images/dummy-dashboard.webp",
-    },
-    {
-      createdAt: new Date().toISOString(),
-      description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
-      image: "/images/dummy-dashboard.webp",
-    },
-  ];
+  // const items = [
+  //   // 캐러셀 아이템 목데이터
+  //   {
+  //     createdAt: new Date().toISOString(),
+  //     description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
+  //     thumbnail: "/images/dummy-dashboard.webp",
+  //   },
+  //   {
+  //     createdAt: new Date().toISOString(),
+  //     description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
+  //     thumbnail: "/images/dummy-dashboard.webp",
+  //   },
+  //   {
+  //     createdAt: new Date().toISOString(),
+  //     description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
+  //     thumbnail: "/images/dummy-dashboard.webp",
+  //   },
+  //   {
+  //     createdAt: new Date().toISOString(),
+  //     description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
+  //     thumbnail: "/images/dummy-dashboard.webp",
+  //   },
+  //   {
+  //     createdAt: new Date().toISOString(),
+  //     description: "이에이트에의 유튜브 영상을 빠르게 확인해보세요.",
+  //     thumbnail: "/images/dummy-dashboard.webp",
+  //   },
+  // ];
+
   const getItemsPerSlide = () => {
     if (typeof window === "undefined") return 1;
     const width = window.innerWidth;
@@ -63,20 +64,21 @@ const SimulationSection = () => {
     if (width >= 600) return 2; // 태블릿
     return 1; // 모바일
   };
-  const [groupedItems, setGroupedItems] = useState<Item[][]>([]);
+  const [groupedItems, setGroupedItems] = useState<SiumlationRes[][]>([]);
 
   useEffect(() => {
     const updateGroupedItems = () => {
+      if (!data) return;
       const count = getItemsPerSlide();
-      const total = items.length;
+      const total = data.length;
 
       const grouped: typeof groupedItems = [];
       for (let i = 0; i < total; i += count) {
-        let group = items.slice(i, i + count);
+        let group = data.slice(i, i + count);
 
         // 마지막 그룹인데 갯수가 부족하면 앞에서부터 채움
         if (group.length < count) {
-          group = [...group, ...items.slice(0, count - group.length)];
+          group = [...group, ...data.slice(0, count - group.length)];
         }
 
         grouped.push(group);
@@ -88,7 +90,7 @@ const SimulationSection = () => {
     updateGroupedItems();
     window.addEventListener("resize", updateGroupedItems);
     return () => window.removeEventListener("resize", updateGroupedItems);
-  }, []);
+  }, [data]);
 
   return (
     <section className="relative">
@@ -156,7 +158,7 @@ const SimulationSection = () => {
                         {/* 이미지 */}
                         <div className="relative aspect-[1.42] size-full overflow-hidden tablet:aspect-[1.5] web:aspect-[1.05]">
                           <Image
-                            src={item.image}
+                            src={item.thumbnail}
                             alt="DX Simulations"
                             fill
                             className="rounded-[20px] object-contain"
