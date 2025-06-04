@@ -6,7 +6,7 @@ import Image from "next/image";
 import { X } from "lucide-react";
 import OneButtonModal from "./one-button-modal";
 import { useState } from "react";
-import { usePostSubscription } from "@/hooks/subscription/use-post-subscription";
+import { usePostSubscribe } from "@/hooks/subscribe/use-post-subscribe";
 
 interface SubscriptionModalProps {
   onClickClose: () => void;
@@ -14,7 +14,7 @@ interface SubscriptionModalProps {
 
 const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
-  const { form, onSubmit } = usePostSubscription();
+  const { form, onSubmit } = usePostSubscribe();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

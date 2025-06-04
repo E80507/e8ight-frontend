@@ -3,11 +3,24 @@
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { usePostSubscription } from "@/hooks/subscription/use-post-subscription";
 import Image from "next/image";
+import { usePostSubscribe } from "@/hooks/subscribe/use-post-subscribe";
+import OneButtonModal from "../_components/modal/one-button-modal";
+import { useState } from "react";
+
 
 const SubscriptionSection = () => {
-  const { onSubmit, form } = usePostSubscription();
+  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
+  const { onSubmit, form } = usePostSubscribe(() => setIsCompleteModalOpen(true));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await onSubmit(e);
+  };
+
+  const handleCompleteModalClose = () => {
+    setIsCompleteModalOpen(false);
+  };
 
   return (
     <section>
@@ -41,7 +54,9 @@ const SubscriptionSection = () => {
           </div>
 
           <Form {...form}>
-            <form onSubmit={onSubmit}>
+            <form
+              onSubmit={handleSubmit}
+            >
               <CustomInputField
                 form={form}
                 name="email"
@@ -62,6 +77,14 @@ const SubscriptionSection = () => {
               </div>
             </form>
           </Form>
+
+          {isCompleteModalOpen && (
+            <OneButtonModal
+              title="뉴스레터 구독이 완료되었습니다"
+              desc="매주 새로운 테크 소식을 전달해드릴게요!"
+              onClickConfirm={handleCompleteModalClose}
+            />
+          )}
         </div>
       </div>
     </section>
