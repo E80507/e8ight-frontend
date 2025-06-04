@@ -11,7 +11,7 @@ interface DetailPageProps {
   params: { id: string };
 }
 
-export default function DetailPage({ params }: DetailPageProps) {
+const DetailPageContent = ({ params }: DetailPageProps) => {
   const { id } = params;
   const { post, isLoading, isError } = usePostDetail(id as string);
 
@@ -57,4 +57,8 @@ export default function DetailPage({ params }: DetailPageProps) {
       <SubscriptionBanner />
     </div>
   );
+};
+
+export default function Page({ params }: DetailPageProps) {
+  return <DetailPageContent params={params} />;
 }

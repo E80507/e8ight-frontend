@@ -244,4 +244,6 @@ const AdminDetailPage = ({ params }: AdminDetailPageProps) => {
   );
 };
 
-export default AdminDetailPage;
+export default function Page({ params }: AdminDetailPageProps) {
+  return <AdminDetailPage params={params} />;
+}
