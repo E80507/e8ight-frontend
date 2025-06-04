@@ -68,12 +68,7 @@ const CreatePostPage = () => {
           <h1 className="pretendard-title-m web:pretendard-title-l">
             컨텐츠 추가
           </h1>
-          <Button
-            size="lg"
-            className="w-[97px]"
-            onClick={handleCreatePost}
-            disabled={!form.formState.isValid}
-          >
+          <Button size="lg" className="w-[97px]" onClick={handleCreatePost}>
             게시하기
           </Button>
         </div>
@@ -128,14 +123,13 @@ const CreatePostPage = () => {
                   {(selectedCategory === POST_CATEGORY_VALUES.LIBRARY ||
                     selectedCategory === POST_CATEGORY_VALUES.INSIGHT) && (
                     <>
-                      <div className="flex flex-col web:flex-row web:gap-x-3">
+                      <div className="flex flex-col gap-y-4 web:flex-row web:gap-x-1 web:gap-y-4">
                         {/* 제목, 저자 필드(라이브러리, 인사이트) */}
                         <CustomInputField
                           form={form}
                           name="title"
                           placeholder="제목을 입력해주세요."
                           label="제목"
-                          className="mb-4 web:mb-0"
                           isEssential
                           noIcon
                         />
@@ -174,7 +168,6 @@ const CreatePostPage = () => {
                     size="cta"
                     className="mt-4 h-14 w-full web:hidden"
                     onClick={handleCreatePost}
-                    disabled={!form.formState.isValid}
                   >
                     게시하기
                   </Button>
