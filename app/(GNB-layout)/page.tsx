@@ -4,7 +4,6 @@ import HeroSection from "@/app/main/hero-section";
 import ArchiveSection from "@/app/main/archive-section";
 import SubscriptionSection from "../main/subscription-section";
 import HistorySection from "../main/history-section";
-import Link from "next/link";
 import SimulationSection from "../main/simulatiom.section";
 
 const Home = () => {
