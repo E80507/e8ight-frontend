@@ -3,13 +3,17 @@
 import QuillViewer from "@/components/QuillViewer";
 import { Button } from "@/components/ui/button";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
 
-const AdminDetailPage = () => {
+interface AdminDetailPageProps {
+  params: { id: string };
+}
+
+const AdminDetailPage = ({ params }: AdminDetailPageProps) => {
   const router = useRouter();
-  const { id } = useParams();
+  const { id } = params;
   const { post, isLoading, isError } = usePostDetail(id as string);
   const { deletePosts } = useDeletePosts();
 

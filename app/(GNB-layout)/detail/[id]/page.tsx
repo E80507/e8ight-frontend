@@ -1,6 +1,5 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
 import PostHeader from "./_components/post-header";
 import PostContent from "./_components/post-content";
@@ -9,8 +8,12 @@ import SubscriptionBanner from "./_components/subscription-banner";
 import Image from "next/image";
 import { isValidImageUrl } from "@/utils/image";
 
-export default function DetailPage() {
-  const { id } = useParams();
+interface DetailPageProps {
+  params: { id: string };
+}
+
+export default function DetailPage({ params }: DetailPageProps) {
+  const { id } = params;
   const { post, isLoading, isError } = usePostDetail(id as string);
 
   const thumbnailSrc =
