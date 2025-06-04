@@ -7,8 +7,10 @@ import { SetStateAction, useState } from "react";
 import { PostsRequestParams } from "@/api/dto/post";
 import { usePost } from "@/hooks/post/use-post";
 import { usePostFilters } from "@/hooks/use-post-filters";
+import { usePathname } from "next/navigation";
 
 const AdminClient = () => {
+  const pathname = usePathname();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [params, setParams] = useState<PostsRequestParams>({
     page: 1,
@@ -38,7 +40,15 @@ const AdminClient = () => {
     totalCount,
     isLoading,
     error,
+    mutate
   } = usePost(params);
+
+  // 라우터 변경 감지하여 데이터 갱신
+  useEffect(() => {
+    if (pathname === '/admin') {
+      mutate();
+    }
+  }, [pathname, mutate]);
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
