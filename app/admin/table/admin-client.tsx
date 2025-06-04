@@ -4,17 +4,32 @@ import PostContainer from "./_components/pc/post-container";
 import MobilePostContainer from "./_components/mobile/post-container";
 import { Dispatch, useEffect } from "react";
 import { SetStateAction, useState } from "react";
-import { PostCategory, PostsRequestParams } from "@/api/dto/post";
+import { PostsRequestParams } from "@/api/dto/post";
 import { usePost } from "@/hooks/post/use-post";
+import { usePostFilters } from "@/hooks/use-post-filters";
 
 const AdminClient = () => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [currentCategory, setCurrentCategory] = useState<string>("all");
   const [params, setParams] = useState<PostsRequestParams>({
     page: 1,
     limit: 10,
     sortOrder: "DESC",
     keyword: "",
+  });
+
+  // 공유 필터 상태 관리
+  const {
+    category,
+    date,
+    setCategory,
+    setDate,
+    handleFilterChange: handleSharedFilterChange,
+  } = usePostFilters((filterParams) => {
+    setParams((prev) => ({
+      ...prev,
+      ...filterParams,
+      page: 1, // 필터 변경 시 첫 페이지로 이동
+    }));
   });
 
   // 게시물 목록 조회
@@ -33,52 +48,12 @@ const AdminClient = () => {
     }));
   };
 
-  // 필터 변경 핸들러
-  const handleFilterChange = (filterParams: Partial<PostsRequestParams>) => {
-    // 날짜 필터의 경우 시간 설정
-    if (filterParams.startDate && filterParams.endDate) {
-      const startDate = new Date(filterParams.startDate);
-      const endDate = new Date(filterParams.endDate);
-
-      filterParams.startDate = startDate.toISOString().split("T")[0];
-      filterParams.endDate = endDate.toISOString().split("T")[0];
-    }
-
-    setParams((prev) => ({
-      ...prev,
-      ...filterParams,
-      page: 1, // 필터 변경 시 첫 페이지로 이동
-    }));
-  };
-
   // 검색어 변경 핸들러
   const handleKeywordChange = (keyword: string) => {
     setParams((prev) => ({
       ...prev,
       keyword,
       page: 1, // 검색어 변경 시 첫 페이지로 이동
-    }));
-  };
-
-  // 카테고리 변경 핸들러
-  const handleCategoryChange = (category: string) => {
-    setCurrentCategory(category);
-
-    if (category === "all") {
-      handleFilterChange({ category: undefined });
-    } else {
-      handleFilterChange({ category: category as PostCategory });
-    }
-  };
-
-  // 필터 변경 핸들러
-  const handleMobileFilterChange = (
-    filterParams: Partial<PostsRequestParams>,
-  ) => {
-    setParams((prev) => ({
-      ...prev,
-      ...filterParams,
-      page: 1, // 필터 변경 시 첫 페이지로 이동
     }));
   };
 
@@ -111,13 +86,15 @@ const AdminClient = () => {
         allPosts={allPosts}
         selectedIds={selectedIds}
         setSelectedIds={setSelectedIds}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={handleSharedFilterChange}
         handlePageChange={handlePageChange}
         handleKeywordChange={handleKeywordChange}
         params={params}
         totalCount={totalCount}
-        handleCategoryChange={handleCategoryChange}
-        currentCategory={currentCategory}
+        currentCategory={category}
+        onCategoryChange={setCategory}
+        date={date}
+        onDateChange={setDate}
       />
 
       {/* 모바일 화면  */}
@@ -126,12 +103,16 @@ const AdminClient = () => {
         currentPagePosts={currentPagePosts}
         selectedIds={selectedIds}
         setSelectedIds={setSelectedIds}
-        handleMobileFilterChange={handleMobileFilterChange}
+        handleFilterChange={handleSharedFilterChange}
         handlePageChange={handlePageChange}
         handleKeywordChange={handleKeywordChange}
         params={params}
         totalCount={totalCount}
         handleSelectItem={handleSelectItem}
+        category={category}
+        onCategoryChange={setCategory}
+        date={date}
+        onDateChange={setDate}
       />
     </>
   );
