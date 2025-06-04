@@ -11,10 +11,15 @@ export const PostFormSchema = z.object({
 
   content: z.string().optional(),
 
-  thumbnail:
-    typeof window === "undefined"
-      ? z.any()
-      : z.instanceof(File, { message: "썸네일 이미지를 업로드해주세요." }),
+  // 썸네일을 필수로 설정 (File 또는 유효한 URL)
+  thumbnail: z
+    .union([
+      z.instanceof(File, { message: "썸네일 이미지를 업로드해주세요." }),
+      z.string().url({ message: "유효한 URL 형식의 썸네일을 입력해주세요." }),
+    ])
+    .refine((val) => val !== undefined && val !== null, {
+      message: "썸네일을 반드시 입력해주세요.",
+    }),
 
   author: z
     .string({ required_error: "저자를 입력해주세요." })
