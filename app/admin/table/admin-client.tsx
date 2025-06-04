@@ -17,7 +17,12 @@ const AdminClient = () => {
   });
 
   // 게시물 목록 조회
-  const { posts: allPosts = [], totalCount, isLoading, error } = usePost(params);
+  const {
+    posts: allPosts = [],
+    totalCount,
+    isLoading,
+    error,
+  } = usePost(params);
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
@@ -34,8 +39,8 @@ const AdminClient = () => {
       const startDate = new Date(filterParams.startDate);
       const endDate = new Date(filterParams.endDate);
 
-      filterParams.startDate = startDate.toISOString().split('T')[0];
-      filterParams.endDate = endDate.toISOString().split('T')[0];
+      filterParams.startDate = startDate.toISOString().split("T")[0];
+      filterParams.endDate = endDate.toISOString().split("T")[0];
     }
 
     setParams((prev) => ({
@@ -56,8 +61,10 @@ const AdminClient = () => {
     }
   };
 
-   // 필터 변경 핸들러
-   const handleMobileFilterChange = (filterParams: Partial<PostsRequestParams>) => {
+  // 필터 변경 핸들러
+  const handleMobileFilterChange = (
+    filterParams: Partial<PostsRequestParams>,
+  ) => {
     setParams((prev) => ({
       ...prev,
       ...filterParams,
@@ -115,7 +122,7 @@ const AdminClient = () => {
         handleSelectItem={handleSelectItem}
       />
     </>
-  )
-}   
+  );
+};
 
 export default AdminClient;
