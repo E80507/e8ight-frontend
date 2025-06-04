@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
 import { useState } from "react";
 import { ADMIN_POST_CATEGORIES } from "@/constants/admin";
-import { PostCategory, PostsRequestParams } from "@/api/dto/post";
+import { PostsRequestParams } from "@/api/dto/post";
 import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {
@@ -41,15 +41,12 @@ const PostFilterBar = ({
   };
 
   // 현재 선택된 카테고리의 텍스트 값 찾기
-  const selectedCategoryText = ADMIN_POST_CATEGORIES.find(
-    (c) => c.value === category
-  )?.text || "전체";
+  const selectedCategoryText =
+    ADMIN_POST_CATEGORIES.find((c) => c.value === category)?.text || "전체";
 
   // 카테고리 변경 핸들러
   const handleCategoryChange = (text: string) => {
-    const selectedCategory = ADMIN_POST_CATEGORIES.find(
-      (c) => c.text === text,
-    );
+    const selectedCategory = ADMIN_POST_CATEGORIES.find((c) => c.text === text);
     if (selectedCategory) {
       onCategoryChange(selectedCategory.value);
     } else {
