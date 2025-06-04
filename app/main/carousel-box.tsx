@@ -9,14 +9,11 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { useRef } from "react";
+import { CarouselRes } from "../api/dto/main";
 
 interface CarouselBoxProps {
   setApi: (api: CarouselApi) => void;
-  items: {
-    category: string;
-    title: string;
-    description: string;
-  }[];
+  items: CarouselRes[];
 }
 
 const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
@@ -52,11 +49,11 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
         </div>
       </div>
       <CarouselContent className="flex-1">
-        {items.map((_, i) => (
+        {items.map((item, i) => (
           <CarouselItem key={i}>
             <div className="relative aspect-[7/8] size-full overflow-hidden rounded-[20px]">
               <Image
-                src="/images/history.webp"
+                src={item.thumbnail}
                 alt="이미지"
                 fill
                 className="object-cover"

@@ -1,12 +1,8 @@
-interface CarouselItem {
+export interface CarouselRes {
   id: string;
   title: string;
   description: string;
-  image: string;
+  thumbnail: string;
   link: string;
   category: string;
-}
-
-export interface CarouselRes {
-  carouselItems: CarouselItem[];
 }

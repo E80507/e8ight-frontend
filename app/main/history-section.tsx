@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 import CarouselBox from "./carousel-box";
-// import { useGetCarouselData } from "@/hooks/main/use-get-carousel-data";
+import { getHistoryData } from "../api/main";
+import useSWR from "swr";
 import {
   TECH_INSIGHT_PAGE,
   TECH_LIBRARY_PAGE,
@@ -16,33 +17,13 @@ const HistorySection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const router = useRouter();
-  // const { data } = useGetCarouselData();
+  const { data } = useSWR("carouselData", getHistoryData);
 
   const handleCategoryClick = (category: string) => {
     if (category === "tech-insight") router.push(TECH_INSIGHT_PAGE);
     else if (category === "downloads") router.push(DOWNLOADS_PAGE);
     else router.push(TECH_LIBRARY_PAGE);
   };
-
-  const items = [
-    // 캐러셀 아이템 목데이터
-    {
-      category: "tech-insight",
-      title: "Tech Insight",
-      description:
-        "Lorem ipsum dolor sit amet, labore natus. Numquam labore soluta quo corrupti",
-    },
-    {
-      category: "tech-library",
-      title: "Tech Library",
-      description: "우리가 만들어가는 혁신.",
-    },
-    {
-      category: "downloads",
-      title: "Downloads",
-      description: "기술과 사람의 연결.",
-    },
-  ];
 
   useEffect(() => {
     if (!api) return;
@@ -59,6 +40,7 @@ const HistorySection = () => {
       api.off("select", handleSelect);
     };
   }, [api]);
+  if (!data) return null;
 
   return (
     <section className="mx-auto max-w-[1440px] px-4 pt-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
@@ -77,17 +59,17 @@ const HistorySection = () => {
 
           {/* 캐러셀: tablet 이하에만 보이게 */}
           <div className="mb-[26px] w-full web:hidden">
-            <CarouselBox setApi={setApi} items={items} />
+            <CarouselBox setApi={setApi} items={data} />
           </div>
 
           {/* 텍스트 본문 */}
           <div>
             <div className="mb-8">
               <p className="mb-4 text-primary subtitle-s tablet:subtitle-m web:subtitle-l">
-                {items[current].title}
+                {data[current]?.title}
               </p>
               <p className="break-words leading-relaxed h2-r tablet:h2-l web:h2-l">
-                {items[current].description}
+                {data[current]?.description}
               </p>
             </div>
 
@@ -96,7 +78,7 @@ const HistorySection = () => {
               variant="outline"
               shape="round"
               className="hidden tablet:block"
-              onClick={() => handleCategoryClick(items[current].category)}
+              onClick={() => handleCategoryClick(data[current].category)}
             >
               더보기
             </Button>
@@ -105,7 +87,7 @@ const HistorySection = () => {
               variant="outline"
               shape="round"
               className="tablet:hidden"
-              onClick={() => handleCategoryClick(items[current].category)}
+              onClick={() => handleCategoryClick(data[current].category)}
             >
               더보기
             </Button>
@@ -114,7 +96,7 @@ const HistorySection = () => {
 
         {/* 캐러셀: web 이상에만 보이게 */}
         <div className="hidden basis-[41%] web:block">
-          <CarouselBox setApi={setApi} items={items} />
+          <CarouselBox setApi={setApi} items={data} />
         </div>
       </div>
     </section>
