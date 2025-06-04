@@ -5,6 +5,7 @@ import { Post, PostsRequestParams } from "@/api/dto/post";
 import PostTableToolbar from "./post-table-toolbar";
 import PostFilterBar from "./post-filter-bar";
 import Pagination from "@/app/_components/pagination";
+import { searchDate } from "@/app/_components/calendar-single";
 
 interface PostContainerProps {
   allPosts: Post[];
@@ -15,8 +16,10 @@ interface PostContainerProps {
   handleKeywordChange: (keyword: string) => void;
   params: PostsRequestParams;
   totalCount: number;
-  handleCategoryChange: (category: string) => void;
   currentCategory: string;
+  onCategoryChange: (category: string) => void;
+  date: searchDate;
+  onDateChange: (date: searchDate) => void;
 }
 
 const PostContainer = ({
@@ -28,17 +31,21 @@ const PostContainer = ({
   handleKeywordChange,
   params,
   totalCount,
-  handleCategoryChange,
   currentCategory,
+  onCategoryChange,
+  date,
+  onDateChange,
 }: PostContainerProps) => {
   return (
     <div className="hidden md:flex flex-col gap-10 max-w-[1194px] mx-auto p-10">
       {/* 필터 */}
       <PostFilterBar
         currentCategory={currentCategory}
-        onCategoryChange={handleCategoryChange}
+        onCategoryChange={onCategoryChange}
         onFilterChange={handleFilterChange}
         handleKeywordChange={handleKeywordChange}
+        date={date}
+        onDateChange={onDateChange}
       />
 
       {/* 테이블 */}

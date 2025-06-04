@@ -7,18 +7,23 @@ import Pagination from "@/app/_components/pagination";
 import PostTableToolbar from "./post-table-toolbar";
 import { PostsRequestParams } from "@/api/dto/post";
 import { Post } from "@/api/dto/post";
+import { searchDate } from "@/app/_components/calendar-single";
 
 interface MobilePostContainerProps {
   allPosts: Post[];
   currentPagePosts: Post[];
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
-  handleMobileFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
+  handleFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handlePageChange: React.Dispatch<React.SetStateAction<number>>;
   handleKeywordChange: (keyword: string) => void;
   params: PostsRequestParams;
   totalCount: number;
   handleSelectItem: (id: string) => void;
+  category: string;
+  onCategoryChange: (category: string) => void;
+  date: searchDate;
+  onDateChange: (date: searchDate) => void;
 }
 
 const MobilePostContainer = ({
@@ -26,12 +31,16 @@ const MobilePostContainer = ({
   currentPagePosts,
   selectedIds,
   setSelectedIds,
-  handleMobileFilterChange,
+  handleFilterChange,
   handlePageChange,
   handleKeywordChange,
   params,
   totalCount,
   handleSelectItem,
+  category,
+  onCategoryChange,
+  date,
+  onDateChange,
 }: MobilePostContainerProps) => {
   return (
     <div className="flex flex-col">
@@ -39,8 +48,12 @@ const MobilePostContainer = ({
         {/* 필터 바 */}
         <PostFilterBar
           totalCount={allPosts.length}
-          onFilterChange={handleMobileFilterChange}
+          onFilterChange={handleFilterChange}
           handleKeywordChange={handleKeywordChange}
+          category={category}
+          onCategoryChange={onCategoryChange}
+          date={date}
+          onDateChange={onDateChange}
         />
 
         {/* 선택 영역 */}
