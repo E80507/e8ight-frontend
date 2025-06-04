@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 interface PostSearchBarProps {
   placeholder: string;
   setKeyword: (keyword: string) => void;
+  onReset: () => void;
 }
 
-const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
+const PostSearchBar = ({ placeholder, setKeyword, onReset }: PostSearchBarProps) => {
   const [inputValue, setInputValue] = useState("");
 
   // 인풋 변경 핸들러
@@ -26,11 +27,12 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
   // 초기화 핸들러
   const handleReset = () => {
     setInputValue("");
-    setKeyword("");
+    onReset();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setKeyword(inputValue);
   };
 
   return (
