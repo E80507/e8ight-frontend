@@ -43,7 +43,7 @@ const HistorySection = () => {
   if (!data) return null;
 
   return (
-    <section className="mx-auto max-w-[1440px] px-4 pt-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
+    <section className="mx-auto max-w-[1440px] px-4 py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
       <div className="flex flex-col  web:flex-row web:justify-between web:gap-x-[21%]">
         {/* 텍스트 영역 */}
         <div className="flex min-w-0 flex-col web:h-[523px] web:basis-[38%]  web:justify-between">
