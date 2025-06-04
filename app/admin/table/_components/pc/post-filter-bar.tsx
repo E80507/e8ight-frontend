@@ -1,5 +1,5 @@
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
-import { useCallback, useState, useRef } from "react";
+import { useCallback } from "react";
 import { ADMIN_POST_CATEGORIES } from "@/constants/admin";
 import { PostsRequestParams } from "@/api/dto/post";
 import Radio from "@/components/radio";
@@ -7,30 +7,25 @@ import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {
   currentCategory: string;
+  date: searchDate;
   onCategoryChange: (category: string) => void;
+  onDateChange: (date: searchDate) => void;
   onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handleKeywordChange: (keyword: string) => void;
 }
 
 const PostFilterBar = ({
   currentCategory,
+  date,
   onCategoryChange,
+  onDateChange,
   onFilterChange,
   handleKeywordChange,
 }: PostFilterBarProps) => {
-  const [date, setDate] = useState<searchDate>({
-    start: undefined,
-    end: undefined,
-  });
-
-  // 이전 날짜 상태를 저장하는 ref
-  const prevDateRef = useRef<searchDate>(date);
-
   // 날짜 변경 핸들러
   const handleDateChange = useCallback(
     (newDate: searchDate) => {
-      // 상태 업데이트
-      setDate(newDate);
+      onDateChange(newDate);
 
       // 시작일과 종료일이 모두 있을 때만 필터 적용
       if (newDate?.start && newDate?.end) {
@@ -42,27 +37,13 @@ const PostFilterBar = ({
         const startDateStr = startDate.toISOString().split("T")[0];
         const endDateStr = endDate.toISOString().split("T")[0];
 
-        // 이전 날짜와 동일한 경우 필터 적용하지 않음
-        if (
-          prevDateRef.current?.start?.getTime() === startDate.getTime() &&
-          prevDateRef.current?.end?.getTime() === endDate.getTime()
-        ) {
-          return;
-        }
-
-        // 현재 날짜를 이전 날짜로 저장
-        prevDateRef.current = {
-          start: startDate,
-          end: endDate,
-        };
-
         onFilterChange({
           startDate: startDateStr,
           endDate: endDateStr,
         });
       }
     },
-    [onFilterChange],
+    [onDateChange, onFilterChange],
   );
 
   return (
