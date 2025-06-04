@@ -120,13 +120,17 @@ const CustomEmailField = <T extends FieldValues>({
               >
                 <SelectTrigger className="flex-1">
                   {isCustomDomain ? (
-                    <Input
-                      type="text"
-                      className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-                      placeholder="직접 입력"
-                      onChange={(e) => handleCustomDomainChange(e.target.value, field)}
-                      value={customDomain}
-                    />
+                    <div onClick={(e) => e.stopPropagation()}>
+                      <Input
+                        type="text"
+                        className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                        placeholder="직접 입력"
+                        onChange={(e) => handleCustomDomainChange(e.target.value, field)}
+                        value={customDomain}
+                        onFocus={(e) => e.stopPropagation()}
+                        onPointerDown={(e) => e.stopPropagation()}
+                      />
+                    </div>
                   ) : (
                     <SelectValue />
                   )}
