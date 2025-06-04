@@ -2,7 +2,7 @@ import { apiFetch } from "@/util/fetch";
 import { GetPostsReq, SearchReq } from "./dto/dashboard";
 
 // 포스트 검색
-export const fetchPostsByTitle = async (data: SearchReq) => {
+export const fetchPostsBySearch = async (data: SearchReq) => {
   try {
     const res = await apiFetch(`/search`, {
       method: "POST",
