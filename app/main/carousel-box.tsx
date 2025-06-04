@@ -9,11 +9,11 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { useRef } from "react";
-import { CarouselRes } from "../api/dto/main";
+import { HistoryRes } from "../api/dto/main";
 
 interface CarouselBoxProps {
   setApi: (api: CarouselApi) => void;
-  items: CarouselRes[];
+  items: HistoryRes[];
 }
 
 const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
