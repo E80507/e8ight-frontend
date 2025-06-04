@@ -22,7 +22,7 @@ const ArchiveSection = () => {
   });
 
   const { posts = [] } = usePost(params);
-  
+
   const onClickPdfDownload = (postId: string) => {
     setSelectedPostId(postId);
   };
