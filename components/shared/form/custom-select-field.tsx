@@ -52,13 +52,13 @@ const CustomSelectField = <T extends FieldValues>({
 
         return (
           <div className={className}>
-            <FormItem className="flex flex-col gap-3">
+            <FormItem>
               <FormControl>
                 <>
-                  <FormLabel htmlFor={name}>
+                  <FormLabel htmlFor={name} className="mb-3 gap-0">
                     {label}
                     {isEssential && (
-                      <span className="ml-[2px] text-error">{`*`}</span>
+                      <span className="ml-[4px] text-error">{`*`}</span>
                     )}
                   </FormLabel>
                   <Select
@@ -87,7 +87,10 @@ const CustomSelectField = <T extends FieldValues>({
                   </Select>
                 </>
               </FormControl>
-              <FormMessage />
+
+              <div className="mt-2">
+                <FormMessage />
+              </div>
             </FormItem>
           </div>
         );

@@ -46,9 +46,9 @@ const CustomCheckboxGroupField = <T extends FieldValues>({
         return (
           <FormItem className={className}>
             {label && (
-              <FormLabel className="mb-[24px]">
+              <FormLabel className="mb-[24px] gap-0">
                 {label}
-                {isEssential && <span className="ml-1 text-red-500">*</span>}
+                {isEssential && <span className="ml-[4px] text-red-500">*</span>}
               </FormLabel>
             )}
             <div className="flex flex-col gap-[24px]">

@@ -94,10 +94,10 @@ const CustomEmailField = <T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           {label && (
-            <FormLabel className="mb-3 web:mb-2" htmlFor={name}>
+            <FormLabel className="mb-3 web:mb-2 gap-0" htmlFor={name}>
               {label}
               {isEssential && (
-                <span className="ml-[2px] text-error">{`*`}</span>
+                <span className="ml-[4px] text-error">{`*`}</span>
               )}
             </FormLabel>
           )}
