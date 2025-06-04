@@ -3,7 +3,7 @@
 import { Post } from "@/types/post";
 import formattedDate from "@/util/date";
 import { shareUrl } from "@/utils/share";
-import { Share2Icon } from "@radix-ui/react-icons";
+import { Share2Icon } from "lucide-react";
 
 interface PostHeaderProps {
   post: Post | undefined;
@@ -18,7 +18,7 @@ export default function PostHeader({ post }: PostHeaderProps) {
 
       <div className="flex items-center gap-[8px] mt-[16px] tablet:pretendard-body-2 pretendard-body-3 text-[#A7A9B4]">
         <span>{formattedDate(post?.createdAt, "INPUT_DATE")}</span>
-        <span className="before:content-[''] before:inline-block before:w-[1px] before:h-[14px] before:bg-[#A7A9B4] before:mx-2"></span>
+        <span className="relative before:absolute before:content-[''] before:w-[1px] before:h-[14px] before:bg-[#EEEFF1] before:top-1/2 before:-translate-y-1/2" />
         <span>저자: {post?.author}</span>
       </div>
 
