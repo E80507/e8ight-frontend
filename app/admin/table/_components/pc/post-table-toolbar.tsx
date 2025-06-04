@@ -2,8 +2,6 @@ import { Button } from "@/components/ui/button";
 import { CREATE_POST_PAGE } from "@/constants/path";
 import { useRouter } from "next/navigation";
 import { useDeletePosts } from "@/hooks/post/use-delete-posts";
-import TwoButtonModal from "@/app/_components/modal/two-button-modal";
-import { useState } from "react";
 
 interface PostTableToolbarProps {
   totalCount: number;
@@ -16,12 +14,15 @@ const PostTableToolbar = ({
 }: PostTableToolbarProps) => {
   const router = useRouter();
   const { deletePosts } = useDeletePosts();
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleDelete = async () => {
-    setIsDeleteModalOpen(false);
-    const success = await deletePosts(selectedIds);
-    console.log(success);
+    const confirmed = confirm(
+      "해당 게시글을 삭제하시나요?\n\n삭제된 게시글은 다시 복구할 수 없으며, 해당 카테고리 목록에서 제외됩니다.",
+    );
+    if (confirmed) {
+      const success = await deletePosts(selectedIds);
+      console.log(success);
+    }
   };
 
   return (
@@ -33,21 +34,11 @@ const PostTableToolbar = ({
           variant={"outline"}
           size={"lg"}
           className="max-w-[97px]"
-          onClick={() => setIsDeleteModalOpen(true)}
+          onClick={handleDelete}
           disabled={selectedIds.length === 0}
         >
           삭제하기
         </Button>
-
-        {isDeleteModalOpen && (
-          <TwoButtonModal
-            title="해당 게시글을 삭제하시나요?"
-            desc="삭제된 게시글은 다시 복구할 수 없으며, 해당 카테고리 목록에서 제외됩니다."
-            buttonText="확인"
-            onClickFirstBtn={() => setIsDeleteModalOpen(false)}
-            onClickSecondBtn={handleDelete}
-          />
-        )}
 
         <Button
           size={"lg"}

@@ -20,6 +20,7 @@ interface PostContainerProps {
   onCategoryChange: (category: string) => void;
   date: searchDate;
   onDateChange: (date: searchDate) => void;
+  resetFilters: () => void;
 }
 
 const PostContainer = ({
@@ -35,6 +36,7 @@ const PostContainer = ({
   onCategoryChange,
   date,
   onDateChange,
+  resetFilters,
 }: PostContainerProps) => {
   return (
     <div className="hidden md:flex flex-col gap-10 max-w-[1194px] mx-auto p-10">
@@ -46,6 +48,7 @@ const PostContainer = ({
         handleKeywordChange={handleKeywordChange}
         date={date}
         onDateChange={onDateChange}
+        resetFilters={resetFilters}
       />
 
       {/* 테이블 */}

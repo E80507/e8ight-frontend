@@ -8,16 +8,24 @@ interface UsePostFiltersReturn {
   setCategory: (category: string) => void;
   setDate: (date: searchDate) => void;
   handleFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
+  resetFilters: () => void;
 }
+
+const getDefaultDate = () => {
+  const end = new Date();
+  const start = new Date();
+  start.setMonth(start.getMonth() - 1);
+  return {
+    start,
+    end,
+  };
+};
 
 export const usePostFilters = (
   onFilterChange: (filterParams: Partial<PostsRequestParams>) => void,
 ): UsePostFiltersReturn => {
   const [category, setCategory] = useState<string>("all");
-  const [date, setDate] = useState<searchDate>({
-    start: undefined,
-    end: undefined,
-  });
+  const [date, setDate] = useState<searchDate>(getDefaultDate());
 
   // 카테고리 변경 핸들러
   const handleCategoryChange = useCallback(
@@ -41,11 +49,30 @@ export const usePostFilters = (
     [onFilterChange],
   );
 
+  // 필터 초기화 핸들러
+  const resetFilters = useCallback(() => {
+    const defaultDate = getDefaultDate();
+    setCategory("all");
+    setDate(defaultDate);
+
+    // API 필터 초기화
+    const startDate = defaultDate.start.toISOString().split("T")[0];
+    const endDate = defaultDate.end.toISOString().split("T")[0];
+
+    onFilterChange({
+      category: undefined,
+      keyword: "",
+      startDate,
+      endDate,
+    });
+  }, [onFilterChange]);
+
   return {
     category,
     date,
     setCategory: handleCategoryChange,
     setDate,
     handleFilterChange,
+    resetFilters,
   };
 };

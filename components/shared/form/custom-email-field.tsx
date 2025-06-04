@@ -32,11 +32,11 @@ interface CustomEmailFieldProps<T extends FieldValues> {
 }
 
 const EMAIL_DOMAINS = [
+  "직접입력",
   "gmail.com",
   "naver.com",
   "daum.net",
   "hanmail.net",
-  "직접입력",
 ];
 
 const CustomEmailField = <T extends FieldValues>({
@@ -51,7 +51,7 @@ const CustomEmailField = <T extends FieldValues>({
   const [emailId, setEmailId] = useState("");
   const [domain, setDomain] = useState("");
   const [customDomain, setCustomDomain] = useState("");
-  const [isCustomDomain, setIsCustomDomain] = useState(false);
+  const [isCustomDomain, setIsCustomDomain] = useState(true);
   const error = form.formState.errors[name];
 
   const handleEmailChange = (
@@ -94,10 +94,10 @@ const CustomEmailField = <T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           {label && (
-            <FormLabel className="mb-3 web:mb-2" htmlFor={name}>
+            <FormLabel className="mb-3 web:mb-2 gap-0" htmlFor={name}>
               {label}
               {isEssential && (
-                <span className="ml-[2px] text-error">{`*`}</span>
+                <span className="ml-[4px] text-error">{`*`}</span>
               )}
             </FormLabel>
           )}
@@ -108,52 +108,43 @@ const CustomEmailField = <T extends FieldValues>({
                 type="text"
                 disabled={disabled}
                 id={name}
-                className={`flex-1 ${error ? "border-destructive focus-visible:border-destructive" : ""} ${className}`}
+                className={`flex-1 h-[48px] ${error ? "border-destructive focus-visible:border-destructive" : ""} ${className}`}
                 onChange={(e) => handleEmailChange(e.target.value, field)}
                 placeholder={placeholder}
                 value={emailId}
               />
               <span className="text-gray-500">@</span>
-              {isCustomDomain ? (
-                <Select
-                  onValueChange={(value) => handleDomainSelect(value, field)}
-                >
-                  <SelectTrigger className="flex-1">
-                    <Input
-                      type="text"
-                      className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-                      placeholder="직접 입력"
-                      onChange={(e) =>
-                        handleCustomDomainChange(e.target.value, field)
-                      }
-                      value={customDomain}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {EMAIL_DOMAINS.map((domain) => (
-                      <SelectItem key={domain} value={domain}>
-                        {domain}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              ) : (
-                <Select
-                  onValueChange={(value) => handleDomainSelect(value, field)}
-                  value={domain}
-                >
-                  <SelectTrigger className="flex-1">
-                    <SelectValue placeholder="선택" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {EMAIL_DOMAINS.map((domain) => (
-                      <SelectItem key={domain} value={domain}>
-                        {domain}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
+              <Select
+                onValueChange={(value) => handleDomainSelect(value, field)}
+                value={isCustomDomain ? "직접입력" : domain}
+              >
+                <SelectTrigger className="flex-1 h-[48px]">
+                  {isCustomDomain ? (
+                    <div onClick={(e) => e.stopPropagation()}>
+                      <Input
+                        type="text"
+                        className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                        placeholder="직접 입력"
+                        onChange={(e) =>
+                          handleCustomDomainChange(e.target.value, field)
+                        }
+                        value={customDomain}
+                        onFocus={(e) => e.stopPropagation()}
+                        onPointerDown={(e) => e.stopPropagation()}
+                      />
+                    </div>
+                  ) : (
+                    <SelectValue />
+                  )}
+                </SelectTrigger>
+                <SelectContent>
+                  {EMAIL_DOMAINS.map((domain) => (
+                    <SelectItem key={domain} value={domain}>
+                      {domain}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </FormControl>
 

@@ -6,9 +6,14 @@ import { useState } from "react";
 interface PostSearchBarProps {
   placeholder: string;
   setKeyword: (keyword: string) => void;
+  onReset: () => void;
 }
 
-const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
+const PostSearchBar = ({
+  placeholder,
+  setKeyword,
+  onReset,
+}: PostSearchBarProps) => {
   const [inputValue, setInputValue] = useState("");
 
   // 인풋 변경 핸들러
@@ -26,15 +31,19 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
   // 초기화 핸들러
   const handleReset = () => {
     setInputValue("");
-    setKeyword("");
+    onReset();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setKeyword(inputValue);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-[8px]">
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center gap-[8px] w-full"
+    >
       <div className="relative flex items-center w-[400px]">
         <SearchIcon className="absolute inset-y-0 left-0 my-auto ml-[16px] size-[24px] text-[#D6D7DC]" />
 

@@ -53,10 +53,10 @@ const CustomTextareaField = <T extends FieldValues>({
           <FormControl>
             <>
               {label && (
-                <FormLabel htmlFor={name}>
+                <FormLabel htmlFor={name} className="gap-0">
                   {label}
                   {isEssential && (
-                    <span className="ml-[2px] text-error">{`*`}</span>
+                    <span className="ml-[4px] text-error">{`*`}</span>
                   )}
                 </FormLabel>
               )}

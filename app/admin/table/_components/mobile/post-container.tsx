@@ -24,6 +24,7 @@ interface MobilePostContainerProps {
   onCategoryChange: (category: string) => void;
   date: searchDate;
   onDateChange: (date: searchDate) => void;
+  resetFilters: () => void;
 }
 
 const MobilePostContainer = ({
@@ -41,6 +42,7 @@ const MobilePostContainer = ({
   onCategoryChange,
   date,
   onDateChange,
+  resetFilters,
 }: MobilePostContainerProps) => {
   return (
     <div className="flex flex-col">
@@ -54,6 +56,7 @@ const MobilePostContainer = ({
           onCategoryChange={onCategoryChange}
           date={date}
           onDateChange={onDateChange}
+          resetFilters={resetFilters}
         />
 
         {/* 선택 영역 */}

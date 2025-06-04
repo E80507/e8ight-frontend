@@ -21,6 +21,7 @@ import { handlePostCategoryText } from "@/util/string";
 import { Post } from "@/api/dto/post";
 import Check from "@/components/shared/check";
 import formattedDate from "@/util/date";
+import { useRouter } from "next/navigation";
 
 interface PostTableProps {
   data: Post[];
@@ -35,6 +36,7 @@ export function PostTable({
   selectedIds,
   setSelectedIds,
 }: PostTableProps) {
+  const router = useRouter();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -110,7 +112,14 @@ export function PostTable({
       size: 217,
     }),
     columnHelper.accessor("title", {
-      cell: (data) => data.getValue(),
+      cell: (info) => (
+        <div
+          className="cursor-pointer hover:text-primary"
+          onClick={() => router.push(`/admin/${info.row.original.id}`)}
+        >
+          {info.getValue()}
+        </div>
+      ),
       header: "제목",
       size: 556,
     }),
@@ -178,7 +187,13 @@ export function PostTable({
               {row.getVisibleCells().map((cell, cellIndex) => (
                 <TableCell
                   size="sm"
-                  className={`h-[45px] ${selectedIds.includes(row.original.id) ? "bg-[#F7FEFD]" : ""} border-t ${rowIndex === table.getRowModel().rows.length - 1 ? "border-b" : ""}`}
+                  className={`h-[45px] ${
+                    selectedIds.includes(row.original.id) ? "bg-[#F7FEFD]" : ""
+                  } border-t ${
+                    rowIndex === table.getRowModel().rows.length - 1
+                      ? "border-b"
+                      : ""
+                  }`}
                   key={cell.id + cellIndex}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
