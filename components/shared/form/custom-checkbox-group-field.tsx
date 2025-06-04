@@ -93,7 +93,10 @@ const CustomCheckboxGroupField = <T extends FieldValues>({
                 </div>
               ))}
             </div>
-            <FormMessage />
+
+            <div className="mt-2">
+              <FormMessage />
+            </div>
           </FormItem>
         );
       }}
