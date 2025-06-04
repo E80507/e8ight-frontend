@@ -93,7 +93,7 @@ const SimulationSection = () => {
   }, [data]);
 
   return (
-    <section className="relative">
+    <section className="relative min-h-[389px]">
       <div className="absolute inset-0 -z-10 h-[389px]">
         <Image
           src="/images/bg-simulation.webp"
@@ -104,7 +104,7 @@ const SimulationSection = () => {
       </div>
 
       <Carousel opts={{ loop: true }} plugins={[autoplayRef.current]}>
-        <div className="relative mx-auto max-w-[1440px] px-4 pb-10 pt-[99px] text-white tablet:px-[30px] web:px-[120px]">
+        <div className="relative mx-auto max-w-[1440px] px-4 pb-10 pt-[99px] text-white tablet:px-[30px] web:px-[120px] web:py-[100px]">
           <div className="relative flex flex-col gap-x-5">
             <div className="mb-5 flex flex-col gap-y-2 web:mb-0">
               <p className="pretendard-h1-r tablet:pretendard-h1-m web:pretendard-h1-l">
