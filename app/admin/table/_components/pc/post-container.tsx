@@ -12,6 +12,7 @@ interface PostContainerProps {
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
   handleFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handlePageChange: React.Dispatch<React.SetStateAction<number>>;
+  handleKeywordChange: (keyword: string) => void;
   params: PostsRequestParams;
   totalCount: number;
   handleCategoryChange: (category: string) => void;
@@ -24,6 +25,7 @@ const PostContainer = ({
   setSelectedIds,
   handleFilterChange,
   handlePageChange,
+  handleKeywordChange,
   params,
   totalCount,
   handleCategoryChange,
@@ -33,16 +35,16 @@ const PostContainer = ({
     <div className="hidden md:flex flex-col gap-10 max-w-[1194px] mx-auto p-10">
       {/* 필터 */}
       <PostFilterBar
-        posts={allPosts}
         currentCategory={currentCategory}
         onCategoryChange={handleCategoryChange}
         onFilterChange={handleFilterChange}
+        handleKeywordChange={handleKeywordChange}
       />
 
       {/* 테이블 */}
       <div className="flex flex-col gap-[16px]">
         {/* 툴바 */}
-        <PostTableToolbar totalCount={totalCount} />
+        <PostTableToolbar totalCount={totalCount} selectedIds={selectedIds} />
 
         <div className="flex flex-col gap-[40px]">
           {/* 테이블 */}

@@ -8,6 +8,7 @@ export interface PostsRequestParams {
   startDate?: string;
   endDate?: string;
   sortOrder?: SortOrder;
+  keyword?: string;
 }
 
 export interface Post {

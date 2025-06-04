@@ -1,6 +1,20 @@
 import { PostsRequestParams, PostsResponse } from "./dto/post";
 import { apiFetch } from "@/util/fetch";
 
+export const deletePost = async (postId: string) => {
+  return apiFetch(`/posts/${postId}`, {
+    method: "DELETE",
+    headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_ADMIN_KEY || "",
+    },
+  });
+};
+
+export const deletePosts = async (postIds: string[]) => {
+  const promises = postIds.map(id => deletePost(id));
+  return Promise.all(promises);
+}; 
+
 export const getPosts = async (
   params: PostsRequestParams,
 ): Promise<PostsResponse> => {
@@ -20,6 +34,9 @@ export const getPosts = async (
   }
   if (params.sortOrder) {
     queryParams.append("sortOrder", params.sortOrder);
+  }
+  if (params.keyword) {
+    queryParams.append("keyword", params.keyword);
   }
 
   return apiFetch(`/posts?${queryParams.toString()}`);

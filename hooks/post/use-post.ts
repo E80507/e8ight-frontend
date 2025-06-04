@@ -1,13 +1,19 @@
 import useSWR from "swr";
-import { getPosts } from "@/api/posts";
+import { getPosts } from "@/api/post";
 import { PostsRequestParams, PostsResponse } from "@/api/dto/post";
 
-export const usePosts = (params: PostsRequestParams) => {
-  const queryKey = ["posts", params];
-
+export const usePost = (params: PostsRequestParams) => {
   const { data, error, isLoading, mutate } = useSWR<PostsResponse>(
-    queryKey,
-    () => getPosts(params),
+    ["posts", JSON.stringify(params)],
+    async () => {
+      return getPosts(params);
+    },
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      shouldRetryOnError: false,
+      dedupingInterval: 2000,
+    },
   );
 
   return {
