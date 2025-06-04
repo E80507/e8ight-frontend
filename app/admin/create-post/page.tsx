@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSelectField from "@/components/shared/form/custom-select-field";
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { PostFormSchema } from "@/schema/post";
-import { POST_CATEGORIES } from "@/constants/admin";
+import { POST_CATEGORIES, POST_CATEGORY_VALUES } from "@/constants/admin";
 import { Button } from "@/components/ui/button";
-import { AdminCategory } from "@/app/api/dto/admin";
+import { AdminCategory, CreatePostReq } from "@/app/api/dto/admin";
 import ThumbnailUploader from "./_components/thumbnail-uploader";
 import TagKeyword from "./_components/tag-keyword";
 import dynamic from "next/dynamic";
@@ -53,13 +53,25 @@ const CreatePostPage = () => {
 
   const handleCreatePost = handleSubmit(
     (data) => {
-      createPost(data);
+      createPost(data as CreatePostReq);
     },
     (errors) => {
       console.log("유효성 오류:", errors);
     },
   );
+  useEffect(() => {
+    console.log(form.getValues());
+  }, [form.getValues()]);
+  // content 폼값 직접 watch
+  const contentValue = form.watch("content");
 
+  // QuillEditor에서 변경된 내용 폼에 설정할 때 debounce 적용 (300ms)
+  const onContentChange = (content: string) => {
+    // 불필요한 setValue 반복 방지: content가 실제로 변경됐을 때만 호출
+    if (content !== form.getValues("content")) {
+      form.setValue("content", content, { shouldValidate: true });
+    }
+  };
   return (
     <div className="web:h-full web:pt-10">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col gap-y-8 bg-white px-4 py-6 web:rounded-lg web:p-10">
@@ -76,7 +88,10 @@ const CreatePostPage = () => {
             <div className="flex flex-col gap-y-8">
               {/* 카테고리 필드 */}
               <CustomSelectField
-                selectValue={POST_CATEGORIES}
+                selectValue={POST_CATEGORIES.map((category) => ({
+                  value: category.value,
+                  text: category.label,
+                }))}
                 form={form}
                 name="category"
                 placeholder="선택"
@@ -84,7 +99,12 @@ const CreatePostPage = () => {
                 onChange={(value) => {
                   if (value) {
                     setIsCategorySelected(true);
-                    setSelectedCategory(value as AdminCategory);
+                    const foundCategory = POST_CATEGORIES.find(
+                      (category) => category.value === value,
+                    );
+                    if (foundCategory) {
+                      setSelectedCategory(foundCategory.value as AdminCategory);
+                    }
                   }
                 }}
                 className="web:w-[177px]"
@@ -93,15 +113,15 @@ const CreatePostPage = () => {
               {isCategorySelected && (
                 <div
                   className={`flex flex-col gap-y-8 ${
-                    selectedCategory === AdminCategory.LIBRARY ||
-                    selectedCategory === AdminCategory.INSIGHT
+                    selectedCategory === POST_CATEGORY_VALUES.LIBRARY ||
+                    selectedCategory === POST_CATEGORY_VALUES.INSIGHT
                       ? "gap-x-3"
                       : ""
                   }`}
                 >
                   {/* 제목 필드(다운로드, DX) */}
-                  {selectedCategory !== AdminCategory.LIBRARY &&
-                    selectedCategory !== AdminCategory.INSIGHT && (
+                  {selectedCategory !== POST_CATEGORY_VALUES.LIBRARY &&
+                    selectedCategory !== POST_CATEGORY_VALUES.INSIGHT && (
                       <CustomInputField
                         form={form}
                         name="title"
@@ -111,8 +131,8 @@ const CreatePostPage = () => {
                       />
                     )}
 
-                  {(selectedCategory === AdminCategory.LIBRARY ||
-                    selectedCategory === AdminCategory.INSIGHT) && (
+                  {(selectedCategory === POST_CATEGORY_VALUES.LIBRARY ||
+                    selectedCategory === POST_CATEGORY_VALUES.INSIGHT) && (
                     <>
                       <div className="flex flex-col web:flex-row web:gap-x-3">
                         {/* 제목, 저자 필드(라이브러리, 인사이트) */}
@@ -137,12 +157,8 @@ const CreatePostPage = () => {
                         </div>
                       </div>
                       <QuillEditor
-                        value={form.watch("content")}
-                        onChange={(content) =>
-                          form.setValue("content", content, {
-                            shouldValidate: true,
-                          })
-                        }
+                        value={contentValue}
+                        onChange={onContentChange}
                         onImageUpload={handleImageUpload}
                         height="468px"
                       />

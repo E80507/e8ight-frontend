@@ -23,21 +23,28 @@ export const ADMIN_CATEGORY_ARRAY = [
   },
 ];
 
+export const POST_CATEGORY_VALUES = {
+  LIBRARY: "LIBRARY",
+  INSIGHT: "INSIGHT",
+  DX: "DX",
+  DOWNLOADS: "DOWNLOADS",
+};
+
 export const POST_CATEGORIES = [
   {
-    value: "Tech Library",
-    text: AdminCategory.LIBRARY,
+    label: "Tech Library",
+    value: POST_CATEGORY_VALUES.LIBRARY,
   },
   {
-    value: "Tech Insight",
-    text: AdminCategory.INSIGHT,
+    label: "Tech Insight",
+    value: POST_CATEGORY_VALUES.INSIGHT,
   },
   {
-    value: "DX Simulation",
-    text: AdminCategory.DX,
+    label: "DX Simulation",
+    value: POST_CATEGORY_VALUES.DX,
   },
   {
-    value: "Downloads",
-    text: AdminCategory.DOWNLOADS,
+    label: "Downloads",
+    value: POST_CATEGORY_VALUES.DOWNLOADS,
   },
 ];

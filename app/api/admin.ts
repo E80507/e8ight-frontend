@@ -108,7 +108,7 @@ export const createKeyword = async (data: CreateTagReq) => {
 // 키워드 삭제
 export const deleteKeyword = async (data: DeleteTagReq) => {
   try {
-    const res = await apiFetch(`search/keywords/${data.id}`, {
+    const res = await apiFetch(`/search/keywords/${data.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

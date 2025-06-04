@@ -20,23 +20,20 @@ const TagKeyword = ({
 
   const openModal = (e: React.MouseEvent, type: "tags" | "keywords") => {
     e.preventDefault();
-
     setModalType(type);
   };
-  const selectedKeywords = form.watch("keywords");
-  const selectedTags = form.watch("tags");
 
   return (
     <>
       <div>
         <p className="mb-3 pretendard-subtitle-m">태그</p>
         <div className="flex gap-x-3">
-          {selectedTags && selectedTags.length > 0 && (
+          {tags && tags.length > 0 && (
             <div className="flex flex-wrap items-center gap-x-2">
-              {selectedTags.map((tag: string) => (
+              {tags.map((tag: { id: string; content: string }) => (
                 <Badge
-                  key={tag}
-                  text={tag}
+                  key={tag.id}
+                  text={tag.content}
                   color="default"
                   className="h-10 px-4 py-2 pretendard-body-2"
                 />
@@ -63,12 +60,12 @@ const TagKeyword = ({
           </span>
         </p>
         <div className="flex gap-x-3">
-          {selectedKeywords && selectedKeywords.length > 0 && (
+          {keywords && keywords.length > 0 && (
             <div className="flex flex-wrap items-center gap-x-2">
-              {selectedKeywords.map((keyword: string) => (
+              {keywords.map((keyword: { id: string; content: string }) => (
                 <Badge
-                  key={keyword}
-                  text={keyword}
+                  key={keyword.id}
+                  text={keyword.content}
                   color="default"
                   className="h-10 px-4 py-2 pretendard-body-2"
                 />
