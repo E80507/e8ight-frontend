@@ -6,17 +6,15 @@ import PostContent from "./post-content";
 import SocialLinks from "./social-links";
 import SubscriptionBanner from "./subscription-banner";
 import Image from "next/image";
+import { Suspense } from "react";
+import { Post } from "@/types/post";
 
 interface DetailContentProps {
   params: { id: string };
 }
 
-export const DetailContent = ({ params }: DetailContentProps) => {
-  const { id } = params;
-  const { post, isLoading, isError } = usePostDetail(id as string);
-
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError) return <div>에러</div>;
+const DetailContentInner = ({ post }: { post: Post }) => {
+  if (!post) return null;
 
   return (
     <div>
@@ -56,5 +54,18 @@ export const DetailContent = ({ params }: DetailContentProps) => {
       {/* 구독 배너 */}
       <SubscriptionBanner />
     </div>
+  );
+};
+
+export const DetailContent = ({ params }: DetailContentProps) => {
+  const { id } = params;
+  const { post, isError } = usePostDetail(id as string);
+
+  if (isError) return <div>에러가 발생했습니다.</div>;
+
+  return (
+    <Suspense fallback={<div>로딩 중...</div>}>
+      <DetailContentInner post={post as Post} />
+    </Suspense>
   );
 };
