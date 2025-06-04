@@ -9,7 +9,11 @@ interface PostSearchBarProps {
   onReset: () => void;
 }
 
-const PostSearchBar = ({ placeholder, setKeyword, onReset }: PostSearchBarProps) => {
+const PostSearchBar = ({
+  placeholder,
+  setKeyword,
+  onReset,
+}: PostSearchBarProps) => {
   const [inputValue, setInputValue] = useState("");
 
   // 인풋 변경 핸들러

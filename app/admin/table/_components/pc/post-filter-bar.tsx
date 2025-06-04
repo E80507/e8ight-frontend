@@ -89,7 +89,7 @@ const PostFilterBar = ({
                 className="flex items-center gap-3 py-2 hover:bg-gray-50 transition-colors"
               >
                 <Radio isChecked={currentCategory === condition.value} />
-                <span className="mt-px subtitle-m whitespace-nowrap">
+                <span className="mt-px pretendard-subtitle-m whitespace-nowrap">
                   {condition.text}
                 </span>
               </button>

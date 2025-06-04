@@ -54,11 +54,11 @@ export const usePostFilters = (
     const defaultDate = getDefaultDate();
     setCategory("all");
     setDate(defaultDate);
-    
+
     // API 필터 초기화
     const startDate = defaultDate.start.toISOString().split("T")[0];
     const endDate = defaultDate.end.toISOString().split("T")[0];
-    
+
     onFilterChange({
       category: undefined,
       keyword: "",
