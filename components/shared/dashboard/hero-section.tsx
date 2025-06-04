@@ -28,7 +28,7 @@ const HeroSection = () => {
       {/* 콘텐츠 */}
       <div className="absolute top-[76px] w-full tablet:top-[120px] web:top-[219px]">
         <div className="mx-4 flex max-w-[1440px] gap-x-2 tablet:mx-4 web:mx-auto web:w-full web:px-[120px]">
-          <div className="size-2 rounded-full bg-[#70D5B2] web:size-4" />
+          <div className="size-2 rounded-full bg-primary-strong web:size-4" />
           <div>
             <h1 className="gibson-h1-s tablet:gibson-h1-m web:gibson-h1-l">
               {title}

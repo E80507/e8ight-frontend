@@ -23,6 +23,7 @@ const config: Config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           alternative: "hsl(var(--primary-alternative))",
+          strong: "hsl(var(--primary-strong))",
         },
         background: {
           DEFAULT: "hsl(var(--background))",
