@@ -188,7 +188,11 @@ export function PostTable({
           ))
         ) : (
           <TableRow>
-            <TableCell className="h-[398px] pretendard-body-1 text-[#A7A9B4]" size="lg" colSpan={columns.length}>
+            <TableCell
+              className="h-[398px] pretendard-body-1 text-[#A7A9B4]"
+              size="lg"
+              colSpan={columns.length}
+            >
               등록된 게시글이 없습니다.
             </TableCell>
           </TableRow>
