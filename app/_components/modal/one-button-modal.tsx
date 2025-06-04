@@ -56,7 +56,7 @@ const OneButtonModal = ({
             {primaryText && <span>{primaryText}</span>}
             {title}
           </p>
-          <p className="pretendard-body-3 text-label-natural">{desc}</p>
+          <p className="text-label-natural pretendard-body-3">{desc}</p>
         </div>
         <div
           className={cn({
@@ -70,7 +70,7 @@ const OneButtonModal = ({
           ) : (
             <button
               onClick={onClickConfirm}
-              className="w-full border-t border-line py-[13px] text-center text-title-s text-primary"
+              className="w-full border py-[13px] text-center text-primary"
             >
               {buttonText}
             </button>
