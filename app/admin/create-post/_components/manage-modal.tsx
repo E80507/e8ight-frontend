@@ -53,7 +53,7 @@ const ManageModal = ({
       setOriginalOptions(defaultOptions);
       setOriginalSelected(form.getValues(modalType) || []);
     }
-  }, [modalType]);
+  }, [modalType, defaultOptions]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -255,7 +255,7 @@ const ManageModal = ({
                   onChange={(e) => setNewItem(e.target.value)}
                   className={`flex w-full rounded-md border border-black/10 px-4 py-3 transition-colors pretendard-body-2 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[#8B909C] focus-visible:border-black focus-visible:outline-none focus-visible:ring-0 disabled:mt-3 disabled:cursor-not-allowed disabled:bg-black/10 disabled:text-black/40 ${
                     error
-                      ? "border-error ring-1 focus-visible:border-error"
+                      ? "border-2 border-error focus-visible:border-error"
                       : ""
                   }`}
                   placeholder={`새로운 ${modalType === "tags" ? "태그" : "검색어"} 입력해주세요.`}
@@ -268,7 +268,7 @@ const ManageModal = ({
                 />
               </label>
             </div>
-            <FormMessage className="ml-6 pretendard-subtitle-s">
+            <FormMessage className="ml-6 text-error !pretendard-subtitle-s">
               {error}
             </FormMessage>
           </div>
