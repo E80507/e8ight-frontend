@@ -68,7 +68,7 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-y-3">
+    <div className="flex flex-col">
       <FormControl>
         <div>
           <FormLabel htmlFor={name} className="pretendard-subtitle-m">
