@@ -7,21 +7,35 @@ import { useRouter } from "next/navigation";
 import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
 import Image from "next/image";
-import { Suspense } from "react";
-import { Post } from "@/types/post";
 
 interface AdminDetailContentProps {
   params: { id: string };
 }
 
-const AdminDetailContentInner = ({
-  post,
-  onDelete,
-}: {
-  post: Post;
-  onDelete: () => void;
-}) => {
-  if (!post) return null;
+export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
+  const router = useRouter();
+  const { id } = params;
+  const { post, isError } = usePostDetail(id as string);
+  const { deletePosts } = useDeletePosts();
+
+  // 삭제하기
+  const handleDelete = async () => {
+    const confirmed = confirm(
+      "해당 게시글을 삭제하시나요?\n\n삭제된 게시글은 다시 복구할 수 없으며, 해당 카테고리 목록에서 제외됩니다.",
+    );
+    if (confirmed) {
+      const success = await deletePosts([id as string]);
+      if (success) {
+        await mutate(
+          (key) => typeof key === "string" && key.startsWith("posts"),
+        );
+        router.push("/admin");
+      }
+    }
+  };
+
+  if (isError) return <div>에러가 발생했습니다.</div>;
+  if (!post) return <div>로딩 중...</div>;
 
   const showField = (field: string): boolean => {
     switch (post?.category) {
@@ -55,7 +69,7 @@ const AdminDetailContentInner = ({
           <Button
             variant="outline"
             className="h-[48px] w-[97px]"
-            onClick={onDelete}
+            onClick={handleDelete}
           >
             삭제하기
           </Button>
@@ -222,7 +236,7 @@ const AdminDetailContentInner = ({
           <Button
             variant="outline"
             className="flex-1 h-[48px] w-[97px]"
-            onClick={onDelete}
+            onClick={handleDelete}
           >
             삭제하기
           </Button>
@@ -231,36 +245,5 @@ const AdminDetailContentInner = ({
         </div>
       </div>
     </div>
-  );
-};
-
-export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
-  const router = useRouter();
-  const { id } = params;
-  const { post, isError } = usePostDetail(id as string);
-  const { deletePosts } = useDeletePosts();
-
-  // 삭제하기
-  const handleDelete = async () => {
-    const confirmed = confirm(
-      "해당 게시글을 삭제하시나요?\n\n삭제된 게시글은 다시 복구할 수 없으며, 해당 카테고리 목록에서 제외됩니다.",
-    );
-    if (confirmed) {
-      const success = await deletePosts([id as string]);
-      if (success) {
-        await mutate(
-          (key) => typeof key === "string" && key.startsWith("posts"),
-        );
-        router.push("/admin");
-      }
-    }
-  };
-
-  if (isError) return <div>에러가 발생했습니다.</div>;
-
-  return (
-    <Suspense fallback={<div>로딩 중...</div>}>
-      <AdminDetailContentInner post={post as Post} onDelete={handleDelete} />
-    </Suspense>
   );
 };
