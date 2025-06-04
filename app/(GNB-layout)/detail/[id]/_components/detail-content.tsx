@@ -6,7 +6,6 @@ import PostContent from "./post-content";
 import SocialLinks from "./social-links";
 import SubscriptionBanner from "./subscription-banner";
 import Image from "next/image";
-import { Post } from "@/types/post";
 
 interface DetailContentProps {
   params: { id: string };
