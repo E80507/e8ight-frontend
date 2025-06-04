@@ -68,17 +68,17 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
             className,
           )}
         >
-          <span className="flex gap-3 pretendar-body-2">
+          <span className="flex gap-3 pretendard-body-2">
             <input
               type="text"
               readOnly
               value={
                 range?.from
                   ? formattedDate(range.from, "INPUT_DATE")
-                  : "연도. 월. 일"
+                  : "연도-월-일"
               }
               placeholder="Start date"
-              className="max-w-[80px] bg-transparent focus:outline-none"
+              className="max-w-[100px] bg-transparent focus:outline-none"
             />
             <span>~</span>
             <input
@@ -87,10 +87,10 @@ const CalendarDouble = ({ date, setDate, className }: CalendarDoubleProps) => {
               value={
                 range?.to
                   ? formattedDate(range.to, "INPUT_DATE")
-                  : "연도. 월. 일"
+                  : "연도-월-일"
               }
               placeholder="End date"
-              className="max-w-[80px] bg-transparent focus:outline-none"
+              className="max-w-[100px] bg-transparent focus:outline-none"
             />
           </span>
           <CalendarIcon className="absolute inset-y-0 right-0 my-auto ml-auto mr-3 size-[19px] text-black" />

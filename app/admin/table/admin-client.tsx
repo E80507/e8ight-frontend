@@ -26,6 +26,7 @@ const AdminClient = () => {
     setCategory,
     setDate,
     handleFilterChange: handleSharedFilterChange,
+    resetFilters,
   } = usePostFilters((filterParams) => {
     setParams((prev) => ({
       ...prev,
@@ -105,6 +106,7 @@ const AdminClient = () => {
         onCategoryChange={setCategory}
         date={date}
         onDateChange={setDate}
+        resetFilters={resetFilters}
       />
 
       {/* 모바일 화면  */}
@@ -123,6 +125,7 @@ const AdminClient = () => {
         onCategoryChange={setCategory}
         date={date}
         onDateChange={setDate}
+        resetFilters={resetFilters}
       />
     </>
   );

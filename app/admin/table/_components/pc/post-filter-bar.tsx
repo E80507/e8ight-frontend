@@ -12,6 +12,7 @@ interface PostFilterBarProps {
   onDateChange: (date: searchDate) => void;
   onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handleKeywordChange: (keyword: string) => void;
+  resetFilters: () => void;
 }
 
 const PostFilterBar = ({
@@ -21,6 +22,7 @@ const PostFilterBar = ({
   onDateChange,
   onFilterChange,
   handleKeywordChange,
+  resetFilters,
 }: PostFilterBarProps) => {
   // 날짜 변경 핸들러
   const handleDateChange = useCallback(
@@ -57,6 +59,7 @@ const PostFilterBar = ({
           <PostSearchBar
             placeholder="제목, 저자"
             setKeyword={handleKeywordChange}
+            onReset={resetFilters}
           />
         </div>
       </div>
