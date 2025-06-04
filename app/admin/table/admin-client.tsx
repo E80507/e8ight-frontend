@@ -2,14 +2,18 @@
 
 import PostContainer from "./_components/pc/post-container";
 import MobilePostContainer from "./_components/mobile/post-container";
-import { Dispatch, useEffect } from "react";
-import { SetStateAction, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
+import { SetStateAction } from "react";
 import { PostsRequestParams } from "@/api/dto/post";
 import { usePost } from "@/hooks/post/use-post";
 import { usePostFilters } from "@/hooks/use-post-filters";
+import { usePathname } from "next/navigation";
+import Loading from "@/components/shared/loading/loading";
 
 const AdminClient = () => {
+  const pathname = usePathname();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [params, setParams] = useState<PostsRequestParams>({
     page: 1,
     limit: 10,
@@ -24,6 +28,7 @@ const AdminClient = () => {
     setCategory,
     setDate,
     handleFilterChange: handleSharedFilterChange,
+    resetFilters,
   } = usePostFilters((filterParams) => {
     setParams((prev) => ({
       ...prev,
@@ -33,12 +38,23 @@ const AdminClient = () => {
   });
 
   // 게시물 목록 조회
-  const {
-    posts: allPosts = [],
-    totalCount,
-    isLoading,
-    error,
-  } = usePost(params);
+  const { posts: allPosts = [], totalCount, error, mutate } = usePost(params);
+
+  // 라우터 변경 감지하여 데이터 갱신
+  useEffect(() => {
+    if (pathname === "/admin") {
+      mutate();
+    }
+  }, [pathname, mutate]);
+
+  // 로딩 상태 관리
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [params]);
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
@@ -76,45 +92,49 @@ const AdminClient = () => {
     params.page * params.limit,
   );
 
-  if (isLoading) return <div>로딩중...</div>;
   if (error) return <div>에러</div>;
 
   return (
-    <>
-      {/* pc 화면 */}
-      <PostContainer
-        allPosts={allPosts}
-        selectedIds={selectedIds}
-        setSelectedIds={setSelectedIds}
-        handleFilterChange={handleSharedFilterChange}
-        handlePageChange={handlePageChange}
-        handleKeywordChange={handleKeywordChange}
-        params={params}
-        totalCount={totalCount}
-        currentCategory={category}
-        onCategoryChange={setCategory}
-        date={date}
-        onDateChange={setDate}
-      />
+    <div className="relative">
+      {isLoading && <Loading />}
+      <div>
+        {/* pc 화면 */}
+        <PostContainer
+          allPosts={allPosts}
+          selectedIds={selectedIds}
+          setSelectedIds={setSelectedIds}
+          handleFilterChange={handleSharedFilterChange}
+          handlePageChange={handlePageChange}
+          handleKeywordChange={handleKeywordChange}
+          params={params}
+          totalCount={totalCount}
+          currentCategory={category}
+          onCategoryChange={setCategory}
+          date={date}
+          onDateChange={setDate}
+          resetFilters={resetFilters}
+        />
 
-      {/* 모바일 화면  */}
-      <MobilePostContainer
-        allPosts={allPosts}
-        currentPagePosts={currentPagePosts}
-        selectedIds={selectedIds}
-        setSelectedIds={setSelectedIds}
-        handleFilterChange={handleSharedFilterChange}
-        handlePageChange={handlePageChange}
-        handleKeywordChange={handleKeywordChange}
-        params={params}
-        totalCount={totalCount}
-        handleSelectItem={handleSelectItem}
-        category={category}
-        onCategoryChange={setCategory}
-        date={date}
-        onDateChange={setDate}
-      />
-    </>
+        {/* 모바일 화면  */}
+        <MobilePostContainer
+          allPosts={allPosts}
+          currentPagePosts={currentPagePosts}
+          selectedIds={selectedIds}
+          setSelectedIds={setSelectedIds}
+          handleFilterChange={handleSharedFilterChange}
+          handlePageChange={handlePageChange}
+          handleKeywordChange={handleKeywordChange}
+          params={params}
+          totalCount={totalCount}
+          handleSelectItem={handleSelectItem}
+          category={category}
+          onCategoryChange={setCategory}
+          date={date}
+          onDateChange={setDate}
+          resetFilters={resetFilters}
+        />
+      </div>
+    </div>
   );
 };
 

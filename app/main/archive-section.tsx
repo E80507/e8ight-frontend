@@ -4,25 +4,31 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState } from "react";
 import PdfDownloadModal from "../_components/modal/pdf-download-modal";
-
-const archiveData = [
-  {
-    id: 1,
-    title: "포스트 제목이 들어갑니다.",
-    bgImage: "/images/archive1.webp",
-  },
-  {
-    id: 2,
-    title: "포스트 제목이 들어갑니다.",
-    bgImage: "/images/archive2.webp",
-  },
-];
+import { useRouter } from "next/navigation";
+import { DOWNLOADS_PAGE } from "@/constants/path";
+import { Post, PostsRequestParams } from "@/api/dto/post";
+import { usePost } from "@/hooks/post/use-post";
+import { isValidImageUrl } from "@/utils/image";
 
 const ArchiveSection = () => {
-  const [modal, setModal] = useState(false);
+  const router = useRouter();
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+  const [params] = useState<PostsRequestParams>({
+    page: 1,
+    limit: 2,
+    sortOrder: "DESC",
+    keyword: "",
+    category: "DOWNLOADS",
+  });
 
-  const onClickPdfDownload = () => {
-    setModal(true);
+  const { posts = [] } = usePost(params);
+
+  const onClickPdfDownload = (postId: string) => {
+    setSelectedPostId(postId);
+  };
+
+  const getImageSrc = (url: string | null) => {
+    return url && isValidImageUrl(url) ? url : "/images/default-thumbnail.webp";
   };
 
   return (
@@ -33,14 +39,14 @@ const ArchiveSection = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-[16px] web:grid-cols-2 web:gap-[24px]">
-          {archiveData.map(({ id, title, bgImage }) => (
+          {posts.map((post: Post) => (
             <div
-              key={id}
+              key={post.id}
               className="relative flex aspect-[1/1] flex-col justify-between overflow-hidden rounded-[20px] border p-[32px] tablet:aspect-[1.8/1] web:aspect-[1.39/1]"
             >
               <Image
-                src={bgImage}
-                alt={title}
+                src={getImageSrc(post.thumbnail)}
+                alt={post.title}
                 fill
                 className="object-cover"
                 loading="lazy"
@@ -55,10 +61,10 @@ const ArchiveSection = () => {
                   alt=""
                   width={68}
                   height={29}
-                  className="-mt-px w-[68px] h-[29px]"
+                  className="-mt-px h-[29px] w-[68px]"
                   loading="lazy"
                 />
-                <div className="text-white pretendard-h1-m">{title}</div>
+                <div className="text-white pretendard-h1-m">{post.title}</div>
               </div>
 
               <Button
@@ -66,14 +72,10 @@ const ArchiveSection = () => {
                 variant="outline"
                 shape="round"
                 className="relative z-10 ml-auto h-[37px] w-[120px] pretendard-title-s tablet:h-[48px] tablet:w-[160px]"
-                onClick={onClickPdfDownload}
+                onClick={() => onClickPdfDownload(post.id)}
               >
                 PDF 다운로드
               </Button>
-
-              {modal && (
-                <PdfDownloadModal onClickClose={() => setModal(false)} />
-              )}
             </div>
           ))}
         </div>
@@ -84,11 +86,16 @@ const ArchiveSection = () => {
             variant="outline"
             shape="round"
             className="h-[37px] w-[120px] pretendard-title-s tablet:h-[48px] tablet:w-[160px]"
+            onClick={() => router.push(DOWNLOADS_PAGE)}
           >
             더보기
           </Button>
         </div>
       </div>
+
+      {selectedPostId && (
+        <PdfDownloadModal onClickClose={() => setSelectedPostId(null)} />
+      )}
     </section>
   );
 };

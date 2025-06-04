@@ -52,13 +52,12 @@ const CustomInputField = <T extends FieldValues>({
     value: string,
     field: ControllerRenderProps<T, Path<T>>,
   ) => {
-    if (value.includes(" ")) {
+    if (type === "tel") {
+      const phone = handlePhoneNumberInput(value);
+      field.onChange(phone);
+    } else if (noSpace && value.includes(" ")) {
       field.onChange(value.trim());
     } else {
-      if (type === "tel") {
-        const phone = handlePhoneNumberInput(value);
-        return field.onChange(phone);
-      }
       field.onChange(value);
     }
   };
@@ -80,10 +79,10 @@ const CustomInputField = <T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           {label ? (
-            <FormLabel className="mb-3" htmlFor={name}>
+            <FormLabel className="mb-3 gap-0" htmlFor={name}>
               {label}
               {isEssential && !noIcon && (
-                <span className="ml-[2px] text-error">{`*`}</span>
+                <span className="ml-[4px] text-error">{`*`}</span>
               )}
             </FormLabel>
           ) : (
@@ -99,7 +98,7 @@ const CustomInputField = <T extends FieldValues>({
                 className={`disabled:mt-3 disabled:bg-black/10 ${error ? "border-error focus-visible:border-error" : ""} ${className}`}
                 {...field}
                 onChange={
-                  noSpace
+                  noSpace || type === "tel"
                     ? (e) => onChangeValue(e.target.value, field)
                     : field.onChange
                 }

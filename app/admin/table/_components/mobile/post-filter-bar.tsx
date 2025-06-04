@@ -22,6 +22,7 @@ interface PostFilterBarProps {
   onDateChange: (date: searchDate) => void;
   onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handleKeywordChange: (keyword: string) => void;
+  resetFilters: () => void;
 }
 
 const PostFilterBar = ({
@@ -32,6 +33,7 @@ const PostFilterBar = ({
   onDateChange,
   onFilterChange,
   handleKeywordChange,
+  resetFilters,
 }: PostFilterBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -91,15 +93,12 @@ const PostFilterBar = ({
             </button>
           </SheetTrigger>
 
-          <SheetContent
-            side="bottom"
-            className="h-[80vh] bg-white rounded-t-[12px]"
-          >
+          <SheetContent side="bottom" className="bg-white rounded-t-[12px]">
             <SheetHeader>
               <SheetTitle className="pretendard-title-m">필터 설정</SheetTitle>
             </SheetHeader>
 
-            <div className="mt-6 flex flex-col gap-[16px]">
+            <div className="mt-6 flex flex-col gap-[40px]">
               <div className="flex flex-col gap-[24px]">
                 {/* 생성 일자 필터 */}
                 <div className="flex flex-col gap-[8px]">
@@ -132,26 +131,23 @@ const PostFilterBar = ({
                   </select>
                 </div>
               </div>
-            </div>
 
-            {/* 설정하기 버튼 */}
-            <SheetFooter className="absolute bottom-0 left-0 right-0 bg-white pt-[24px] pb-[40px] px-[16px]">
-              <Button
-                size="lg"
-                className="text-white w-full h-[59px] pretendard-subtitle-l"
-                onClick={handleApply}
-              >
-                설정하기
-              </Button>
-            </SheetFooter>
+              <SheetFooter>
+                <div className="flex gap-[8px] w-full">
+                  <Button className="flex-1" onClick={handleApply}>
+                    적용하기
+                  </Button>
+                </div>
+              </SheetFooter>
+            </div>
           </SheetContent>
         </Sheet>
       </div>
 
-      {/* 검색바 */}
       <PostSearchBar
         placeholder="제목, 저자"
         setKeyword={handleKeywordChange}
+        onReset={resetFilters}
       />
     </div>
   );
