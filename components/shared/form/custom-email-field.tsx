@@ -51,7 +51,7 @@ const CustomEmailField = <T extends FieldValues>({
   const [emailId, setEmailId] = useState("");
   const [domain, setDomain] = useState("");
   const [customDomain, setCustomDomain] = useState("");
-  const [isCustomDomain, setIsCustomDomain] = useState(false);
+  const [isCustomDomain, setIsCustomDomain] = useState(true);
   const error = form.formState.errors[name];
 
   const handleEmailChange = (
