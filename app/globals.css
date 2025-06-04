@@ -29,6 +29,7 @@ body {
 @layer base {
   :root {
     --primary: 178 100% 34%;
+    --primary-strong: 165 35% 17%;
     --background: 0 0% 100%;
     --background-alternative: 180 9% 98%;
     --background-natural: 220 14% 94%;
@@ -158,4 +159,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   line-height: 150% !important;
   padding: 12px !important;
   font-weight: 400 !important;
+  font-style: normal !important;
 }
