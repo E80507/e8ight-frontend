@@ -16,25 +16,45 @@ import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {
   totalCount: number;
+  category: string;
+  date: searchDate;
+  onCategoryChange: (category: string) => void;
+  onDateChange: (date: searchDate) => void;
   onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handleKeywordChange: (keyword: string) => void;
 }
 
 const PostFilterBar = ({
   totalCount,
+  category,
+  date,
+  onCategoryChange,
+  onDateChange,
   onFilterChange,
   handleKeywordChange,
 }: PostFilterBarProps) => {
-  const [date, setDate] = useState<searchDate>({
-    start: undefined,
-    end: undefined,
-  });
-  const [category, setCategory] = useState<string>("전체");
   const [isOpen, setIsOpen] = useState(false);
 
   // 날짜 변경 핸들러
   const handleDateChange = (newDate: searchDate) => {
-    setDate(newDate);
+    onDateChange(newDate);
+  };
+
+  // 현재 선택된 카테고리의 텍스트 값 찾기
+  const selectedCategoryText = ADMIN_POST_CATEGORIES.find(
+    (c) => c.value === category
+  )?.text || "전체";
+
+  // 카테고리 변경 핸들러
+  const handleCategoryChange = (text: string) => {
+    const selectedCategory = ADMIN_POST_CATEGORIES.find(
+      (c) => c.text === text,
+    );
+    if (selectedCategory) {
+      onCategoryChange(selectedCategory.value);
+    } else {
+      onCategoryChange("all");
+    }
   };
 
   // 필터 적용 핸들러
@@ -53,18 +73,6 @@ const PostFilterBar = ({
 
       filterParams.startDate = startDateStr;
       filterParams.endDate = endDateStr;
-    }
-
-    // 카테고리 필터
-    if (category && category !== "전체") {
-      const selectedCategory = ADMIN_POST_CATEGORIES.find(
-        (c) => c.text === category,
-      );
-      if (selectedCategory?.value) {
-        filterParams.category = selectedCategory.value as PostCategory;
-      }
-    } else {
-      filterParams.category = undefined;
     }
 
     // API 필터 적용
@@ -115,8 +123,8 @@ const PostFilterBar = ({
                     카테고리
                   </label>
                   <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    value={selectedCategoryText}
+                    onChange={(e) => handleCategoryChange(e.target.value)}
                     className="w-full h-[48px] px-3 border rounded-sm focus:outline-none"
                   >
                     {ADMIN_POST_CATEGORIES.map((option) => (
