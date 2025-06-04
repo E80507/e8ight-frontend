@@ -18,7 +18,7 @@ const MobilePostContainer = () => {
   });
 
   // 게시물 목록 조회
-  const { posts: allPosts = [], isLoading, error } = usePost(params);
+  const { posts: allPosts = [], totalCount, isLoading, error } = usePost(params);
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
@@ -60,6 +60,7 @@ const MobilePostContainer = () => {
   );
 
   return (
+    <div className="flex flex-col">
     <div className="md:hidden flex flex-col gap-[16px] bg-white min-h-screen">
       {/* 필터 바 */}
       <PostFilterBar
@@ -75,7 +76,8 @@ const MobilePostContainer = () => {
         setSelectedIds={setSelectedIds}
       />
 
-      <div>
+      {totalCount > 0 ? (
+        <div>
         {/* 게시물 리스트 */}
         {currentPagePosts.map((post, index) => (
           <MobileListItem
@@ -94,6 +96,12 @@ const MobilePostContainer = () => {
           onPageChange={handlePageChange}
           className="py-[24px]"
         />
+      </div>
+      ) : (
+        <div className="flex-1 border flex justify-center items-center pretendard-body-1 text-[#A7A9B4]">
+          등록된 게시글이 없습니다.
+        </div>
+      )}
       </div>
 
       {/* 추가 버튼 */}
