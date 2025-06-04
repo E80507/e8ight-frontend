@@ -9,4 +9,4 @@ export interface Post {
   keywords: string[];
   linkUrl: string;
   files: any[];
-} 
+}

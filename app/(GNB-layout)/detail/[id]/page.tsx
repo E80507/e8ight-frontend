@@ -16,7 +16,7 @@ const DetailPage = () => {
     shareUrl(post?.linkUrl);
   };
 
-  if (isLoading) return <div>로딩 중...</div>
+  if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러</div>;
 
   return (
@@ -25,10 +25,12 @@ const DetailPage = () => {
 
       <div className="web:px-[120px] web:py-[80px] tablet:px-[30px] tablet:py-[40px] px-[16px] py-[40px] max-w-[1200px] mx-auto">
         <div className="border-b border-[#EEEFF1] tablet:pb-[48px] pb-[24px]">
-          <p className="tablet:pretendard-h1-l pretendard-h1-r">{post?.title}</p>
+          <p className="tablet:pretendard-h1-l pretendard-h1-r">
+            {post?.title}
+          </p>
 
           <div className="flex items-center gap-[8px] mt-[16px] tablet:pretendard-body-2 pretendard-body-3 text-[#A7A9B4]">
-            <span>{post?.createdAt}</span>
+            <span>생성일 백엔드분께 요청</span>
             <span className="before:content-[''] before:inline-block before:w-[1px] before:h-[14px] before:bg-[#A7A9B4] before:mx-2"></span>
             <span>저자: {post?.author}</span>
           </div>
@@ -45,7 +47,7 @@ const DetailPage = () => {
               ))}
             </div>
 
-            <button 
+            <button
               onClick={handleShare}
               className="tablet:flex hidden items-center gap-[8px] px-[16px] py-[12px] bg-[#F9FAFA] border border-[#D6D7DC] rounded-[10px]"
             >

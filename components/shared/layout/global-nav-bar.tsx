@@ -75,6 +75,7 @@ const GlobalNavBar = () => {
 
   const isContactPage = path === CONTACT_PAGE;
   const isHome = path === "/";
+  const isDetailPage = path?.includes("/detail/");
 
   return (
     <>
@@ -159,9 +160,14 @@ const GlobalNavBar = () => {
 
         <div className="flex items-center gap-[24px]">
           {/* 공유하기 */}
-          <button type="button" onClick={() => shareUrl(window.location.href)}>
-            <Share2Icon />
-          </button>
+          {isDetailPage && (
+            <button
+              type="button"
+              onClick={() => shareUrl(window.location.href)}
+            >
+              <Share2Icon />
+            </button>
+          )}
 
           <IconButton
             src={isMobileMenuOpen ? "/svg/icon/x.svg" : "/svg/icon/menu.svg"}
