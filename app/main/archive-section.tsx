@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState } from "react";
 import PdfDownloadModal from "../_components/modal/pdf-download-modal";
+import { useRouter } from "next/navigation";
+import { DOWNLOADS_PAGE } from "@/constants/path";
 
 const archiveData = [
   {
@@ -19,6 +21,7 @@ const archiveData = [
 ];
 
 const ArchiveSection = () => {
+  const router = useRouter();
   const [modal, setModal] = useState(false);
 
   const onClickPdfDownload = () => {
@@ -84,6 +87,7 @@ const ArchiveSection = () => {
             variant="outline"
             shape="round"
             className="h-[37px] w-[120px] pretendard-title-s tablet:h-[48px] tablet:w-[160px]"
+            onClick={() => router.push(DOWNLOADS_PAGE)}
           >
             더보기
           </Button>
