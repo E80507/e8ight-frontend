@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 interface PostSearchBarProps {
   placeholder: string;
-  setKeyword: (val: string) => void;
+  setKeyword: (keyword: string) => void;
 }
 
 const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
@@ -18,8 +18,8 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      console.log("inputValue", inputValue);
-      setKeyword(inputValue); // 검색어 전달
+      e.preventDefault();
+      setKeyword(inputValue);
     }
   };
 
@@ -29,8 +29,12 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
     setKeyword("");
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
-    <div className="flex items-center gap-[8px]">
+    <form onSubmit={handleSubmit} className="flex items-center gap-[8px]">
       <div className="relative flex items-center flex-1">
         <SearchIcon className="absolute inset-y-0 left-0 my-auto ml-[16px] size-[24px] text-[#D6D7DC]" />
 
@@ -38,13 +42,13 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
           className="h-[48px] placeholder:text-[#A7A9B4] pretendard-body-2 pl-[44px]"
           placeholder={placeholder}
           value={inputValue}
-          onChange={onChangeValue} // 입력값 업데이트
-          onKeyDown={handleKeyDown} // Enter 키 감지
-          disabled={true}
+          onChange={onChangeValue}
+          onKeyDown={handleKeyDown}
         />
       </div>
 
       <Button
+        type="button"
         variant={"outline"}
         size={"lg"}
         className="w-[84px]"
@@ -52,7 +56,7 @@ const PostSearchBar = ({ placeholder, setKeyword }: PostSearchBarProps) => {
       >
         초기화
       </Button>
-    </div>
+    </form>
   );
 };
 

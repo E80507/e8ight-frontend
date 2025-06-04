@@ -14,6 +14,7 @@ const AdminClient = () => {
     page: 1,
     limit: 10,
     sortOrder: "DESC",
+    keyword: "",
   });
 
   // 게시물 목록 조회
@@ -47,6 +48,15 @@ const AdminClient = () => {
       ...prev,
       ...filterParams,
       page: 1, // 필터 변경 시 첫 페이지로 이동
+    }));
+  };
+
+  // 검색어 변경 핸들러
+  const handleKeywordChange = (keyword: string) => {
+    setParams((prev) => ({
+      ...prev,
+      keyword,
+      page: 1, // 검색어 변경 시 첫 페이지로 이동
     }));
   };
 
@@ -103,6 +113,7 @@ const AdminClient = () => {
         setSelectedIds={setSelectedIds}
         handleFilterChange={handleFilterChange}
         handlePageChange={handlePageChange}
+        handleKeywordChange={handleKeywordChange}
         params={params}
         totalCount={totalCount}
         handleCategoryChange={handleCategoryChange}
@@ -117,6 +128,7 @@ const AdminClient = () => {
         setSelectedIds={setSelectedIds}
         handleMobileFilterChange={handleMobileFilterChange}
         handlePageChange={handlePageChange}
+        handleKeywordChange={handleKeywordChange}
         params={params}
         totalCount={totalCount}
         handleSelectItem={handleSelectItem}

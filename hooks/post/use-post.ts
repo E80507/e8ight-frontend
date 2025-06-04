@@ -5,7 +5,9 @@ import { PostsRequestParams, PostsResponse } from "@/api/dto/post";
 export const usePost = (params: PostsRequestParams) => {
   const { data, error, isLoading, mutate } = useSWR<PostsResponse>(
     ["posts", JSON.stringify(params)],
-    () => getPosts(params),
+    async () => {
+      return getPosts(params);
+    },
     {
       revalidateOnFocus: false,
       revalidateIfStale: false,

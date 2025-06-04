@@ -12,6 +12,7 @@ interface PostContainerProps {
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
   handleFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
   handlePageChange: React.Dispatch<React.SetStateAction<number>>;
+  handleKeywordChange: (keyword: string) => void;
   params: PostsRequestParams;
   totalCount: number;
   handleCategoryChange: (category: string) => void;
@@ -24,6 +25,7 @@ const PostContainer = ({
   setSelectedIds,
   handleFilterChange,
   handlePageChange,
+  handleKeywordChange,
   params,
   totalCount,
   handleCategoryChange,
@@ -37,6 +39,7 @@ const PostContainer = ({
         currentCategory={currentCategory}
         onCategoryChange={handleCategoryChange}
         onFilterChange={handleFilterChange}
+        handleKeywordChange={handleKeywordChange}
       />
 
       {/* 테이블 */}

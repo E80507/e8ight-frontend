@@ -4,18 +4,22 @@ import SearchBar from "./post-search-bar";
 import { POST_CATEGORIES } from "@/constants/admin";
 import { Post, PostsRequestParams } from "@/api/dto/post";
 import Radio from "@/components/radio";
+import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {
   posts: Post[];
   currentCategory: string;
   onCategoryChange: (category: string) => void;
-  onFilterChange: (params: Partial<PostsRequestParams>) => void;
+  onFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
+  handleKeywordChange: (keyword: string) => void;
 }
 
 const PostFilterBar = ({
+  posts,
   currentCategory,
   onCategoryChange,
   onFilterChange,
+  handleKeywordChange,
 }: PostFilterBarProps) => {
   const [date, setDate] = useState<searchDate>({
     start: undefined,
@@ -72,7 +76,7 @@ const PostFilterBar = ({
           상세검색
         </div>
         <div className="flex-1 flex items-center px-[16px]">
-          <SearchBar placeholder="제목, 저자" setKeyword={() => {}} />
+          <PostSearchBar placeholder="제목, 저자" setKeyword={handleKeywordChange} />
         </div>
       </div>
 

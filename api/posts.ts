@@ -21,6 +21,9 @@ export const getPosts = async (
   if (params.sortOrder) {
     queryParams.append("sortOrder", params.sortOrder);
   }
+  if (params.keyword) {
+    queryParams.append("keyword", params.keyword);
+  }
 
   return apiFetch(`/posts?${queryParams.toString()}`);
 };
