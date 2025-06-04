@@ -259,12 +259,6 @@ const ManageModal = ({
                       : ""
                   }`}
                   placeholder={`새로운 ${modalType === "tags" ? "태그" : "검색어"} 입력해주세요.`}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleAddItem();
-                    }
-                  }}
                 />
               </label>
             </div>

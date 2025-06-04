@@ -103,7 +103,11 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
                 />
               </div>
             ) : (
-              <div className="flex size-full flex-col items-center justify-center">
+              <div
+                className={`flex size-full flex-col items-center justify-center rounded-md ${
+                  errors[name] ? "border-2 border-error" : ""
+                }`}
+              >
                 <Button
                   size="lg"
                   className="z-10 w-[97px]"
