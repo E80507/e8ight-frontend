@@ -29,7 +29,7 @@ const SearchSection = ({
       <div className="relative flex h-[54px] w-full items-center">
         <Input
           variant="bottom-border"
-          placeholder={"키워드 또는 내용을 입력해주세요."}
+          placeholder={"키워드를 입력해주세요."}
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={(e) => {
