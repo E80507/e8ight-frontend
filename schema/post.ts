@@ -7,7 +7,10 @@ export const PostFormSchema = z.object({
 
   content: z.string({ required_error: "내용을 입력해주세요." }),
 
-  thumbnail: z.instanceof(File),
+  thumbnail:
+    typeof window === "undefined"
+      ? z.any()
+      : z.instanceof(File, { message: "썸네일 이미지를 업로드해주세요." }),
 
   author: z.string({ required_error: "저자를 입력해주세요." }),
 

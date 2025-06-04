@@ -17,7 +17,6 @@ const PostTableToolbar = ({
 }: PostTableToolbarProps) => {
   const { deletePosts } = useDeletePosts();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [deleteResult, setDeleteResult] = useState<{success: boolean; message: string}>({ success: false, message: "" });
 
   // 전체 선택 여부 확인
   const isAllSelected =
@@ -34,26 +33,9 @@ const PostTableToolbar = ({
 
   // 선택 삭제 핸들러
   const handleDelete = async () => {
-    if (selectedIds.length === 0) {
-      setDeleteResult({
-        success: false,
-        message: "삭제할 게시물을 선택해주세요."
-      });
-      return;
-    }
-
     setIsDeleteModalOpen(false);
     const success = await deletePosts(selectedIds);
-    setDeleteResult({
-      success,
-      message: success ? "게시물이 삭제되었습니다." : "게시물 삭제에 실패했습니다."
-    });
-  };
-
-  const handleCloseResultModal = () => {
-    if (deleteResult.success) {
-      setIsDeleteModalOpen(false);
-    }
+    console.log(success);
   };
 
   return (

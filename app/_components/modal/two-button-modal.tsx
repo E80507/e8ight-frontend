@@ -8,7 +8,6 @@ interface TwoButtonModalProps {
   buttonText: string; // 버튼 텍스트
   onClickFirstBtn: () => void; // 버튼 핸들러
   onClickSecondBtn: () => void; // 버튼 핸들러
-  className?: string; // 모달 클래스명
 }
 
 const TwoButtonModal = ({
@@ -17,8 +16,7 @@ const TwoButtonModal = ({
   loading,
   buttonText,
   onClickFirstBtn,
-  onClickSecondBtn, 
-  className,
+  onClickSecondBtn,
 }: TwoButtonModalProps) => {
   // body overflow 설정
   useEffect(() => {

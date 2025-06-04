@@ -57,7 +57,9 @@ const PostFilterBar = ({
 
     // 카테고리 필터
     if (category && category !== "전체") {
-      const selectedCategory = ADMIN_POST_CATEGORIES.find((c) => c.text === category);
+      const selectedCategory = ADMIN_POST_CATEGORIES.find(
+        (c) => c.text === category,
+      );
       if (selectedCategory?.value) {
         filterParams.category = selectedCategory.value as PostCategory;
       }
