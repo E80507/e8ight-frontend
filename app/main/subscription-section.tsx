@@ -10,9 +10,7 @@ import { useState } from "react";
 
 const SubscriptionSection = () => {
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
-  const { onSubmit, form } = usePostSubscribe(() =>
-    setIsCompleteModalOpen(true),
-  );
+  const { onSubmit, form } = usePostSubscribe(() => setIsCompleteModalOpen(true));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

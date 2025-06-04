@@ -14,12 +14,11 @@ interface SubscriptionModalProps {
 
 const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
-  const { form, onSubmit } = usePostSubscribe();
+  const { onSubmit, form } = usePostSubscribe(() => setIsCompleteModalOpen(true));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await onSubmit(e);
-    setIsCompleteModalOpen(true);
   };
 
   const handleCompleteModalClose = () => {
@@ -29,9 +28,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
 
   return (
     <div className="fixed inset-0 z-[101] flex items-center justify-center bg-black/70 px-[16px]">
-      <Form {...form}>
-        <form
-          onSubmit={handleSubmit}
+        <div
           className="relative w-full overflow-hidden rounded-[20px] tablet:w-[627px]"
         >
           <button
@@ -72,31 +69,34 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
                   </p>
                 </div>
 
-                <div className="w-full">
-                  <CustomInputField
-                    form={form}
-                    name="email"
-                    placeholder="이메일을 입력해주세요."
-                    className="mx-auto h-[48px] w-full rounded-[100px] px-[24px] text-black pretendard-body-2 tablet:w-[328px]"
-                  />
+                <Form {...form}>
+                  <form onSubmit={handleSubmit}>
+                    <div className="w-full">
+                      <CustomInputField
+                        form={form}
+                        name="email"
+                        placeholder="이메일을 입력해주세요."
+                        className="mx-auto h-[48px] w-full rounded-[100px] px-[24px] text-black pretendard-body-2 tablet:w-[328px]"
+                      />
 
-                  <div className="mt-[20px] flex justify-center tablet:mt-[32px]">
-                    <Button
-                      type="submit"
-                      size="lg"
-                      variant="outline"
-                      shape="round"
-                      className="w-[160px] pretendard-title-s placeholder:text-[#C8C9D0]"
-                    >
-                      뉴스레터 신청하기
-                    </Button>
-                  </div>
-                </div>
+                      <div className="mt-[20px] flex justify-center tablet:mt-[32px]">
+                        <Button
+                          type="submit"
+                          size="lg"
+                          variant="outline"
+                          shape="round"
+                          className="w-[160px] pretendard-title-s placeholder:text-[#C8C9D0]"
+                        >
+                          뉴스레터 신청하기
+                        </Button>
+                      </div>
+                    </div>
+                  </form>
+                </Form>
               </div>
             </div>
           </div>
-        </form>
-      </Form>
+        </div>
 
       {isCompleteModalOpen && (
         <OneButtonModal
