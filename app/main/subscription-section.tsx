@@ -8,10 +8,11 @@ import { usePostSubscribe } from "@/hooks/subscribe/use-post-subscribe";
 import OneButtonModal from "../_components/modal/one-button-modal";
 import { useState } from "react";
 
-
 const SubscriptionSection = () => {
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
-  const { onSubmit, form } = usePostSubscribe(() => setIsCompleteModalOpen(true));
+  const { onSubmit, form } = usePostSubscribe(() =>
+    setIsCompleteModalOpen(true),
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,9 +55,7 @@ const SubscriptionSection = () => {
           </div>
 
           <Form {...form}>
-            <form
-              onSubmit={handleSubmit}
-            >
+            <form onSubmit={handleSubmit}>
               <CustomInputField
                 form={form}
                 name="email"

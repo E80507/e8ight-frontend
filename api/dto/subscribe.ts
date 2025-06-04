@@ -10,5 +10,5 @@ export interface SubscribeResponse {
     createdAt: string;
     updatedAt: string;
     deletedAt: string | null;
-  }
+  };
 }

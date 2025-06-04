@@ -18,7 +18,7 @@ export const usePostSubscribe = (onSuccess?: () => void) => {
 
     try {
       const email = form.getValues("email");
-      
+
       // 0.4초 대기
       await new Promise((resolve) => setTimeout(resolve, 400));
       const response = await postSubscribe(email);
