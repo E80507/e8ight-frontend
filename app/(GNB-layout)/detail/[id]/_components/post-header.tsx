@@ -12,9 +12,7 @@ interface PostHeaderProps {
 export default function PostHeader({ post }: PostHeaderProps) {
   return (
     <div className="border-b border-[#EEEFF1] tablet:pb-[48px] pb-[24px]">
-      <p className="tablet:pretendard-h1-l pretendard-h1-r">
-        {post?.title}
-      </p>
+      <p className="tablet:pretendard-h1-l pretendard-h1-r">{post?.title}</p>
 
       <div className="flex items-center gap-[8px] mt-[16px] tablet:pretendard-body-2 pretendard-body-3 text-[#A7A9B4]">
         <span>{formattedDate(post?.createdAt, "INPUT_DATE")}</span>
@@ -43,4 +41,4 @@ export default function PostHeader({ post }: PostHeaderProps) {
       </div>
     </div>
   );
-} 
+}

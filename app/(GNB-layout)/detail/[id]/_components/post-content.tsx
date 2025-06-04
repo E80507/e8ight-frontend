@@ -13,4 +13,4 @@ export default function PostContent({ post }: PostContentProps) {
       <QuillViewer content={post?.content} />
     </div>
   );
-} 
+}
