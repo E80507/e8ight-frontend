@@ -8,7 +8,6 @@ import Pagination from "@/app/_components/pagination";
 
 interface PostContainerProps {
   allPosts: Post[];
-  currentPagePosts: Post[];
   selectedIds: string[];
   setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
   handleFilterChange: (filterParams: Partial<PostsRequestParams>) => void;
@@ -21,7 +20,6 @@ interface PostContainerProps {
 
 const PostContainer = ({
   allPosts,
-  currentPagePosts,
   selectedIds,
   setSelectedIds,
   handleFilterChange,
@@ -44,7 +42,7 @@ const PostContainer = ({
       {/* 테이블 */}
       <div className="flex flex-col gap-[16px]">
         {/* 툴바 */}
-        <PostTableToolbar totalCount={allPosts.length} />
+        <PostTableToolbar totalCount={totalCount} />
 
         <div className="flex flex-col gap-[40px]">
           {/* 테이블 */}
@@ -55,13 +53,13 @@ const PostContainer = ({
             )}
             selectedIds={selectedIds}
             setSelectedIds={setSelectedIds}
-            totalCount={allPosts.length}
+            totalCount={totalCount}
           />
 
           {/* 페이지네이션 */}
           <Pagination
             currentPage={params.page}
-            totalPages={Math.ceil(allPosts.length / params.limit)}
+            totalPages={Math.ceil(totalCount / params.limit)}
             onPageChange={handlePageChange}
           />
         </div>
