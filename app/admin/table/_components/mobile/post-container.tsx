@@ -18,7 +18,12 @@ const MobilePostContainer = () => {
   });
 
   // 게시물 목록 조회
-  const { posts: allPosts = [], totalCount, isLoading, error } = usePost(params);
+  const {
+    posts: allPosts = [],
+    totalCount,
+    isLoading,
+    error,
+  } = usePost(params);
 
   // 페이지 변경 핸들러
   const handlePageChange: Dispatch<SetStateAction<number>> = (page) => {
@@ -61,47 +66,47 @@ const MobilePostContainer = () => {
 
   return (
     <div className="flex flex-col">
-    <div className="md:hidden flex flex-col gap-[16px] bg-white min-h-screen">
-      {/* 필터 바 */}
-      <PostFilterBar
-        totalCount={allPosts.length}
-        posts={allPosts}
-        onFilterChange={handleFilterChange}
-      />
-
-      {/* 선택 영역 */}
-      <PostTableToolbar
-        posts={currentPagePosts}
-        selectedIds={selectedIds}
-        setSelectedIds={setSelectedIds}
-      />
-
-      {totalCount > 0 ? (
-        <div>
-        {/* 게시물 리스트 */}
-        {currentPagePosts.map((post, index) => (
-          <MobileListItem
-            post={post}
-            key={post.id}
-            isFirst={index === 0}
-            isSelected={selectedIds.includes(post.id)}
-            onSelect={() => handleSelectItem(post.id)}
-          />
-        ))}
-
-        {/* 페이지네이션 */}
-        <Pagination
-          currentPage={params.page}
-          totalPages={Math.ceil(allPosts.length / params.limit)}
-          onPageChange={handlePageChange}
-          className="py-[24px]"
+      <div className="md:hidden flex flex-col gap-[16px] bg-white min-h-screen">
+        {/* 필터 바 */}
+        <PostFilterBar
+          totalCount={allPosts.length}
+          posts={allPosts}
+          onFilterChange={handleFilterChange}
         />
-      </div>
-      ) : (
-        <div className="flex-1 border flex justify-center items-center pretendard-body-1 text-[#A7A9B4]">
-          등록된 게시글이 없습니다.
-        </div>
-      )}
+
+        {/* 선택 영역 */}
+        <PostTableToolbar
+          posts={currentPagePosts}
+          selectedIds={selectedIds}
+          setSelectedIds={setSelectedIds}
+        />
+
+        {totalCount > 0 ? (
+          <div>
+            {/* 게시물 리스트 */}
+            {currentPagePosts.map((post, index) => (
+              <MobileListItem
+                post={post}
+                key={post.id}
+                isFirst={index === 0}
+                isSelected={selectedIds.includes(post.id)}
+                onSelect={() => handleSelectItem(post.id)}
+              />
+            ))}
+
+            {/* 페이지네이션 */}
+            <Pagination
+              currentPage={params.page}
+              totalPages={Math.ceil(allPosts.length / params.limit)}
+              onPageChange={handlePageChange}
+              className="py-[24px]"
+            />
+          </div>
+        ) : (
+          <div className="flex-1 border flex justify-center items-center pretendard-body-1 text-[#A7A9B4]">
+            등록된 게시글이 없습니다.
+          </div>
+        )}
       </div>
 
       {/* 추가 버튼 */}
