@@ -89,6 +89,8 @@ const ContactPage = () => {
               <CustomInputField
                 form={form}
                 name="phone"
+                type="tel"
+                maxLength={13}
                 placeholder="연락처를 입력해주세요."
                 label="연락처"
                 isEssential={true}
