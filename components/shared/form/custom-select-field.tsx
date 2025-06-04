@@ -3,6 +3,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import {
   Select,
@@ -46,46 +47,51 @@ const CustomSelectField = <T extends FieldValues>({
     <FormField
       control={form.control}
       name={name}
-      render={({ field }) => (
-        <div className={className}>
-          <FormItem className="flex flex-col gap-3">
-            <FormControl>
-              <>
-                <FormLabel htmlFor={name}>
-                  {label}
-                  {isEssential && (
-                    <span className="ml-[2px] text-error">{`*`}</span>
-                  )}
-                </FormLabel>
-                <Select
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                    onChange?.(value);
-                  }}
-                  value={field.value}
-                  disabled={disabled}
-                  defaultValue={defaultValue}
-                >
-                  <SelectTrigger
-                    className={field.value ? "" : " [&>span]:text-black/40"}
+      render={({ field }) => {
+        const error = form.formState.errors[name];
+
+        return (
+          <div className={className}>
+            <FormItem className="flex flex-col gap-3">
+              <FormControl>
+                <>
+                  <FormLabel htmlFor={name}>
+                    {label}
+                    {isEssential && (
+                      <span className="ml-[2px] text-error">{`*`}</span>
+                    )}
+                  </FormLabel>
+                  <Select
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      onChange?.(value);
+                    }}
+                    value={field.value}
+                    disabled={disabled}
+                    defaultValue={defaultValue}
                   >
-                    <SelectValue placeholder={placeholder} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {selectValue.map((item) => (
-                        <SelectItem key={item.value} value={item.value}>
-                          {item.text}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </>
-            </FormControl>
-          </FormItem>
-        </div>
-      )}
+                    <SelectTrigger
+                      className={`${field.value ? "" : "[&>span]:text-black/40"} ${error ? "border-destructive focus:border-destructive" : ""}`}
+                    >
+                      <SelectValue placeholder={placeholder} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {selectValue.map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.text}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </div>
+        );
+      }}
     />
   );
 };
