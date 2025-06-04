@@ -26,7 +26,9 @@ export const ContactSchema = z.object({
 
   inquiryType: z
     .string({ required_error: "문의 유형을 선택해주세요." })
-    .min(1, { message: "문의 유형을 선택해주세요." }),
+    .refine((val) => ["1", "2", "3"].includes(val), {
+      message: "문의 유형을 선택해주세요.",
+    }),
 
   industry: z
     .string({ required_error: "산업 분야를 선택해주세요." })
