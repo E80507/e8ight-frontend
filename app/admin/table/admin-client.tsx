@@ -40,12 +40,12 @@ const AdminClient = () => {
     totalCount,
     isLoading,
     error,
-    mutate
+    mutate,
   } = usePost(params);
 
   // 라우터 변경 감지하여 데이터 갱신
   useEffect(() => {
-    if (pathname === '/admin') {
+    if (pathname === "/admin") {
       mutate();
     }
   }, [pathname, mutate]);
