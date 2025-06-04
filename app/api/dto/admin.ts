@@ -26,3 +26,27 @@ export interface PostReq {
   linkUrl: string;
   fileIds: string[];
 }
+
+// 포스트 생성
+export interface CreatePostReq {
+  title: string;
+  content: string;
+  thumbnail?: File | string;
+  author?: string;
+  mainIamge?: string;
+  category: string;
+  tags?: string[];
+  keywords?: string[];
+  linkUrl?: string;
+  fileId?: string[];
+}
+
+// 키워드 태그 생성
+export interface CreateTagReq {
+  content: string;
+}
+
+// 키워드 태그 삭제
+export interface DeleteTagReq {
+  id: string;
+}
