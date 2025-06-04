@@ -162,7 +162,7 @@ const FormMessage = React.forwardRef<
       ref={ref}
       id={formMessageId}
       className={cn(
-        "caption px-2 text-destructive",
+        "caption px-2 text-error",
         // error?.message ? "text-destructive" : "text-primary",
         className,
       )}

@@ -13,7 +13,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const variants = {
       default:
-        "border rounded-md border-black/10 px-4 py-3 pretendard-body-2 placeholder:text-[#8B909C]",
+        "border rounded-md border-line-normal px-4 py-3 pretendard-body-2 placeholder:text-label-assistive",
       "bottom-border":
         "border-b border-gray-strong py-4 pl-10 placeholder:text-label-alternative font-pretendard body-1",
     };

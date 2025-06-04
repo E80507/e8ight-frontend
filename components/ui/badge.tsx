@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export type BadgeColor = "green" | "blue" | "red" | "yellow";
+export type BadgeColor = "green" | "blue" | "red" | "yellow" | "default";
 
 interface BadgeProps {
   text: string;
@@ -13,6 +13,7 @@ const colorVariants = {
   blue: "bg-[#BDCDF4]",
   red: "bg-[#F4BDBD]",
   yellow: "bg-[#FFE9A0]",
+  default: "bg-component-alternative",
 };
 
 const Badge = ({ text, color, className }: BadgeProps) => {

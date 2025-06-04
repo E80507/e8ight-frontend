@@ -27,6 +27,7 @@ interface CustomInputFieldProps<T extends FieldValues> {
   type?: "number" | "email" | "text" | "password" | "tel";
   className?: string; // 클래스명
   isEssential?: boolean; // 필수 입력 여부
+  noIcon?: boolean; // 아이콘 미표시 여부
 }
 
 const CustomInputField = <T extends FieldValues>({
@@ -40,6 +41,7 @@ const CustomInputField = <T extends FieldValues>({
   type,
   className,
   isEssential,
+  noIcon = false,
 }: CustomInputFieldProps<T>) => {
   const [currentType, setCurrentType] = useState(type);
   const [isExposedPassword, setExposed] = useState(false);
@@ -78,9 +80,9 @@ const CustomInputField = <T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           {label ? (
-            <FormLabel className="mb-3 web:mb-2" htmlFor={name}>
+            <FormLabel className="mb-3" htmlFor={name}>
               {label}
-              {isEssential && (
+              {isEssential && !noIcon && (
                 <span className="ml-[2px] text-error">{`*`}</span>
               )}
             </FormLabel>
@@ -94,7 +96,7 @@ const CustomInputField = <T extends FieldValues>({
                 disabled={disabled}
                 id={name}
                 maxLength={maxLength}
-                className={`disabled:mt-3 disabled:bg-black/10 ${error ? "border-destructive focus-visible:border-destructive" : ""} ${className}`}
+                className={`disabled:mt-3 disabled:bg-black/10 ${error ? "border-error focus-visible:border-error" : ""} ${className}`}
                 {...field}
                 onChange={
                   noSpace

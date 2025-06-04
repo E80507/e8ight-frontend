@@ -12,15 +12,16 @@ const buttonVariants = cva(
         default: "bg-primary text-white disabled:bg-primary/10",
         pink: "bg-[#FF6668] text-white",
         destructive: "bg-destructive text-destructive-foreground",
-        outline: "border bg-white text-black disabled:bg-gray-100",
+        outline:
+          "border bg-white text-black disabled:bg-component-natural disabled:text-label-alternative",
         "outline-black": "border border-black disabled:border-gray-300",
       },
       size: {
         default: "h-12 px-[15px] heading-4",
         sm: "h-[30px] max-w-max px-3 py-1 subtitle-3",
-        md: "w-[80px] h-[37px] px-4 py-2 title-s",
-        lg: "w-[120px] lg:w-[160px] h-[48px] px-6 py-3 title-s",
-        cta: "w-[240px] h-[59px] title-s",
+        md: "h-[37px] w-[80px] px-4 py-2 title-s",
+        lg: "h-[48px] w-[120px] px-6 py-3 title-s",
+        cta: "h-[59px] w-[240px] title-s",
         icon: "size-9",
       },
       shape: {
