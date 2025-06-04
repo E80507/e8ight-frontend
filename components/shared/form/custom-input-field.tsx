@@ -79,10 +79,10 @@ const CustomInputField = <T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           {label ? (
-            <FormLabel className="mb-3" htmlFor={name}>
+            <FormLabel className="mb-3 gap-0" htmlFor={name}>
               {label}
               {isEssential && !noIcon && (
-                <span className="ml-[2px] text-error">{`*`}</span>
+                <span className="ml-[4px] text-error">{`*`}</span>
               )}
             </FormLabel>
           ) : (
