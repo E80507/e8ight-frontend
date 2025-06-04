@@ -11,27 +11,39 @@ export const usePostSubscribe = (onSuccess?: () => void) => {
     resolver: zodResolver(subsscribeSchema),
   });
 
-  const [loading, setLoading] = useState(false); // 로딩 상태
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = form.handleSubmit(async () => {
-    setLoading(true); // 로딩 시작
-
+    setLoading(true);
     try {
       const email = form.getValues("email");
-
-      // 0.4초 대기
       await new Promise((resolve) => setTimeout(resolve, 400));
       const response = await postSubscribe(email);
-      onSuccess?.();
-    } catch (err: unknown) {
-      if (!err) return;
-      console.error("Subscribe error:", err);
-      toast({
-        title: "잠시 후 다시 시도해주세요",
-        // icon: "light",
-      });
+      console.log("Response message:", response.message);
+      
+      if (response.message === "뉴스레터가 성공적으로 구독되었습니다.") {
+        console.log("Calling onSuccess callback");
+        onSuccess?.();
+      } else {
+        toast({
+          title: response.message || "구독 처리 중 문제가 발생했습니다",
+        });
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        const errorData = JSON.parse(err.message);
+        if (errorData?.statusCode === 409) {
+          toast({
+            title: "이미 구독 중인 이메일입니다.",
+          });
+        } else {
+          toast({
+            title: errorData?.message || "구독 처리 중 문제가 발생했습니다.",
+          });
+        }
+      }
     } finally {
-      setLoading(false); // 로딩 종료
+      setLoading(false);
     }
   });
 
