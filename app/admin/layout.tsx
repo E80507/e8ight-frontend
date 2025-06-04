@@ -14,7 +14,7 @@ const AdminLayout = ({ children }: GlobalNavBarLayoutProps) => {
         <div className="w-screen overflow-x-hidden">
           <AdminAuthGate>
             <AdminNavBar />
-            <div className="relative mt-14 min-h-screen web:mt-0 web:bg-background-alternative">
+            <div className="relative min-h-screen bg-background-alternative">
               {children}
             </div>
           </AdminAuthGate>
