@@ -95,7 +95,8 @@ const CreatePostPage = () => {
       try {
         const payload: CreatePostReq = {
           ...data,
-          fileIds,
+          fileId: fileIds,
+          content: data.content ?? "",
         };
 
         await trigger(payload);
