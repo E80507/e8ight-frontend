@@ -154,14 +154,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 12px !important;
   font-weight: 400 !important;
 }
-.ql-editor::placeholder {
-  font-family: "Pretendard", sans-serif !important;
-  font-size: 16px !important;
-  line-height: 150% !important;
-  padding: 12px !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
-}
+
 .ql-editor.ql-blank::before {
   font-style: normal !important;
   color: var(--label-assistive) !important;
@@ -171,4 +164,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 300 !important;
   letter-spacing: -0.3% !important;
   font-family: "var(--font-pretendard)" !important;
+  font-family: "Pretendard", sans-serif !important;
 }
