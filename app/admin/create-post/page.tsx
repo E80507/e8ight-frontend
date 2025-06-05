@@ -17,6 +17,10 @@ import { usePostS3PresignedUrl } from "@/hooks/s3/use-post-s3-presigned-url";
 import { Domain } from "@/app/api/dto/s3";
 import { createPost } from "@/app/api/admin";
 import { useMediaQuery } from "@/hooks/admin/use-media-query";
+import useSWRMutation from "swr/mutation";
+import { useRouter } from "next/navigation";
+import { FormMessage } from "@/components/ui/form";
+import { ADMIN_PAGE } from "@/constants/path";
 
 const QuillEditor = dynamic(() => import("@/components/QuillEditor"), {
   ssr: false,
@@ -27,6 +31,9 @@ const CreatePostPage = () => {
   const [selectedCategory, setSelectedCategory] =
     useState<AdminCategory | null>(null);
   const isMobile = useMediaQuery("(max-width: 599px)");
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof PostFormSchema>>({
     resolver: zodResolver(PostFormSchema),
     defaultValues: {
@@ -40,8 +47,9 @@ const CreatePostPage = () => {
       keywords: [],
     },
   });
+
   const { onPostS3PresignedUrl } = usePostS3PresignedUrl(Domain.ANNOUNCEMENT);
-  const { handleSubmit } = form;
+
   const handleImageUpload = async (file: File): Promise<string> => {
     try {
       const [fileUrl] = await onPostS3PresignedUrl([file]);
@@ -52,9 +60,21 @@ const CreatePostPage = () => {
     }
   };
 
-  const handleCreatePost = handleSubmit(
-    (data) => {
-      createPost(data as CreatePostReq);
+  const { trigger, isMutating } = useSWRMutation(
+    "createPost",
+    async (key, { arg }: { arg: CreatePostReq }) => {
+      return await createPost(arg);
+    },
+  );
+
+  const handleCreatePost = form.handleSubmit(
+    async (data) => {
+      try {
+        await trigger(data as CreatePostReq);
+        router.push(ADMIN_PAGE);
+      } catch (error) {
+        console.error("게시글 등록 실패", error);
+      }
     },
     (errors) => {
       console.log("유효성 오류:", errors);
@@ -68,7 +88,12 @@ const CreatePostPage = () => {
           <h1 className="pretendard-title-m web:pretendard-title-l">
             컨텐츠 추가
           </h1>
-          <Button size="lg" className="w-[97px]" onClick={handleCreatePost}>
+          <Button
+            size="lg"
+            className="w-[97px]"
+            onClick={handleCreatePost}
+            disabled={isMutating}
+          >
             게시하기
           </Button>
         </div>
@@ -145,16 +170,23 @@ const CreatePostPage = () => {
                         </div>
                       </div>
                       <div>
-                        <QuillEditor
-                          value={form.watch("content")}
-                          onChange={(content) => {
-                            form.setValue("content", content, {
-                              shouldValidate: true,
-                            });
-                          }}
-                          onImageUpload={handleImageUpload}
-                          height={isMobile ? "401px" : "468px"}
-                        />
+                        <div
+                          className={`${form.formState.errors.content ? "rounded-md border-2 border-error" : ""}`}
+                        >
+                          <QuillEditor
+                            value={form.watch("content")}
+                            onChange={(content) => {
+                              form.setValue("content", content, {
+                                shouldValidate: true,
+                              });
+                            }}
+                            onImageUpload={handleImageUpload}
+                            height={isMobile ? "401px" : "468px"}
+                          />
+                        </div>
+                        <FormMessage className="!mt-2">
+                          {form.formState.errors.content?.message}
+                        </FormMessage>
                       </div>
                     </>
                   )}
@@ -168,6 +200,7 @@ const CreatePostPage = () => {
                     size="cta"
                     className="mt-4 h-14 w-full web:hidden"
                     onClick={handleCreatePost}
+                    disabled={isMutating}
                   >
                     게시하기
                   </Button>

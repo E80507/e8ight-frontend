@@ -9,9 +9,8 @@ export const PostFormSchema = z.object({
     .string({ required_error: "카테고리를 입력해주세요." })
     .min(1, { message: "카테고리는 최소 1자 이상이어야 합니다." }),
 
-  content: z.string().optional(),
+  content: z.string().min(1, { message: "내용을 입력해주세요." }),
 
-  // 썸네일을 필수로 설정 (File 또는 유효한 URL)
   thumbnail: z
     .union([
       z.instanceof(File, { message: "썸네일 이미지를 업로드해주세요." }),
