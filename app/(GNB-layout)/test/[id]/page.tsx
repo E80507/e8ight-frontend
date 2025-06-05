@@ -1,5 +1,7 @@
+import DetailContent from "./_components/detail-content";
+
 const PostDetailPage = () => {
-  return <div>포스트 페이지</div>;
+  return <DetailContent />;
 };
 
 export default PostDetailPage;
