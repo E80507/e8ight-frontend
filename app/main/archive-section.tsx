@@ -89,9 +89,9 @@ const ArchiveSection = () => {
       </div>
 
       {selectedPostId && (
-        <PdfDownloadModal 
-          postId={selectedPostId} 
-          onClickClose={() => setSelectedPostId(null)} 
+        <PdfDownloadModal
+          postId={selectedPostId}
+          onClickClose={() => setSelectedPostId(null)}
         />
       )}
     </section>

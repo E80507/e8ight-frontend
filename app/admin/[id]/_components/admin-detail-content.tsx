@@ -211,17 +211,26 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
               <div className="flex flex-1 flex-col px-[16px] py-[12px] pretendard-subtitle-s">
                 {post?.files && post.files.length > 0 ? (
                   post.files.map((file, index) => (
-                    <div key={index} className="flex h-[45px] items-center justify-between">
+                    <div
+                      key={index}
+                      className="flex h-[45px] items-center justify-between"
+                    >
                       <div className="flex items-center gap-[10px] flex-1">
-                        <div className="pretendard-body-3 truncate text-[#474953]">{file.fileName}</div>
+                        <div className="pretendard-body-3 truncate text-[#474953]">
+                          {file.fileName}
+                        </div>
                       </div>
-                      <div className="text-label-normal pretendard-body-3 text-[#474953] min-w-[100px] text-right">
-                        {file.fileSize ? `${Math.round(file.fileSize / 1024)} KB` : ''}
+                      <div className="pretendard-body-3 text-[#474953] min-w-[100px] text-right">
+                        {file.fileSize
+                          ? `${Math.round(file.fileSize / 1024)} KB`
+                          : ""}
                       </div>
                     </div>
                   ))
                 ) : (
-                  <div className="text-label-assistive">등록된 파일이 없습니다.</div>
+                  <div className="text-label-assistive">
+                    등록된 파일이 없습니다.
+                  </div>
                 )}
               </div>
             </div>

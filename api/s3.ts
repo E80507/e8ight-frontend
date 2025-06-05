@@ -8,4 +8,4 @@ export const getPresignedUrls = async (
     method: "POST",
     body: JSON.stringify(data),
   });
-}; 
+};

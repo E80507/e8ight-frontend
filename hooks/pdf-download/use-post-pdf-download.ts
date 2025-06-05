@@ -34,10 +34,9 @@ export const usePostPdfDownload = () => {
           department: data.department,
           email: data.email,
         }),
-
-        setTimeout(() => {
-          form.reset(); // 로그 확인 후 폼 리셋
-        }, 1000);
+          setTimeout(() => {
+            form.reset(); // 로그 확인 후 폼 리셋
+          }, 1000);
 
         alert("PDF 다운로드가 성공적으로 접수되었습니다.");
       } catch (err: unknown) {
