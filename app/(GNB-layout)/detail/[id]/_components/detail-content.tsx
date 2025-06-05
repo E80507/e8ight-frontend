@@ -6,13 +6,15 @@ import PostContent from "./post-content";
 import SocialLinks from "./social-links";
 import SubscriptionBanner from "./subscription-banner";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
-interface DetailContentProps {
-  params: { id: string };
-}
+// interface DetailContentProps {
+//   params: { id: string };
+// }
 
-const DetailContent = ({ params }: DetailContentProps) => {
-  const { id } = params;
+const DetailContent = () => {
+  // const { id } = params;
+  const { id } = useParams();
   console.log(id);
   const { post, isError, isLoading } = usePostDetail(id as string);
 
