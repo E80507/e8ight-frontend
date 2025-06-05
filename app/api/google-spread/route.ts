@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const { type = "contact", values } = data;
 
     // 시트 이름 결정
-    const sheetName = type === "newsletter" ? "테스트2" : "테스트";
+    const sheetName = type === "contact" ? "테스트" : "테스트2";
 
     const auth = new GoogleAuth({
       credentials: {
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       url,
       method: "POST",
       data: {
-        values: Array.isArray(values) ? values : [values],
+        values: [values],
       },
       headers: {
         "Content-Type": "application/json",
@@ -52,6 +52,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, data: result.data });
   } catch (error) {
     console.error("Error appending data to Google Sheets:", error);
-    return NextResponse.json({ error: error }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to append data to Google Sheets" },
+      { status: 500 },
+    );
   }
 }
