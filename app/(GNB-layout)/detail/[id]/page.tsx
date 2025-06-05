@@ -4,6 +4,8 @@ import DetailContent from "./_components/detail-content";
 //   params: { id: string };
 // }
 
-export default function Page() {
+const PostDetailPage = () => {
   return <DetailContent />;
-}
+};
+
+export default PostDetailPage;
