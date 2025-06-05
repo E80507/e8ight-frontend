@@ -2,24 +2,27 @@
 
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 interface SearchSectionProps {
   keyword: string;
   onSearch: (value: string) => void;
   setKeyword: (value: string) => void;
+  text: string;
 }
 
 const SearchSection = ({
   keyword,
   onSearch,
   setKeyword,
+  text,
 }: SearchSectionProps) => {
   const pathname = usePathname();
 
-  let text = "";
-  if (pathname === "/tech-library") text = "테크 라이브러리에서 궁금했던 ";
-  else if (pathname === "/tech-insight") text = "테크 인사이트에서 궁금했던 ";
+  useEffect(() => {
+    setKeyword("");
+  }, [pathname]);
 
   return (
     <section className="flex flex-col gap-y-[14px] font-pretendard tablet:gap-y-6">

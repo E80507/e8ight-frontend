@@ -3,7 +3,11 @@ import { Button } from "@/components/ui/button";
 import ManageModal from "./manage-modal";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import { PostFormSchema } from "@/schema/post";
+import {
+  PostDXFormSchema,
+  PostLibraryInsightFormSchema,
+  PostDownloadsFormSchema,
+} from "@/schema/post";
 import Badge from "@/components/ui/badge";
 import { getTags, getKeywords } from "@/app/api/admin";
 import useSWR from "swr";
@@ -11,7 +15,11 @@ import useSWR from "swr";
 const TagKeyword = ({
   form,
 }: {
-  form: UseFormReturn<z.infer<typeof PostFormSchema>>;
+  form: UseFormReturn<
+    | z.infer<typeof PostLibraryInsightFormSchema>
+    | z.infer<typeof PostDXFormSchema>
+    | z.infer<typeof PostDownloadsFormSchema>
+  >;
 }) => {
   const [modalType, setModalType] = useState<"tags" | "keywords" | null>(null);
 
