@@ -3,16 +3,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { CONTACT_PAGE } from "@/constants/path";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-const HeroSection = () => {
+const HeroSection = ({ title }: { title: string }) => {
   const router = useRouter();
-  const pathname = usePathname();
-
-  let title = "";
-  if (pathname === "/tech-library") title = "E8 Tech Library";
-  else if (pathname === "/tech-insight") title = "E8 Tech Insight";
-  else if (pathname === "/downloads") title = "Downloads";
 
   return (
     <section className="relative mt-[-48px] h-[279px] overflow-hidden tablet:h-[311px] web:mt-[-139px] web:h-[496px]">
