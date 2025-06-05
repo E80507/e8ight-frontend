@@ -112,10 +112,10 @@ const ContactPage = () => {
                 placeholder="문의 유형을 선택해주세요."
                 label="문의 유형"
                 selectValue={[
-                  { value: "1", text: "문의" },
-                  { value: "2", text: "제품 문의" },
-                  { value: "3", text: "기타" },
-                ]}
+                  { value: "문의", text: "문의" },
+                  { value: "제품 문의", text: "제품 문의" },
+                  { value: "기타", text: "기타" },
+                ]}                
                 isEssential={true}
               />
 
