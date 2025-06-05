@@ -1,3 +1,5 @@
+"use client";
+
 import DetailContent from "./_components/detail-content";
 
 interface DetailPageProps {

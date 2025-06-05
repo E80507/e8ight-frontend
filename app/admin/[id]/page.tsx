@@ -1,3 +1,5 @@
+"use client";
+
 import AdminDetailContent from "./_components/admin-detail-content";
 
 interface AdminDetailPageProps {
