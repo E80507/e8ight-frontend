@@ -16,6 +16,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    allowDevelopmentBuild: true
+  }
 };
 
 export default nextConfig;
