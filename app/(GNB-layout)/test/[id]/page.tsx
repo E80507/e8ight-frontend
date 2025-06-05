@@ -1,0 +1,7 @@
+import DetailContent from "./_components/detail-content";
+
+const PostDetailPage = () => {
+  return <DetailContent />;
+};
+
+export default PostDetailPage;

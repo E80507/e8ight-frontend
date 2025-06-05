@@ -134,7 +134,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${gibson.variable} ${pretendard.variable} w-screen min-w-full overflow-x-hidden bg-white font-gibson antialiased`}
+        className={`${gibson.variable} ${pretendard.variable} font-gibson w-screen min-w-full overflow-x-hidden bg-white antialiased`}
       >
         <div className="relative min-h-screen">{children}</div>
       </body>
