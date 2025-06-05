@@ -70,6 +70,7 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
         black: "hsl(var(--black))",
+        "black-1": "hsl(var(--black-1))",
         error: "hsl(var(--error))",
         "gray-strong": "hsl(var(--gray-strong))",
         "gray-700": "hsl(var(--gray-700))",

@@ -2,34 +2,22 @@ import ActionButtons from "@/components/shared/layout/action-buttons";
 
 const HeroSection = () => {
   return (
-    <section className="mx-auto mb-[60px] h-screen w-full max-w-[1440px] px-4 tablet:px-[30px] web:mb-[100px] web:px-[120px] web:pt-[100px]">
-      <div className="mb-8 flex h-full gap-x-2 pt-[426px] text-center text-white web:mb-10">
-        <div className="size-2 rounded-full bg-[#70D5B2] web:size-4" />
-        <div className="flex flex-col">
-          <h1 className="text-left text-black gibson-h1-s tablet:mb-3 tablet:gibson-h1-m web:mb-1 web:gibson-h1-l">
+    <section className="relative mx-auto h-[calc(100vh-67px)] w-full max-w-[1440px] px-4 tablet:px-[30px] web:h-[calc(100vh-139px)] web:px-[120px] web:pt-[100px]">
+      <div className="absolute bottom-0 mb-[100px] flex flex-col gap-x-2 text-center text-white ">
+        <div className="mb-8 flex flex-col gap-y-3">
+          <h1 className="text-left text-white gibson-h1-s tablet:gibson-h1-m web:gibson-h1-l">
             Global No.1
             <br />
             Digital Twin Platform
           </h1>
-          <h2 className="text-left text-label-natural gibson-body-3 tablet:gibson-body-2 web:gibson-body-1">
+          <h2 className="text-left text-background-alternative gibson-body-3 tablet:gibson-body-2 web:gibson-body-1">
             The Evolution of Digital
             <br className="block tablet:hidden" />
             Transformation
           </h2>
         </div>
+        <ActionButtons />
       </div>
-
-      <video
-        autoPlay
-        loop
-        muted
-        src="/video/hero.mp4"
-        className="absolute left-0 top-[-67px] -z-10 h-screen  w-full object-cover web:top-[-139px]"
-      >
-        Your browser does not support the video tag.
-      </video>
-
-      <ActionButtons />
     </section>
   );
 };
