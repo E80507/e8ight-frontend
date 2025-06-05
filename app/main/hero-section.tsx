@@ -18,6 +18,17 @@ const HeroSection = () => {
           </h2>
         </div>
       </div>
+
+      <video
+        autoPlay
+        loop
+        muted
+        src="/video/hero.mp4"
+        className="absolute -top-[139px] left-0 w-full object-cover tablet:h-[800px] web:h-[811px] -z-10"
+      >
+        Your browser does not support the video tag.
+      </video>
+
       <ActionButtons />
     </section>
   );
