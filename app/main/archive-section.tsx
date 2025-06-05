@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { DOWNLOADS_PAGE } from "@/constants/path";
 import { Post, PostsRequestParams } from "@/api/dto/post";
 import { usePost } from "@/hooks/post/use-post";
-import { isValidImageUrl } from "@/utils/image";
 
 const ArchiveSection = () => {
   const router = useRouter();
@@ -27,10 +26,6 @@ const ArchiveSection = () => {
     setSelectedPostId(postId);
   };
 
-  const getImageSrc = (url: string | null) => {
-    return url && isValidImageUrl(url) ? url : "/images/default-thumbnail.webp";
-  };
-
   return (
     <section className="px-[16px] py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-[24px] tablet:gap-[32px] web:gap-[40px]">
@@ -45,7 +40,7 @@ const ArchiveSection = () => {
               className="relative flex aspect-[1/1] flex-col justify-between overflow-hidden rounded-[20px] border p-[32px] tablet:aspect-[1.8/1] web:aspect-[1.39/1]"
             >
               <Image
-                src={getImageSrc(post.thumbnail)}
+                src={post.thumbnail}
                 alt={post.title}
                 fill
                 className="object-cover"
