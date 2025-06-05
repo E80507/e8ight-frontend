@@ -20,16 +20,12 @@ const ContactPage = () => {
       <div className="max-w-[1200px] mx-auto tablet:rounded-[20px] overflow-hidden">
         {/* 배너 */}
         <div
-          className="flex items-center relative overflow-hidden bg-cover bg-center px-[16px] pt-[60px] pb-[16px] tablet:px-[40px] tablet:py-[80px] web:h-[357px] tablet:h-[328px] h-[197px] bg-cover bg-center"
+          className="flex items-center relative overflow-hidden bg-cover bg-center bg-cover bg-center"
           style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
         >
-          <div className="absolute inset-0 z-0 bg-white opacity-[0.21]" />
-
-          <div className="flex gap-[8px] relative z-10 ">
-            <div className="tablet:w-[16px] tablet:h-[16px] w-[8px] h-[8px] bg-[#70D5B2] rounded-full" />
-
-            <div className="flex flex-col gap-[16px]">
-              <div className="web:gibson-h1-l tablet:gibson-h1-m gibson-h1-s">
+          <div className="flex flex-col web:pt-[80px] web:pb-[40px] tablet:px-[40px] tablet:pt-[60px] tablet:pb-[40px] tablet:h-auto h-[229px] pt-[60px] px-[16px] pb-[24px]">
+            <div className="flex flex-col gap-[8px] mt-auto tablet:mt-0">
+              <div className="tablet:gibson-h1-m gibson-h1-s">
                 Global No.1
                 <br />
                 Digital Twin Platform
