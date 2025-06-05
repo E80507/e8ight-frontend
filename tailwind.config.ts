@@ -78,6 +78,7 @@ const config: Config = {
         "line-normal": "hsl(var(--line-normal))",
         "component-natural": "hsl(var(--component-natural))",
         "component-alternative": "hsl(var(--component-alternative))",
+        "background-hero": "hsl(var(--background-hero))",
       },
       borderRadius: {
         lg: "var(--radius)", // 10px
