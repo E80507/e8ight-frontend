@@ -33,21 +33,15 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
           <div className="max-h-[calc(100vh-40px)] overflow-y-auto web:max-h-[calc(100vh-102px)]">
             {/* 배너 */}
             <div
-              className="relative tablet:h-[216px] h-[204px] overflow-hidden bg-cover bg-center pt-[68px] px-[16px] tablet:py-[80px] tablet:px-[30px]"
+              className="flex flex-col relative overflow-hidden bg-cover bg-center tablet:pt-[80px] tablet:pb-[40px] tablet:px-[40px] tablet:h-auto h-[204px] py-[24px] px-[16px]"
               style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
             >
-              <div className="absolute inset-0 z-0 bg-white opacity-[0.21]" />
-
-              <div className="relative z-10 flex gap-[8px]">
-                <div className="w-[8px] h-[8px] tablet:h-[16px] tablet:w-[16px] rounded-full bg-[#70D5B2]" />
-
-                <div className="tablet:gibson-heading-2 pretendard-h1-m">
-                  Global No.1
-                  <br />
-                  Digital Twin Platform
-                </div>
-              </div>
+              <div className="tablet:gibson-h1-m pretendard-h1-m mt-auto">
+                Global No.1
+                <br />
+                Digital Twin Platform
             </div>
+          </div>
 
             {/* 폼 영역 */}
             <div className="py-[40px] px-[16px] tablet:p-5 web:p-[40px]">
