@@ -114,7 +114,7 @@ export function PostTable({
     columnHelper.accessor("title", {
       cell: (info) => (
         <div
-          className="cursor-pointer hover:text-primary"
+          className="cursor-pointer hover:text-primary underline truncate max-w-[500px]"
           onClick={() => router.push(`/admin/${info.row.original.id}`)}
         >
           {info.getValue()}

@@ -15,10 +15,13 @@ export const PdfDownloadSchema = z.object({
     .string({ required_error: "부서/팀을 입력해주세요." })
     .min(2, { message: "한글, 최소 2자 이상 입력해주세요." }),
 
-  phone: z.number({
-    required_error: "연락처를 입력해주세요.",
-    invalid_type_error: "숫자만 입력해주세요.",
-  }),
+  phone: z
+    .string({ required_error: "연락처를 입력해주세요." })
+    .min(12, { message: "올바른 연락처 형식이 아닙니다." })
+    .max(13, { message: "올바른 연락처 형식이 아닙니다." })
+    .regex(/^\d{3}-\d{3,4}-\d{4}$/, {
+      message: "올바른 연락처 형식이 아닙니다.",
+    }),
 
   email: z
     .string({ required_error: "이메일을 입력해주세요." })
