@@ -23,8 +23,8 @@ export const DetailContent = ({ params }: DetailContentProps) => {
       {/* 게시물 썸네일 */}
       <div className="tablet:h-[299px] h-[173px] relative bg-gray-100">
         <Image
-          src={post?.thumbnail || ""}
-          alt={post?.title || "썸네일 이미지"}
+          src={post.thumbnail || ""}
+          alt={post.title || "썸네일 이미지"}
           fill
           className="object-cover"
           priority

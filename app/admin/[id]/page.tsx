@@ -4,6 +4,6 @@ interface AdminDetailPageProps {
   params: { id: string };
 }
 
-export default async function Page({ params }: AdminDetailPageProps) {
+export default function Page({ params }: AdminDetailPageProps) {
   return <AdminDetailContent params={params} />;
 }
