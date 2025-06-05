@@ -208,12 +208,16 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
                 첨부파일
               </div>
 
-              <div className="flex flex-1 flex-col gap-2 px-[16px] py-[12px] pretendard-subtitle-s">
+              <div className="flex flex-1 flex-col px-[16px] py-[12px] pretendard-subtitle-s">
                 {post?.files && post.files.length > 0 ? (
                   post.files.map((file, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="text-label-normal">{file.fileName}</div>
-                      {/* <div className="text-label-assistive">({formatBytes(file.fileSize)})</div> */}
+                    <div key={index} className="flex h-[45px] items-center justify-between">
+                      <div className="flex items-center gap-[10px] flex-1">
+                        <div className="pretendard-body-3 truncate text-[#474953]">{file.fileName}</div>
+                      </div>
+                      <div className="text-label-normal pretendard-body-3 text-[#474953] min-w-[100px] text-right">
+                        {file.fileSize ? `${Math.round(file.fileSize / 1024)} KB` : ''}
+                      </div>
                     </div>
                   ))
                 ) : (

@@ -42,14 +42,14 @@ const CustomFileUploadField = ({
 
       <div className="border-line overflow-hidden rounded-[12px] border">
         <div className="flex h-[45px] items-center justify-between bg-background-natural px-[16px] py-[12px]">
-          <div>파일명</div>
-          <div>용량</div>
+          <div className="text-[#474953] pretendard-body-3">파일명</div>
+          <div className="text-[#474953] pretendard-body-3">용량</div>
         </div>
 
         {files && files.length > 0 ? (
           files.map((file) => (
             <div key={file.id} className="flex h-[45px] items-center justify-between px-[16px] py-[12px]">
-              <div className="flex items-center gap-[10px]">
+              <div className="flex items-center gap-[10px] flex-1">
                 <div className="relative size-[24px] overflow-hidden rounded-[2px]">
                   <Image
                     src={getFileIcon(file.fileUrl)}
@@ -58,10 +58,11 @@ const CustomFileUploadField = ({
                     className={isPdf(file.fileUrl) ? "object-contain p-1" : "object-cover"}
                   />
                 </div>
-                <div className="pretendard-body-3">{file.fileName}</div>
+
+                <div className="pretendard-body-3 text-[#474953]">{file.fileName}</div>
               </div>
 
-              <div className="text-label-normal body-3">{formatBytes(file.fileSize)}</div>
+              <div className="text-label-normal pretendard-body-3 text-[#474953]">{formatBytes(file.fileSize)}</div>
             </div>
           ))
         ) : (
