@@ -29,13 +29,13 @@ const Check = ({ type, isChecked = false }: CheckProps) => {
 
       <Image
         className={cn(
-          "absolute transition-opacity duration-200 w-[20px] h-[20px] tablet:w-[24px] tablet:h-[24px]",
+          "absolute transition-opacity duration-200 w-[20px] h-[20px]",
           isChecked ? "opacity-100" : "opacity-0",
         )}
         src="/svg/icon/check.svg"
         alt="체크 아이콘"
-        width={24}
-        height={24}
+        width={20}
+        height={20}
       />
     </div>
   );
