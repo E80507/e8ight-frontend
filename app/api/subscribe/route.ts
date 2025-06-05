@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     });
 
     const client = await auth.getClient();
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/뉴스레터!A1:append`;
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/테스트2!A1:append`;
 
     const result = await client.request({
       url,
