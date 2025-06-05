@@ -23,15 +23,17 @@ const DetailContent = ({ params }: DetailContentProps) => {
   return (
     <div>
       {/* 게시물 썸네일 */}
-      <div className="relative h-[173px] bg-gray-100 tablet:h-[299px]">
-        <Image
-          src={post.thumbnail}
-          alt={post.title || "썸네일 이미지"}
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+      {post.thumbnail && (
+        <div className="relative h-[173px] bg-gray-100 tablet:h-[299px]">
+          <Image
+            src={post.thumbnail}
+            alt={post.title || "썸네일 이미지"}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
 
       <div className="mx-auto max-w-[1200px] px-[16px] py-[40px] tablet:px-[30px] tablet:py-[40px] web:px-0 web:py-[80px]">
         {/* 게시물 헤더 */}
