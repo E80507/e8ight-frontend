@@ -1,3 +1,5 @@
+"use client";
+
 import CustomCheckboxField from "@/components/shared/form/custom-checkbox-field";
 import CustomEmailField from "@/components/shared/form/custom-email-field";
 import CustomInputField from "@/components/shared/form/custom-input-field";
@@ -5,16 +7,48 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useRef } from "react";
 import { X } from "lucide-react";
-// import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
 import { usePostPdfDownload } from "@/hooks/pdf-download/use-post-pdf-download";
+import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
+import { usePostDetail } from "@/hooks/post/use-post-detail";
+import { useDownloadFiles } from "@/hooks/s3/use-download-files";
 
 interface PdfDownloadModalProps {
+  postId: string;
   onClickClose: () => void;
 }
 
-const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
+const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
   const { form, onSubmit } = usePostPdfDownload();
   const formRef = useRef<HTMLFormElement>(null);
+  const { post } = usePostDetail(postId);
+  const { downloadFiles } = useDownloadFiles();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // 폼 유효성 검사
+    const isValid = await form.trigger();
+    if (!isValid) return;
+
+    // 파일 URL 추출
+    const fileUrls = post?.files?.map(file => file.fileUrl) || [];
+    if (fileUrls.length === 0) {
+      alert("다운로드할 파일이 없습니다.");
+      return;
+    }
+
+    // 파일 다운로드 실행
+    const success = await downloadFiles(fileUrls);
+    if (success) {
+      alert("파일 다운로드가 완료되었습니다.");
+      onClickClose();
+    } else {
+      alert("파일 다운로드 중 오류가 발생했습니다.");
+    }
+
+    // 폼 데이터 제출
+    onSubmit(e);
+  };
 
   return (
     <div className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-black/70 p-[16px] web:py-[51px]">
@@ -24,7 +58,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-4 top-4 z-50 bg-transparent border-none"
+            className="absolute right-4 top-4 z-50 border-none bg-transparent"
             onClick={onClickClose}
           >
             <X className="h-[24px] w-[24px] text-[#A7A9B4]" />
@@ -33,7 +67,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
           <div className="max-h-[calc(100vh-40px)] overflow-y-auto web:max-h-[calc(100vh-102px)]">
             {/* 배너 */}
             <div
-              className="flex flex-col relative overflow-hidden bg-cover bg-center tablet:pt-[80px] tablet:pb-[40px] tablet:px-[40px] tablet:h-auto h-[204px] py-[24px] px-[16px]"
+              className="relative flex h-[204px] flex-col overflow-hidden bg-cover bg-center px-[16px] py-[24px] tablet:h-auto tablet:px-[40px] tablet:pb-[40px] tablet:pt-[80px]"
               style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
             >
               <div className="tablet:gibson-h1-m pretendard-h1-m mt-auto">
@@ -44,15 +78,18 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
             </div>
 
             {/* 폼 영역 */}
-            <div className="py-[40px] px-[16px] tablet:p-5 web:p-[40px]">
+            <div className="px-[16px] py-[40px] tablet:p-5 web:p-[40px]">
               <Form {...form}>
                 <form
-                  onSubmit={onSubmit}
+                  onSubmit={handleSubmit}
                   ref={formRef}
                   className="flex flex-col gap-[32px]"
                 >
                   {/* 파일 업로드 */}
-                  {/* <CustomFileUploadField label="다운로드 파일명" /> */}
+                  <CustomFileUploadField 
+                    label="다운로드 파일명" 
+                    files={post?.files}
+                  />
 
                   {/* 성함 */}
                   <CustomInputField
