@@ -13,3 +13,10 @@ export interface S3PostPresignedUrlRes {
     fileUrl: string;
   }[];
 }
+
+export interface S3FileMetadata {
+  fileUrl: string;
+  fileName: string;
+  fileSize: number;
+  mimeType: string;
+}
