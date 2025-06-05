@@ -42,7 +42,9 @@ const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
       </div>
 
       {/* 제목 */}
-      <div className="pretendard-subtitle-m truncate">{post?.title}</div>
+      <div className="pretendard-subtitle-m truncate max-w-full">
+        {post?.title}
+      </div>
 
       {/* 작성일, 작성자 */}
       <div className="flex items-center gap-[8px]">

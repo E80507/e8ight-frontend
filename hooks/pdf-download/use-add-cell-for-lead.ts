@@ -17,14 +17,7 @@ export default function useAddCellForLead() {
       phone?: string;
       email: string;
     }) => {
-      const {
-        name,
-        position,
-        company,
-        department,
-        phone,
-        email,
-      } = data;
+      const { name, position, company, department, phone, email } = data;
 
       const values = [
         formatDate(),
