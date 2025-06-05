@@ -5,30 +5,23 @@ import ArchiveSection from "@/app/main/archive-section";
 import SubscriptionSection from "../main/subscription-section";
 import HistorySection from "../main/history-section";
 import SimulationSection from "../main/simulation.section";
-import Image from "next/image";
+import BackgroundSection from "../main/background-section";
 
 const Home = () => {
   return (
     <div>
-      {/* 히어로 세션 */}
+      {/* 백그라운드 섹션 */}
+      <BackgroundSection />
+      {/* 히어로 섹션 */}
       <HeroSection />
-      {/* 역사 세션 */}
+      {/* 역사 섹션 */}
       <HistorySection />
-      {/* 시뮬레이션 세션 */}
+      {/* 시뮬레이션 섹션 */}
       <SimulationSection />
-      {/* 아카이브 세션 */}
+      {/* 아카이브 섹션 */}
       <ArchiveSection />
-      {/* 구독 세션 */}
+      {/* 구독 섹션 */}
       <SubscriptionSection />
-      <div className="absolute left-0 top-[-67px] -z-10 h-screen w-full web:top-[-139px]">
-        <Image
-          src="/gif/hero.gif"
-          alt="Global No.1 Digital Twin Platform"
-          fill
-          unoptimized
-          className="object-cover"
-        />
-      </div>
     </div>
   );
 };
