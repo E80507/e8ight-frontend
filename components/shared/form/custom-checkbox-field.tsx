@@ -69,7 +69,7 @@ const CustomCheckboxField = <T extends FieldValues>({
                     type="checkbox"
                     checked={isChecked || false}
                     onChange={(e) => handleChange(e.target.checked)}
-                    className="peer absolute z-10 size-[20px] cursor-pointer rounded-[2px] opacity-0 tablet:size-[24px]"
+                    className="peer absolute z-10 size-[20px] cursor-pointer rounded-[2px] opacity-0"
                     value={value}
                     name={`${name}-${value}`}
                   />
