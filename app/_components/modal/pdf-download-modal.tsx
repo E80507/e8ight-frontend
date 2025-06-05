@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useRef } from "react";
 import { X } from "lucide-react";
-import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
+// import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
 import { usePostPdfDownload } from "@/hooks/pdf-download/use-post-pdf-download";
 
 interface PdfDownloadModalProps {
@@ -52,7 +52,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                   className="flex flex-col gap-[32px]"
                 >
                   {/* 파일 업로드 */}
-                  <CustomFileUploadField label="다운로드 파일명" />
+                  {/* <CustomFileUploadField label="다운로드 파일명" /> */}
 
                   {/* 성함 */}
                   <CustomInputField
