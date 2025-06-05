@@ -40,8 +40,8 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                 Global No.1
                 <br />
                 Digital Twin Platform
+              </div>
             </div>
-          </div>
 
             {/* 폼 영역 */}
             <div className="py-[40px] px-[16px] tablet:p-5 web:p-[40px]">
