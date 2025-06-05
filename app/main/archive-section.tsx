@@ -27,7 +27,7 @@ const ArchiveSection = () => {
   };
 
   return (
-    <section className="w-full px-[16px] py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
+    <section className="px-[16px] py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-[24px] tablet:gap-[32px] web:gap-[40px]">
         <div className="pretendard-h1-r tablet:pretendard-h1-m web:pretendard-h1-l">
           자료실
