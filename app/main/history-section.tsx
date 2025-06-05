@@ -48,7 +48,6 @@ const HistorySection = () => {
         {/* 텍스트 영역 */}
         <div className="flex min-w-0 flex-col web:h-[523px] web:basis-[38%]  web:justify-between">
           <div className="hidden items-start gap-x-2 web:flex">
-            <div className="size-4 rounded-full bg-primary" />
             <h3 className="display-1">
               이에이트의 <br />
               기술 이야기를
@@ -66,10 +65,10 @@ const HistorySection = () => {
           <div>
             <div className="mb-8">
               <p className="mb-4 text-primary subtitle-s tablet:subtitle-m web:subtitle-l">
-                {data[current]?.title}
+                {data[current]?.category}
               </p>
               <p className="break-words leading-relaxed h2-r tablet:h2-l web:h2-l">
-                {data[current]?.description}
+                {data[current]?.title}
               </p>
             </div>
 
