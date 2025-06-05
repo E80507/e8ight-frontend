@@ -87,7 +87,7 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
                   src={preview}
                   alt="썸네일 미리보기"
                   fill
-                  className="object-cover"
+                  className="object-contain"
                 />
                 <IconButton
                   className="absolute right-1 top-1"
