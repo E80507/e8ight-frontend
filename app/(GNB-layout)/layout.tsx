@@ -1,4 +1,4 @@
-import Loading from "@/components/shared/loading/loading";
+// import Loading from "@/components/shared/loading/loading";
 import GlobalNavBar from "@/components/shared/layout/global-nav-bar";
 // import { Toaster } from "@/components/ui/toaster";
 import GlobalFooter from "@/components/shared/layout/global-footer";
@@ -10,13 +10,13 @@ interface GlobalNavBarLayoutProps {
 const GlobalNavBarLayout = ({ children }: GlobalNavBarLayoutProps) => {
   return (
     <>
-      <Loading>
-        <div className="w-screen overflow-x-hidden">
-          <GlobalNavBar />
-          <div className="relative min-h-screen">{children}</div>
-          <GlobalFooter />
-        </div>
-      </Loading>
+      {/* <Loading> */}
+      <div className="w-screen overflow-x-hidden">
+        <GlobalNavBar />
+        <div className="relative min-h-screen">{children}</div>
+        <GlobalFooter />
+      </div>
+      {/* </Loading> */}
       {/* <Toaster /> */}
     </>
   );
