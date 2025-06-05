@@ -6,7 +6,7 @@
 // import SocialLinks from "./social-links";
 // import SubscriptionBanner from "./subscription-banner";
 // import Image from "next/image";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 
 // interface DetailContentProps {
 //   params: { id: string };
@@ -14,8 +14,8 @@ import { useParams } from "next/navigation";
 
 const DetailContent = () => {
   // const { id } = params;
-  const { id } = useParams();
-  console.log(id);
+  // const { id } = useParams();
+
   // const { post, isError, isLoading } = usePostDetail(id as string);
 
   // if (isLoading) return <div>로딩 중...</div>;
@@ -24,7 +24,8 @@ const DetailContent = () => {
 
   return (
     <div>
-      <div>{id}</div>
+      <p>hhhhhh</p>
+
       {/* {post.thumbnail && (
         <div className="relative h-[173px] bg-gray-100 tablet:h-[299px]">
           <Image
