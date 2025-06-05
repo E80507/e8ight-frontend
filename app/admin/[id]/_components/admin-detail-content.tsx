@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
 import Image from "next/image";
+// import { formatBytes } from "@/util/file";
 
 interface AdminDetailContentProps {
   params: { id: string };
@@ -202,18 +203,27 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 첨부파일 */}
           {showField("files") && (
-            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            <div className="flex flex-col tablet:flex-row">
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 첨부파일
               </div>
 
-              <div className="flex flex-1 items-center px-[16px] py-[12px] pretendard-subtitle-s">
-                {/* {post?.files} */}
+              <div className="flex flex-1 flex-col gap-2 px-[16px] py-[12px] pretendard-subtitle-s">
+                {post?.files && post.files.length > 0 ? (
+                  post.files.map((file, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="text-label-normal">{file.fileName}</div>
+                      {/* <div className="text-label-assistive">({formatBytes(file.fileSize)})</div> */}
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-label-assistive">등록된 파일이 없습니다.</div>
+                )}
               </div>
             </div>
           )}
 
-          <div className="flex gap-[8px] px-[16px] py-[40px] tablet:hidden">
+          <div className="fixed bottom-0 w-full flex gap-[8px] px-[16px] py-[40px] tablet:hidden border-t border-[#EEEFF1] ">
             <Button
               variant="outline"
               className="h-[48px] w-[97px] flex-1"
