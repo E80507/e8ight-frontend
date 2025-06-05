@@ -1,4 +1,3 @@
-import { AdminCategory } from "@/app/api/dto/admin";
 import { PostCategory } from "@/api/dto/post";
 
 export const ADMIN_POST_CATEGORIES = [

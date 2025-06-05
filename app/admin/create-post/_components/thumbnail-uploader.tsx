@@ -53,7 +53,9 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
       setPreview(objectUrl);
       try {
         const urls = await onPostS3PresignedUrl([file]);
-        setValue(`thumbnail`, urls[0]);
+        setValue("thumbnail", urls[0], {
+          shouldValidate: true,
+        });
       } catch (error) {
         setLocalError("파일 업로드에 실패했습니다.");
         console.error(error);
@@ -68,7 +70,7 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-y-2">
       <FormControl>
         <div>
           <FormLabel htmlFor={name} className="pretendard-subtitle-m">
@@ -80,7 +82,7 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
             }`}
           >
             {preview ? (
-              <div className="relative h-[89px] w-[296px] overflow-hidden rounded-md web:h-[210px] web:w-[700px]">
+              <div className="relative size-full overflow-hidden rounded-md">
                 <NextImage
                   src={preview}
                   alt="썸네일 미리보기"
@@ -100,7 +102,11 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
                 />
               </div>
             ) : (
-              <div className="flex size-full flex-col items-center justify-center">
+              <div
+                className={`flex size-full flex-col items-center justify-center rounded-md ${
+                  errors[name] ? "border-2 border-error" : ""
+                }`}
+              >
                 <Button
                   size="lg"
                   className="z-10 w-[97px]"

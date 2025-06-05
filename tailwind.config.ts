@@ -23,6 +23,7 @@ const config: Config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           alternative: "hsl(var(--primary-alternative))",
+          strong: "hsl(var(--primary-strong))",
         },
         background: {
           DEFAULT: "hsl(var(--background))",
@@ -72,6 +73,7 @@ const config: Config = {
         error: "hsl(var(--error))",
         "gray-strong": "hsl(var(--gray-strong))",
         "gray-700": "hsl(var(--gray-700))",
+        "gray-40": "hsl(var(--gray-40))",
         "line-normal": "hsl(var(--line-normal))",
         "component-natural": "hsl(var(--component-natural))",
         "component-alternative": "hsl(var(--component-alternative))",

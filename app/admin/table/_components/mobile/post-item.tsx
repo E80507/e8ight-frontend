@@ -3,6 +3,7 @@ import Check from "@/components/shared/check";
 import Badge from "@/components/ui/badge";
 import type { BadgeColor } from "@/components/ui/badge";
 import formattedDate from "@/util/date";
+import Link from "next/link";
 
 const categoryMap: Record<string, BadgeColor> = {
   INSIGHT: "green",
@@ -20,7 +21,8 @@ interface PostItemProps {
 
 const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
   return (
-    <div
+    <Link
+      href={`/admin/${post?.id}`}
       className={`flex flex-col gap-[14px] py-[24px] px-[16px] border-b border-[#EEEFF1] ${
         isFirst ? "border-t" : ""
       } ${isSelected ? "bg-[#F7FEFD]" : ""}`}
@@ -40,7 +42,9 @@ const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
       </div>
 
       {/* 제목 */}
-      <div className="pretendard-subtitle-m truncate">{post?.title}</div>
+      <div className="pretendard-subtitle-m truncate max-w-full">
+        {post?.title}
+      </div>
 
       {/* 작성일, 작성자 */}
       <div className="flex items-center gap-[8px]">
@@ -52,7 +56,7 @@ const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
           {post?.author || "-"}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

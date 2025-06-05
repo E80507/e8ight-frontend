@@ -53,7 +53,7 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
           <CarouselItem key={i}>
             <div className="relative aspect-[7/8] size-full overflow-hidden rounded-[20px]">
               <Image
-                src={item.thumbnail}
+                src={item.thumbnail ?? "/images/main/default-thumbnail.png"}
                 alt="이미지"
                 fill
                 className="object-cover"

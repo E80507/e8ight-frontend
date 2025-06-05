@@ -29,6 +29,7 @@ body {
 @layer base {
   :root {
     --primary: 178 100% 34%;
+    --primary-strong: 165 35% 17%;
     --background: 0 0% 100%;
     --background-alternative: 180 9% 98%;
     --background-natural: 220 14% 94%;
@@ -65,6 +66,7 @@ body {
     --error: 0 85% 44%;
     --gray-strong: 214 4% 34%;
     --gray-700: 230 8% 40%;
+    --gray-40: 0 0% 68%;
     --component-natural: 230 8% 85%;
     --component-alternative: 240 10% 96%;
     --line-normal: 220 10% 94%;
@@ -152,10 +154,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 12px !important;
   font-weight: 400 !important;
 }
-.ql-editor::placeholder {
-  font-family: "Pretendard", sans-serif !important;
+
+.ql-editor.ql-blank::before {
+  font-style: normal !important;
+  color: var(--label-assistive) !important;
+  content: attr(data-placeholder) !important;
   font-size: 16px !important;
   line-height: 150% !important;
-  padding: 12px !important;
-  font-weight: 400 !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.3% !important;
+  font-family: "var(--font-pretendard)" !important;
+  font-family: "Pretendard", sans-serif !important;
 }

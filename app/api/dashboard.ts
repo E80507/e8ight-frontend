@@ -4,10 +4,12 @@ import { GetPostsReq, SearchReq } from "./dto/dashboard";
 // 포스트 검색
 export const fetchPostsBySearch = async (data: SearchReq) => {
   try {
-    const res = await apiFetch(`/search`, {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
+    const res = await apiFetch(
+      `/posts?page=${data.page}&limit=${data.limit}&category=${data.category}&keyword=${data.keyword}`,
+      {
+        method: "GET",
+      },
+    );
     return res;
   } catch (err) {
     console.error(err);
@@ -18,9 +20,12 @@ export const fetchPostsBySearch = async (data: SearchReq) => {
 // 포스트 전체 조회
 export const getPosts = async (data: GetPostsReq) => {
   try {
-    const res = await apiFetch(`/posts?page=${data.page}&limit=${data.limit}`, {
-      method: "GET",
-    });
+    const res = await apiFetch(
+      `/posts?page=${data.page}&limit=${data.limit}&category=${data.category}`,
+      {
+        method: "GET",
+      },
+    );
     return res;
   } catch (err) {
     console.error(err);

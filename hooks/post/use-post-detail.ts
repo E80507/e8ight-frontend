@@ -2,9 +2,12 @@ import useSWR from "swr";
 import { getPostDetail } from "@/api/post";
 import { Post } from "@/types/post";
 
-export const usePostDetail = (id: string) => {
+export const usePostDetail = (
+  id: string,
+  type: "public" | "admin" = "public",
+) => {
   const { data, error, isLoading } = useSWR<Post>(
-    id ? `/posts/${id}` : null,
+    id ? `${type}/posts/${id}` : null,
     () => getPostDetail(id),
   );
 

@@ -15,16 +15,19 @@ const DashboardLayout = () => {
     currentPage,
     totalPages,
     setCurrentPage,
+    title,
+    text,
   } = useDashboardPosts();
 
   return (
     <>
-      <HeroSection />
+      <HeroSection title={title} />
       <div className="mx-auto max-w-[1440px] p-6 tablet:p-[30px] web:px-[120px] web:py-20">
         <SearchSection
           keyword={keyword}
           onSearch={handleSearch}
           setKeyword={setKeyword}
+          text={text}
         />
         <PostList posts={posts} />
         {totalPages > 1 && (

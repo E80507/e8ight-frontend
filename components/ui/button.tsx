@@ -100,6 +100,7 @@ const iconButtonVariants = cva(
         fill: "rounded-full bg-white hover:bg-gray-50 active:bg-gray-100 disabled:bg-gray-50",
       },
       size: {
+        xs: "size-[18px]",
         sm: "size-[24px]",
         md: "size-[40px]",
       },

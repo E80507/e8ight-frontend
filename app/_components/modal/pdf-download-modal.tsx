@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useRef } from "react";
 import { X } from "lucide-react";
-import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
+// import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
 import { usePostPdfDownload } from "@/hooks/pdf-download/use-post-pdf-download";
 
 interface PdfDownloadModalProps {
@@ -33,19 +33,13 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
           <div className="max-h-[calc(100vh-40px)] overflow-y-auto web:max-h-[calc(100vh-102px)]">
             {/* 배너 */}
             <div
-              className="relative tablet:h-[216px] h-[204px] overflow-hidden bg-cover bg-center pt-[68px] px-[16px] tablet:py-[80px] tablet:px-[30px]"
+              className="flex flex-col relative overflow-hidden bg-cover bg-center tablet:pt-[80px] tablet:pb-[40px] tablet:px-[40px] tablet:h-auto h-[204px] py-[24px] px-[16px]"
               style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
             >
-              <div className="absolute inset-0 z-0 bg-white opacity-[0.21]" />
-
-              <div className="relative z-10 flex gap-[8px]">
-                <div className="w-[8px] h-[8px] tablet:h-[16px] tablet:w-[16px] rounded-full bg-[#70D5B2]" />
-
-                <div className="tablet:gibson-heading-2 pretendard-h1-m">
-                  Global No.1
-                  <br />
-                  Digital Twin Platform
-                </div>
+              <div className="tablet:gibson-h1-m pretendard-h1-m mt-auto">
+                Global No.1
+                <br />
+                Digital Twin Platform
               </div>
             </div>
 
@@ -58,7 +52,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                   className="flex flex-col gap-[32px]"
                 >
                   {/* 파일 업로드 */}
-                  <CustomFileUploadField label="다운로드 파일명" />
+                  {/* <CustomFileUploadField label="다운로드 파일명" /> */}
 
                   {/* 성함 */}
                   <CustomInputField
@@ -100,6 +94,8 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                   <CustomInputField
                     form={form}
                     name="phone"
+                    type="tel"
+                    maxLength={13}
                     placeholder="연락처를 입력해주세요."
                     label="연락처"
                     isEssential={true}

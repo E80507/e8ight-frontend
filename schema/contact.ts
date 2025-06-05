@@ -29,7 +29,7 @@ export const ContactSchema = z.object({
 
   inquiryType: z
     .string({ required_error: "문의 유형을 선택해주세요." })
-    .refine((val) => ["1", "2", "3"].includes(val), {
+    .refine((val) => ["문의", "제품 문의", "기타"].includes(val), {
       message: "문의 유형을 선택해주세요.",
     }),
 
@@ -40,6 +40,9 @@ export const ContactSchema = z.object({
   interestedProduct: z
     .array(z.string())
     .min(1, { message: "관심 있는 제품을 한 개 이상 선택해주세요." }),
+
+  pix4dProduct: z.string().optional(),
+  otherProduct: z.string().optional(),
 
   message: z
     .string({ required_error: "문의 내용을 입력해주세요." })

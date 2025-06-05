@@ -94,7 +94,7 @@ export default function QuillEditor({
         onChange(content);
       }
     });
-  }, [isMounted, placeholder, onChange]);
+  }, [isMounted, placeholder, onChange, onImageUpload]);
 
   useEffect(() => {
     if (!quillRef.current) return;

@@ -12,6 +12,7 @@ interface CustomCheckboxFieldProps<T extends FieldValues> {
   value?: string;
   showMessage?: boolean;
   disabled?: boolean;
+  onChange?: (checked: boolean) => void;
 }
 
 const CustomCheckboxField = <T extends FieldValues>({
@@ -22,6 +23,8 @@ const CustomCheckboxField = <T extends FieldValues>({
   isEssential = false,
   value,
   showMessage = true,
+  // disabled = false,
+  onChange,
 }: CustomCheckboxFieldProps<T>) => {
   return (
     <FormField
@@ -42,9 +45,11 @@ const CustomCheckboxField = <T extends FieldValues>({
               ? [...currentValues, value]
               : currentValues.filter((v: string) => v !== value);
             field.onChange(newValue);
+            onChange?.(checked);
           } else {
             // 단일 체크박스인 경우 boolean 값 업데이트
             field.onChange(checked);
+            onChange?.(checked);
           }
         };
 
@@ -56,10 +61,6 @@ const CustomCheckboxField = <T extends FieldValues>({
             <label
               htmlFor={id}
               className="flex flex-1 cursor-pointer items-center gap-2"
-              onClick={(e) => {
-                e.preventDefault();
-                handleChange(!isChecked);
-              }}
             >
               <FormControl>
                 <div className="relative inline-block">
@@ -68,7 +69,7 @@ const CustomCheckboxField = <T extends FieldValues>({
                     type="checkbox"
                     checked={isChecked || false}
                     onChange={(e) => handleChange(e.target.checked)}
-                    className="peer absolute z-10 size-[20px] cursor-pointer rounded-[2px] opacity-0 tablet:size-[24px]"
+                    className="peer absolute z-10 size-[20px] cursor-pointer rounded-[2px] opacity-0"
                     value={value}
                     name={`${name}-${value}`}
                   />
@@ -76,10 +77,10 @@ const CustomCheckboxField = <T extends FieldValues>({
                 </div>
               </FormControl>
               {label && (
-                <label className="select-none pretendard-body-2">
+                <span className="select-none pretendard-body-2">
                   {label}
                   {isEssential && <span className="ml-1 text-red-500">*</span>}
-                </label>
+                </span>
               )}
             </label>
             {showMessage && <FormMessage />}

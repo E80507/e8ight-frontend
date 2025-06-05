@@ -43,6 +43,18 @@ const CustomCheckboxGroupField = <T extends FieldValues>({
           field.onChange([]);
         }
 
+        const handleCheckboxChange = (
+          checked: boolean,
+          option: CheckboxOption,
+        ) => {
+          console.log("체크박스 변경:", {
+            value: option.value,
+            checked,
+            currentValues: field.value,
+            formValues: form.getValues(),
+          });
+        };
+
         return (
           <FormItem className={className}>
             {label && (
@@ -62,6 +74,9 @@ const CustomCheckboxGroupField = <T extends FieldValues>({
                     label={option.label}
                     value={option.value}
                     showMessage={false}
+                    onChange={(checked) =>
+                      handleCheckboxChange(checked, option)
+                    }
                   />
                   {/* 체크박스가 선택되었고 추가 필드가 있는 경우에만 표시 */}
                   {field.value?.includes(option.value) &&
