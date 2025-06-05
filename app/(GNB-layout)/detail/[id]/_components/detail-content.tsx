@@ -13,10 +13,11 @@ interface DetailContentProps {
 
 const DetailContent = ({ params }: DetailContentProps) => {
   const { id } = params;
-  const { post, isError } = usePostDetail(id as string);
+  const { post, isError, isLoading } = usePostDetail(id as string);
 
+  if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러가 발생했습니다.</div>;
-  if (!post) return <div>로딩 중...</div>;
+  if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
 
   return (
     <div>
