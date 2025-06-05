@@ -2,6 +2,8 @@
 
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 interface SearchSectionProps {
   keyword: string;
@@ -16,6 +18,12 @@ const SearchSection = ({
   setKeyword,
   text,
 }: SearchSectionProps) => {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setKeyword("");
+  }, [pathname]);
+
   return (
     <section className="flex flex-col gap-y-[14px] font-pretendard tablet:gap-y-6">
       <p className=" break-words  subtitle-m tablet:subtitle-l">
