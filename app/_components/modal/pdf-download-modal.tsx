@@ -10,6 +10,7 @@ import { X } from "lucide-react";
 import { usePostPdfDownload } from "@/hooks/pdf-download/use-post-pdf-download";
 import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
+import { useDownloadFiles } from "@/hooks/s3/use-download-files";
 
 interface PdfDownloadModalProps {
   postId: string;
@@ -20,6 +21,34 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
   const { form, onSubmit } = usePostPdfDownload();
   const formRef = useRef<HTMLFormElement>(null);
   const { post } = usePostDetail(postId);
+  const { downloadFiles } = useDownloadFiles();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // 폼 유효성 검사
+    const isValid = await form.trigger();
+    if (!isValid) return;
+
+    // 파일 URL 추출
+    const fileUrls = post?.files?.map(file => file.fileUrl) || [];
+    if (fileUrls.length === 0) {
+      alert("다운로드할 파일이 없습니다.");
+      return;
+    }
+
+    // 파일 다운로드 실행
+    const success = await downloadFiles(fileUrls);
+    if (success) {
+      alert("파일 다운로드가 완료되었습니다.");
+      onClickClose();
+    } else {
+      alert("파일 다운로드 중 오류가 발생했습니다.");
+    }
+
+    // 폼 데이터 제출
+    onSubmit(e);
+  };
 
   return (
     <div className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-black/70 p-[16px] web:py-[51px]">
@@ -52,7 +81,7 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
             <div className="px-[16px] py-[40px] tablet:p-5 web:p-[40px]">
               <Form {...form}>
                 <form
-                  onSubmit={onSubmit}
+                  onSubmit={handleSubmit}
                   ref={formRef}
                   className="flex flex-col gap-[32px]"
                 >
