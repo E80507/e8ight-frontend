@@ -34,15 +34,12 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
       autoplayRef={autoplayRef}
     >
       <div className="flex items-start justify-between gap-x-2 web:mb-6 web:flex-col">
-        <div className="flex items-start gap-x-2 web:hidden">
-          <div className="size-2 rounded-full bg-primary web:size-4" />
-          <h3 className="display-3 tablet:display-2 web:display-1">
-            이에이트의 <br />
-            기술 이야기를
-            <br />
-            전합니다.
-          </h3>
-        </div>
+        <h3 className="display-3 tablet:display-2 web:display-1">
+          이에이트의 <br />
+          기술 이야기를
+          <br />
+          전합니다.
+        </h3>
         <div className="flex gap-x-4 self-end">
           <CarouselPrevious className="border-none" />
           <CarouselNext className="border-none" />
