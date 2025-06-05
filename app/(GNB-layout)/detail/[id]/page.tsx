@@ -1,8 +1,4 @@
-import dynamic from "next/dynamic";
-
-const DetailContent = dynamic(() => import("./_components/detail-content"), {
-  ssr: false,
-});
+import DetailContent from "./_components/detail-content";
 
 interface DetailPageProps {
   params: { id: string };
