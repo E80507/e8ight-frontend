@@ -1,33 +1,26 @@
 "use client";
 
-// import { usePostDetail } from "@/hooks/post/use-post-detail";
-// import PostHeader from "./post-header";
-// import PostContent from "./post-content";
-// import SocialLinks from "./social-links";
-// import SubscriptionBanner from "./subscription-banner";
-// import Image from "next/image";
-// import { useParams } from "next/navigation";
-
-// interface DetailContentProps {
-//   params: { id: string };
-// }
+import { usePostDetail } from "@/hooks/post/use-post-detail";
+import PostHeader from "./post-header";
+import PostContent from "./post-content";
+import SocialLinks from "./social-links";
+import SubscriptionBanner from "./subscription-banner";
+import Image from "next/image";
+import { useParams } from "next/navigation";
 
 const DetailContent = () => {
-  // const { id } = params;
-  // const { id } = useParams();
+  const { id } = useParams();
+  console.log(id);
+  const { post, isError, isLoading } = usePostDetail(id as string);
 
-  // const { post, isError, isLoading } = usePostDetail(id as string);
-
-  // if (isLoading) return <div>로딩 중...</div>;
-  // if (isError) return <div>에러가 발생했습니다.</div>;
-  // if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>에러가 발생했습니다.</div>;
+  if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
 
   return (
     <div>
-      <p>hhhhhh</p>
-
-      {/* {post.thumbnail && (
-        <div className="relative h-[173px] bg-gray-100 tablet:h-[299px]">
+      {post.thumbnail && (
+        <div className="tablet:h-[299px] relative h-[173px] bg-gray-100">
           <Image
             src={post.thumbnail}
             alt={post.title || "썸네일 이미지"}
@@ -38,13 +31,13 @@ const DetailContent = () => {
         </div>
       )}
 
-      <div className="mx-auto max-w-[1200px] px-[16px] py-[40px] tablet:px-[30px] tablet:py-[40px] web:px-0 web:py-[80px]">
+      <div className="tablet:px-[30px] tablet:py-[40px] web:px-0 web:py-[80px] mx-auto max-w-[1200px] px-[16px] py-[40px]">
         <PostHeader post={post} />
         <PostContent post={post} />
         <SocialLinks />
       </div>
 
-      <SubscriptionBanner /> */}
+      <SubscriptionBanner />
     </div>
   );
 };
