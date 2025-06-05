@@ -25,13 +25,13 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // 폼 유효성 검사
     const isValid = await form.trigger();
     if (!isValid) return;
 
     // 파일 URL 추출
-    const fileUrls = post?.files?.map(file => file.fileUrl) || [];
+    const fileUrls = post?.files?.map((file) => file.fileUrl) || [];
     if (fileUrls.length === 0) {
       alert("다운로드할 파일이 없습니다.");
       return;
@@ -86,8 +86,8 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
                   className="flex flex-col gap-[32px]"
                 >
                   {/* 파일 업로드 */}
-                  <CustomFileUploadField 
-                    label="다운로드 파일명" 
+                  <CustomFileUploadField
+                    label="다운로드 파일명"
                     files={post?.files}
                   />
 
