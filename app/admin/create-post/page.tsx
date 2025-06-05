@@ -160,7 +160,6 @@ const CreatePostPage = () => {
     }
   };
 
-  console.log(fileIds);
   return (
     <div className="web:h-full web:pt-10">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
