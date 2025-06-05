@@ -1,3 +1,5 @@
+"use client";
+
 import AdminClient from "./table/admin-client";
 
 const AdminPage = () => {
