@@ -16,5 +16,10 @@ export default function QuillViewer({ content = "" }: QuillViewerProps) {
     }
   }, [content]);
 
-  return <div ref={viewerRef} className="quill-viewer ql-editor" />;
+  return (
+    <div 
+      ref={viewerRef} 
+      className="quill-viewer ql-editor prose max-w-none" 
+    />
+  );
 }

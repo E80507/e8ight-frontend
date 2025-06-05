@@ -120,6 +120,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
                 상세내용
               </div>
 
+              <div className="px-[12px] pretendard-subtitle-s flex-1">
               <div className="flex flex-1 items-center px-[12px] pretendard-subtitle-s">
                 <QuillViewer content={post?.content} />
               </div>
