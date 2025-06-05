@@ -33,7 +33,10 @@ export default function useAddCellForLead() {
         await fetch("/api/google-spread", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ values }),
+          body: JSON.stringify({ 
+            type: "newsletter",
+            values 
+          }),
         });
       } catch (error) {
         console.error("스프레드시트 저장 실패", error);
