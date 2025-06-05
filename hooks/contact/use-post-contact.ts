@@ -17,7 +17,7 @@ export const usePostContact = () => {
       agreeToReceiveMarketing: false,
       pix4dProduct: "",
       otherProduct: "",
-    }
+    },
   });
 
   const { sendToSheet } = useAddCellForLead();
@@ -30,18 +30,20 @@ export const usePostContact = () => {
         // 0.4초 대기 (API 호출 시뮬레이션)
         await new Promise((resolve) => setTimeout(resolve, 400));
 
-        console.log("문의 데이터:", data);  // 데이터 확인용 로그
+        console.log("문의 데이터:", data); // 데이터 확인용 로그
 
         // 관심 제품 처리
-        const processedInterestedProducts = data.interestedProduct.map(product => {
-          if (product === "pix4d" && data.pix4dProduct) {
-            return `PIX4D - ${data.pix4dProduct}`;
-          }
-          if (product === "other" && data.otherProduct) {
-            return `기타 - ${data.otherProduct}`;
-          }
-          return product;
-        });
+        const processedInterestedProducts = data.interestedProduct.map(
+          (product) => {
+            if (product === "pix4d" && data.pix4dProduct) {
+              return `PIX4D - ${data.pix4dProduct}`;
+            }
+            if (product === "other" && data.otherProduct) {
+              return `기타 - ${data.otherProduct}`;
+            }
+            return product;
+          },
+        );
 
         // 뉴스레터 구독 동의한 경우 이메일 전송
         if (data.agreeToReceiveMarketing) {
@@ -65,7 +67,8 @@ export const usePostContact = () => {
                 });
               } else {
                 toast({
-                  title: errorData?.message || "구독 처리 중 문제가 발생했습니다.",
+                  title:
+                    errorData?.message || "구독 처리 중 문제가 발생했습니다.",
                 });
               }
             }
@@ -89,10 +92,9 @@ export const usePostContact = () => {
           interestedProduct: processedInterestedProducts.join(", "),
           message: data.message,
         }),
-
-        setTimeout(() => {
-          form.reset();  // 로그 확인 후 폼 리셋
-        }, 1000);
+          setTimeout(() => {
+            form.reset(); // 로그 확인 후 폼 리셋
+          }, 1000);
 
         alert("문의가 성공적으로 접수되었습니다.");
       } catch (err: unknown) {

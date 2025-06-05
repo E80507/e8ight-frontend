@@ -115,7 +115,7 @@ const ContactPage = () => {
                   { value: "문의", text: "문의" },
                   { value: "제품 문의", text: "제품 문의" },
                   { value: "기타", text: "기타" },
-                ]}                
+                ]}
                 isEssential={true}
               />
 

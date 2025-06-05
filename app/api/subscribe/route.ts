@@ -10,7 +10,7 @@ export async function POST(req: Request) {
 
     // 현재 날짜 및 시간 포맷팅
     const now = new Date();
-    const formatDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    const formatDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`;
 
     const auth = new GoogleAuth({
       credentials: {
@@ -57,4 +57,4 @@ export async function POST(req: Request) {
       { status: 500 },
     );
   }
-} 
+}

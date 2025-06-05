@@ -23,7 +23,7 @@ const CustomCheckboxField = <T extends FieldValues>({
   isEssential = false,
   value,
   showMessage = true,
-  disabled = false,
+  // disabled = false,
   onChange,
 }: CustomCheckboxFieldProps<T>) => {
   return (

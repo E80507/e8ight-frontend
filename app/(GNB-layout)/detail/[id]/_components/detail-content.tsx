@@ -38,17 +38,6 @@ export const DetailContent = ({ params }: DetailContentProps) => {
         {/* 게시물 내용 */}
         <PostContent post={post} />
 
-        {/* 게시물 메인 이미지 */}
-        <div className="mt-[40px] max-w-[1200px] web:h-[571px] tablet:h-[458px] h-[156px] relative bg-gray-100">
-          <Image
-            src={post?.mainImage || ""}
-            alt={`${post?.title || "게시글"} 메인 이미지`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 1200px) 100vw, 1200px"
-          />
-        </div>
-
         {/* 소셜 링크 */}
         <SocialLinks />
       </div>

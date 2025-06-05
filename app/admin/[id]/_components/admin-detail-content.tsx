@@ -46,7 +46,6 @@ export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           "author",
           "title",
           "content",
-          "mainImage",
           "thumbnail",
           "tags",
           "keywords",
@@ -123,27 +122,6 @@ export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
               <div className="flex items-center px-[12px] pretendard-subtitle-s flex-1">
                 <QuillViewer content={post?.content} />
-              </div>
-            </div>
-          )}
-
-          {/* 메인 이미지 */}
-          {showField("mainImage") && (
-            <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-              <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
-                메인 이미지
-              </div>
-
-              <div className="flex items-center px-[20px] py-[16px] pretendard-subtitle-s flex-1">
-                <div className="bg-gray-100 tablet:max-w-[442px] w-full tablet:h-[210px] h-[152px] relative overflow-hidden">
-                  <Image
-                    src={post?.mainImage || ""}
-                    alt={post?.title || "썸네일 이미지"}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
               </div>
             </div>
           )}
