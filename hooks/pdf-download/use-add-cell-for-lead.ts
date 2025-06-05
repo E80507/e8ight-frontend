@@ -33,9 +33,9 @@ export default function useAddCellForLead() {
         await fetch("/api/google-spread", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             type: "newsletter",
-            values 
+            values,
           }),
         });
       } catch (error) {
