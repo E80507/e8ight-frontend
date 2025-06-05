@@ -29,7 +29,7 @@ export const PostLibraryInsightFormSchema = z.object({
   // tags, keywords는 검사에서 제외
   tags: z.array(z.string()).optional(),
   keywords: z.array(z.string()).optional(),
-  linkUrl: z.string().min(1, { message: "링크를 입력해주세요." }),
+  linkUrl: z.string().optional(),
   file: z.array(z.string()).optional(),
 });
 
