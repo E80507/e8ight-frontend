@@ -11,9 +11,9 @@ interface DetailContentProps {
   params: { id: string };
 }
 
-export const DetailContent = ({ params }: DetailContentProps) => {
+const DetailContent = ({ params }: DetailContentProps) => {
   const { id } = params;
-  const { post, isError } = usePostDetail(id as string);
+  const { post, isError } = usePostDetail(id as string, "public");
 
   if (isError) return <div>에러가 발생했습니다.</div>;
   if (!post) return <div>로딩 중...</div>;
@@ -47,3 +47,5 @@ export const DetailContent = ({ params }: DetailContentProps) => {
     </div>
   );
 };
+
+export default DetailContent;
