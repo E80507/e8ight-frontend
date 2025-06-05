@@ -1,9 +1,9 @@
 "use client";
 
 import { usePostDetail } from "@/hooks/post/use-post-detail";
-import PostHeader from "./post-header";
-import PostContent from "./post-content";
-import SocialLinks from "./social-links";
+// import PostHeader from "./post-header";
+// import PostContent from "./post-content";
+// import SocialLinks from "./social-links";
 import SubscriptionBanner from "./subscription-banner";
 import Image from "next/image";
 
@@ -32,16 +32,16 @@ const DetailContent = ({ params }: DetailContentProps) => {
         />
       </div>
 
-      <div className="mx-auto max-w-[1200px] px-[16px] py-[40px] tablet:px-[30px] tablet:py-[40px] web:px-0 web:py-[80px]">
-        {/* 게시물 헤더 */}
+      {/* <div className="mx-auto max-w-[1200px] px-[16px] py-[40px] tablet:px-[30px] tablet:py-[40px] web:px-0 web:py-[80px]">
+        게시물 헤더
         <PostHeader post={post} />
 
-        {/* 게시물 내용 */}
+        게시물 내용
         <PostContent post={post} />
 
-        {/* 소셜 링크 */}
+        소셜 링크
         <SocialLinks />
-      </div>
+      </div> */}
 
       {/* 구독 배너 */}
       <SubscriptionBanner />
