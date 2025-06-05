@@ -1,5 +1,3 @@
-"use client";
-
 import dynamic from "next/dynamic";
 
 const DetailContent = dynamic(() => import("./_components/detail-content"), {
