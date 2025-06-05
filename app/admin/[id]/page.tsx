@@ -1,4 +1,4 @@
-import { AdminDetailContent } from "./_components/admin-detail-content";
+import AdminDetailContent from "./_components/admin-detail-content";
 
 interface AdminDetailPageProps {
   params: { id: string };

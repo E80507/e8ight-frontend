@@ -1,4 +1,4 @@
-import { DetailContent } from "./_components/detail-content";
+import DetailContent from "./_components/detail-content";
 
 interface DetailPageProps {
   params: { id: string };

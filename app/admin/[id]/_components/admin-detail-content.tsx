@@ -12,10 +12,10 @@ interface AdminDetailContentProps {
   params: { id: string };
 }
 
-export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
+const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
   const router = useRouter();
   const { id } = params;
-  const { post, isError } = usePostDetail(id as string);
+  const { post, isError } = usePostDetail(id as string, "admin");
   const { deletePosts } = useDeletePosts();
 
   // 삭제하기
@@ -60,7 +60,7 @@ export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <div className="max-w-[1240px] tablet:px-[16px] mx-auto">
         <div className="justify-between h-[48px] hidden tablet:flex">
           <h3 className="pretendard-title-l">게시글 상세정보</h3>
@@ -79,7 +79,7 @@ export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
         {/* 카테고리 */}
         <div className="mt-[12px] border border-[#EEEFF1]">
-          <div className="flex flex-col tablet:flex-row">
+          <div className="flex flex-col tablet:flex-row  border-b border-[#EEEFF1]">
             <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
               카테고리
             </div>
@@ -206,7 +206,7 @@ export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
               </div>
 
               <div className="flex items-center px-[16px] py-[12px] pretendard-subtitle-s flex-1">
-                {post?.files}
+                {/* {post?.files} */}
               </div>
             </div>
           )}
@@ -227,3 +227,5 @@ export const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
     </div>
   );
 };
+
+export default AdminDetailContent;
