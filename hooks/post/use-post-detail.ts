@@ -4,10 +4,10 @@ import { Post } from "@/types/post";
 
 export const usePostDetail = (
   id: string,
-  type: "public" | "admin" = "public",
+  // type: "public" | "admin" = "public",
 ) => {
   const { data, error, isLoading } = useSWR<Post>(
-    id ? `${type}/posts/${id}` : null,
+    id ? `/posts/${id}` : null,
     () => getPostDetail(id),
   );
 
