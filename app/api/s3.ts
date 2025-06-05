@@ -3,6 +3,7 @@ import {
   S3PostPresignedUrlReq,
   S3PostPresignedUrlRes,
   S3FileMetadata,
+  UploadS3MetadataResponse,
 } from "./dto/s3";
 
 // s3 presigned url 요청
@@ -47,7 +48,7 @@ export const uploadS3File = async (
 //s3 파일 업로드 완료후 메타데이터 저장
 export const uploadS3FileMetadata = async (
   req: S3FileMetadata,
-): Promise<S3FileMetadata> => {
+): Promise<UploadS3MetadataResponse> => {
   try {
     const res = await apiFetch("/s3/upload/complete", {
       method: "POST",

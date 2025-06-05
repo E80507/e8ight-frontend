@@ -18,5 +18,9 @@ export interface S3FileMetadata {
   fileUrl: string;
   fileName: string;
   fileSize: number;
-  mimeType: string;
+  mimeType?: string;
+}
+
+export interface UploadS3MetadataResponse {
+  savedFile: { id: string };
 }
