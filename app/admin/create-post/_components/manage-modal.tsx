@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { PostLibraryInsightFormSchema, PostDXFormSchema } from "@/schema/post";
+import {
+  PostLibraryInsightFormSchema,
+  PostDXFormSchema,
+  PostDownloadsFormSchema,
+} from "@/schema/post";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import CustomCheckboxField from "@/components/shared/form/custom-checkbox-field";
@@ -27,7 +31,9 @@ export interface OptionItem {
 interface ManageModalProps {
   modalType: "tags" | "keywords";
   form: UseFormReturn<
-    z.infer<typeof PostLibraryInsightFormSchema | typeof PostDXFormSchema>
+    | z.infer<typeof PostLibraryInsightFormSchema>
+    | z.infer<typeof PostDXFormSchema>
+    | z.infer<typeof PostDownloadsFormSchema>
   >;
   setModalType: (modalType: "tags" | "keywords" | null) => void;
   options: OptionItem[];
