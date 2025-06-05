@@ -31,7 +31,7 @@ export const DetailContent = ({ params }: DetailContentProps) => {
         />
       </div>
 
-      <div className="web:px-[120px] web:py-[80px] tablet:px-[30px] tablet:py-[40px] px-[16px] py-[40px] max-w-[1200px] mx-auto">
+      <div className="web:py-[80px] web:px-0 tablet:px-[30px] tablet:py-[40px] px-[16px] py-[40px] max-w-[1200px] mx-auto">
         {/* 게시물 헤더 */}
         <PostHeader post={post} />
 
