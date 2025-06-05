@@ -23,13 +23,6 @@ export default function NotFound() {
           >
             홈으로 돌아가기
           </Link>
-
-          <button
-            onClick={() => window.history.back()}
-            className="inline-block w-full rounded-lg bg-gray-200 px-6 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-300"
-          >
-            이전 페이지로
-          </button>
         </div>
 
         <div className="mt-8 text-sm text-gray-400">
