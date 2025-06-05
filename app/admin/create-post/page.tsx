@@ -45,7 +45,6 @@ const CreatePostPage = () => {
     { name: string; size: number; url: string }[] | null
   >(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [fileIds, setFileIds] = useState<string[]>([]);
 
   const schema =
     selectedCategory === POST_CATEGORY_VALUES.DX
@@ -93,12 +92,7 @@ const CreatePostPage = () => {
   const handleCreatePost = form.handleSubmit(
     async (data) => {
       try {
-        const payload: CreatePostReq = {
-          ...data,
-          fileIds,
-        };
-
-        await trigger(payload);
+        await trigger(data as CreatePostReq);
         router.push(ADMIN_PAGE);
       } catch (error) {
         console.error("게시글 등록 실패", error);
@@ -111,55 +105,56 @@ const CreatePostPage = () => {
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files || files.length === 0) return;
+    if (files && files.length > 0) {
+      const MAX_SIZE = 10 * 1024 * 1024; // 10MB in bytes
+      const updatedFiles = Array.from(files);
 
-    const MAX_SIZE = 10 * 1024 * 1024; // 10MB
-    const updatedFiles = Array.from(files);
+      const validFiles = updatedFiles.filter((file) => file.size <= MAX_SIZE);
+      const invalidFiles = updatedFiles.filter((file) => file.size > MAX_SIZE);
 
-    const validFiles = updatedFiles.filter((file) => file.size <= MAX_SIZE);
-    const invalidFiles = updatedFiles.filter((file) => file.size > MAX_SIZE);
+      if (invalidFiles.length > 0) {
+        setErrorMessage("파일 크기는 최대 10MB까지 가능합니다.");
+      }
 
-    if (invalidFiles.length > 0) {
-      setErrorMessage("파일 크기는 최대 10MB까지 가능합니다.");
-    }
+      if (validFiles.length > 0) {
+        try {
+          // Upload files to S3 and get the URLs
+          const fileUrls = await Promise.all(
+            validFiles.map(async (file) => await handleImageUpload(file)),
+          );
 
-    if (validFiles.length > 0) {
-      try {
-        const uploadedFileDetails = await Promise.all(
-          validFiles.map(async (file) => {
-            // 1. S3 업로드
-            const fileUrl = await handleImageUpload(file);
+          // Prepare file details with URLs
+          const newFileDetails = validFiles.map((file, index) => ({
+            name: file.name,
+            size: file.size,
+            url: fileUrls[index],
+          }));
 
-            // 2. 메타데이터 등록
+          // Save file details to state
+          setFileDetails((prevDetails) => [
+            ...(prevDetails || []),
+            ...newFileDetails,
+          ]);
+
+          form.setValue("file", [...(form.watch("file") ?? []), ...fileUrls]);
+
+          for (let i = 0; i < validFiles.length; i++) {
             const fileMetadata = {
-              fileName: file.name,
-              fileSize: file.size,
-              mimetype: file.type,
-              fileUrl: fileUrl,
+              fileName: validFiles[i].name,
+              fileSize: validFiles[i].size,
+              fileUrl: fileUrls[i],
+              mimeType: validFiles[i].type,
             };
-            const data = await uploadS3FileMetadata(fileMetadata);
 
-            // 3. fileIds 상태 저장
-            setFileIds((prevIds) => [...prevIds, data.savedFile.id]);
-
-            return {
-              name: file.name,
-              size: file.size,
-              url: fileUrl,
-            };
-          }),
-        );
-
-        // 4. 상태에 파일 정보 저장
-        setFileDetails((prev) => [...(prev || []), ...uploadedFileDetails]);
-      } catch (error) {
-        console.error("파일 업로드 실패", error);
-        setErrorMessage("파일 업로드 중 문제가 발생했습니다.");
+            await uploadS3FileMetadata(fileMetadata);
+          }
+        } catch {
+          setErrorMessage("파일 업로드 중 오류가 발생했습니다.");
+        }
       }
     }
   };
 
-  console.log(fileIds);
   return (
     <div className="web:h-full web:pt-10">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
