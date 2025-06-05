@@ -13,7 +13,7 @@ interface DetailContentProps {
 
 const DetailContent = ({ params }: DetailContentProps) => {
   const { id } = params;
-  const { post, isError } = usePostDetail(id as string, "public");
+  const { post, isError } = usePostDetail(id as string);
 
   if (isError) return <div>에러가 발생했습니다.</div>;
   if (!post) return <div>로딩 중...</div>;
@@ -21,7 +21,7 @@ const DetailContent = ({ params }: DetailContentProps) => {
   return (
     <div>
       {/* 게시물 썸네일 */}
-      <div className="tablet:h-[299px] h-[173px] relative bg-gray-100">
+      <div className="relative h-[173px] bg-gray-100 tablet:h-[299px]">
         <Image
           src={post.thumbnail}
           alt={post.title || "썸네일 이미지"}
@@ -31,7 +31,7 @@ const DetailContent = ({ params }: DetailContentProps) => {
         />
       </div>
 
-      <div className="web:py-[80px] web:px-0 tablet:px-[30px] tablet:py-[40px] px-[16px] py-[40px] max-w-[1200px] mx-auto">
+      <div className="mx-auto max-w-[1200px] px-[16px] py-[40px] tablet:px-[30px] tablet:py-[40px] web:px-0 web:py-[80px]">
         {/* 게시물 헤더 */}
         <PostHeader post={post} />
 
