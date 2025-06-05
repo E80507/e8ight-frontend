@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactSchema } from "@/schema/contact";
 import useAddCellForLead from "./use-add-cell-for-lead";
+import { postSubscribe } from "@/api/subscribe";
 
 export const usePostContact = () => {
   const [loading, setLoading] = useState(false); // 로딩 상태
@@ -42,6 +43,35 @@ export const usePostContact = () => {
           return product;
         });
 
+        // 뉴스레터 구독 동의한 경우 이메일 전송
+        if (data.agreeToReceiveMarketing) {
+          try {
+            const response = await postSubscribe(data.email);
+            console.log("Response message:", response.message);
+
+            if (response.message === "뉴스레터가 성공적으로 구독되었습니다.") {
+              console.log("Calling onSuccess callback");
+            } else {
+              toast({
+                title: response.message || "구독 처리 중 문제가 발생했습니다",
+              });
+            }
+          } catch (err) {
+            if (err instanceof Error) {
+              const errorData = JSON.parse(err.message);
+              if (errorData?.statusCode === 409) {
+                toast({
+                  title: "이미 구독 중인 이메일입니다.",
+                });
+              } else {
+                toast({
+                  title: errorData?.message || "구독 처리 중 문제가 발생했습니다.",
+                });
+              }
+            }
+          }
+        }
+
         toast({
           title: "문의가 성공적으로 접수되었습니다.",
         });
@@ -63,6 +93,8 @@ export const usePostContact = () => {
         setTimeout(() => {
           form.reset();  // 로그 확인 후 폼 리셋
         }, 1000);
+
+        alert("문의가 성공적으로 접수되었습니다.");
       } catch (err: unknown) {
         console.error("Form Submission Error:", err);
         toast({

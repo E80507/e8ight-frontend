@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PdfDownloadSchema } from "@/schema/pdf-download";
+import useAddCellForLead from "./use-add-cell-for-lead";
 
 export const usePostPdfDownload = () => {
   const [loading, setLoading] = useState(false); // 로딩 상태
@@ -11,6 +12,8 @@ export const usePostPdfDownload = () => {
   const form = useForm<z.infer<typeof PdfDownloadSchema>>({
     resolver: zodResolver(PdfDownloadSchema),
   });
+
+  const { sendToSheet } = useAddCellForLead();
 
   const onSubmit = form.handleSubmit(
     async (data) => {
@@ -21,15 +24,28 @@ export const usePostPdfDownload = () => {
         await new Promise((resolve) => setTimeout(resolve, 400));
 
         toast({
-          title: "문의가 성공적으로 접수되었습니다.",
+          title: "PDF 다운로드가 성공적으로 접수되었습니다.",
         });
 
-        // Reset form after successful submission
-        form.reset();
+        console.log("PDF 다운로드 데이터:", JSON.stringify(data));
+
+        sendToSheet({
+          name: data.name,
+          position: data.position,
+          company: data.company,
+          department: data.department,
+          email: data.email,
+        }),
+
+        setTimeout(() => {
+          form.reset();  // 로그 확인 후 폼 리셋
+        }, 1000);
+
+        alert("PDF 다운로드가 성공적으로 접수되었습니다.");
       } catch (err: unknown) {
         console.error("Form Submission Error:", err);
         toast({
-          title: "문의 접수 중 오류가 발생했습니다.",
+          title: "PDF 다운로드 중 오류가 발생했습니다.",
           variant: "destructive",
         });
       } finally {
