@@ -53,7 +53,6 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
       setPreview(objectUrl);
       try {
         const urls = await onPostS3PresignedUrl([file]);
-        console.log(urls);
         setValue("thumbnail", urls[0], {
           shouldValidate: true,
         });
