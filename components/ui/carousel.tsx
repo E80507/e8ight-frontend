@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
@@ -9,6 +8,7 @@ import useEmblaCarousel, {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Autoplay from "embla-carousel-autoplay";
+import Image from "next/image";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -219,7 +219,12 @@ const CarouselPrevious = React.forwardRef<
       onClick={handleClick}
       {...props}
     >
-      <ChevronLeftIcon className="size-8" />
+      <Image
+        src="/svg/icon/chevron-left-carousel.svg"
+        alt="previous"
+        width={32}
+        height={32}
+      />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -246,7 +251,12 @@ const CarouselNext = React.forwardRef<
       onClick={handleClick}
       {...props}
     >
-      <ChevronRightIcon className="size-8" />
+      <Image
+        src="/svg/icon/chevron-right-carousel.svg"
+        alt="previous"
+        width={32}
+        height={32}
+      />
       <span className="sr-only">Next slide</span>
     </Button>
   );
