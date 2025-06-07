@@ -49,7 +49,7 @@ const AdminNavBar = () => {
             height={43}
             priority
           />
-          <span className="font-gibson h2-r">E8 Admin</span>
+          <span className="font-gibson font-semibold">E8 Admin</span>
         </Link>
       </div>
 
