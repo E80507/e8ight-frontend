@@ -1,19 +1,15 @@
 import useSWR from "swr";
-import { getPostDetail } from "@/api/post";
 import { Post } from "@/types/post";
+import { getPostDetail } from "@/api/post";
 
-export const usePostDetail = (
-  id: string,
-  type: "public" | "admin" = "public",
-) => {
-  const { data, error, isLoading } = useSWR<Post>(
-    id ? `${type}/posts/${id}` : null,
+export const usePostDetail = (id: string) => {
+  const { data: post, error: isError } = useSWR<Post>(
+    id ? `posts/${id}` : null,
     () => getPostDetail(id),
   );
 
   return {
-    post: data,
-    isLoading,
-    isError: error,
+    post,
+    isError,
   };
 };

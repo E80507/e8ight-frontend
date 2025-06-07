@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
 import Image from "next/image";
+// import { formatBytes } from "@/util/file";
 
 interface AdminDetailContentProps {
   params: { id: string };
@@ -15,7 +16,7 @@ interface AdminDetailContentProps {
 const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
   const router = useRouter();
   const { id } = params;
-  const { post, isError } = usePostDetail(id as string, "admin");
+  const { post, isError } = usePostDetail(id as string);
   const { deletePosts } = useDeletePosts();
 
   // 삭제하기
@@ -60,9 +61,9 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
-      <div className="max-w-[1240px] tablet:px-[16px] mx-auto">
-        <div className="justify-between h-[48px] hidden tablet:flex">
+    <div className="min-h-screen bg-white">
+      <div className="mx-auto max-w-[1240px] tablet:px-[16px]">
+        <div className="hidden h-[48px] justify-between tablet:flex">
           <h3 className="pretendard-title-l">게시글 상세정보</h3>
 
           <div className="flex items-center gap-[8px]">
@@ -79,61 +80,63 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
         {/* 카테고리 */}
         <div className="mt-[12px] border border-[#EEEFF1]">
-          <div className="flex flex-col tablet:flex-row  border-b border-[#EEEFF1]">
-            <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+          <div className="flex flex-col border-b  border-[#EEEFF1] tablet:flex-row">
+            <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               카테고리
             </div>
 
-            <div className="flex items-center px-[12px] pretendard-subtitle-s min-h-[45px] py-[12px]">
+            <div className="flex min-h-[45px] items-center p-[12px] pretendard-subtitle-s">
               {post?.category}
             </div>
           </div>
 
           {/* 저자 */}
           {showField("author") && (
-            <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-              <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 저자
               </div>
 
-              <div className="flex items-center px-[12px] pretendard-subtitle-s min-h-[45px]">
+              <div className="flex min-h-[45px] items-center px-[12px] pretendard-subtitle-s">
                 {post?.author}
               </div>
             </div>
           )}
 
           {/* 제목 */}
-          <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-            <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+          <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               제목
             </div>
 
-            <div className="flex items-center px-[12px] pretendard-subtitle-s flex-1 min-h-[45px]">
+            <div className="flex min-h-[45px] flex-1 items-center px-[12px] pretendard-subtitle-s">
               {post?.title}
             </div>
           </div>
 
           {/* 상세내용 */}
           {showField("content") && (
-            <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-              <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 상세내용
               </div>
 
-              <div className="flex items-center px-[12px] pretendard-subtitle-s flex-1">
-                <QuillViewer content={post?.content} />
+              <div className="flex-1 px-[12px] pretendard-subtitle-s">
+                <div className="flex flex-1 items-center px-[12px] pretendard-subtitle-s">
+                  <QuillViewer content={post?.content} />
+                </div>
               </div>
             </div>
           )}
 
           {/* 썸네일 */}
-          <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-            <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+          <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               썸네일
             </div>
 
-            <div className="flex items-center px-[20px] py-[16px] pretendard-subtitle-s flex-1">
-              <div className="bg-gray-100 w-full tablet:h-[210px] h-[100px] relative overflow-hidden">
+            <div className="flex flex-1 items-center px-[20px] py-[16px] pretendard-subtitle-s">
+              <div className="relative h-[100px] w-full overflow-hidden bg-gray-100 tablet:h-[210px]">
                 <Image
                   src={post?.thumbnail || ""}
                   alt={post?.title || "썸네일 이미지"}
@@ -147,16 +150,16 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 태그 */}
           {showField("tags") && (
-            <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-              <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 태그
               </div>
 
-              <div className="flex items-center gap-[8px] px-[16px] py-[12px] pretendard-subtitle-s flex-1">
+              <div className="flex flex-1 items-center gap-[8px] px-[16px] py-[12px] pretendard-subtitle-s">
                 {post?.tags?.map((tag: string, index: number) => (
                   <div
                     key={index}
-                    className="flex items-center justify-center px-[16px] h-[40px] bg-[#F4F4F6] pretendard-body-2 rounded-[8px]"
+                    className="flex h-[40px] items-center justify-center rounded-[8px] bg-[#F4F4F6] px-[16px] pretendard-body-2"
                   >
                     {tag}
                   </div>
@@ -167,16 +170,16 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 검색 키워드 */}
           {showField("keywords") && (
-            <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-              <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 검색 키워드
               </div>
 
-              <div className="flex items-center px-[16px] py-[12px] pretendard-subtitle-s flex-1">
+              <div className="flex flex-1 items-center px-[16px] py-[12px] pretendard-subtitle-s">
                 {post?.keywords?.map((keyword: string, index: number) => (
                   <div
                     key={index}
-                    className="flex items-center justify-center px-[16px] h-[40px] bg-[#F4F4F6] pretendard-body-2 rounded-[8px]"
+                    className="flex h-[40px] items-center justify-center rounded-[8px] bg-[#F4F4F6] px-[16px] pretendard-body-2"
                   >
                     {keyword}
                   </div>
@@ -187,12 +190,12 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 링크 연결 */}
           {showField("linkUrl") && (
-            <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-              <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 링크 연결
               </div>
 
-              <div className="flex items-center px-[16px] py-[12px] pretendard-subtitle-s flex-1">
+              <div className="flex flex-1 items-center px-[16px] py-[12px] pretendard-subtitle-s">
                 {post?.linkUrl}
               </div>
             </div>
@@ -200,27 +203,49 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 첨부파일 */}
           {showField("files") && (
-            <div className="flex flex-col tablet:flex-row border-b border-[#EEEFF1]">
-              <div className="flex items-center px-[16px] tablet:w-[160px] w-full min-h-[45px] bg-[#EEEFF1] pretendard-body-3">
+            <div className="flex flex-col tablet:flex-row">
+              <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 첨부파일
               </div>
 
-              <div className="flex items-center px-[16px] py-[12px] pretendard-subtitle-s flex-1">
-                {/* {post?.files} */}
+              <div className="flex flex-1 flex-col px-[16px] py-[12px] pretendard-subtitle-s">
+                {post?.files && post.files.length > 0 ? (
+                  post.files.map((file, index) => (
+                    <div
+                      key={index}
+                      className="flex h-[45px] items-center justify-between"
+                    >
+                      <div className="flex items-center gap-[10px] flex-1">
+                        <div className="pretendard-body-3 truncate text-[#474953]">
+                          {file.fileName}
+                        </div>
+                      </div>
+                      <div className="pretendard-body-3 text-[#474953] min-w-[100px] text-right">
+                        {file.fileSize
+                          ? `${Math.round(file.fileSize / 1024)} KB`
+                          : ""}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-label-assistive">
+                    등록된 파일이 없습니다.
+                  </div>
+                )}
               </div>
             </div>
           )}
 
-          <div className="flex tablet:hidden py-[40px] px-[16px] gap-[8px]">
+          <div className="fixed bottom-0 w-full flex gap-[8px] px-[16px] py-[40px] tablet:hidden border-t border-[#EEEFF1] ">
             <Button
               variant="outline"
-              className="flex-1 h-[48px] w-[97px]"
+              className="h-[48px] w-[97px] flex-1"
               onClick={handleDelete}
             >
               삭제하기
             </Button>
 
-            <Button className="flex-1 h-[48px] w-[97px]">수정하기</Button>
+            <Button className="h-[48px] w-[97px] flex-1">수정하기</Button>
           </div>
         </div>
       </div>
