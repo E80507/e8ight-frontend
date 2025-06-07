@@ -93,6 +93,7 @@ const CustomEmailField = <T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem>
+          {/* 라벨 */}
           {label && (
             <FormLabel className="mb-3 web:mb-2 gap-0" htmlFor={name}>
               {label}
@@ -104,6 +105,7 @@ const CustomEmailField = <T extends FieldValues>({
 
           <FormControl>
             <div className="flex items-center gap-2">
+              {/* 이메일 아이디 인풋 */}
               <Input
                 type="text"
                 disabled={disabled}
@@ -113,7 +115,11 @@ const CustomEmailField = <T extends FieldValues>({
                 placeholder={placeholder}
                 value={emailId}
               />
+
+              {/* 골뱅이 */}
               <span className="text-gray-500">@</span>
+
+              {/* 도메인 선택 셀렉트 */}
               <Select
                 onValueChange={(value) => handleDomainSelect(value, field)}
                 value={isCustomDomain ? "직접입력" : domain}
@@ -137,7 +143,9 @@ const CustomEmailField = <T extends FieldValues>({
                     <SelectValue />
                   )}
                 </SelectTrigger>
-                <SelectContent>
+
+                {/* 도메인 선택 컨텐츠 */}
+                <SelectContent className="z-[1000]">
                   {EMAIL_DOMAINS.map((domain) => (
                     <SelectItem key={domain} value={domain}>
                       {domain}
@@ -148,6 +156,7 @@ const CustomEmailField = <T extends FieldValues>({
             </div>
           </FormControl>
 
+          {/* 에러 메시지 */}
           <div className="mt-2">
             <FormMessage />
           </div>

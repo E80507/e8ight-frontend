@@ -38,6 +38,7 @@ const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
           />
           <Check type="square" isChecked={isSelected} />
         </button>
+
         <Badge color={categoryMap[post?.category]} text={post?.category} />
       </div>
 

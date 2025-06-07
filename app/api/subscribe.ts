@@ -1,6 +1,7 @@
 import { apiFetch } from "@/util/fetch";
 import { SubscribeResponse } from "./dto/subscribe";
 
+// 구독 신청
 export const postSubscribe = async (
   email: string,
 ): Promise<SubscribeResponse> => {

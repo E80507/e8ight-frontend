@@ -21,6 +21,7 @@ const PostSearchBar = ({
     setInputValue(e.target.value);
   };
 
+  // 인풋 키 다운 핸들러
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault(); // 폼 제출 방지
@@ -34,6 +35,7 @@ const PostSearchBar = ({
     onReset();
   };
 
+  // 검색 핸들러
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setKeyword(inputValue);
@@ -44,6 +46,7 @@ const PostSearchBar = ({
       onSubmit={handleSubmit}
       className="flex items-center gap-[8px] w-full"
     >
+      {/* 검색 바 */}
       <div className="relative flex items-center w-[400px]">
         <SearchIcon className="absolute inset-y-0 left-0 my-auto ml-[16px] size-[24px] text-[#D6D7DC]" />
 
@@ -56,6 +59,7 @@ const PostSearchBar = ({
         />
       </div>
 
+      {/* 초기화 버튼 */}
       <Button
         type="button"
         variant={"outline"}

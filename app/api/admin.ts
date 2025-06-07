@@ -80,6 +80,7 @@ export const getTags = async () => {
     throw new Error("태그 조회에 실패했습니다.");
   }
 };
+
 // 태그 생성
 export const createTag = async (data: CreateTagReq) => {
   try {
@@ -97,6 +98,7 @@ export const createTag = async (data: CreateTagReq) => {
     throw new Error("태그 생성에 실패했습니다.");
   }
 };
+
 // 태그 삭제
 export const deleteTag = async (data: DeleteTagReq) => {
   try {

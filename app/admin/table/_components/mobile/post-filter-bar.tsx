@@ -88,16 +88,19 @@ const PostFilterBar = ({
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
+            {/* 필터 버튼 */}
             <button type="button" className="hover:opacity-80">
               <ListFilter />
             </button>
           </SheetTrigger>
 
           <SheetContent side="bottom" className="bg-white rounded-t-[12px]">
+            {/* 헤더 */}
             <SheetHeader>
               <SheetTitle className="pretendard-title-m">필터 설정</SheetTitle>
             </SheetHeader>
 
+            {/* 필터 컨테이너 */}
             <div className="mt-6 flex flex-col gap-[40px]">
               <div className="flex flex-col gap-[24px]">
                 {/* 생성 일자 필터 */}
@@ -132,6 +135,7 @@ const PostFilterBar = ({
                 </div>
               </div>
 
+              {/* 적용 버튼 */}
               <SheetFooter>
                 <div className="flex gap-[8px] w-full">
                   <Button className="flex-1" onClick={handleApply}>
@@ -144,6 +148,7 @@ const PostFilterBar = ({
         </Sheet>
       </div>
 
+      {/* 검색 바 */}
       <PostSearchBar
         placeholder="제목, 저자"
         setKeyword={handleKeywordChange}

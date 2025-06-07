@@ -15,6 +15,7 @@ const PostTableToolbar = ({
   const router = useRouter();
   const { deletePosts } = useDeletePosts();
 
+  // 삭제 핸들러
   const handleDelete = async () => {
     const confirmed = confirm(
       "해당 게시글을 삭제하시나요?\n\n삭제된 게시글은 다시 복구할 수 없으며, 해당 카테고리 목록에서 제외됩니다.",
@@ -27,9 +28,11 @@ const PostTableToolbar = ({
 
   return (
     <div className="flex items-center justify-between justify-between">
+      {/* 총 게시글 수 */}
       <p className="pretendard-subtitle-l">총 {totalCount}건</p>
 
       <div className="flex items-center gap-[8px]">
+        {/* 삭제 버튼 */}
         <Button
           variant={"outline"}
           size={"lg"}
@@ -40,6 +43,7 @@ const PostTableToolbar = ({
           삭제하기
         </Button>
 
+        {/* 추가 버튼 */}
         <Button
           size={"lg"}
           className="max-w-[97px]"

@@ -14,11 +14,13 @@ const SubscriptionSection = () => {
     setIsCompleteModalOpen(true),
   );
 
+  // 구독 신청 핸들러
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await onSubmit(e);
   };
 
+  // 구독 완료 모달 닫기 핸들러
   const handleCompleteModalClose = () => {
     setIsCompleteModalOpen(false);
   };
@@ -56,6 +58,7 @@ const SubscriptionSection = () => {
 
           <Form {...form}>
             <form onSubmit={handleSubmit}>
+              {/* 이메일 인풋 */}
               <CustomInputField
                 form={form}
                 name="email"
@@ -63,6 +66,7 @@ const SubscriptionSection = () => {
                 className="w-[328px] rounded-[100px] px-[24px] text-black pretendard-body-2"
               />
 
+              {/* 뉴스레터 신청 버튼 */}
               <div className="mt-[32px] flex justify-center">
                 <Button
                   type="submit"
@@ -77,6 +81,7 @@ const SubscriptionSection = () => {
             </form>
           </Form>
 
+          {/* 구독 완료 모달 */}
           {isCompleteModalOpen && (
             <OneButtonModal
               title="뉴스레터 구독이 완료되었습니다"
