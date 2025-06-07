@@ -39,7 +39,7 @@ const PostContainer = ({
   resetFilters,
 }: PostContainerProps) => {
   return (
-    <div className="hidden md:flex flex-col gap-10 max-w-[1200px] mx-auto py-10">
+    <div className="hidden md:flex flex-col gap-10 max-w-[1440px] web:px-[120px] mx-auto py-10">
       {/* 필터 */}
       <PostFilterBar
         currentCategory={currentCategory}

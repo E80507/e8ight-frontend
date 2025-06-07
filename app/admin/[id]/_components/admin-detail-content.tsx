@@ -62,8 +62,9 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="mx-auto max-w-[1240px] tablet:px-[16px]">
-        <div className="hidden h-[48px] justify-between tablet:flex">
+      <div className="mx-auto max-w-[1440px] web:px-[120px] tablet:pt-[24px] tablet:pb-[40px] tablet:px-[30px]">
+        {/* 데스크탑 버튼 */}
+        <div className="hidden mb-[12px] h-[48px] justify-between tablet:flex">
           <h3 className="pretendard-title-l">게시글 상세정보</h3>
 
           <div className="flex items-center gap-[8px]">
@@ -78,14 +79,17 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           </div>
         </div>
 
-        {/* 카테고리 */}
-        <div className="mt-[12px] border border-[#EEEFF1]">
+        {/* 데스크탑 내용 */}
+        <div className="tablet:pb-0 pb-[128px] border border-[#EEEFF1]">
+          {/* 카테고리 */}
           <div className="flex flex-col border-b  border-[#EEEFF1] tablet:flex-row">
+            {/* 항목 제목 */}
             <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               카테고리
             </div>
 
-            <div className="flex min-h-[45px] items-center p-[12px] pretendard-subtitle-s">
+            {/* 항목 내용 */}
+            <div className="flex min-h-[45px] items-center pretendard-subtitle-s py-[12px] px-[8px]">
               {post?.category}
             </div>
           </div>
@@ -93,11 +97,13 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           {/* 저자 */}
           {showField("author") && (
             <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 저자
               </div>
 
-              <div className="flex min-h-[45px] items-center px-[12px] pretendard-subtitle-s">
+              {/* 항목 내용 */}
+              <div className="flex min-h-[45px] items-center pretendard-subtitle-s py-[12px] px-[8px]">
                 {post?.author}
               </div>
             </div>
@@ -105,11 +111,13 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 제목 */}
           <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            {/* 항목 제목 */}
             <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               제목
             </div>
 
-            <div className="flex min-h-[45px] flex-1 items-center px-[12px] pretendard-subtitle-s">
+            {/* 항목 내용 */}
+            <div className="flex min-h-[45px] flex-1 items-center px-[12px] pretendard-subtitle-s py-[12px] px-[16px]">
               {post?.title}
             </div>
           </div>
@@ -117,25 +125,27 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           {/* 상세내용 */}
           {showField("content") && (
             <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 상세내용
               </div>
 
-              <div className="flex-1 px-[12px] pretendard-subtitle-s">
-                <div className="flex flex-1 items-center px-[12px] pretendard-subtitle-s">
-                  <QuillViewer content={post?.content} />
-                </div>
+              {/* 항목 내용 */}
+              <div className="flex flex-1 items-center pretendard-subtitle-s px-[4px]">
+                <QuillViewer content={post?.content} />
               </div>
             </div>
           )}
 
           {/* 썸네일 */}
           <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            {/* 항목 제목 */}
             <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               썸네일
             </div>
 
-            <div className="flex flex-1 items-center px-[20px] py-[16px] pretendard-subtitle-s">
+            {/* 항목 내용 */}
+            <div className="flex flex-1 items-center pretendard-subtitle-s py-[20px] px-[16px]">
               <div className="relative h-[100px] w-full overflow-hidden bg-gray-100 tablet:h-[210px]">
                 <Image
                   src={post?.thumbnail || ""}
@@ -151,11 +161,13 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           {/* 태그 */}
           {showField("tags") && (
             <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 태그
               </div>
 
-              <div className="flex flex-1 items-center gap-[8px] px-[16px] py-[12px] pretendard-subtitle-s">
+
+              <div className="flex flex-1 items-center gap-[8px] min-h-[45px] pretendard-subtitle-s py-[12px] px-[16px]">
                 {post?.tags?.map((tag: string, index: number) => (
                   <div
                     key={index}
@@ -171,11 +183,13 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           {/* 검색 키워드 */}
           {showField("keywords") && (
             <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 검색 키워드
               </div>
 
-              <div className="flex flex-1 items-center px-[16px] py-[12px] pretendard-subtitle-s">
+              {/* 항목 내용 */}
+              <div className="flex flex-1 items-center min-h-[45px] pretendard-subtitle-s py-[12px] px-[16px]">
                 {post?.keywords?.map((keyword: string, index: number) => (
                   <div
                     key={index}
@@ -191,10 +205,12 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           {/* 링크 연결 */}
           {showField("linkUrl") && (
             <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+              {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 링크 연결
               </div>
 
+              {/* 항목 내용 */}
               <div className="flex flex-1 items-center px-[16px] py-[12px] pretendard-subtitle-s">
                 {post?.linkUrl}
               </div>
@@ -204,10 +220,12 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           {/* 첨부파일 */}
           {showField("files") && (
             <div className="flex flex-col tablet:flex-row">
+              {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 첨부파일
               </div>
 
+              {/* 항목 내용 */}
               <div className="flex flex-1 flex-col px-[16px] py-[12px] pretendard-subtitle-s">
                 {post?.files && post.files.length > 0 ? (
                   post.files.map((file, index) => (
@@ -236,7 +254,9 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
             </div>
           )}
 
-          <div className="fixed bottom-0 w-full flex gap-[8px] px-[16px] py-[40px] tablet:hidden border-t border-[#EEEFF1] ">
+          {/* 모바일 버튼 */}
+          <div className="fixed bottom-0 w-full flex items-center justify-center gap-[8px] px-[16px] h-[128px] tablet:hidden border-t border-[#EEEFF1] bg-white">
+            {/* 삭제하기 */}
             <Button
               variant="outline"
               className="h-[48px] w-[97px] flex-1"
@@ -245,6 +265,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
               삭제하기
             </Button>
 
+            {/* 수정하기 */}
             <Button className="h-[48px] w-[97px] flex-1">수정하기</Button>
           </div>
         </div>
