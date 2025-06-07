@@ -45,7 +45,7 @@ const AdminNavBar = () => {
           <Image
             src="/svg/logo.svg"
             alt={SERVICE_NAME}
-            width={64}
+            width={45}
             height={43}
             priority
           />
