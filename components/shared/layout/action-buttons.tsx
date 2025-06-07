@@ -14,12 +14,12 @@ const ActionButtons = ({ className }: ActionButtonsProps) => {
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
 
   return (
-    <div className={className || "flex gap-x-3"}>
+    <div className="flex gap-x-3">
       <Link href={CONTACT_PAGE} prefetch>
         <Button
           size="lg"
           shape="round"
-          className="border-black-1 bg-white text-black web:w-[160px]"
+          className={`border web:w-[160px] ${className}`}
         >
           1:1 상담
         </Button>
@@ -29,7 +29,7 @@ const ActionButtons = ({ className }: ActionButtonsProps) => {
         size="lg"
         shape="round"
         onClick={() => setIsSubscriptionModalOpen(true)} //뉴스 레터 모달 띄우기
-        className="border-black-1 bg-white text-black web:w-[160px]"
+        className={`border web:w-[160px] ${className}`}
       >
         뉴스레터 구독
       </Button>

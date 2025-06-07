@@ -16,7 +16,7 @@ const HeroSection = () => {
             Transformation
           </h2>
         </div>
-        <ActionButtons />
+        <ActionButtons className="border-black-1 bg-white text-black hover:border-primary hover:bg-primary" />
       </div>
     </section>
   );

@@ -22,7 +22,7 @@ const GlobalFooter = () => {
             height={37}
             style={{ width: 110, height: 37 }}
           />
-          <ActionButtons />
+          <ActionButtons className="bg-transparent" />
         </div>
 
         <p className="mb-1 mt-[14px] web:mt-0">{COMPANY_NAME}</p>

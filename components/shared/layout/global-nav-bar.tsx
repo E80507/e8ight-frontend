@@ -199,7 +199,7 @@ const GlobalNavBar = () => {
             ))}
           </div>
           <DrawerFooter className="flex flex-col py-10">
-            <ActionButtons />
+            <ActionButtons className="border-black-1 bg-white text-black hover:border-primary hover:bg-primary" />
             <ExternalLinksNav />
           </DrawerFooter>
         </DrawerContent>
