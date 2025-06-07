@@ -80,55 +80,56 @@ const GlobalNavBar = () => {
   return (
     <>
       {/* 홈페이지 데스크톱 GNB */}
+
       <header
-        className={`relative z-[100] hidden w-full flex-col px-[120px] py-4 font-pretendard web:flex ${
-          isContactPage
-            ? "bg-[#FBFBFC]"
-            : "mx-auto max-w-[1440px] bg-transparent"
+        className={`relative z-[100] hidden w-full bg-[#FBFBFC] web:flex ${
+          isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"
         }`}
       >
-        <div className="flex items-center justify-between">
-          <button type="button" onClick={handleLogoClick}>
-            <Image
-              src="/svg/logo.svg"
-              alt={SERVICE_NAME}
-              width={45}
-              height={43}
-              priority
-            />
-          </button>
-          <ExternalLinksNav />
-        </div>
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col px-[120px] py-4 font-pretendard">
+          <div className="flex items-center justify-between">
+            <button type="button" onClick={handleLogoClick}>
+              <Image
+                src="/svg/logo.svg"
+                alt={SERVICE_NAME}
+                width={45}
+                height={43}
+                priority
+              />
+            </button>
+            <ExternalLinksNav />
+          </div>
 
-        <div className="mt-4 flex items-center justify-between">
-          <nav className="flex items-center gap-x-[59px]">
-            {NAV_LINKS.map(({ label, path: href }) => (
-              <Link
-                key={href}
-                href={href}
-                className="flex items-center gap-3 title-l"
+          <div className="mt-4 flex items-center justify-between">
+            <nav className="flex items-center gap-x-[59px]">
+              {NAV_LINKS.map(({ label, path: href }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="flex items-center gap-3 title-l"
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+            <Link href={CONTACT_PAGE} prefetch>
+              <Button
+                size="lg"
+                shape="round"
+                className="w-[160px]"
+                onClick={() => router.push(CONTACT_PAGE)}
               >
-                {label}
-              </Link>
-            ))}
-          </nav>
-          <Link href={CONTACT_PAGE} prefetch>
-            <Button
-              size="lg"
-              shape="round"
-              className="w-[160px]"
-              onClick={() => router.push(CONTACT_PAGE)}
-            >
-              상담문의
-            </Button>
-          </Link>
+                상담문의
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 
       {/* 홈페이지 모바일 GNB */}
       <header
-        className={`pointer-events-auto relative z-[100] flex w-full items-center justify-between px-4 py-3 web:hidden ${
-          isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"
+        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between bg-transparent px-4 py-3 web:hidden ${
+          isContactPage ? "tablet:bg-[#FBFBFC]" : ""
         } ${isHome ? "h-[67px]" : "h-12"}`}
       >
         {isHome ? (
