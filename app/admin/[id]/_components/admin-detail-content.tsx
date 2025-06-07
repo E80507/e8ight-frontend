@@ -117,7 +117,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
             </div>
 
             {/* 항목 내용 */}
-            <div className="flex min-h-[45px] flex-1 items-center px-[12px] pretendard-subtitle-s py-[12px] px-[16px]">
+            <div className="flex min-h-[45px] flex-1 items-center pretendard-subtitle-s py-[12px] px-[16px]">
               {post?.title}
             </div>
           </div>
@@ -165,7 +165,6 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 태그
               </div>
-
 
               <div className="flex flex-1 items-center gap-[8px] min-h-[45px] pretendard-subtitle-s py-[12px] px-[16px]">
                 {post?.tags?.map((tag: string, index: number) => (
