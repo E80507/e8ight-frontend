@@ -15,7 +15,7 @@ const AdminNavBar = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 mx-auto flex w-full max-w-[1440px] items-center justify-between p-4 font-pretendard web:relative web:px-[120px] web:py-6 ${isCreatePage ? "bg-white" : ""}`}
+      className={`fixed inset-x-0 top-0 z-50 mx-auto flex w-full max-w-[1440px] items-center justify-between bg-white p-4 font-pretendard web:relative web:px-[120px] web:py-6`}
     >
       {/* 왼쪽 영역 */}
       <div className="flex items-center">
