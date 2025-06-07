@@ -24,3 +24,16 @@ export interface S3FileMetadata {
 export interface UploadS3MetadataResponse {
   savedFile: { id: string };
 }
+
+export interface GetPresignedUrlReq {
+  fileUrls: string[];
+}
+
+export interface PresignedUrlInfo {
+  presignedUrl: string;
+  fileUrl: string;
+}
+
+export interface GetPresignedUrlRes {
+  urls: PresignedUrlInfo[];
+}

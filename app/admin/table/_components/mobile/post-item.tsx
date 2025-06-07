@@ -1,4 +1,4 @@
-import { Post } from "@/api/dto/post";
+import { Post } from "@/app/api/dto/post";
 import Check from "@/components/shared/check";
 import Badge from "@/components/ui/badge";
 import type { BadgeColor } from "@/components/ui/badge";

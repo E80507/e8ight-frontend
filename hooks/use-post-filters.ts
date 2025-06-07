@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { PostCategory, PostsRequestParams } from "@/api/dto/post";
+import { PostCategory, PostsRequestParams } from "@/app/api/dto/post";
 import { searchDate } from "@/app/_components/calendar-single";
 
 interface UsePostFiltersReturn {

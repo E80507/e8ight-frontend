@@ -6,7 +6,7 @@ import { useState } from "react";
 import PdfDownloadModal from "../_components/modal/pdf-download-modal";
 import { useRouter } from "next/navigation";
 import { DOWNLOADS_PAGE } from "@/constants/path";
-import { Post, PostsRequestParams } from "@/api/dto/post";
+import { Post, PostsRequestParams } from "@/app/api/dto/post";
 import { usePost } from "@/hooks/post/use-post";
 
 const ArchiveSection = () => {

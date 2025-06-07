@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
 import { useState } from "react";
 import { ADMIN_POST_CATEGORIES } from "@/constants/admin";
-import { PostsRequestParams } from "@/api/dto/post";
+import { PostsRequestParams } from "@/app/api/dto/post";
 import PostSearchBar from "./post-search-bar";
 
 interface PostFilterBarProps {

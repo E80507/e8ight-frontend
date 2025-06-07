@@ -1,7 +1,7 @@
 "use client";
 
 import { PostTable } from "./post-table";
-import { Post, PostsRequestParams } from "@/api/dto/post";
+import { Post, PostsRequestParams } from "@/app/api/dto/post";
 import PostTableToolbar from "./post-table-toolbar";
 import PostFilterBar from "./post-filter-bar";
 import Pagination from "@/app/_components/pagination";

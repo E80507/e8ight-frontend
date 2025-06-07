@@ -5,8 +5,8 @@ import FloatingAddButton from "./post-add-button";
 import PostFilterBar from "./post-filter-bar";
 import Pagination from "@/app/_components/pagination";
 import PostTableToolbar from "./post-table-toolbar";
-import { PostsRequestParams } from "@/api/dto/post";
-import { Post } from "@/api/dto/post";
+import { PostsRequestParams } from "@/app/api/dto/post";
+import { Post } from "@/app/api/dto/post";
 import { searchDate } from "@/app/_components/calendar-single";
 
 interface MobilePostContainerProps {

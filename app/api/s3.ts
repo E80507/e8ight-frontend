@@ -4,6 +4,8 @@ import {
   S3PostPresignedUrlRes,
   S3FileMetadata,
   UploadS3MetadataResponse,
+  GetPresignedUrlReq,
+  GetPresignedUrlRes,
 } from "./dto/s3";
 
 // s3 presigned url 요청
@@ -63,4 +65,14 @@ export const uploadS3FileMetadata = async (
     console.error(err);
     throw err;
   }
+};
+
+// s3 파일 다운로드 요청
+export const getPresignedUrls = async (
+  data: GetPresignedUrlReq,
+): Promise<GetPresignedUrlRes> => {
+  return apiFetch("/s3/download/presigned-url", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
 };

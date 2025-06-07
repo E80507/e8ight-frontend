@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactSchema } from "@/schema/contact";
 import useAddCellForLead from "./use-add-cell-for-lead";
-import { postSubscribe } from "@/api/subscribe";
+import { postSubscribe } from "@/app/api/subscribe";
 
 export const usePostContact = () => {
   const [loading, setLoading] = useState(false); // 로딩 상태

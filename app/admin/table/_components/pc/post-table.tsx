@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { handlePostCategoryText } from "@/util/string";
-import { Post } from "@/api/dto/post";
+import { Post } from "@/app/api/dto/post";
 import Check from "@/components/shared/check";
 import formattedDate from "@/util/date";
 import { useRouter } from "next/navigation";

@@ -1,4 +1,4 @@
-import { getPresignedUrls } from "@/api/s3";
+import { getPresignedUrls } from "@/app/api/s3";
 
 export const useDownloadFiles = () => {
   const downloadFiles = async (fileUrls: string[]) => {
