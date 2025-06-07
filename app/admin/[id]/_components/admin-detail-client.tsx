@@ -247,7 +247,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
                     </div>
                   ))
                 ) : (
-                  <div className="text-label-assistive">
+                  <div className="flex items-center min-h-[45px] px-[16px] py-[12px] text-label-assistive">
                     등록된 파일이 없습니다.
                   </div>
                 )}

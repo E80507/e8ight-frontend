@@ -152,15 +152,15 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
                     form={form}
                     name="agreeToPrivacyPolicy"
                     label={
-                      <span className="pretendard-body-3">
-                        <span className="font-bold text-primary">
+                      <>
+                        <span className="text-primary pretendard-title-s pb-[0.1562rem]">
                           [필수] 개인정보 수집 동의
                         </span>
-                        <span>
+                        <span className="pretendard-body-3 pb-[0.1562rem]">
                           : 개인정보 수집 및 이용약관을 확인하였으며, 이에
                           동의합니다.
                         </span>
-                      </span>
+                      </>
                     }
                     isEssential={true}
                     type="square"
