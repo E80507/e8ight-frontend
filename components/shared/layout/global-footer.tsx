@@ -12,7 +12,7 @@ import {
 
 const GlobalFooter = () => {
   return (
-    <footer className="bg-background-alternative px-4 py-10 font-pretendard text-label-alternative caption2-400 web:px-0 web:py-[60px]">
+    <footer className="bg-toast-bg px-4 py-10 font-pretendard text-label-alternative caption2-400 web:px-0 web:py-[60px]">
       <div className="mx-auto w-full max-w-[1440px] px-4 web:px-[120px]">
         <div className="flex flex-col justify-between gap-y-6 web:flex-row web:items-center web:gap-y-0">
           <Image
@@ -22,7 +22,7 @@ const GlobalFooter = () => {
             height={37}
             style={{ width: 110, height: 37 }}
           />
-          <ActionButtons className="bg-transparent" />
+          <ActionButtons className="border-white bg-transparent text-white" />
         </div>
 
         <p className="mb-1 mt-[14px] web:mt-0">{COMPANY_NAME}</p>

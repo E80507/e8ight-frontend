@@ -79,6 +79,7 @@ const config: Config = {
         "component-natural": "hsl(var(--component-natural))",
         "component-alternative": "hsl(var(--component-alternative))",
         "background-hero": "hsl(var(--background-hero))",
+        "toast-bg": "hsl(var(--toast-bg))",
       },
       borderRadius: {
         lg: "var(--radius)", // 10px

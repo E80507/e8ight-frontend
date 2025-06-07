@@ -73,6 +73,7 @@ body {
     --line-normal: 220 10% 94%;
     --line-natural: 220 8% 85%;
     --background-hero: 175 48% 95%;
+    --toast-bg: 262 5% 9%;
   }
   .dark {
     --background: 0 0% 100%;
