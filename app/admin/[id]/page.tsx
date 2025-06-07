@@ -1,13 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const AdminDetailContent = dynamic(
-  () => import("./_components/admin-detail-content"),
-  {
-    ssr: false,
-  },
-);
+import AdminDetailContent from "./_components/admin-detail-content";
 
 interface AdminDetailPageProps {
   params: { id: string };

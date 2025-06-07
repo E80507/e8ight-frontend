@@ -23,6 +23,12 @@ export const usePostPdfDownload = () => {
         // 0.4초 대기 (API 호출 시뮬레이션)
         await new Promise((resolve) => setTimeout(resolve, 400));
 
+        toast({
+          title: "PDF 다운로드가 성공적으로 접수되었습니다.",
+        });
+
+        console.log("PDF 다운로드 데이터:", JSON.stringify(data));
+
         sendToSheet({
           name: data.name,
           position: data.position,
@@ -33,6 +39,8 @@ export const usePostPdfDownload = () => {
           setTimeout(() => {
             form.reset(); // 로그 확인 후 폼 리셋
           }, 1000);
+
+        alert("PDF 다운로드가 성공적으로 접수되었습니다.");
       } catch (err: unknown) {
         console.error("Form Submission Error:", err);
         toast({
