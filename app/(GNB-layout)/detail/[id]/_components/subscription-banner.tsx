@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function SubscriptionBanner() {
   return (
     <div className="flex justify-center items-center relative tablet:h-[360px] h-[425px] overflow-hidden">
+      {/* 배경 이미지 */}
       <Image
         src="/images/subscription.webp"
         alt="Subscription background"
@@ -16,7 +17,9 @@ export default function SubscriptionBanner() {
         quality={90}
       />
 
+      {/* 텍스트 컨테이너 */}
       <div className="flex flex-col gap-[32px] tablet:flex-row tablet:justify-between tablet:text-left text-center items-center web:w-[1040px] w-full tablet:px-[30px]">
+        {/* 텍스트 컨테이너 */}
         <div className="flex flex-col gap-[8px]">
           <div className="relative tablet:gibson-heading-1 gibson-heading-2 text-white">
             Global No.1

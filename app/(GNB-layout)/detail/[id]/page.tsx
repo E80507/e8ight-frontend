@@ -1,7 +1,13 @@
-import DetailContent from "./_components/detail-content";
+import DetailClient from "./_components/detail-client";
 
-const PostDetailPage = () => {
-  return <DetailContent />;
+interface PostDetailPageProps {
+  params: {
+    id: string;
+  };
+}
+
+const PostDetailPage = ({ params }: PostDetailPageProps) => {
+  return <DetailClient params={params} />;
 };
 
 export default PostDetailPage;

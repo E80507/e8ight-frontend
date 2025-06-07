@@ -7,13 +7,13 @@ import { useRouter } from "next/navigation";
 import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
 import Image from "next/image";
-// import { formatBytes } from "@/util/file";
+import Loading from "@/components/shared/loading/loading";
 
 interface AdminDetailContentProps {
   params: { id: string };
 }
 
-const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
+const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
   const router = useRouter();
   const { id } = params;
   const { post, isError } = usePostDetail(id as string);
@@ -24,8 +24,10 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
     const confirmed = confirm(
       "해당 게시글을 삭제하시나요?\n\n삭제된 게시글은 다시 복구할 수 없으며, 해당 카테고리 목록에서 제외됩니다.",
     );
+
     if (confirmed) {
       const success = await deletePosts([id as string]);
+
       if (success) {
         await mutate(
           (key) => typeof key === "string" && key.startsWith("posts"),
@@ -36,7 +38,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
   };
 
   if (isError) return <div>에러가 발생했습니다.</div>;
-  if (!post) return <div>로딩 중...</div>;
+  if (!post) return <Loading />;
 
   const showField = (field: string): boolean => {
     switch (post?.category) {
@@ -82,7 +84,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
         {/* 데스크탑 내용 */}
         <div className="tablet:pb-0 pb-[128px] border border-[#EEEFF1]">
           {/* 카테고리 */}
-          <div className="flex flex-col border-b  border-[#EEEFF1] tablet:flex-row">
+          <div className="flex flex-col border-b tablet:border-b border-[#EEEFF1] tablet:flex-row">
             {/* 항목 제목 */}
             <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               카테고리
@@ -96,7 +98,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 저자 */}
           {showField("author") && (
-            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            <div className="flex flex-col border-b tablet:border-b border-[#EEEFF1] tablet:flex-row">
               {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 저자
@@ -110,7 +112,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           )}
 
           {/* 제목 */}
-          <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+          <div className="flex flex-col border-b tablet:border-b border-[#EEEFF1] tablet:flex-row">
             {/* 항목 제목 */}
             <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               제목
@@ -124,7 +126,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 상세내용 */}
           {showField("content") && (
-            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            <div className="flex flex-col border-b tablet:border-b border-[#EEEFF1] tablet:flex-row">
               {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 상세내용
@@ -138,7 +140,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
           )}
 
           {/* 썸네일 */}
-          <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+          <div className="flex flex-col border-b tablet:border-b border-[#EEEFF1] tablet:flex-row">
             {/* 항목 제목 */}
             <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
               썸네일
@@ -160,7 +162,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 태그 */}
           {showField("tags") && (
-            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            <div className="flex flex-col border-b tablet:border-b border-[#EEEFF1] tablet:flex-row">
               {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 태그
@@ -181,7 +183,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 검색 키워드 */}
           {showField("keywords") && (
-            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            <div className="flex flex-col border-b tablet:border-b-0 border-[#EEEFF1] tablet:flex-row">
               {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 검색 키워드
@@ -203,7 +205,7 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 링크 연결 */}
           {showField("linkUrl") && (
-            <div className="flex flex-col border-b border-[#EEEFF1] tablet:flex-row">
+            <div className="flex flex-col border-b tablet:border-b-0 border-[#EEEFF1] tablet:flex-row">
               {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 링크 연결
@@ -218,19 +220,19 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
 
           {/* 첨부파일 */}
           {showField("files") && (
-            <div className="flex flex-col tablet:flex-row">
+            <div className="flex flex-col border-b tablet:border-b-0 border-[#EEEFF1] tablet:flex-row">
               {/* 항목 제목 */}
               <div className="flex min-h-[45px] w-full items-center bg-[#EEEFF1] px-[16px] pretendard-body-3 tablet:w-[160px]">
                 첨부파일
               </div>
 
               {/* 항목 내용 */}
-              <div className="flex flex-1 flex-col px-[16px] py-[12px] pretendard-subtitle-s">
+              <div className="flex flex-1 flex-col pretendard-subtitle-s">
                 {post?.files && post.files.length > 0 ? (
                   post.files.map((file, index) => (
                     <div
                       key={index}
-                      className="flex h-[45px] items-center justify-between"
+                      className="flex min-h-[45px] px-[16px] py-[12px] items-center justify-between"
                     >
                       <div className="flex items-center gap-[10px] flex-1">
                         <div className="pretendard-body-3 truncate text-[#474953]">
@@ -273,4 +275,4 @@ const AdminDetailContent = ({ params }: AdminDetailContentProps) => {
   );
 };
 
-export default AdminDetailContent;
+export default AdminDetailClient;
