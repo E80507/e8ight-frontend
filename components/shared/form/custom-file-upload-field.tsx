@@ -6,12 +6,11 @@ interface CustomFileUploadFieldProps {
 const CustomFileUploadField = ({
   label,
   isEssential,
-  files,
 }: CustomFileUploadFieldProps) => {
   return (
     <div>
       {label && (
-        <label className="mb-[12px] block pretendard-subtitle-m">
+        <label className="pretendard-subtitle-m mb-[12px] block">
           {label}
           {isEssential && <span className="ml-[2px] text-error">{`*`}</span>}
         </label>
@@ -28,7 +27,9 @@ const CustomFileUploadField = ({
             <div className="w-[24px] h-[24px] rounded-[2px] bg-background-natural"></div>
             <div className="body-3">파일 제목이 들어갑니다.</div>
           </div>
-        )}
+
+          <div className="body-3 text-label-normal">1.93MB</div>
+        </div>
       </div>
     </div>
   );
