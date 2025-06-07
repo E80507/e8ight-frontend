@@ -6,43 +6,36 @@ import PostContent from "./post-content";
 import SocialLinks from "./social-links";
 import SubscriptionBanner from "./subscription-banner";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
-interface DetailContentProps {
-  params: { id: string };
-}
-
-const DetailContent = ({ params }: DetailContentProps) => {
-  const { id } = params;
-  const { post, isError } = usePostDetail(id as string, "public");
+const DetailContent = () => {
+  const { id } = useParams();
+  console.log(id);
+  const { post, isError } = usePostDetail(id as string);
 
   if (isError) return <div>에러가 발생했습니다.</div>;
-  if (!post) return <div>로딩 중...</div>;
+  if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
 
   return (
     <div>
-      {/* 게시물 썸네일 */}
-      <div className="tablet:h-[299px] h-[173px] relative bg-gray-100">
-        <Image
-          src={post.thumbnail}
-          alt={post.title || "썸네일 이미지"}
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+      {post.thumbnail && (
+        <div className="tablet:h-[299px] relative h-[173px] bg-gray-100">
+          <Image
+            src={post.thumbnail}
+            alt={post.title || "썸네일 이미지"}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
 
-      <div className="web:py-[80px] web:px-0 tablet:px-[30px] tablet:py-[40px] px-[16px] py-[40px] max-w-[1200px] mx-auto">
-        {/* 게시물 헤더 */}
+      <div className="tablet:px-[30px] tablet:py-[40px] web:px-0 web:py-[80px] mx-auto max-w-[1200px] px-[16px] py-[40px]">
         <PostHeader post={post} />
-
-        {/* 게시물 내용 */}
         <PostContent post={post} />
-
-        {/* 소셜 링크 */}
         <SocialLinks />
       </div>
 
-      {/* 구독 배너 */}
       <SubscriptionBanner />
     </div>
   );

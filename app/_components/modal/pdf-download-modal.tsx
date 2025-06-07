@@ -24,7 +24,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-4 top-4 z-50 bg-transparent border-none"
+            className="absolute right-4 top-4 z-50 border-none bg-transparent"
             onClick={onClickClose}
           >
             <X className="h-[24px] w-[24px] text-[#A7A9B4]" />
@@ -33,7 +33,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
           <div className="max-h-[calc(100vh-40px)] overflow-y-auto web:max-h-[calc(100vh-102px)]">
             {/* 배너 */}
             <div
-              className="flex flex-col relative overflow-hidden bg-cover bg-center tablet:pt-[80px] tablet:pb-[40px] tablet:px-[40px] tablet:h-auto h-[204px] py-[24px] px-[16px]"
+              className="relative flex h-[204px] flex-col overflow-hidden bg-cover bg-center px-[16px] py-[24px] tablet:h-auto tablet:px-[40px] tablet:pb-[40px] tablet:pt-[80px]"
               style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
             >
               <div className="tablet:gibson-h1-m pretendard-h1-m mt-auto">
@@ -44,7 +44,7 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
             </div>
 
             {/* 폼 영역 */}
-            <div className="py-[40px] px-[16px] tablet:p-5 web:p-[40px]">
+            <div className="px-[16px] py-[40px] tablet:p-5 web:p-[40px]">
               <Form {...form}>
                 <form
                   onSubmit={onSubmit}
@@ -52,7 +52,10 @@ const PdfDownloadModal = ({ onClickClose }: PdfDownloadModalProps) => {
                   className="flex flex-col gap-[32px]"
                 >
                   {/* 파일 업로드 */}
-                  <CustomFileUploadField label="다운로드 파일명" />
+                  <CustomFileUploadField
+                    label="다운로드 파일명"
+                    files={post?.files}
+                  />
 
                   {/* 성함 */}
                   <CustomInputField
