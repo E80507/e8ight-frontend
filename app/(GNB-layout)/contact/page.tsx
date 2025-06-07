@@ -38,7 +38,7 @@ const ContactPage = () => {
         </div>
 
         {/* 폼 영역 */}
-        <div className="pt-[16px] pb-[40px] px-[16px] tablet:p-[40px] bg-white">
+        <div className="pt-[16px] pb-[24px] px-[16px] tablet:p-[24px] bg-white">
           <Form {...form}>
             <form
               onSubmit={onSubmit}
