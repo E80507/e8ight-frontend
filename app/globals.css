@@ -62,17 +62,8 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 10px;
-    --black: 0 0% 0%;
-    --black-1: 225, 3%, 6%;
-    --error: 0 85% 44%;
-    --gray-strong: 214 4% 34%;
-    --gray-700: 230 8% 40%;
-    --gray-40: 0 0% 68%;
-    --component-natural: 230 8% 85%;
-    --component-alternative: 240 10% 96%;
-    --line-normal: 220 10% 94%;
-    --line-natural: 220 8% 85%;
-    --background-hero: 175 48% 95%;
+    --black: 0 1% 6%;
+    --error: 2 100% 50%;
   }
   .dark {
     --background: 0 0% 100%;
