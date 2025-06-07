@@ -51,7 +51,7 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden bg-black/70 p-[16px] web:py-[51px]">
+    <div className="fixed inset-0 z-[999] flex items-center justify-center overflow-hidden bg-black/70 p-[16px] web:py-[51px]">
       <div className="w-full max-w-[1200px] overflow-hidden rounded-[20px] bg-white">
         <div className="relative">
           {/* 닫기 버튼 */}

@@ -30,7 +30,7 @@ const DetailContent = () => {
         </div>
       )}
 
-      <div className="tablet:px-[30px] tablet:py-[40px] web:px-0 web:py-[80px] mx-auto max-w-[1200px] px-[16px] py-[40px]">
+      <div className="max-w-[1440px] web:px-[120px] tablet:px-[30px] tablet:py-[40px] web:py-[80px] mx-auto px-[16px] py-[40px]">
         <PostHeader post={post} />
         <PostContent post={post} />
         <SocialLinks />
