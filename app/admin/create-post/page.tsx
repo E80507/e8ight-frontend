@@ -310,20 +310,19 @@ const CreatePostPage = () => {
                         <div
                           className={`${form.formState.errors.content ? "rounded-md border-2 border-error" : ""}`}
                         >
-                          <QuillEditor
-                            key={`editor-${post?.id}`}
-                            defaultValue={post?.content || ""}
-                            initialValue={post?.content || ""}
-                            value={form.watch("content")}
-                            onChange={(content) => {
-                              // console.log("QuillEditor onChange:", content);
-                              form.setValue("content", content, {
-                                shouldValidate: true,
-                              });
-                            }}
-                            onImageUpload={handleImageUpload}
-                            height={isMobile ? "401px" : "468px"}
-                          />
+                            <QuillEditor
+                              key={`editor-${post?.id}`}
+                              defaultValue={post?.content || ""}
+                              initialValue={post?.content || ""}
+                              value={form.watch("content")}
+                              onChange={(content) => {
+                                form.setValue("content", content, {
+                                  shouldValidate: true,
+                                });
+                              }}
+                              onImageUpload={handleImageUpload}
+                              height={isMobile ? "401px" : "468px"}
+                            />
                         </div>
                         <FormMessage className="!mt-2">
                           {form.formState.errors.content?.message}
