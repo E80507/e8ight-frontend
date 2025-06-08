@@ -1,6 +1,6 @@
 const BackgroundSection = () => {
   return (
-    <div className="absolute left-0 top-[-67px] -z-10 h-screen w-full overflow-hidden web:top-[-139px]">
+    <div className="absolute inset-0 -z-10 h-screen w-full overflow-hidden">
       <video
         autoPlay
         loop

@@ -5,14 +5,10 @@ import ArchiveSection from "@/app/main/archive-section";
 import SubscriptionSection from "../main/subscription-section";
 import HistorySection from "../main/history-section";
 import SimulationSection from "../main/simulation.section";
-import BackgroundSection from "../main/background-section";
 
 const Home = () => {
   return (
-    <div>
-      {/* 백그라운드 섹션 */}
-      <BackgroundSection />
-
+    <>
       {/* 히어로 섹션 */}
       <HeroSection />
 
@@ -27,7 +23,7 @@ const Home = () => {
 
       {/* 구독 섹션 */}
       <SubscriptionSection />
-    </div>
+    </>
   );
 };
 
