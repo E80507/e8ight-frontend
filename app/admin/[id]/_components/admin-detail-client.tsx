@@ -77,7 +77,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             >
               삭제하기
             </Button>
-            <Button 
+            <Button
               className="h-[48px] w-[97px]"
               onClick={() => router.push(`/admin/create-post?id=${id}`)}
             >
@@ -272,7 +272,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             </Button>
 
             {/* 수정하기 */}
-            <Button 
+            <Button
               className="h-[48px] w-[97px] flex-1"
               onClick={() => router.push(`/admin/create-post?id=${id}`)}
             >

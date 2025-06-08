@@ -26,7 +26,7 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
   // 초기 썸네일 URL 감시
   const thumbnailUrl = watch(name);
   useEffect(() => {
-    if (thumbnailUrl && typeof thumbnailUrl === 'string') {
+    if (thumbnailUrl && typeof thumbnailUrl === "string") {
       setPreview(thumbnailUrl);
     }
   }, [thumbnailUrl]);

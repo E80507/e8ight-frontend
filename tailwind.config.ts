@@ -109,7 +109,7 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       boxShadow: {
-        'custom-gray': '0px 4px 18px 0px #D6D6D6',
+        "custom-gray": "0px 4px 18px 0px #D6D6D6",
       },
     },
   },

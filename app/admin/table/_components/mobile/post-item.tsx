@@ -35,11 +35,11 @@ const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
       } ${isSelected ? "bg-[#F7FEFD]" : ""}`}
     >
       {/* 카테고리 */}
-      <div className="flex items-center gap-[14px]" onClick={(e) => e.stopPropagation()}>
-        <div
-          className="relative cursor-pointer"
-          onClick={handleCheckboxClick}
-        >
+      <div
+        className="flex items-center gap-[14px]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative cursor-pointer" onClick={handleCheckboxClick}>
           <input
             type="checkbox"
             checked={isSelected}

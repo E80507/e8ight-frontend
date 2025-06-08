@@ -163,7 +163,7 @@ export function PostTable({
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header, headerIndex) => {
               return (
-                <TableHead 
+                <TableHead
                   key={header.id + headerIndex}
                   style={{ width: `${header.column.getSize()}px` }}
                   className="!p-0"

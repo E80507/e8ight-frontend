@@ -26,9 +26,11 @@ export default function PostHeader({ post }: PostHeaderProps) {
         <span>저자: {post?.author}</span>
       </div>
 
-      <div className={`flex items-center justify-between ${post?.tags?.length ? 'tablet:mt-[40px] mt-[24px]' : 'tablet:mt-[40px]'}`}>
+      <div
+        className={`flex items-center justify-between ${post?.tags?.length ? "tablet:mt-[40px] mt-[24px]" : "tablet:mt-[40px]"}`}
+      >
         {/* 태그 */}
-        {post?.tags?.length > 0 && (
+        {(post?.tags?.length ?? 0) > 0 && (
           <div className="flex flex-wrap gap-[8px]">
             {post?.tags.map((tag, index) => (
               <div

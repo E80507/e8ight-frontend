@@ -55,7 +55,7 @@ export default function AdminAuthGate({
   if (!isAuthed) {
     return (
       <div className="fixed inset-0 z-[102] flex items-center justify-center bg-black/60 px-5">
-        <div className="flex w-full max-w-[350px] flex-col rounded-[12px] bg-white shadow-custom-gray">      
+        <div className="flex w-full max-w-[350px] flex-col rounded-[12px] bg-white shadow-custom-gray">
           <div className="flex flex-col justify-center gap-[8px] px-[16px] pt-[24px] pb-[16px]">
             {/* 로고 */}
             <Image
@@ -68,8 +68,10 @@ export default function AdminAuthGate({
             />
 
             {/* 인증 코드 입력 안내 문구 */}
-            <p className="pretendard-title-l text-center">인증 코드를 입력해주세요</p>
-          
+            <p className="pretendard-title-l text-center">
+              인증 코드를 입력해주세요
+            </p>
+
             <div className="flex flex-col gap-[8px]">
               {/* 인증 코드 입력 필드 */}
               <input
@@ -85,7 +87,9 @@ export default function AdminAuthGate({
               />
 
               {/* 에러 메시지 */}
-              {error && <p className="pretendard-subtitle-s text-[#D11111]">{error}</p>}
+              {error && (
+                <p className="pretendard-subtitle-s text-[#D11111]">{error}</p>
+              )}
             </div>
           </div>
 

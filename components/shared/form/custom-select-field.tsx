@@ -61,6 +61,7 @@ const CustomSelectField = <T extends FieldValues>({
                       <span className="ml-[4px] text-error">{`*`}</span>
                     )}
                   </FormLabel>
+
                   <Select
                     onValueChange={(value) => {
                       field.onChange(value);

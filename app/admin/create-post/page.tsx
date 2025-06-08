@@ -47,7 +47,7 @@ const CreatePostPage = () => {
   const postId = searchParams.get("id");
   const isEditMode = !!postId;
   const { post } = usePostDetail(postId || "");
-  
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileDetails, setFileDetails] = useState<
     { name: string; size: number; url: string }[] | null
@@ -87,7 +87,6 @@ const CreatePostPage = () => {
       setSelectedCategory(category);
       setIsCategorySelected(true);
 
-
       setTimeout(() => {
         const formData = {
           title: post.title,
@@ -101,17 +100,17 @@ const CreatePostPage = () => {
           linkUrl: post.linkUrl || "",
           file: post.files || [],
         };
-        
+
         // 폼 초기화
         form.reset(formData);
-        
+
         // 각 필드 개별적으로 설정
         Object.entries(formData).forEach(([key, value]) => {
-          form.setValue(key as any, value);
+          form.setValue(key as keyof typeof formData, value);
         });
-        
+
         if (post.files) {
-          setFileIds(post.files.map(file => file.id));
+          setFileIds(post.files.map((file) => file.id));
         }
       }, 0);
     }
@@ -159,7 +158,10 @@ const CreatePostPage = () => {
         }
         router.push(ADMIN_PAGE);
       } catch (error) {
-        console.error(isEditMode ? "게시글 수정 실패" : "게시글 등록 실패", error);
+        console.error(
+          isEditMode ? "게시글 수정 실패" : "게시글 등록 실패",
+          error,
+        );
       }
     },
     (errors) => {
@@ -310,19 +312,17 @@ const CreatePostPage = () => {
                         <div
                           className={`${form.formState.errors.content ? "rounded-md border-2 border-error" : ""}`}
                         >
-                            <QuillEditor
-                              key={`editor-${post?.id}`}
-                              defaultValue={post?.content || ""}
-                              initialValue={post?.content || ""}
-                              value={form.watch("content")}
-                              onChange={(content) => {
-                                form.setValue("content", content, {
-                                  shouldValidate: true,
-                                });
-                              }}
-                              onImageUpload={handleImageUpload}
-                              height={isMobile ? "401px" : "468px"}
-                            />
+                          <QuillEditor
+                            key={`editor-${postId}`}
+                            value={form.watch("content")}
+                            onChange={(content) => {
+                              form.setValue("content", content, {
+                                shouldValidate: true,
+                              });
+                            }}
+                            onImageUpload={handleImageUpload}
+                            height={isMobile ? "401px" : "468px"}
+                          />
                         </div>
                         <FormMessage className="!mt-2">
                           {form.formState.errors.content?.message}
