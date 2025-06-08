@@ -8,7 +8,11 @@ import { ADMIN_PAGE } from "@/constants/path";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-const AdminNavBar = () => {
+interface AdminNavBarProps {
+  isEditMode?: boolean;
+}
+
+const AdminNavBar = ({ isEditMode = false }: AdminNavBarProps) => {
   const router = useRouter();
   const path = usePathname();
   const isCreatePage = path === "/admin/create-post";
@@ -55,7 +59,7 @@ const AdminNavBar = () => {
 
       {/* 가운데 타이틀 (모바일 전용) */}
       <p className="flex-1 text-center pretendard-title-m web:hidden">
-        {isCreatePage ? "컨텐츠 추가" : ""}
+        {isEditMode ? "컨텐츠 수정" : isCreatePage ? "컨텐츠 추가" : ""}
       </p>
 
       {/* 오른쪽 영역 */}
