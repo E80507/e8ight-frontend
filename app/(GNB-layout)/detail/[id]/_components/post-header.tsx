@@ -26,23 +26,25 @@ export default function PostHeader({ post }: PostHeaderProps) {
         <span>저자: {post?.author}</span>
       </div>
 
-      <div className="flex items-center justify-between tablet:mt-[40px] mt-[24px]">
+      <div className={`flex items-center justify-between ${post?.tags?.length ? 'tablet:mt-[40px] mt-[24px]' : 'tablet:mt-[40px]'}`}>
         {/* 태그 */}
-        <div className="flex flex-wrap gap-[8px]">
-          {post?.tags.map((tag, index) => (
-            <div
-              key={index}
-              className="flex justify-center items-center px-[16px] py-[8px] tablet:h-[40px] h-[33px] rounded-[8px] tablet:pretendard-title-m pretendard-title-xs bg-[#F4F4F6]"
-            >
-              {tag}
-            </div>
-          ))}
-        </div>
+        {post?.tags?.length > 0 && (
+          <div className="flex flex-wrap gap-[8px]">
+            {post?.tags.map((tag, index) => (
+              <div
+                key={index}
+                className="flex justify-center items-center px-[16px] py-[8px] tablet:h-[40px] h-[33px] rounded-[8px] tablet:pretendard-title-m pretendard-title-xs bg-[#F4F4F6]"
+              >
+                {tag}
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* 공유하기 */}
         <button
-          onClick={() => shareUrl(post?.linkUrl)}
-          className="tablet:flex hidden items-center gap-[8px] px-[16px] py-[12px] bg-[#F9FAFA] border border-[#D6D7DC] rounded-[10px]"
+          onClick={() => shareUrl(window.location.href)}
+          className="items-center gap-[8px] px-[16px] py-[12px] bg-[#F9FAFA] border border-[#D6D7DC] rounded-[10px] hidden tablet:flex"
         >
           <Share2Icon /> 공유하기
         </button>
