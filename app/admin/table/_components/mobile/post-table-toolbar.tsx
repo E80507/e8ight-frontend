@@ -1,5 +1,5 @@
 import Check from "@/components/shared/check";
-import { Post } from "@/api/dto/post";
+import { Post } from "@/app/api/dto/post";
 import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 
 interface PostTableToolbarProps {

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "../use-toast";
 import { z } from "zod";
 import { subsscribeSchema } from "@/schema/subscribe";
-import { postSubscribe } from "@/api/subscribe";
+import { postSubscribe } from "@/app/api/subscribe";
 
 export const usePostSubscribe = (onSuccess?: () => void) => {
   const form = useForm<z.infer<typeof subsscribeSchema>>({

@@ -1,7 +1,7 @@
 import CalendarDouble, { searchDate } from "@/app/_components/calendar-single";
 import { useCallback } from "react";
 import { ADMIN_POST_CATEGORIES } from "@/constants/admin";
-import { PostsRequestParams } from "@/api/dto/post";
+import { PostsRequestParams } from "@/app/api/dto/post";
 import Radio from "@/components/radio";
 import PostSearchBar from "./post-search-bar";
 
@@ -55,6 +55,8 @@ const PostFilterBar = ({
         <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           상세검색
         </div>
+
+        {/* 검색어 컨테이너 */}
         <div className="flex-1 flex items-center px-[16px]">
           <PostSearchBar
             placeholder="제목, 저자"
@@ -69,6 +71,8 @@ const PostFilterBar = ({
         <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           생성 일자
         </div>
+
+        {/* 생성 일자 컨테이너 */}
         <div className="flex-1 flex items-center px-[16px]">
           <CalendarDouble date={date} setDate={handleDateChange} />
         </div>
@@ -79,6 +83,8 @@ const PostFilterBar = ({
         <div className="flex items-center px-[16px] w-[160px] bg-[#EEEFF1] pretendard-title-s">
           카테고리
         </div>
+
+        {/* 카테고리 버튼 컨테이너 */}
         <div className="flex-1 flex items-center px-[16px]">
           <div className="flex flex-wrap gap-x-6">
             {ADMIN_POST_CATEGORIES.map((condition) => (

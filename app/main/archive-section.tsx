@@ -6,7 +6,7 @@ import { useState } from "react";
 import PdfDownloadModal from "../_components/modal/pdf-download-modal";
 import { useRouter } from "next/navigation";
 import { DOWNLOADS_PAGE } from "@/constants/path";
-import { Post, PostsRequestParams } from "@/api/dto/post";
+import { Post, PostsRequestParams } from "@/app/api/dto/post";
 import { usePost } from "@/hooks/post/use-post";
 
 const ArchiveSection = () => {
@@ -29,10 +29,12 @@ const ArchiveSection = () => {
   return (
     <section className="px-[16px] py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-[24px] tablet:gap-[32px] web:gap-[40px]">
+        {/* 헤더 */}
         <div className="pretendard-h1-r tablet:pretendard-h1-m web:pretendard-h1-l">
           자료실
         </div>
 
+        {/* 포스트 리스트 */}
         <div className="grid grid-cols-1 gap-[16px] web:grid-cols-2 web:gap-[24px]">
           {posts.map((post: Post) => (
             <div
@@ -75,6 +77,7 @@ const ArchiveSection = () => {
           ))}
         </div>
 
+        {/* 더보기 버튼 */}
         <div className="flex justify-center">
           <Button
             size="lg"
@@ -88,6 +91,7 @@ const ArchiveSection = () => {
         </div>
       </div>
 
+      {/* 팝업 */}
       {selectedPostId && (
         <PdfDownloadModal
           postId={selectedPostId}

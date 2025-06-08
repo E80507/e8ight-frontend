@@ -4,7 +4,7 @@ import PostContainer from "./_components/pc/post-container";
 import MobilePostContainer from "./_components/mobile/post-container";
 import { Dispatch, useEffect, useState } from "react";
 import { SetStateAction } from "react";
-import { PostsRequestParams } from "@/api/dto/post";
+import { PostsRequestParams } from "@/app/api/dto/post";
 import { usePost } from "@/hooks/post/use-post";
 import { usePostFilters } from "@/hooks/use-post-filters";
 import { usePathname } from "next/navigation";

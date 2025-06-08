@@ -38,7 +38,7 @@ const ContactPage = () => {
         </div>
 
         {/* 폼 영역 */}
-        <div className="pt-[16px] pb-[40px] px-[16px] tablet:p-[40px] bg-white">
+        <div className="pt-[16px] pb-[24px] px-[16px] tablet:p-[24px] bg-white">
           <Form {...form}>
             <form
               onSubmit={onSubmit}
@@ -180,12 +180,15 @@ const ContactPage = () => {
                 form={form}
                 name="agreeToPrivacyPolicy"
                 label={
-                  <span className="pretendard-body-3">
-                    <span className="font-bold text-primary">
+                  <>
+                    <span className="text-primary pretendard-title-s pb-[0.1562rem]">
                       [필수] 개인정보 수집 동의
                     </span>
-                    : 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.
-                  </span>
+                    <span className="pretendard-body-3 pb-[0.1562rem]">
+                      : 개인정보 수집 및 이용약관을 확인하였으며, 이에
+                      동의합니다.
+                    </span>
+                  </>
                 }
                 isEssential={true}
               />
@@ -195,7 +198,7 @@ const ContactPage = () => {
                 form={form}
                 name="agreeToReceiveMarketing"
                 label={
-                  <span className="pretendard-body-3">
+                  <span className="pretendard-body-3 pb-[0.1562rem]">
                     [선택] 이에이트 뉴스레터 수신에 동의합니다.
                   </span>
                 }

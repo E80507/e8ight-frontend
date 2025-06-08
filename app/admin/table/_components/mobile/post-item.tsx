@@ -1,4 +1,4 @@
-import { Post } from "@/api/dto/post";
+import { Post } from "@/app/api/dto/post";
 import Check from "@/components/shared/check";
 import Badge from "@/components/ui/badge";
 import type { BadgeColor } from "@/components/ui/badge";
@@ -38,6 +38,7 @@ const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
           />
           <Check type="square" isChecked={isSelected} />
         </button>
+
         <Badge color={categoryMap[post?.category]} text={post?.category} />
       </div>
 

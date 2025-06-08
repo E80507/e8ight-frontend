@@ -1,4 +1,4 @@
-import { deletePosts } from "@/api/post";
+import { deletePosts } from "@/app/api/post";
 import { useSWRConfig } from "swr";
 
 export const useDeletePosts = () => {

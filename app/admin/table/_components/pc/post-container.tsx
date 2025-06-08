@@ -1,7 +1,7 @@
 "use client";
 
 import { PostTable } from "./post-table";
-import { Post, PostsRequestParams } from "@/api/dto/post";
+import { Post, PostsRequestParams } from "@/app/api/dto/post";
 import PostTableToolbar from "./post-table-toolbar";
 import PostFilterBar from "./post-filter-bar";
 import Pagination from "@/app/_components/pagination";
@@ -39,7 +39,7 @@ const PostContainer = ({
   resetFilters,
 }: PostContainerProps) => {
   return (
-    <div className="hidden md:flex flex-col gap-10 max-w-[1200px] mx-auto py-10">
+    <div className="hidden md:flex flex-col gap-10 max-w-[1440px] web:px-[120px] tablet:px-[30px] mx-auto py-10">
       {/* 필터 */}
       <PostFilterBar
         currentCategory={currentCategory}

@@ -7,6 +7,7 @@ export interface HistoryRes {
   category: string;
   createdAt: string;
 }
+
 export interface SiumlationRes {
   title: string;
   thumbnail: string;

@@ -1,6 +1,6 @@
 import useSWR from "swr";
-import { getPosts } from "@/api/post";
-import { PostsRequestParams, PostsResponse } from "@/api/dto/post";
+import { getPosts } from "@/app/api/post";
+import { PostsRequestParams, PostsResponse } from "@/app/api/dto/post";
 
 export const usePost = (params: PostsRequestParams) => {
   const { data, error, isLoading, mutate } = useSWR<PostsResponse>(

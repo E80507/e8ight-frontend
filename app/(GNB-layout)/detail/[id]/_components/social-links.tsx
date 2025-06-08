@@ -21,10 +21,12 @@ const SOCIAL_LINKS = [
 export default function SocialLinks() {
   return (
     <div className="flex flex-col tablet:gap-[24px] gap-[12px] tablet:mt-[40px] mt-[24px]">
+      {/* 이에이트 SNS */}
       <div className="tablet:pretendard-subtitle-l pretendard-subtitle-s text-[#A7A9B4]">
         이에이트 SNS
       </div>
 
+      {/* 소셜 링크 */}
       <div className="flex items-center tablet:gap-[40px] gap-[24px]">
         {SOCIAL_LINKS.map((social) => (
           <Link
