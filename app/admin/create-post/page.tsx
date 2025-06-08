@@ -82,39 +82,38 @@ const CreatePostPage = () => {
   // 수정 모드일 때 초기 데이터 설정
   useEffect(() => {
     if (isEditMode && post) {
-      // console.log("수정 모드 데이터:", post);
-      
       // 먼저 카테고리 설정
-      setSelectedCategory(post.category as AdminCategory);
+      const category = post.category as AdminCategory;
+      setSelectedCategory(category);
       setIsCategorySelected(true);
 
-      // 폼 데이터 설정
-      const formData = {
-        title: post.title,
-        category: post.category,
-        content: post.content || "",
-        thumbnail: post.thumbnail,
-        author: post.author || "",
-        mainImage: post.mainImage,
-        tags: post.tags || [],
-        keywords: post.keywords || [],
-        linkUrl: post.linkUrl || "",
-        file: post.fileIds || [],
-      };
-      
-      // console.log("설정할 폼 데이터:", formData);
-      
-      // 폼 초기화
-      form.reset(formData);
-      
-      // 각 필드 개별적으로 설정
-      Object.entries(formData).forEach(([key, value]) => {
-        form.setValue(key as any, value);
-      });
-      
-      if (post.fileIds) {
-        setFileIds(post.fileIds);
-      }
+
+      setTimeout(() => {
+        const formData = {
+          title: post.title,
+          category: post.category,
+          content: post.content || "",
+          thumbnail: post.thumbnail,
+          author: post.author || "",
+          mainImage: post.mainImage,
+          tags: post.tags || [],
+          keywords: post.keywords || [],
+          linkUrl: post.linkUrl || "",
+          file: post.files || [],
+        };
+        
+        // 폼 초기화
+        form.reset(formData);
+        
+        // 각 필드 개별적으로 설정
+        Object.entries(formData).forEach(([key, value]) => {
+          form.setValue(key as any, value);
+        });
+        
+        if (post.files) {
+          setFileIds(post.files.map(file => file.id));
+        }
+      }, 0);
     }
   }, [isEditMode, post, form]);
 
