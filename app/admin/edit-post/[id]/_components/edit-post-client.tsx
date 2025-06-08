@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomSelectField from "@/components/shared/form/custom-select-field";
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { FormProvider, useForm } from "react-hook-form";
@@ -14,12 +14,12 @@ import {
 import { POST_CATEGORIES, POST_CATEGORY_VALUES } from "@/constants/admin";
 import { Button, IconButton } from "@/components/ui/button";
 import { AdminCategory, CreatePostReq } from "@/app/api/dto/admin";
-import ThumbnailUploader from "./_components/thumbnail-uploader";
-import TagKeyword from "./_components/tag-keyword";
+import ThumbnailUploader from "@/app/admin/create-post/_components/thumbnail-uploader";
+import TagKeyword from "@/app/admin/create-post/_components/tag-keyword";
 import dynamic from "next/dynamic";
 import { usePostS3PresignedUrl } from "@/hooks/s3/use-post-s3-presigned-url";
 import { Domain } from "@/app/api/dto/s3";
-import { createPost } from "@/app/api/admin";
+import { updatePost } from "@/app/api/admin";
 import { useMediaQuery } from "@/hooks/admin/use-media-query";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/navigation";
@@ -29,17 +29,27 @@ import { useRef } from "react";
 import { formatBytes } from "@/util/file";
 import Image from "next/image";
 import { uploadS3FileMetadata } from "@/app/api/s3";
+import { usePostDetail } from "@/hooks/post/use-post-detail";
+import Loading from "@/components/shared/loading/loading";
 
 const QuillEditor = dynamic(() => import("@/components/QuillEditor"), {
   ssr: false,
+  loading: () => <Loading />,
 });
 
-const CreatePostPage = () => {
+interface EditPostClientProps {
+  params: { id: string };
+}
+
+const EditPostClient = ({ params }: EditPostClientProps) => {
   const [isCategorySelected, setIsCategorySelected] = useState(false);
   const [selectedCategory, setSelectedCategory] =
     useState<AdminCategory | null>(null);
   const isMobile = useMediaQuery("(max-width: 599px)");
   const router = useRouter();
+  const { id: postId } = params;
+  const { post } = usePostDetail(postId || "");
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileDetails, setFileDetails] = useState<
     { name: string; size: number; url: string }[] | null
@@ -71,6 +81,50 @@ const CreatePostPage = () => {
     },
   });
 
+  // 초기 데이터 설정
+  useEffect(() => {
+    if (post) {
+      const category = post.category as AdminCategory;
+      setSelectedCategory(category);
+      setIsCategorySelected(true);
+
+      setTimeout(() => {
+        const formData = {
+          title: post.title,
+          category: post.category,
+          content: post.content || "",
+          thumbnail: post.thumbnail,
+          author: post.author || "",
+          mainImage: post.mainImage,
+          tags: post.tags || [],
+          keywords: post.keywords || [],
+          linkUrl: post.linkUrl || "",
+          file: post.files || [],
+        };
+
+        // 폼 초기화
+        form.reset(formData);
+
+        // 각 필드 개별적으로 설정
+        Object.entries(formData).forEach(([key, value]) => {
+          form.setValue(key as keyof typeof formData, value);
+        });
+
+        if (post.files) {
+          setFileIds(post.files.map((file) => file.id));
+
+          // 파일 상세 정보 설정
+          const fileDetailsData = post.files.map((file) => ({
+            name: file.fileName,
+            size: file.fileSize,
+            url: file.fileUrl,
+          }));
+          setFileDetails(fileDetailsData);
+        }
+      }, 0);
+    }
+  }, [post, form]);
+
   const { onPostS3PresignedUrl } = usePostS3PresignedUrl(Domain.ANNOUNCEMENT);
 
   const handleImageUpload = async (file: File): Promise<string> => {
@@ -83,14 +137,14 @@ const CreatePostPage = () => {
     }
   };
 
-  const { trigger, isMutating } = useSWRMutation(
-    "createPost",
-    async (key, { arg }: { arg: CreatePostReq }) => {
-      return await createPost(arg);
+  const { trigger: updateTrigger, isMutating: isUpdating } = useSWRMutation(
+    "updatePost",
+    async (key, { arg }: { arg: { id: string; data: CreatePostReq } }) => {
+      return await updatePost(arg.id, arg.data);
     },
   );
 
-  const handleCreatePost = form.handleSubmit(
+  const handleSubmit = form.handleSubmit(
     async (data) => {
       try {
         const payload: CreatePostReq = {
@@ -99,10 +153,12 @@ const CreatePostPage = () => {
           content: data.content ?? "",
         };
 
-        await trigger(payload);
+        if (postId) {
+          await updateTrigger({ id: postId, data: payload });
+        }
         router.push(ADMIN_PAGE);
       } catch (error) {
-        console.error("게시글 등록 실패", error);
+        console.error("게시글 수정 실패", error);
       }
     },
     (errors) => {
@@ -160,23 +216,24 @@ const CreatePostPage = () => {
     }
   };
 
-  console.log(fileIds);
   return (
     <div className="web:h-full web:pt-10">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
         <div className="hidden items-center justify-between web:flex">
           <h1 className="pretendard-title-m web:pretendard-title-l">
-            컨텐츠 추가
+            컨텐츠 수정
           </h1>
+
           <Button
             size="lg"
             className="w-[97px]"
-            onClick={handleCreatePost}
-            disabled={isMutating}
+            onClick={handleSubmit}
+            disabled={isUpdating}
           >
-            게시하기
+            수정하기
           </Button>
         </div>
+
         <form className="flex flex-col">
           <FormProvider {...form}>
             <div className="flex flex-col gap-y-4 web:gap-y-8">
@@ -249,11 +306,13 @@ const CreatePostPage = () => {
                           />
                         </div>
                       </div>
+
                       <div>
                         <div
                           className={`${form.formState.errors.content ? "rounded-md border-2 border-error" : ""}`}
                         >
                           <QuillEditor
+                            key={`editor-${postId}`}
                             value={form.watch("content")}
                             onChange={(content) => {
                               form.setValue("content", content, {
@@ -285,6 +344,7 @@ const CreatePostPage = () => {
                               (최대 10MB 제한)
                             </span>
                           </p>
+
                           <Button
                             variant="outline"
                             size="lg"
@@ -298,11 +358,13 @@ const CreatePostPage = () => {
                             추가하기
                           </Button>
                         </div>
+
                         <div className="w-full rounded-xl border border-line-normal">
                           <div className="flex w-full items-center justify-between bg-gray-100 px-4 py-3">
                             <p className="text-label-normal pretendard-body-3">
                               파일명
                             </p>
+
                             <div className="flex items-center gap-x-8">
                               <p className="text-label-normal pretendard-body-3">
                                 용량
@@ -335,6 +397,7 @@ const CreatePostPage = () => {
                               )}
                             </div>
                           </div>
+
                           {!fileDetails || fileDetails.length === 0 ? (
                             <div className="px-4 py-3">
                               <p className="text-label-assistive pretendard-body-2">
@@ -393,6 +456,7 @@ const CreatePostPage = () => {
                             </div>
                           )}
                         </div>
+
                         <input
                           type="file"
                           ref={fileInputRef}
@@ -400,6 +464,7 @@ const CreatePostPage = () => {
                           onChange={(e) => handleFileChange(e)}
                         />
                       </div>
+
                       {errorMessage && (
                         <p className="mt-2 text-error pretendard-body-2">
                           {errorMessage}
@@ -445,13 +510,14 @@ const CreatePostPage = () => {
                     </div>
                   )}
 
+                  {/* 모바일 버튼 */}
                   <Button
                     size="cta"
                     className="mt-4 h-14 w-full web:hidden"
-                    onClick={handleCreatePost}
-                    disabled={isMutating}
+                    onClick={handleSubmit}
+                    disabled={isUpdating}
                   >
-                    게시하기
+                    수정하기
                   </Button>
                 </div>
               )}
@@ -463,4 +529,4 @@ const CreatePostPage = () => {
   );
 };
 
-export default CreatePostPage;
+export default EditPostClient;
