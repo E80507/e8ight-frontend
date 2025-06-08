@@ -46,9 +46,9 @@ const HistorySection = () => {
     <section className="mx-auto max-w-[1440px] px-4 py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
       <div className="flex flex-col  web:flex-row web:justify-between web:gap-x-[21%]">
         {/* 텍스트 영역 */}
-        <div className="flex min-w-0 flex-col web:h-[523px] web:basis-[38%]  web:justify-between">
+        <div className="flex min-w-0 flex-col web:h-[523px] web:basis-[38%] web:justify-between">
           <div className="hidden items-start gap-x-2 web:flex">
-            <h3 className="display-1">
+            <h3 className="pretendard-display-3 tablet:pretendard-display-2  web:pretendard-display-1">
               이에이트의 <br />
               기술 이야기를
               <br />
@@ -63,11 +63,11 @@ const HistorySection = () => {
 
           {/* 텍스트 본문 */}
           <div>
-            <div className="mb-8">
+            <div className="mb-8 font-pretendard">
               <p className="mb-4 text-primary subtitle-s tablet:subtitle-m web:subtitle-l">
                 {data[current]?.category}
               </p>
-              <p className="break-words leading-relaxed h2-r tablet:h2-l web:h2-l">
+              <p className="break-words leading-relaxed h2-r tablet:h2-l">
                 {data[current]?.title}
               </p>
             </div>
