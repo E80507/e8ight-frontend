@@ -8,7 +8,8 @@ export interface HistoryRes {
   createdAt: string;
 }
 export interface SiumlationRes {
-  description: string;
+  title: string;
   thumbnail: string;
   createdAt: string;
+  linkUrl: string;
 }
