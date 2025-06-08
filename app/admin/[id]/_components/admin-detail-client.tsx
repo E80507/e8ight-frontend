@@ -80,7 +80,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             </Button>
             <Button
               className="h-[48px] w-[97px]"
-              onClick={() => router.push(`/admin/create-post?id=${id}`)}
+              onClick={() => router.push(`${EDIT_POST_PAGE}/${id}`)}
             >
               수정하기
             </Button>
