@@ -111,6 +111,13 @@ const CreatePostPage = () => {
 
         if (post.files) {
           setFileIds(post.files.map((file) => file.id));
+          // 파일 상세 정보 설정
+          const fileDetailsData = post.files.map((file) => ({
+            name: file.fileName,
+            size: file.fileSize,
+            url: file.fileUrl,
+          }));
+          setFileDetails(fileDetailsData);
         }
       }, 0);
     }
