@@ -41,8 +41,14 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
           전합니다.
         </h3>
         <div className="flex gap-x-4 self-end">
-          <CarouselPrevious className="border-none" />
-          <CarouselNext className="border-none" />
+          <CarouselPrevious
+            className="border-none bg-transparent"
+            svgColor="text-black"
+          />
+          <CarouselNext
+            className="border-none bg-transparent"
+            svgColor="text-black"
+          />
         </div>
       </div>
       <CarouselContent className="flex-1">

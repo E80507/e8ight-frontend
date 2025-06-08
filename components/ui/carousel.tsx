@@ -8,7 +8,8 @@ import useEmblaCarousel, {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Autoplay from "embla-carousel-autoplay";
-import Image from "next/image";
+import ChevronLeftCarousel from "@/public/svg/icon/chevron-left-carousel.svg";
+import ChevronRightCarousel from "@/public/svg/icon/chevron-right-carousel.svg";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -201,66 +202,66 @@ CarouselItem.displayName = "CarouselItem";
 
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { scrollPrev, canScrollPrev, autoplayRef } = useCarousel();
+  React.ComponentProps<typeof Button> & { svgColor?: string }
+>(
+  (
+    { className, variant = "outline", size = "icon", svgColor, ...props },
+    ref,
+  ) => {
+    const { scrollPrev, canScrollPrev, autoplayRef } = useCarousel();
 
-  const handleClick = () => {
-    scrollPrev();
-    autoplayRef?.current?.reset(); // 타이머 초기화
-  };
-  return (
-    <Button
-      ref={ref}
-      variant={variant}
-      size={size}
-      className={className}
-      disabled={!canScrollPrev}
-      onClick={handleClick}
-      {...props}
-    >
-      <Image
-        src="/svg/icon/chevron-left-carousel.svg"
-        alt="previous"
-        width={32}
-        height={32}
-      />
-      <span className="sr-only">Previous slide</span>
-    </Button>
-  );
-});
+    const handleClick = () => {
+      scrollPrev();
+      autoplayRef?.current?.reset(); // 타이머 초기화
+    };
+    return (
+      <Button
+        ref={ref}
+        variant={variant}
+        size={size}
+        className={cn("text-white", className)}
+        disabled={!canScrollPrev}
+        onClick={handleClick}
+        {...props}
+      >
+        <ChevronLeftCarousel className={`${svgColor} size-8`} />
+        <span className="sr-only">Previous slide</span>
+      </Button>
+    );
+  },
+);
 CarouselPrevious.displayName = "CarouselPrevious";
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { scrollNext, canScrollNext, autoplayRef } = useCarousel();
+  React.ComponentProps<typeof Button> & { svgColor?: string }
+>(
+  (
+    { className, variant = "outline", size = "icon", svgColor, ...props },
+    ref,
+  ) => {
+    const { scrollNext, canScrollNext, autoplayRef } = useCarousel();
 
-  const handleClick = () => {
-    scrollNext();
-    autoplayRef?.current?.reset(); // 타이머 초기화
-  };
-  return (
-    <Button
-      ref={ref}
-      variant={variant}
-      size={size}
-      className={className}
-      disabled={!canScrollNext}
-      onClick={handleClick}
-      {...props}
-    >
-      <Image
-        src="/svg/icon/chevron-right-carousel.svg"
-        alt="previous"
-        width={32}
-        height={32}
-      />
-      <span className="sr-only">Next slide</span>
-    </Button>
-  );
-});
+    const handleClick = () => {
+      scrollNext();
+      autoplayRef?.current?.reset(); // 타이머 초기화
+    };
+    return (
+      <Button
+        ref={ref}
+        variant={variant}
+        size={size}
+        className={cn("text-white", className)}
+        disabled={!canScrollNext}
+        onClick={handleClick}
+        {...props}
+      >
+        <ChevronRightCarousel className={`${svgColor} size-8`} />
+        <span className="sr-only">Next slide</span>
+      </Button>
+    );
+  },
+);
 CarouselNext.displayName = "CarouselNext";
 
 export {
