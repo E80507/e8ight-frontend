@@ -109,12 +109,12 @@ export function PostTable({
     columnHelper.accessor("createdAt", {
       cell: (data) => formattedDate(data.getValue(), "INPUT_DATE"),
       header: "등록일",
-      size: 217,
+      size: 220,
     }),
     columnHelper.accessor("title", {
       cell: (info) => (
         <div
-          className="cursor-pointer hover:text-primary underline truncate max-w-[500px]"
+          className="cursor-pointer hover:text-primary underline truncate max-w-[556px]"
           onClick={() => router.push(`/admin/${info.row.original.id}`)}
         >
           {info.getValue()}
@@ -126,7 +126,7 @@ export function PostTable({
     columnHelper.accessor("category", {
       cell: (data) => handlePostCategoryText(data.getValue()),
       header: "카테고리",
-      size: 217,
+      size: 220,
     }),
     columnHelper.accessor("author", {
       cell: (data) => data.getValue() || "-",
@@ -163,7 +163,11 @@ export function PostTable({
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header, headerIndex) => {
               return (
-                <TableHead key={header.id + headerIndex}>
+                <TableHead
+                  key={header.id + headerIndex}
+                  style={{ width: `${header.column.getSize()}px` }}
+                  className="!p-0"
+                >
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -187,6 +191,7 @@ export function PostTable({
               {row.getVisibleCells().map((cell, cellIndex) => (
                 <TableCell
                   size="sm"
+                  style={{ width: `${cell.column.getSize()}px` }}
                   className={`h-[45px] ${
                     selectedIds.includes(row.original.id) ? "bg-[#F7FEFD]" : ""
                   } border-t ${

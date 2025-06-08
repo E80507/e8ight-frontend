@@ -4,6 +4,7 @@ import Badge from "@/components/ui/badge";
 import type { BadgeColor } from "@/components/ui/badge";
 import formattedDate from "@/util/date";
 import Link from "next/link";
+import { MouseEvent } from "react";
 
 const categoryMap: Record<string, BadgeColor> = {
   INSIGHT: "green",
@@ -20,6 +21,12 @@ interface PostItemProps {
 }
 
 const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
+  const handleCheckboxClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onSelect?.();
+  };
+
   return (
     <Link
       href={`/admin/${post?.id}`}
@@ -28,16 +35,19 @@ const PostItem = ({ post, isFirst, isSelected, onSelect }: PostItemProps) => {
       } ${isSelected ? "bg-[#F7FEFD]" : ""}`}
     >
       {/* 카테고리 */}
-      <div className="flex items-center gap-[14px]">
-        <button type="button" className="relative">
+      <div
+        className="flex items-center gap-[14px]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative cursor-pointer" onClick={handleCheckboxClick}>
           <input
             type="checkbox"
             checked={isSelected}
-            onChange={onSelect}
             className="peer absolute opacity-0 size-[20px] cursor-pointer z-10"
+            readOnly
           />
           <Check type="square" isChecked={isSelected} />
-        </button>
+        </div>
 
         <Badge color={categoryMap[post?.category]} text={post?.category} />
       </div>

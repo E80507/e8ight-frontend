@@ -116,3 +116,21 @@ export const deleteTag = async (data: DeleteTagReq) => {
     throw new Error("태그 삭제에 실패했습니다.");
   }
 };
+
+// 포스트 수정
+export const updatePost = async (id: string, data: CreatePostReq) => {
+  try {
+    const res = await apiFetch(`/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.NEXT_PUBLIC_ADMIN_KEY as string,
+      },
+      body: JSON.stringify(data),
+    });
+    return res;
+  } catch (err) {
+    console.error(err);
+    throw new Error("포스트 수정에 실패했습니다.");
+  }
+};
