@@ -173,6 +173,7 @@ const ContactPage = () => {
                 label="문의 내용"
                 isEssential={true}
                 textAreaClass="h-[180px]"
+                maxLength={300}
               />
 
               {/* 개인정보 수집 동의 */}

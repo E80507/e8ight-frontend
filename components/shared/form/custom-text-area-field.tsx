@@ -13,15 +13,16 @@ import {
   Path,
   UseFormReturn,
 } from "react-hook-form";
+import { X } from "lucide-react";
 
 interface CustomTextareaFieldProps<T extends FieldValues> {
   form: UseFormReturn<T>;
   name: Path<T>;
   placeholder: string;
   label?: string;
-  hasTextLength?: boolean;
   isEssential?: boolean; // 필수 입력 여부
   textAreaClass?: string;
+  maxLength?: number;
 }
 
 const CustomTextareaField = <T extends FieldValues>({
@@ -29,11 +30,11 @@ const CustomTextareaField = <T extends FieldValues>({
   name,
   placeholder,
   label,
-  hasTextLength,
   isEssential,
   textAreaClass,
+  maxLength = 300,
 }: CustomTextareaFieldProps<T>) => {
-  const [value, setValue] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const error = form.formState.errors[name];
 
   // 텍스트 변경 핸들러
@@ -41,41 +42,59 @@ const CustomTextareaField = <T extends FieldValues>({
     value: string,
     field: ControllerRenderProps<T, Path<T>>,
   ) => {
-    setValue(value);
-    field.onChange(value);
+    if (value.length <= maxLength) {
+      field.onChange(value);
+    }
   };
+
   return (
     <FormField
       control={form.control}
       name={name}
-      render={({ field }) => (
-        <FormItem className="relative flex flex-col gap-3">
-          <FormControl>
-            <>
-              {label && (
-                <FormLabel htmlFor={name} className="gap-0">
-                  {label}
-                  {isEssential && (
-                    <span className="ml-[4px] text-error">{`*`}</span>
-                  )}
-                </FormLabel>
-              )}
-              <Textarea
-                {...field}
-                className={`${textAreaClass} ${error ? "border-destructive focus-visible:border-destructive" : ""}`}
-                onChange={(e) => onChangeTextarea(e.target.value, field)}
-                value={value || field.value}
-                placeholder={placeholder}
-              />
-            </>
-          </FormControl>
-          {hasTextLength && (
-            <span className="-mt-1 text-right caption">{`${value.length}/300`}</span>
-          )}
+      render={({ field }) => {
+        // 현재 텍스트 길이 계산
+        const currentLength = (field.value || "").toString().length;
 
-          <FormMessage />
-        </FormItem>
-      )}
+        return (
+          <FormItem className="relative flex flex-col gap-3">
+            {label && (
+              <FormLabel htmlFor={name} className="gap-0">
+                {label}
+                {isEssential && (
+                  <span className="ml-[4px] text-error">{`*`}</span>
+                )}
+              </FormLabel>
+            )}
+            <FormControl>
+              <div className="relative">
+                <Textarea
+                  {...field}
+                  className={`${textAreaClass} min-h-[160px] ${error ? "border-destructive focus-visible:border-destructive" : ""}`}
+                  onChange={(e) => onChangeTextarea(e.target.value, field)}
+                  value={field.value}
+                  placeholder={placeholder}
+                  maxLength={maxLength}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
+                />
+                <button
+                  type="button"
+                  className={`absolute right-[16px] top-[16px] text-[#5E616E] hover:text-[#474953] transition-opacity ${isFocused ? "opacity-100" : "opacity-0"}`}
+                  onClick={() => {
+                    field.onChange("");
+                  }}
+                >
+                  <X className="h-4 w-4" />
+                </button>
+                <div className="absolute bottom-[16px] right-[16px] caption text-[#5E616E]">
+                  {`${currentLength}/${maxLength}`}
+                </div>
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        );
+      }}
     />
   );
 };
