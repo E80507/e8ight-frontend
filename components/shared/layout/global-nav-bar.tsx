@@ -184,7 +184,7 @@ const GlobalNavBar = () => {
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
         <DrawerTitle className="sr-only">메뉴 열기</DrawerTitle>
         <DrawerContent
-          className={`flex min-h-screen flex-col items-center bg-white ${isHome ? "pt-[67px]" : "pt-12"} font-pretendard`}
+          className={`flex h-full flex-col items-center bg-white ${isHome ? "pt-[67px]" : "pt-12"} font-pretendard`}
         >
           <div className="flex flex-1 flex-col items-center justify-center gap-y-[59px]">
             {NAV_LINKS.map(({ label, path: href }) => (
