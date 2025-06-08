@@ -44,7 +44,7 @@ export default function PostHeader({ post }: PostHeaderProps) {
         {/* 공유하기 */}
         <button
           onClick={() => shareUrl(window.location.href)}
-          className="items-center gap-[8px] px-[16px] py-[12px] bg-[#F9FAFA] border border-[#D6D7DC] rounded-[10px] hidden tablet:flex"
+          className="ml-auto items-center gap-[8px] px-[16px] py-[12px] bg-[#F9FAFA] border border-[#D6D7DC] rounded-[10px] hidden tablet:flex"
         >
           <Share2Icon /> 공유하기
         </button>

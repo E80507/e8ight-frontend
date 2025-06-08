@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomSelectField from "@/components/shared/form/custom-select-field";
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { FormProvider, useForm } from "react-hook-form";
@@ -19,19 +19,22 @@ import TagKeyword from "./_components/tag-keyword";
 import dynamic from "next/dynamic";
 import { usePostS3PresignedUrl } from "@/hooks/s3/use-post-s3-presigned-url";
 import { Domain } from "@/app/api/dto/s3";
-import { createPost } from "@/app/api/admin";
+import { createPost, updatePost } from "@/app/api/admin";
 import { useMediaQuery } from "@/hooks/admin/use-media-query";
 import useSWRMutation from "swr/mutation";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormMessage } from "@/components/ui/form";
 import { ADMIN_PAGE } from "@/constants/path";
 import { useRef } from "react";
 import { formatBytes } from "@/util/file";
 import Image from "next/image";
 import { uploadS3FileMetadata } from "@/app/api/s3";
+import { usePostDetail } from "@/hooks/post/use-post-detail";
+import Loading from "@/components/shared/loading/loading";
 
 const QuillEditor = dynamic(() => import("@/components/QuillEditor"), {
   ssr: false,
+  loading: () => <Loading />,
 });
 
 const CreatePostPage = () => {
@@ -40,6 +43,11 @@ const CreatePostPage = () => {
     useState<AdminCategory | null>(null);
   const isMobile = useMediaQuery("(max-width: 599px)");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const postId = searchParams.get("id");
+  const isEditMode = !!postId;
+  const { post } = usePostDetail(postId || "");
+  
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileDetails, setFileDetails] = useState<
     { name: string; size: number; url: string }[] | null
@@ -71,6 +79,45 @@ const CreatePostPage = () => {
     },
   });
 
+  // 수정 모드일 때 초기 데이터 설정
+  useEffect(() => {
+    if (isEditMode && post) {
+      // console.log("수정 모드 데이터:", post);
+      
+      // 먼저 카테고리 설정
+      setSelectedCategory(post.category as AdminCategory);
+      setIsCategorySelected(true);
+
+      // 폼 데이터 설정
+      const formData = {
+        title: post.title,
+        category: post.category,
+        content: post.content || "",
+        thumbnail: post.thumbnail,
+        author: post.author || "",
+        mainImage: post.mainImage,
+        tags: post.tags || [],
+        keywords: post.keywords || [],
+        linkUrl: post.linkUrl || "",
+        file: post.fileIds || [],
+      };
+      
+      // console.log("설정할 폼 데이터:", formData);
+      
+      // 폼 초기화
+      form.reset(formData);
+      
+      // 각 필드 개별적으로 설정
+      Object.entries(formData).forEach(([key, value]) => {
+        form.setValue(key as any, value);
+      });
+      
+      if (post.fileIds) {
+        setFileIds(post.fileIds);
+      }
+    }
+  }, [isEditMode, post, form]);
+
   const { onPostS3PresignedUrl } = usePostS3PresignedUrl(Domain.ANNOUNCEMENT);
 
   const handleImageUpload = async (file: File): Promise<string> => {
@@ -83,14 +130,21 @@ const CreatePostPage = () => {
     }
   };
 
-  const { trigger, isMutating } = useSWRMutation(
+  const { trigger: createTrigger, isMutating: isCreating } = useSWRMutation(
     "createPost",
     async (key, { arg }: { arg: CreatePostReq }) => {
       return await createPost(arg);
     },
   );
 
-  const handleCreatePost = form.handleSubmit(
+  const { trigger: updateTrigger, isMutating: isUpdating } = useSWRMutation(
+    "updatePost",
+    async (key, { arg }: { arg: { id: string; data: CreatePostReq } }) => {
+      return await updatePost(arg.id, arg.data);
+    },
+  );
+
+  const handleSubmit = form.handleSubmit(
     async (data) => {
       try {
         const payload: CreatePostReq = {
@@ -99,10 +153,14 @@ const CreatePostPage = () => {
           content: data.content ?? "",
         };
 
-        await trigger(payload);
+        if (isEditMode && postId) {
+          await updateTrigger({ id: postId, data: payload });
+        } else {
+          await createTrigger(payload);
+        }
         router.push(ADMIN_PAGE);
       } catch (error) {
-        console.error("게시글 등록 실패", error);
+        console.error(isEditMode ? "게시글 수정 실패" : "게시글 등록 실패", error);
       }
     },
     (errors) => {
@@ -166,15 +224,15 @@ const CreatePostPage = () => {
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
         <div className="hidden items-center justify-between web:flex">
           <h1 className="pretendard-title-m web:pretendard-title-l">
-            컨텐츠 추가
+            {isEditMode ? "컨텐츠 수정" : "컨텐츠 추가"}
           </h1>
           <Button
             size="lg"
             className="w-[97px]"
-            onClick={handleCreatePost}
-            disabled={isMutating}
+            onClick={handleSubmit}
+            disabled={isCreating || isUpdating}
           >
-            게시하기
+            {isEditMode ? "수정하기" : "게시하기"}
           </Button>
         </div>
         <form className="flex flex-col">
@@ -254,8 +312,12 @@ const CreatePostPage = () => {
                           className={`${form.formState.errors.content ? "rounded-md border-2 border-error" : ""}`}
                         >
                           <QuillEditor
+                            key={`editor-${post?.id}`}
+                            defaultValue={post?.content || ""}
+                            initialValue={post?.content || ""}
                             value={form.watch("content")}
                             onChange={(content) => {
+                              // console.log("QuillEditor onChange:", content);
                               form.setValue("content", content, {
                                 shouldValidate: true,
                               });
@@ -448,10 +510,10 @@ const CreatePostPage = () => {
                   <Button
                     size="cta"
                     className="mt-4 h-14 w-full web:hidden"
-                    onClick={handleCreatePost}
-                    disabled={isMutating}
+                    onClick={handleSubmit}
+                    disabled={isCreating || isUpdating}
                   >
-                    게시하기
+                    {isEditMode ? "수정하기" : "게시하기"}
                   </Button>
                 </div>
               )}
