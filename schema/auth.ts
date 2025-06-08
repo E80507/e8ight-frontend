@@ -12,3 +12,8 @@ export const PasswordChangeSchema = z.object({
   newPassword: z.string({ required_error: "비밀번호를 입력해주세요" }),
   newPasswordConfirm: z.string({ required_error: "비밀번호를 입력해주세요" }),
 });
+
+// 관리자 인증 스키마
+export const adminAuthSchema = z.object({
+  code: z.string().min(1, "올바른 인증 코드를 입력해주세요."),
+});
