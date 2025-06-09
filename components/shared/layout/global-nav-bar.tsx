@@ -78,9 +78,8 @@ const GlobalNavBar = () => {
   return (
     <>
       {/* 홈페이지 데스크톱 GNB */}
-
       <header
-        className={`relative z-[100] hidden w-full web:flex ${
+        className={`fixed z-[100] hidden w-full web:flex ${
           isContactPage ? "bg-[#FBFBFC]" : "bg-white/[0.01] backdrop-blur"
         }`}
       >
@@ -110,6 +109,7 @@ const GlobalNavBar = () => {
                 </Link>
               ))}
             </nav>
+
             <Link href={CONTACT_PAGE} prefetch>
               <Button
                 size="lg"
@@ -126,8 +126,12 @@ const GlobalNavBar = () => {
 
       {/* 홈페이지 모바일 GNB */}
       <header
-        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between bg-transparent px-4 py-3 web:hidden ${
-          isContactPage ? "tablet:bg-[#FBFBFC]" : ""
+        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between px-4 py-3 web:hidden ${
+          isContactPage
+            ? "tablet:bg-[#FBFBFC]"
+            : isDetailPage
+              ? "bg-white"
+              : "bg-transparent"
         } ${isHome ? "h-[67px]" : "h-12"}`}
       >
         {isHome ? (
