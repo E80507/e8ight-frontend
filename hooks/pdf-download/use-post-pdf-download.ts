@@ -23,23 +23,44 @@ export const usePostPdfDownload = () => {
         // 0.4초 대기 (API 호출 시뮬레이션)
         await new Promise((resolve) => setTimeout(resolve, 400));
 
-        console.log("pdf download 데이터", JSON.stringify(data));
+        console.log("[PDF 다운로드] 시작:", JSON.stringify(data, null, 2));
 
-        sendToSheet({
-          name: data.name,
-          position: data.position,
-          company: data.company,
-          department: data.department,
-          phone: data.phone,
-          email: data.email,
-        }),
+        try {
+          await sendToSheet({
+            name: data.name,
+            position: data.position,
+            company: data.company,
+            department: data.department,
+            phone: data.phone,
+            email: data.email,
+          });
+
+          console.log("[PDF 다운로드] 스프레드시트 저장 성공");
+          toast({
+            title: "PDF 다운로드가 완료되었습니다.",
+          });
+
           setTimeout(() => {
-            // form.reset();
+            form.reset();
           }, 1000);
+        } catch (sheetError) {
+          console.error("[PDF 다운로드] 스프레드시트 저장 실패:", sheetError);
+          throw sheetError;
+        }
       } catch (err: unknown) {
-        console.error("Form Submission Error:", err);
+        console.error("[PDF 다운로드] 오류 발생:", err);
+        if (err instanceof Error) {
+          console.error("[PDF 다운로드] 에러 상세:", {
+            name: err.name,
+            message: err.message,
+            stack: err.stack,
+          });
+        }
         toast({
-          title: "PDF 다운로드 중 오류가 발생했습니다.",
+          title:
+            err instanceof Error
+              ? err.message
+              : "PDF 다운로드 중 오류가 발생했습니다.",
           variant: "destructive",
         });
       } finally {

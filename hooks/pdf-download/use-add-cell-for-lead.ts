@@ -30,7 +30,12 @@ export default function useAddCellForLead() {
       ];
 
       try {
-        await fetch("/api/google-spread", {
+        console.log("[스프레드시트 저장] 시도:", {
+          type: "newsletter",
+          values,
+        });
+
+        const response = await fetch("/api/google-spread", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -38,8 +43,32 @@ export default function useAddCellForLead() {
             values,
           }),
         });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("[스프레드시트 저장] 실패 응답:", {
+            status: response.status,
+            statusText: response.statusText,
+            errorData,
+          });
+          throw new Error(
+            errorData.error || "스프레드시트 저장에 실패했습니다.",
+          );
+        }
+
+        const result = await response.json();
+        console.log("[스프레드시트 저장] 성공:", result);
+        return result;
       } catch (error) {
-        console.error("스프레드시트 저장 실패", error);
+        console.error("[스프레드시트 저장] 실패:", error);
+        if (error instanceof Error) {
+          console.error("[스프레드시트 저장] 에러 상세:", {
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+          });
+        }
+        throw error;
       }
     },
     [],
