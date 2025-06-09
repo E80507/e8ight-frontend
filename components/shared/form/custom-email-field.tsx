@@ -110,7 +110,11 @@ const CustomEmailField = <T extends FieldValues>({
                 type="text"
                 disabled={disabled}
                 id={name}
-                className={`flex-1 h-[48px] ${error ? "border-destructive focus-visible:border-destructive" : ""} ${className}`}
+                className={`flex-1 h-[48px] outline outline-1 outline-transparent ${
+                  error
+                    ? "border-error outline-error focus-visible:border-error focus-visible:outline-error"
+                    : ""
+                } ${className}`}
                 onChange={(e) => handleEmailChange(e.target.value, field)}
                 placeholder={placeholder}
                 value={emailId}
@@ -124,7 +128,13 @@ const CustomEmailField = <T extends FieldValues>({
                 onValueChange={(value) => handleDomainSelect(value, field)}
                 value={isCustomDomain ? "직접입력" : domain}
               >
-                <SelectTrigger className="flex-1 h-[48px]">
+                <SelectTrigger
+                  className={`flex-1 h-[48px] outline outline-1 outline-transparent ${
+                    error
+                      ? "border-error outline-error focus:border-error focus:outline-error"
+                      : ""
+                  }`}
+                >
                   {isCustomDomain ? (
                     <div onClick={(e) => e.stopPropagation()}>
                       <Input

@@ -95,7 +95,11 @@ const CustomInputField = <T extends FieldValues>({
                 disabled={disabled}
                 id={name}
                 maxLength={maxLength}
-                className={`disabled:mt-3 disabled:bg-black/10 ${error ? "border-error focus-visible:border-error" : ""} ${className}`}
+                className={`disabled:mt-3 disabled:bg-black/10 outline outline-1 outline-transparent ${
+                  error
+                    ? "border-error outline-error focus-visible:border-error focus-visible:outline-error"
+                    : ""
+                } ${className}`}
                 {...field}
                 onChange={
                   noSpace || type === "tel"

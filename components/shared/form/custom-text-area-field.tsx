@@ -69,7 +69,11 @@ const CustomTextareaField = <T extends FieldValues>({
               <div className="relative">
                 <Textarea
                   {...field}
-                  className={`${textAreaClass} min-h-[160px] ${error ? "border-destructive focus-visible:border-destructive" : ""}`}
+                  className={`min-h-[160px] disabled:mt-3 disabled:bg-black/10 outline outline-1 outline-transparent ${
+                    error
+                      ? "border-error outline-error focus-visible:border-error focus-visible:outline-error"
+                      : ""
+                  } ${textAreaClass}`}
                   onChange={(e) => onChangeTextarea(e.target.value, field)}
                   value={field.value}
                   placeholder={placeholder}
