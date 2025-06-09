@@ -18,6 +18,7 @@ import { getSimulationData } from "../api/main";
 import useSWR from "swr";
 import { SiumlationRes } from "../api/dto/main";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const SimulationSection = () => {
   const router = useRouter();
@@ -133,27 +134,29 @@ const SimulationSection = () => {
                 key={i}
                 className="basis-full !pl-0 tablet:basis-1/2 web:basis-1/3 web:!px-3"
               >
-                <div className="flex flex-col gap-y-4">
-                  {/* 이미지 */}
-                  <div className="relative aspect-[1.42] size-full overflow-hidden tablet:aspect-[1.5] web:aspect-[1.52]">
-                    <Image
-                      src={item.thumbnail}
-                      alt="DX Simulations"
-                      fill
-                      className="rounded-[20px] object-cover"
-                      sizes="(max-width: 600px) 100vw, (max-width: 1025px) 50vw, 33vw"
-                    />
+                <Link href={`${item.linkUrl}`} target="_blank">
+                  <div className="flex flex-col gap-y-4">
+                    {/* 이미지 */}
+                    <div className="relative aspect-[1.42] size-full overflow-hidden tablet:aspect-[1.5] web:aspect-[1.52]">
+                      <Image
+                        src={item.thumbnail}
+                        alt="DX Simulations"
+                        fill
+                        className="rounded-[20px] object-cover"
+                        sizes="(max-width: 600px) 100vw, (max-width: 1025px) 50vw, 33vw"
+                      />
+                    </div>
+                    {/* 텍스트 */}
+                    <div className="px-3">
+                      <p className="text-label-natural pretendard-body-2">
+                        {formattedDate(item.createdAt, "INPUT_DATE")}
+                      </p>
+                      <p className="break-keep font-pretendard text-black h2-l">
+                        {item.title}
+                      </p>
+                    </div>
                   </div>
-                  {/* 텍스트 */}
-                  <div className="px-3">
-                    <p className="text-label-natural pretendard-body-2">
-                      {formattedDate(item.createdAt, "INPUT_DATE")}
-                    </p>
-                    <p className="break-keep font-pretendard text-black h2-l">
-                      {item.title}
-                    </p>
-                  </div>
-                </div>
+                </Link>
               </CarouselItem>
             ))}
           </CarouselContent>
