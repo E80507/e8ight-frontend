@@ -19,6 +19,7 @@ import useSWR from "swr";
 import { SiumlationRes } from "../api/dto/main";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { YOUTUBE_LINK } from "@/constants/service";
 
 const SimulationSection = () => {
   const router = useRouter();
@@ -60,7 +61,6 @@ const SimulationSection = () => {
           className="object-cover"
         />
       </div>
-
       <Carousel
         opts={{
           loop: true,
@@ -70,27 +70,16 @@ const SimulationSection = () => {
         autoplayRef={autoplayRef}
         setApi={setApi}
       >
-        <div className="relative mx-auto w-full px-4 pb-10 pt-[99px] text-white tablet:px-[30px] web:px-[120px] web:py-[100px]">
+        <div className="relative mx-auto flex w-full flex-col px-4 pb-10 pt-[63px] text-white tablet:px-[30px] tablet:py-20 web:px-[120px] web:py-[100px]">
           {/* 헤더 영역 */}
           <div className="mb-5 flex flex-col gap-y-2 web:mb-0">
             <p className="pretendard-h1-r tablet:pretendard-h1-m web:pretendard-h1-l">
               DX Simulations
             </p>
             <div className="items-center gap-x-5 web:flex web:justify-between">
-              <div className="flex items-center gap-x-5">
-                <p className="pretendard-subtitle-s tablet:pretendard-subtitle-m web:pretendard-subtitle-l">
-                  이에이트에의 유튜브 영상을 빠르게 확인해보세요.
-                </p>
-                <Button
-                  size="md"
-                  variant="outline"
-                  shape="round"
-                  className="hidden border-transparent bg-white/40 text-white web:block"
-                  onClick={() => router.push("")}
-                >
-                  더보기
-                </Button>
-              </div>
+              <p className="pretendard-subtitle-s tablet:pretendard-subtitle-m web:pretendard-subtitle-l">
+                이에이트의 유튜브 영상을 빠르게 확인해보세요.
+              </p>
               <div className="hidden gap-x-4 web:flex">
                 <CarouselPrevious
                   className="border-none bg-transparent"
@@ -104,31 +93,20 @@ const SimulationSection = () => {
             </div>
           </div>
 
-          {/* 모바일용 더보기/버튼 */}
-          <div className="flex justify-between">
-            <Button
-              size="md"
-              variant="outline"
-              shape="round"
-              className="border-transparent bg-white/40 text-white web:hidden"
-              onClick={() => router.push("")}
-            >
-              더보기
-            </Button>
-            <div className="flex gap-x-4 self-end web:hidden">
-              <CarouselPrevious
-                className="border-none bg-transparent"
-                svgColor="text-white"
-              />
-              <CarouselNext
-                className="border-none bg-transparent"
-                svgColor="text-white"
-              />
-            </div>
+          {/* 모바일용 캐러셀 버튼 */}
+          <div className="flex justify-end gap-x-4 web:hidden">
+            <CarouselPrevious
+              className="border-none bg-transparent"
+              svgColor="text-white"
+            />
+            <CarouselNext
+              className="border-none bg-transparent"
+              svgColor="text-white"
+            />
           </div>
 
           {/* 캐러셀 콘텐츠 */}
-          <CarouselContent className="mx-auto mt-[60px] max-w-[1440px] gap-x-4 tablet:gap-x-6 tablet:pl-6 web:gap-x-0 web:pl-0">
+          <CarouselContent className="mx-auto mt-[59px] max-w-[1440px] gap-x-4 tablet:gap-x-6 tablet:pl-6 web:gap-x-0 web:pl-0">
             {data?.map((item, i) => (
               <CarouselItem
                 key={i}
@@ -160,6 +138,21 @@ const SimulationSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
+          <Link
+            href={YOUTUBE_LINK}
+            target="_blank"
+            className="mt-[66px] self-center"
+          >
+            <Button
+              size="md"
+              variant="outline"
+              shape="round"
+              className="w-[120px] border border-component-natural text-black tablet:h-12 tablet:w-40"
+              onClick={() => router.push(YOUTUBE_LINK)}
+            >
+              더보기
+            </Button>
+          </Link>
         </div>
       </Carousel>
     </section>
