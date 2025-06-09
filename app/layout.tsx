@@ -8,7 +8,7 @@ import {
 } from "@/constants/service";
 
 const FAVICON_URL = "/favicon.ico";
-const OG_IMAGE_URL = "/png/metadata/og.png";
+const OG_IMAGE_URL = "/images/og/og.png";
 
 const gibson = localFont({
   src: [
