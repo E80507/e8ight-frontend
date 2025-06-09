@@ -4,12 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useCallback, useRef, useEffect } from "react";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerFooter,
-  DrawerTitle,
-} from "@/components/ui/drawer";
 import { IconButton, Button } from "@/components/ui/button";
 import {
   TECH_INSIGHT_PAGE,
@@ -20,7 +14,7 @@ import {
 } from "@/constants/path";
 import { SERVICE_NAME } from "@/constants/service";
 import ExternalLinksNav from "@/components/shared/layout/external-links-nav";
-import ActionButtons from "@/components/shared/layout/action-buttons";
+import GNBDrawer from "@/app/(GNB-layout)/_components/drawer";
 import { Share2Icon } from "lucide-react";
 import { shareUrl } from "@/utils/share";
 
@@ -187,31 +181,13 @@ const GlobalNavBar = () => {
           />
         </div>
       </header>
-
-      <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <DrawerTitle className="sr-only">메뉴 열기</DrawerTitle>
-        <DrawerContent
-          className={`flex h-full flex-col items-center bg-white ${isHome ? "pt-[67px]" : "pt-12"} font-pretendard`}
-        >
-          <div className="flex flex-1 flex-col items-center justify-center gap-y-[59px]">
-            {NAV_LINKS.map(({ label, path: href }) => (
-              <Link
-                key={href}
-                prefetch={false}
-                href={href}
-                className="h1-m"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
-          <DrawerFooter className="flex flex-col justify-center gap-y-[26px] py-10">
-            <ActionButtons className="border-black-1 bg-white text-black hover:border-primary hover:bg-primary" />
-            <ExternalLinksNav />
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+      <GNBDrawer
+        open={isMobileMenuOpen}
+        onOpenChange={setIsMobileMenuOpen}
+        isHome={isHome}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
+        NAV_LINKS={NAV_LINKS}
+      />
     </>
   );
 };
