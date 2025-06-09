@@ -1,8 +1,8 @@
 // 카테고리 유형
 export enum AdminCategory {
-  LIBRARY = "Tech Library",
+  LIBRARY = "Library",
   INSIGHT = "Tech Insight",
-  DX = "DX Simulation",
+  DX = "DX",
   DOWNLOADS = "Downloads",
 }
 

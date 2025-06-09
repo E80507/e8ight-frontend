@@ -19,7 +19,7 @@ const ArchiveSection = () => {
     limit: 2,
     sortOrder: "DESC",
     keyword: "",
-    category: POST_CATEGORY_VALUES.DOWNLOADS as PostCategory,
+    category: "Downloads",
   });
 
   const { posts = [] } = usePost(params);

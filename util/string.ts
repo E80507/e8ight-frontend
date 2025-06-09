@@ -63,13 +63,13 @@ export const handleAdminCategoryText = (category: AdminCategory) => {
 // 포스트 카테고리 텍스트 반환 함수
 export const handlePostCategoryText = (category: PostCategory) => {
   switch (category) {
-    case "LIBRARY":
+    case "Tech Library":
       return "Tech Library";
-    case "INSIGHT":
+    case "Tech Insight":
       return "Tech Insight";
-    case "DX":
-      return "DX Simulation";
-    case "DOWNLOADS":
+    case "DX Simulation":
+      return "DX";
+    case "Downloads":
       return "Downloads";
     default:
       return category;

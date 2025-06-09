@@ -215,6 +215,13 @@ const config: Config = {
           letterSpacing: "-0.3%",
           fontFamily: "var(--font-pretendard)",
         },
+        ".pretendard-h1-s": {
+          fontSize: "18px",
+          lineHeight: "150%",
+          fontWeight: "700",
+          letterSpacing: "-0.3%",
+          fontFamily: "var(--font-pretendard)",
+        },
         ".pretendard-h1-r": {
           fontSize: "20px",
           lineHeight: "160%",
