@@ -1,7 +1,8 @@
 export const SERVICE_NAME = "E8IGHT";
 export const SERVICE_NAME_KR = "이에이트";
-export const SERVICE_URL = "https://daggle.io"; // 서비스 주소, 수정 필요
-export const SERVICE_DESCRIPTION = ""; // 수정 필요
+export const SERVICE_URL = "https://e8.ai.kr";
+export const SERVICE_DESCRIPTION =
+  "디지털 트윈 및 입자 기반 시뮬레이션 기술을 통해 스마트 시티·바이오·헬스케어 등 다양한 산업의 문제를 혁신적으로 해결합니다.";
 
 // 회사 정보
 export const COMPANY_NAME = "이에이트(주)";
