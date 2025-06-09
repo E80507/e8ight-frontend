@@ -1,6 +1,6 @@
 "use client";
 
-import QuillViewer from "@/components/QuillViewer";
+import QuillViewer from "@/components/quill-viewer";
 import { Button } from "@/components/ui/button";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
 import { useRouter } from "next/navigation";
@@ -8,6 +8,7 @@ import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
 import Image from "next/image";
 import Loading from "@/components/shared/loading/loading";
+import { EDIT_POST_PAGE } from "@/constants/path";
 
 interface AdminDetailContentProps {
   params: { id: string };
@@ -77,7 +78,12 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             >
               삭제하기
             </Button>
-            <Button className="h-[48px] w-[97px]" onClick={() => {}}>
+            <Button
+              className="h-[48px] w-[97px]"
+              onClick={() => {
+                router.push(`${EDIT_POST_PAGE}/${id}`);
+              }}
+            >
               수정하기
             </Button>
           </div>
@@ -192,7 +198,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
               </div>
 
               {/* 항목 내용 */}
-              <div className="flex flex-1 items-center min-h-[45px] pretendard-subtitle-s py-[12px] px-[16px]">
+              <div className="flex flex-1 gap-[8px] items-center min-h-[45px] pretendard-subtitle-s py-[12px] px-[16px]">
                 {post?.keywords?.map((keyword: string, index: number) => (
                   <div
                     key={index}
@@ -269,7 +275,12 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             </Button>
 
             {/* 수정하기 */}
-            <Button className="h-[48px] w-[97px] flex-1" onClick={() => {}}>
+            <Button
+              className="h-[48px] w-[97px] flex-1"
+              onClick={() => {
+                router.push(`${EDIT_POST_PAGE}/${id}`);
+              }}
+            >
               수정하기
             </Button>
           </div>

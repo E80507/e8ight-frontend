@@ -3,7 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 // import QuillEditor from "@/components/QuillEditor";
-const QuillEditor = dynamic(() => import("@/components/QuillEditor"), {
+const QuillEditor = dynamic(() => import("@/components/quill-editor"), {
   ssr: false,
 });
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { Post } from "@/types/post";
-import QuillViewer from "@/components/QuillViewer";
+import QuillViewer from "@/components/quill-viewer";
 
 interface PostContentProps {
   post: Post | undefined;
