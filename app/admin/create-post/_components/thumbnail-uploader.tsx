@@ -7,12 +7,14 @@ import { FormControl, FormLabel, FormMessage } from "@/components/ui/form";
 import { useFormContext } from "react-hook-form";
 import { usePostS3PresignedUrl } from "@/hooks/s3/use-post-s3-presigned-url";
 import { Domain } from "@/app/api/dto/s3";
+import { POST_CATEGORY_VALUES } from "@/constants/admin";
 
 type ThumbnailUploaderProps = {
   name: string;
+  category: PostCategory;
 };
 
-const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
+const ThumbnailUploader = ({ name, category }: ThumbnailUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -52,13 +54,6 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
     const objectUrl = URL.createObjectURL(file);
 
     img.onload = async () => {
-      const ratio = img.width / img.height;
-      const expectedRatio = 16 / 7;
-      const ratioDiff = Math.abs(ratio - expectedRatio);
-
-      if (ratioDiff > 0.1) setLocalError("권장 비율(16:7)에 맞지 않습니다.");
-      else setLocalError(null);
-
       setPreview(objectUrl);
       try {
         const urls = await onPostS3PresignedUrl([file]);
@@ -87,16 +82,23 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
           </FormLabel>
           <div
             className={`relative mt-3 w-full rounded-md bg-background-alternative ${
-              preview ? "h-[290px] px-4 py-10" : "h-[225px]"
+              preview ? "min-h-[290px] px-4 py-10" : "h-[225px]"
             }`}
           >
             {preview ? (
-              <div className="relative size-full overflow-hidden rounded-md">
+              <div
+                className={`relative size-full overflow-hidden rounded-md ${
+                  category === POST_CATEGORY_VALUES.DX
+                    ? "aspect-[1.42] tablet:aspect-[1.5] web:mx-auto web:aspect-[1.52] web:max-w-[500px]"
+                    : ""
+                }`}
+              >
                 <NextImage
                   src={preview}
                   alt="썸네일 미리보기"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 600px) 100vw, (max-width: 1025px) 50vw, 33vw"
                 />
                 <IconButton
                   className="absolute right-1 top-1"
