@@ -128,14 +128,14 @@ const SimulationSection = () => {
 
           {/* 캐러셀 콘텐츠 */}
           <CarouselContent
-            className={`mx-auto mt-[59px] max-w-[1440px] gap-x-4 web:gap-x-0 web:pl-0 ${
+            className={`mx-auto mt-[59px] max-w-[1440px] gap-x-4 ${
               isLimitedCarousel ? "tablet:pl-0" : "tablet:gap-x-6 tablet:pl-6"
             }`}
           >
-            {data?.map((item, i) => (
+            {data.map((item, i) => (
               <CarouselItem
                 key={i}
-                className="basis-full !pl-0 tablet:basis-1/2 web:basis-1/3 web:!px-3"
+                className="basis-full !pl-0 tablet:basis-1/2 web:basis-1/3"
               >
                 <Link href={`${item.linkUrl}`} target="_blank">
                   <div className="flex flex-col gap-y-4">
