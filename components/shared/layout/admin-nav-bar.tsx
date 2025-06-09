@@ -7,6 +7,8 @@ import { Button, IconButton } from "@/components/ui/button";
 import { ADMIN_PAGE } from "@/constants/path";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import AdminGNBDrawer from "@/app/admin/_components/drawer";
+import { useState } from "react";
 
 interface AdminNavBarProps {
   isEditMode?: boolean;
@@ -16,6 +18,8 @@ const AdminNavBar = ({ isEditMode = false }: AdminNavBarProps) => {
   const router = useRouter();
   const path = usePathname();
   const isCreatePage = path === "/admin/create-post";
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isHome = path === "/";
 
   return (
     <header
@@ -82,10 +86,18 @@ const AdminNavBar = ({ isEditMode = false }: AdminNavBarProps) => {
             height={24}
             variant="normal"
             size="sm"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             className={`flex web:hidden ${isCreatePage ? "hidden" : ""}`}
           />
         </div>
       </div>
+
+      <AdminGNBDrawer
+        open={isMobileMenuOpen}
+        onOpenChange={setIsMobileMenuOpen}
+        isHome={isHome}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
+      />
     </header>
   );
 };

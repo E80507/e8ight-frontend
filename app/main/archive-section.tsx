@@ -8,8 +8,6 @@ import { useRouter } from "next/navigation";
 import { DOWNLOADS_PAGE } from "@/constants/path";
 import { Post, PostsRequestParams } from "@/app/api/dto/post";
 import { usePost } from "@/hooks/post/use-post";
-import { POST_CATEGORY_VALUES } from "@/constants/admin";
-import { PostCategory } from "@/app/api/dto/post";
 
 const ArchiveSection = () => {
   const router = useRouter();
