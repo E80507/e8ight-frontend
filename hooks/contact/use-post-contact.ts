@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactSchema } from "@/schema/contact";
 import useAddCellForLead from "./use-add-cell-for-lead";
 import { postSubscribe } from "@/app/api/subscribe";
+import { HOME_PAGE } from "@/constants/path";
 
 export const usePostContact = () => {
   const [loading, setLoading] = useState(false);
@@ -100,13 +101,9 @@ export const usePostContact = () => {
             }
           }
 
-          toast({
-            title: "문의가 성공적으로 접수되었습니다.",
-          });
-
-          setTimeout(() => {
-            form.reset();
-          }, 1000);
+          form.reset();
+          alert("문의가 성공적으로 접수되었습니다.");
+          window.location.href = HOME_PAGE;
         } catch (sheetError) {
           console.error("[문의하기] 스프레드시트 저장 실패:", sheetError);
           throw sheetError;
