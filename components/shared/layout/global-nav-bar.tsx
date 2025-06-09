@@ -80,7 +80,7 @@ const GlobalNavBar = () => {
       {/* 홈페이지 데스크톱 GNB */}
       <header
         className={`fixed z-[100] hidden w-full web:flex ${
-          isContactPage ? "bg-[#FBFBFC]" : "bg-white/[0.01] backdrop-blur"
+          isContactPage ? "bg-[#FBFBFC]" : "bg-white/[0.01] backdrop-blur-sm"
         }`}
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col px-[120px] py-4 font-pretendard">
@@ -131,7 +131,7 @@ const GlobalNavBar = () => {
             ? "tablet:bg-[#FBFBFC]"
             : isDetailPage
               ? "bg-white"
-              : "bg-transparent"
+              : "bg-white/[0.01] backdrop-blur-sm"
         } ${isHome ? "h-[67px]" : "h-12"}`}
       >
         {isHome ? (
