@@ -19,7 +19,7 @@ const HeroSection = ({ title }: { title: string }) => {
         <Button
           size="lg"
           shape="round"
-          className="bg-primary-strong web:w-[160px] pretendard-title-s tablet:pretendard-body-2 web:pretendard-body-3 w-[80px] h-[37px]"
+          className="bg-primary-strong web:w-[160px] web:h-[48px] tablet:w-[120px] tablet:h-[37px] pretendard-title-s tablet:pretendard-body-2 web:pretendard-body-3 w-[80px] h-[37px]"
           onClick={() => router.push(CONTACT_PAGE)}
         >
           기술문의
