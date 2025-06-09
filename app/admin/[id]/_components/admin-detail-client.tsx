@@ -90,7 +90,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
         </div>
 
         {/* 데스크탑 내용 */}
-        <div className="tablet:pb-0 pb-[128px] border border-[#EEEFF1]">
+        <div className="tablet:mb-0 mb-[128px] border border-[#EEEFF1]">
           {/* 카테고리 */}
           <div className="flex flex-col border-b tablet:border-b border-[#EEEFF1] tablet:flex-row">
             {/* 항목 제목 */}
@@ -99,7 +99,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             </div>
 
             {/* 항목 내용 */}
-            <div className="flex min-h-[45px] items-center pretendard-subtitle-s py-[12px] px-[8px]">
+            <div className="flex min-h-[45px] items-center pretendard-subtitle-s py-[12px] px-[16px]">
               {post?.category}
             </div>
           </div>
@@ -113,7 +113,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
               </div>
 
               {/* 항목 내용 */}
-              <div className="flex min-h-[45px] items-center pretendard-subtitle-s py-[12px] px-[8px]">
+              <div className="flex min-h-[45px] items-center pretendard-subtitle-s py-[12px] px-[16px]">
                 {post?.author}
               </div>
             </div>
@@ -141,7 +141,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
               </div>
 
               {/* 항목 내용 */}
-              <div className="flex flex-1 items-center pretendard-subtitle-s px-[4px]">
+              <div className="flex flex-1 items-center pretendard-subtitle-s px-[16px] py-[12px]">
                 <QuillViewer content={post?.content} />
               </div>
             </div>
@@ -155,7 +155,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             </div>
 
             {/* 항목 내용 */}
-            <div className="flex flex-1 items-center pretendard-subtitle-s py-[20px] px-[16px]">
+            <div className="flex flex-1 items-center pretendard-subtitle-s py-[12px] px-[16px]">
               <div className="relative h-[100px] w-full overflow-hidden bg-gray-100 tablet:h-[210px]">
                 <Image
                   src={post?.thumbnail || ""}
