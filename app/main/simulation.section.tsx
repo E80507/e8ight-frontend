@@ -59,7 +59,7 @@ const SimulationSection = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (!data) return null;
+  if (!data || data.length === 0) return null;
 
   const isLimitedCarousel = (() => {
     if (screenWidth >= 1024) return data.length <= 3;
