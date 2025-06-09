@@ -11,7 +11,7 @@ import { POST_CATEGORY_VALUES } from "@/constants/admin";
 
 type ThumbnailUploaderProps = {
   name: string;
-  category: PostCategory;
+  category: string | null;
 };
 
 const ThumbnailUploader = ({ name, category }: ThumbnailUploaderProps) => {
