@@ -141,7 +141,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
               </div>
 
               {/* 항목 내용 */}
-              <div className="flex flex-1 items-center pretendard-subtitle-s px-[16px] py-[12px]">
+              <div className="flex flex-1 items-center pretendard-subtitle-s px-[16px] py-[12px] admin-detail-content">
                 <QuillViewer content={post?.content} />
               </div>
             </div>
