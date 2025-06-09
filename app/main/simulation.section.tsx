@@ -127,7 +127,11 @@ const SimulationSection = () => {
           )}
 
           {/* 캐러셀 콘텐츠 */}
-          <CarouselContent className="mx-auto mt-[59px] max-w-[1440px] gap-x-4 tablet:gap-x-6 tablet:pl-6 web:gap-x-0 web:pl-0">
+          <CarouselContent
+            className={`mx-auto mt-[59px] max-w-[1440px] gap-x-4 web:gap-x-0 web:pl-0 ${
+              isLimitedCarousel ? "tablet:pl-0" : "tablet:gap-x-6 tablet:pl-6"
+            }`}
+          >
             {data?.map((item, i) => (
               <CarouselItem
                 key={i}
