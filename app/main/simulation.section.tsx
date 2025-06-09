@@ -31,6 +31,7 @@ const SimulationSection = () => {
 
   const { data } = useSWR<SiumlationRes[]>("simluationData", getSimulationData);
   const [api, setApi] = useState<CarouselApi>();
+
   useEffect(() => {
     if (!api) return;
     api.reInit();
@@ -46,7 +47,25 @@ const SimulationSection = () => {
       api.off("select", handleSelect);
     };
   }, [api]);
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    handleResize(); // 최초 한 번
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   if (!data) return null;
+
+  const isLimitedCarousel = (() => {
+    if (screenWidth >= 1024) return data.length <= 3;
+    if (screenWidth >= 600) return data.length <= 2;
+    return false;
+  })();
 
   return (
     <section className="relative min-h-[389px]">
@@ -61,11 +80,11 @@ const SimulationSection = () => {
       </div>
       <Carousel
         opts={{
-          loop: true,
+          loop: !isLimitedCarousel,
           align: "start",
         }}
-        plugins={[autoplayRef.current]}
-        autoplayRef={autoplayRef}
+        plugins={!isLimitedCarousel ? [autoplayRef.current] : []}
+        autoplayRef={!isLimitedCarousel ? autoplayRef : undefined}
         setApi={setApi}
       >
         <div className="relative mx-auto flex w-full max-w-[1440px] flex-col px-4 pb-10 pt-[63px] text-white tablet:px-[30px] tablet:py-20 web:px-[120px] web:py-[100px]">
@@ -78,30 +97,34 @@ const SimulationSection = () => {
               <p className="pretendard-subtitle-s tablet:pretendard-subtitle-m web:pretendard-subtitle-l">
                 이에이트의 유튜브 영상을 빠르게 확인해보세요.
               </p>
-              <div className="hidden gap-x-4 web:flex">
-                <CarouselPrevious
-                  className="border-none bg-transparent"
-                  svgColor="text-white"
-                />
-                <CarouselNext
-                  className="border-none bg-transparent"
-                  svgColor="text-white"
-                />
-              </div>
+              {!isLimitedCarousel && (
+                <div className="hidden gap-x-4 web:flex">
+                  <CarouselPrevious
+                    className="border-none bg-transparent"
+                    svgColor="text-white"
+                  />
+                  <CarouselNext
+                    className="border-none bg-transparent"
+                    svgColor="text-white"
+                  />
+                </div>
+              )}
             </div>
           </div>
 
           {/* 모바일용 캐러셀 버튼 */}
-          <div className="flex justify-end gap-x-4 web:hidden">
-            <CarouselPrevious
-              className="border-none bg-transparent"
-              svgColor="text-white"
-            />
-            <CarouselNext
-              className="border-none bg-transparent"
-              svgColor="text-white"
-            />
-          </div>
+          {!isLimitedCarousel && (
+            <div className="flex justify-end gap-x-4 web:hidden">
+              <CarouselPrevious
+                className="border-none bg-transparent"
+                svgColor="text-white"
+              />
+              <CarouselNext
+                className="border-none bg-transparent"
+                svgColor="text-white"
+              />
+            </div>
+          )}
 
           {/* 캐러셀 콘텐츠 */}
           <CarouselContent className="mx-auto mt-[59px] max-w-[1440px] gap-x-4 tablet:gap-x-6 tablet:pl-6 web:gap-x-0 web:pl-0">
