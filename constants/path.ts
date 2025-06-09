@@ -1,3 +1,6 @@
+// 홈
+export const HOME_PAGE = "/";
+
 // 기술 콘텐츠
 export const TECH_INSIGHT_PAGE = "/tech-insight";
 export const TECH_LIBRARY_PAGE = "/tech-library";
