@@ -160,7 +160,6 @@ const CreatePostPage = () => {
     }
   };
 
-  console.log(fileIds);
   return (
     <div className="web:h-full web:py-10">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
@@ -298,7 +297,7 @@ const CreatePostPage = () => {
                             추가하기
                           </Button>
                         </div>
-                        <div className="w-full rounded-xl border border-line-normal">
+                        <div className="w-full overflow-hidden rounded-xl border border-line-normal">
                           <div className="flex w-full items-center justify-between bg-gray-100 px-4 py-3">
                             <p className="text-label-normal pretendard-body-3">
                               파일명
