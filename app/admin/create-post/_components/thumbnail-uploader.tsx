@@ -90,7 +90,7 @@ const ThumbnailUploader = ({ name, category }: ThumbnailUploaderProps) => {
                 className={`relative size-full overflow-hidden rounded-md ${
                   category === POST_CATEGORY_VALUES.DX
                     ? "aspect-[1.42] tablet:aspect-[1.5] web:mx-auto web:aspect-[1.52] web:max-w-[500px]"
-                    : ""
+                    : "h-[290px]"
                 }`}
               >
                 <NextImage
