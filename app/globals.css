@@ -179,11 +179,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .ql-picker-options {
-  width: 53px !important;
+  width: 54px !important;
   margin-top: 13px !important;
-  margin-left: -12px !important;
+  margin-left: -13px !important;
   box-shadow: none !important;
   border-color: #eeeff1 !important;
+  border-top: none !important;
 }
 
 .ql-align {
