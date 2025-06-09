@@ -80,8 +80,8 @@ const GlobalNavBar = () => {
       {/* 홈페이지 데스크톱 GNB */}
 
       <header
-        className={`relative z-[100] hidden w-full bg-[#FBFBFC] web:flex ${
-          isContactPage ? "bg-[#FBFBFC]" : "bg-transparent"
+        className={`relative z-[100] hidden w-full web:flex ${
+          isContactPage ? "bg-[#FBFBFC]" : "bg-white/[0.01] backdrop-blur"
         }`}
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col px-[120px] py-4 font-pretendard">
