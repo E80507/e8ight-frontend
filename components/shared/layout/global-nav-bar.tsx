@@ -65,7 +65,6 @@ const GlobalNavBar = () => {
     [clickCount],
   );
 
-  const isContactPage = path === CONTACT_PAGE;
   const isHome = path === "/";
   const isDetailPage = path?.includes("/detail/");
 
@@ -73,9 +72,7 @@ const GlobalNavBar = () => {
     <>
       {/* 홈페이지 데스크톱 GNB */}
       <header
-        className={`fixed z-[100] hidden w-full web:flex ${
-          isContactPage ? "bg-[#FBFBFC]" : "bg-white/[0.01] backdrop-blur-sm"
-        }`}
+        className={`fixed z-[100] hidden w-full web:flex bg-white/[0.08] backdrop-blur-sm`}
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col px-[120px] py-4 font-pretendard">
           <div className="flex items-center justify-between">
@@ -120,13 +117,7 @@ const GlobalNavBar = () => {
 
       {/* 홈페이지 모바일 GNB */}
       <header
-        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between px-4 py-3 web:hidden ${
-          isContactPage
-            ? "tablet:bg-[#FBFBFC]"
-            : isDetailPage
-              ? "bg-white"
-              : "bg-white/[0.01] backdrop-blur-sm"
-        } ${isHome ? "h-[67px]" : "h-12"}`}
+        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between tablet:px-[30px] px-4 py-3 web:hidden bg-white/[0.08] backdrop-blur-sm ${isHome ? "h-[67px]" : "h-12"}`}
       >
         {isHome ? (
           <div className="relative h-[43px] w-[45px]">
