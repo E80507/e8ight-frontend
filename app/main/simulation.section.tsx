@@ -68,9 +68,9 @@ const SimulationSection = () => {
         autoplayRef={autoplayRef}
         setApi={setApi}
       >
-        <div className="relative mx-auto flex w-full flex-col px-4 pb-10 pt-[63px] text-white tablet:px-[30px] tablet:py-20 web:px-[120px] web:py-[100px]">
+        <div className="relative mx-auto flex w-full flex-col pb-10 pt-[63px] text-white tablet:px-[30px] tablet:py-20 web:px-[120px] web:py-[100px]">
           {/* 헤더 영역 */}
-          <div className="mb-5 flex flex-col gap-y-2 web:mb-0">
+          <div className="mb-5 flex flex-col gap-y-2 px-4 tablet:px-0 web:mb-0">
             <p className="pretendard-h1-r tablet:pretendard-h1-m web:pretendard-h1-l">
               DX Simulations
             </p>
@@ -78,7 +78,9 @@ const SimulationSection = () => {
               <p className="pretendard-subtitle-s tablet:pretendard-subtitle-m web:pretendard-subtitle-l">
                 이에이트의 유튜브 영상을 빠르게 확인해보세요.
               </p>
-              <div className="hidden gap-x-4 web:flex">
+              <div
+                className={`hidden gap-x-4 ${data.length <= 3 ? "" : "web:flex"}`}
+              >
                 <CarouselPrevious
                   className="border-none bg-transparent"
                   svgColor="text-white"
@@ -104,11 +106,11 @@ const SimulationSection = () => {
           </div>
 
           {/* 캐러셀 콘텐츠 */}
-          <CarouselContent className="mx-auto mt-[59px] max-w-[1440px] gap-x-4 tablet:gap-x-6 tablet:pl-6 web:gap-x-0 web:pl-0">
+          <CarouselContent className="mx-auto mt-[59px] max-w-[1440px] pr-4 tablet:gap-x-6 tablet:pl-6 tablet:pr-0 web:gap-x-0 web:pl-0">
             {data?.map((item, i) => (
               <CarouselItem
                 key={i}
-                className="basis-full !pl-0 tablet:basis-1/2 web:basis-1/3 web:!px-3"
+                className="basis-full tablet:basis-1/2 tablet:!pl-0 web:basis-1/3 web:!px-3"
               >
                 <Link href={`${item.linkUrl}`} target="_blank">
                   <div className="flex flex-col gap-y-4">

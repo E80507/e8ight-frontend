@@ -15,9 +15,7 @@ export const getHistoryData = async (): Promise<HistoryRes[]> => {
 // 캐러셀 정보 조회
 export const getSimulationData = async (): Promise<SiumlationRes[]> => {
   try {
-    const res = await apiFetch(
-      "/posts?page=1&limit=9&category=DX&sortOrder=RANDOM",
-    );
+    const res = await apiFetch("/posts?page=1&limit=9&category=DX");
     return res.posts;
   } catch (err) {
     console.error(err);
