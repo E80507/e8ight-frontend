@@ -5,7 +5,7 @@ const LazyLoad = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 600;
     const rootMargin = isMobile ? "0px 0px -50px 0px" : "0px 0px -100px 0px";
 
     const observer = new IntersectionObserver(
