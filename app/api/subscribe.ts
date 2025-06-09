@@ -5,23 +5,12 @@ import { SubscribeResponse } from "./dto/subscribe";
 export const postSubscribe = async (
   email: string,
 ): Promise<SubscribeResponse> => {
-  const now = new Date();
-  const formatDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`;
-
   console.log("[뉴스레터 구독] 시작");
-  const requestData = {
-    type: "newsletter",
-    values: [formatDate, email],
-  };
-  console.log(
-    "[뉴스레터 구독] 요청 데이터:",
-    JSON.stringify(requestData, null, 2),
-  );
 
   try {
-    const response = await apiFetch("/api/google-spread", {
+    const response = await apiFetch("/subscribe", {
       method: "POST",
-      body: JSON.stringify(requestData),
+      body: JSON.stringify({ email }),
     });
     console.log(
       "[뉴스레터 구독] 성공 응답:",

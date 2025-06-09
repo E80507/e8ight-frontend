@@ -45,40 +45,6 @@ export const usePostContact = () => {
           },
         );
 
-        // 뉴스레터 구독 동의한 경우 이메일 전송
-        if (data.agreeToReceiveMarketing) {
-          try {
-            console.log("[문의하기] 뉴스레터 구독 시도:", data.email);
-            const response = await postSubscribe(data.email);
-            console.log("[문의하기] 뉴스레터 구독 응답:", response);
-
-            if (response.message === "뉴스레터가 성공적으로 구독되었습니다.") {
-              console.log("[문의하기] 뉴스레터 구독 성공");
-            } else {
-              console.warn("[문의하기] 뉴스레터 구독 실패:", response.message);
-              toast({
-                title: response.message || "구독 처리 중 문제가 발생했습니다",
-              });
-            }
-          } catch (err) {
-            console.error("[문의하기] 뉴스레터 구독 에러:", err);
-            if (err instanceof Error) {
-              const errorData = JSON.parse(err.message);
-              console.error("[문의하기] 뉴스레터 구독 에러 상세:", errorData);
-              if (errorData?.statusCode === 409) {
-                toast({
-                  title: "이미 구독 중인 이메일입니다.",
-                });
-              } else {
-                toast({
-                  title:
-                    errorData?.message || "구독 처리 중 문제가 발생했습니다.",
-                });
-              }
-            }
-          }
-        }
-
         try {
           console.log("[문의하기] 스프레드시트 저장 시도");
           await sendToSheet({
@@ -95,6 +61,45 @@ export const usePostContact = () => {
           });
           console.log("[문의하기] 스프레드시트 저장 성공");
 
+          // 뉴스레터 구독 동의한 경우 이메일 전송
+          if (data.agreeToReceiveMarketing) {
+            try {
+              console.log("[문의하기] 뉴스레터 구독 시도:", data.email);
+              const response = await postSubscribe(data.email);
+              console.log("[문의하기] 뉴스레터 구독 응답:", response);
+
+              if (
+                response.message === "뉴스레터가 성공적으로 구독되었습니다."
+              ) {
+                console.log("[문의하기] 뉴스레터 구독 성공");
+              } else {
+                console.warn(
+                  "[문의하기] 뉴스레터 구독 실패:",
+                  response.message,
+                );
+                toast({
+                  title: response.message || "구독 처리 중 문제가 발생했습니다",
+                });
+              }
+            } catch (err) {
+              console.error("[문의하기] 뉴스레터 구독 에러:", err);
+              if (err instanceof Error) {
+                const errorData = JSON.parse(err.message);
+                console.error("[문의하기] 뉴스레터 구독 에러 상세:", errorData);
+                if (errorData?.statusCode === 409) {
+                  toast({
+                    title: "이미 구독 중인 이메일입니다.",
+                  });
+                } else {
+                  toast({
+                    title:
+                      errorData?.message || "구독 처리 중 문제가 발생했습니다.",
+                  });
+                }
+              }
+            }
+          }
+
           toast({
             title: "문의가 성공적으로 접수되었습니다.",
           });
@@ -106,7 +111,7 @@ export const usePostContact = () => {
           console.error("[문의하기] 스프레드시트 저장 실패:", sheetError);
           throw sheetError;
         }
-      } catch (err: unknown) {
+      } catch (err) {
         console.error("[문의하기] 오류 발생:", err);
         if (err instanceof Error) {
           console.error("[문의하기] 에러 상세:", {
