@@ -24,7 +24,7 @@ const SimulationSection = () => {
   const router = useRouter();
   const autoplayRef = useRef(
     Autoplay({
-      delay: 30000,
+      delay: 3000,
       stopOnInteraction: false,
       stopOnMouseEnter: false,
     }),
