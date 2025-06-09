@@ -13,7 +13,7 @@ import {
 const GlobalFooter = () => {
   return (
     <footer className="bg-toast-bg px-4 py-10 font-pretendard text-label-alternative caption2-400 web:px-0 web:py-[60px]">
-      <div className="mx-auto w-full max-w-[1440px] px-4 web:px-[120px]">
+      <div className="mx-auto w-full max-w-[1440px] web:px-[120px]">
         <div className="flex flex-col justify-between gap-y-6 web:flex-row web:items-center web:gap-y-0">
           <Image
             src="/svg/logo-with-text.svg"
