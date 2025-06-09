@@ -16,7 +16,7 @@ const ContactPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
-    <div className="web:px-[120px] web:py-[179px] tablet:px-[78px] tablet:py-[88px] bg-[#FBFBFC]">
+    <div className="web:px-[120px] web:py-[179px] tablet:px-[30px] tablet:py-[88px] bg-[#FBFBFC]">
       <div className="max-w-[1200px] mx-auto tablet:rounded-[20px] overflow-hidden">
         {/* 배너 */}
         <div

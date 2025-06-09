@@ -2,8 +2,9 @@
 
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useDebounce } from "@/hooks/use-debounce";
 
 interface SearchSectionProps {
   keyword: string;
@@ -19,10 +20,19 @@ const SearchSection = ({
   text,
 }: SearchSectionProps) => {
   const pathname = usePathname();
+  const [inputValue, setInputValue] = useState(keyword);
+  const debouncedValue = useDebounce(inputValue, 300);
 
   useEffect(() => {
+    setInputValue("");
     setKeyword("");
-  }, [pathname]);
+  }, [pathname, setKeyword]);
+
+  // 디바운스된 값이 변경될 때마다 검색 실행
+  useEffect(() => {
+    setKeyword(debouncedValue);
+    onSearch(debouncedValue);
+  }, [debouncedValue, onSearch, setKeyword]);
 
   return (
     <section className="flex flex-col gap-y-[14px] font-pretendard tablet:gap-y-6">
@@ -33,11 +43,8 @@ const SearchSection = ({
         <Input
           variant="bottom-border"
           placeholder={"키워드를 입력해주세요."}
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") onSearch(keyword);
-          }}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         />
         <SearchIcon className="absolute inset-y-0 left-0 my-auto mr-4 size-6 text-gray-200" />
       </div>

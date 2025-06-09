@@ -4,12 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useCallback, useRef, useEffect } from "react";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerFooter,
-  DrawerTitle,
-} from "@/components/ui/drawer";
 import { IconButton, Button } from "@/components/ui/button";
 import {
   TECH_INSIGHT_PAGE,
@@ -20,7 +14,7 @@ import {
 } from "@/constants/path";
 import { SERVICE_NAME } from "@/constants/service";
 import ExternalLinksNav from "@/components/shared/layout/external-links-nav";
-import ActionButtons from "@/components/shared/layout/action-buttons";
+import GNBDrawer from "@/app/(GNB-layout)/_components/drawer";
 import { Share2Icon } from "lucide-react";
 import { shareUrl } from "@/utils/share";
 
@@ -71,7 +65,6 @@ const GlobalNavBar = () => {
     [clickCount],
   );
 
-  const isContactPage = path === CONTACT_PAGE;
   const isHome = path === "/";
   const isDetailPage = path?.includes("/detail/");
 
@@ -79,9 +72,7 @@ const GlobalNavBar = () => {
     <>
       {/* 홈페이지 데스크톱 GNB */}
       <header
-        className={`fixed z-[100] hidden w-full web:flex ${
-          isContactPage ? "bg-[#FBFBFC]" : "bg-white/[0.01] backdrop-blur-sm"
-        }`}
+        className={`fixed z-[100] hidden w-full web:flex bg-white/[0.8] backdrop-blur-sm`}
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col px-[120px] py-4 font-pretendard">
           <div className="flex items-center justify-between">
@@ -126,13 +117,7 @@ const GlobalNavBar = () => {
 
       {/* 홈페이지 모바일 GNB */}
       <header
-        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between px-4 py-3 web:hidden ${
-          isContactPage
-            ? "tablet:bg-[#FBFBFC]"
-            : isDetailPage
-              ? "bg-white"
-              : "bg-white/[0.01] backdrop-blur-sm"
-        } ${isHome ? "h-[67px]" : "h-12"}`}
+        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between tablet:px-[30px] px-4 py-3 web:hidden bg-white/[0.8] backdrop-blur-sm ${isHome ? "h-[67px]" : "h-12"}`}
       >
         {isHome ? (
           <div className="relative h-[43px] w-[45px]">
@@ -187,31 +172,13 @@ const GlobalNavBar = () => {
           />
         </div>
       </header>
-
-      <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <DrawerTitle className="sr-only">메뉴 열기</DrawerTitle>
-        <DrawerContent
-          className={`flex h-full flex-col items-center bg-white ${isHome ? "pt-[67px]" : "pt-12"} font-pretendard`}
-        >
-          <div className="flex flex-1 flex-col items-center justify-center gap-y-[59px]">
-            {NAV_LINKS.map(({ label, path: href }) => (
-              <Link
-                key={href}
-                prefetch={false}
-                href={href}
-                className="h1-m"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
-          <DrawerFooter className="flex flex-col justify-center gap-y-[26px] py-10">
-            <ActionButtons className="border-black-1 bg-white text-black hover:border-primary hover:bg-primary" />
-            <ExternalLinksNav />
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+      <GNBDrawer
+        open={isMobileMenuOpen}
+        onOpenChange={setIsMobileMenuOpen}
+        isHome={isHome}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
+        NAV_LINKS={NAV_LINKS}
+      />
     </>
   );
 };

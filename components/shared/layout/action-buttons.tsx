@@ -8,9 +8,10 @@ import Link from "next/link";
 
 interface ActionButtonsProps {
   className?: string;
+  onClick?: () => void;
 }
 
-const ActionButtons = ({ className }: ActionButtonsProps) => {
+const ActionButtons = ({ className, onClick }: ActionButtonsProps) => {
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
 
   return (
@@ -20,6 +21,7 @@ const ActionButtons = ({ className }: ActionButtonsProps) => {
           size="lg"
           shape="round"
           className={`border web:w-[160px] ${className}`}
+          onClick={onClick}
         >
           1:1 상담
         </Button>
@@ -28,7 +30,9 @@ const ActionButtons = ({ className }: ActionButtonsProps) => {
       <Button
         size="lg"
         shape="round"
-        onClick={() => setIsSubscriptionModalOpen(true)} //뉴스 레터 모달 띄우기
+        onClick={() => {
+          setIsSubscriptionModalOpen(true);
+        }}
         className={`border web:w-[160px] ${className}`}
       >
         뉴스레터 구독
