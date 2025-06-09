@@ -44,3 +44,5 @@ export const GNB_EXTERNAL_LINKS = [
     target: "_blank",
   },
 ];
+
+export const YOUTUBE_LINK = "https://www.youtube.com/e8korea";
