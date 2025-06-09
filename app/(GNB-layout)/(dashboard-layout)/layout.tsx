@@ -22,7 +22,7 @@ const DashboardLayout = () => {
   return (
     <>
       <HeroSection title={title} />
-      <div className="mx-auto max-w-[1440px] p-6 tablet:p-[30px] web:px-[120px] web:py-20">
+      <div className="mx-auto max-w-[1440px] py-6 px-[16px] tablet:p-[30px] web:px-[120px] web:py-20">
         <SearchSection
           keyword={keyword}
           onSearch={handleSearch}

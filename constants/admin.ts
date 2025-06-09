@@ -7,11 +7,11 @@ export const ADMIN_POST_CATEGORIES = [
   },
   {
     text: "Tech Library",
-    value: "LIBRARY" as PostCategory,
+    value: "Tech Library" as PostCategory,
   },
   {
     text: "Tech Insight",
-    value: "INSIGHT" as PostCategory,
+    value: "Tech Insight" as PostCategory,
   },
   {
     text: "DX Simulation",
@@ -19,7 +19,7 @@ export const ADMIN_POST_CATEGORIES = [
   },
   {
     text: "Downloads",
-    value: "DOWNLOADS" as PostCategory,
+    value: "Downloads" as PostCategory,
   },
 ];
 

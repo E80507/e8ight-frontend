@@ -1,4 +1,8 @@
-export type PostCategory = "LIBRARY" | "INSIGHT" | "DX" | "DOWNLOADS";
+export type PostCategory =
+  | "Tech Library"
+  | "Tech Insight"
+  | "DX Simulation"
+  | "Downloads";
 export type SortOrder = "DESC" | "ASC" | "RANDOM";
 
 export interface PostsRequestParams {

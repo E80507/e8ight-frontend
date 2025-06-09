@@ -72,7 +72,13 @@ const CustomSelectField = <T extends FieldValues>({
                     defaultValue={defaultValue}
                   >
                     <SelectTrigger
-                      className={`${field.value ? "" : "[&>span]:text-black/40"} ${error ? "border-destructive focus:border-destructive" : ""}`}
+                      className={`${
+                        field.value ? "" : "[&>span]:text-black/40"
+                      } outline outline-1 outline-transparent ${
+                        error
+                          ? "border-error outline-error focus:border-error focus:outline-error"
+                          : ""
+                      }`}
                     >
                       <SelectValue placeholder={placeholder} />
                     </SelectTrigger>
