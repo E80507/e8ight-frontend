@@ -16,8 +16,10 @@ export default function useAddCellForLead() {
       department?: string;
       phone?: string;
       email: string;
+      fileNames?: string[];
     }) => {
-      const { name, position, company, department, phone, email } = data;
+      const { name, position, company, department, phone, email, fileNames } =
+        data;
 
       const values = [
         formatDate(),
@@ -27,6 +29,7 @@ export default function useAddCellForLead() {
         department || "-",
         phone || "-",
         email || "-",
+        fileNames?.join(", ") || "-",
       ];
 
       try {

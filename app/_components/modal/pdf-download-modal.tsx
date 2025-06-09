@@ -5,7 +5,7 @@ import CustomEmailField from "@/components/shared/form/custom-email-field";
 import CustomInputField from "@/components/shared/form/custom-input-field";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { X } from "lucide-react";
 import { usePostPdfDownload } from "@/hooks/pdf-download/use-post-pdf-download";
 import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
@@ -22,6 +22,14 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const { post } = usePostDetail(postId);
   const { downloadFiles } = useDownloadFiles();
+
+  // 파일명을 폼에 설정
+  useEffect(() => {
+    if (post?.files) {
+      const fileNames = post.files.map((file) => file.fileName);
+      form.setValue("fileNames", fileNames);
+    }
+  }, [post?.files, form]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

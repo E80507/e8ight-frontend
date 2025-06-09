@@ -33,6 +33,7 @@ export const usePostPdfDownload = () => {
             department: data.department,
             phone: data.phone,
             email: data.email,
+            fileNames: data.fileNames,
           });
 
           console.log("[PDF 다운로드] 스프레드시트 저장 성공");

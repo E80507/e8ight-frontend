@@ -32,4 +32,6 @@ export const PdfDownloadSchema = z.object({
       message: "개인정보 수집 및 이용에 동의해주세요.",
     }),
   }),
+
+  fileNames: z.array(z.string()).optional(),
 });
