@@ -51,13 +51,19 @@ const SimulationSection = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenWidth(window.innerWidth);
+      const w = window.innerWidth;
+      setScreenWidth(w);
+      // api가 준비된 시점 이후 리사이즈가 발생하면 재초기화
+      if (api) {
+        api.reInit();
+        api.selectedScrollSnap();
+      }
     };
 
     handleResize(); // 최초 한 번
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [api]);
 
   if (!data || data.length === 0) return null;
 
@@ -128,14 +134,14 @@ const SimulationSection = () => {
 
           {/* 캐러셀 콘텐츠 */}
           <CarouselContent
-            className={`mx-auto mt-[59px] max-w-[1440px] gap-x-4 ${
+            className={`mx-auto mt-[59px] max-w-[1440px] gap-x-4 web:ml-px web:max-w-[calc(100%-33px)] ${
               isLimitedCarousel ? "tablet:pl-0" : "tablet:gap-x-6 tablet:pl-6"
             }`}
           >
             {data.map((item, i) => (
               <CarouselItem
                 key={i}
-                className="basis-full !pl-0 tablet:basis-1/2 web:basis-1/3"
+                className="basis-full !pl-0 tablet:basis-1/2 web:basis-[calc(33.3%)]"
               >
                 <Link href={`${item.linkUrl}`} target="_blank">
                   <div className="flex flex-col gap-y-4">
