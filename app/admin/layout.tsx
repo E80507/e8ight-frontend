@@ -2,7 +2,6 @@
 
 import Loading from "@/components/shared/loading/loading";
 import AdminNavBar from "@/components/shared/layout/admin-nav-bar";
-// import { Toaster } from "@/components/ui/toaster";
 import AdminAuthGate from "./_components/admin-auth-gate";
 
 interface GlobalNavBarLayoutProps {
@@ -22,13 +21,12 @@ const AdminLayout = ({ children, params }: GlobalNavBarLayoutProps) => {
         <div className="w-screen overflow-x-hidden">
           <AdminAuthGate>
             <AdminNavBar isEditMode={isEditMode} />
-            <div className="relative mt-14 min-h-screen web:mt-0 web:bg-background-alternative">
+            <div className="relative web:pt-[96px] pt-[56px] min-h-screen web:bg-background-alternative">
               {children}
             </div>
           </AdminAuthGate>
         </div>
       </Loading>
-      {/* <Toaster /> */}
     </>
   );
 };

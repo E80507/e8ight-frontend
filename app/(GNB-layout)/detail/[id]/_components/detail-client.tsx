@@ -20,7 +20,7 @@ const DetailClient = ({ params }: DetailClientProps) => {
   if (!post) return <Loading />;
 
   return (
-    <>
+    <div className="web:pt-[139px] pt-[48px]">
       {/* 썸네일 */}
       {post.thumbnail && (
         <div className="tablet:h-[299px] relative h-[173px] bg-gray-100">
@@ -47,7 +47,7 @@ const DetailClient = ({ params }: DetailClientProps) => {
 
       {/* 구독 배너 */}
       <SubscriptionBanner />
-    </>
+    </div>
   );
 };
 

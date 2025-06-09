@@ -83,6 +83,13 @@ const PostFilterBar = ({
 
   return (
     <div className="flex flex-col gap-[16px] px-[16px]">
+      {/* 검색 바 */}
+      <PostSearchBar
+        placeholder="제목, 저자"
+        setKeyword={handleKeywordChange}
+        onReset={resetFilters}
+      />
+
       <div className="flex items-center justify-between">
         <p className="pretendard-subtitle-m">총 {totalCount}건</p>
 
@@ -147,13 +154,6 @@ const PostFilterBar = ({
           </SheetContent>
         </Sheet>
       </div>
-
-      {/* 검색 바 */}
-      <PostSearchBar
-        placeholder="제목, 저자"
-        setKeyword={handleKeywordChange}
-        onReset={resetFilters}
-      />
     </div>
   );
 };

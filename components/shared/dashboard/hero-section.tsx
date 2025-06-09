@@ -8,7 +8,7 @@ const HeroSection = ({ title }: { title: string }) => {
   const router = useRouter();
 
   return (
-    <section className="relative mt-[-48px] h-[264px] overflow-hidden bg-background-hero tablet:h-[292px] web:mt-[-139px] web:h-[486px]">
+    <section className="relative h-[264px] overflow-hidden bg-background-hero tablet:h-[292px] web:h-[486px]">
       <div className="mx-auto mt-12 max-w-[1440px] px-4 pb-10 pt-[52px] tablet:px-[30px] tablet:pt-10 web:mt-[139px] web:px-[120px] web:py-20">
         <h1 className="gibson-h1-s tablet:gibson-h1-m web:gibson-h1-l">
           {title}
