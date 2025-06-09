@@ -359,7 +359,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                           </Button>
                         </div>
 
-                        <div className="w-full rounded-xl border border-line-normal">
+                        <div className="w-full overflow-hidden rounded-xl border border-line-normal">
                           <div className="flex w-full items-center justify-between bg-gray-100 px-4 py-3">
                             <p className="text-label-normal pretendard-body-3">
                               파일명
