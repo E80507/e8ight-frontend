@@ -68,7 +68,7 @@ const SimulationSection = () => {
         autoplayRef={autoplayRef}
         setApi={setApi}
       >
-        <div className="relative mx-auto flex w-full flex-col pb-10 pt-[63px] text-white tablet:px-[30px] tablet:py-20 web:px-[120px] web:py-[100px]">
+        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col pb-10 pt-[63px] text-white tablet:px-[30px] tablet:py-20 web:px-[120px] web:py-[100px]">
           {/* 헤더 영역 */}
           <div className="mb-5 flex flex-col gap-y-2 px-4 tablet:px-0 web:mb-0">
             <p className="pretendard-h1-r tablet:pretendard-h1-m web:pretendard-h1-l">
