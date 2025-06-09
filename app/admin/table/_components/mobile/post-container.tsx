@@ -49,7 +49,7 @@ const MobilePostContainer = ({
       <div className="md:hidden flex flex-col gap-[16px] bg-white min-h-screen">
         {/* 필터 바 */}
         <PostFilterBar
-          totalCount={allPosts.length}
+          totalCount={totalCount}
           onFilterChange={handleFilterChange}
           handleKeywordChange={handleKeywordChange}
           category={category}
@@ -82,7 +82,7 @@ const MobilePostContainer = ({
             {/* 페이지네이션 */}
             <Pagination
               currentPage={params.page}
-              totalPages={Math.ceil(allPosts.length / params.limit)}
+              totalPages={Math.ceil(totalCount / params.limit)}
               onPageChange={handlePageChange}
               className="py-[24px]"
             />

@@ -38,7 +38,7 @@ const AdminClient = () => {
   });
 
   // 게시물 목록 조회
-  const { posts: allPosts = [], totalCount, error, mutate } = usePost(params);
+  const { posts, totalCount, error, mutate } = usePost(params);
 
   // 라우터 변경 감지하여 데이터 갱신
   useEffect(() => {
@@ -87,11 +87,6 @@ const AdminClient = () => {
     setSelectedIds([]);
   }, [params]);
 
-  const currentPagePosts = allPosts.slice(
-    (params.page - 1) * params.limit,
-    params.page * params.limit,
-  );
-
   if (error) return <div>에러</div>;
 
   return (
@@ -100,7 +95,7 @@ const AdminClient = () => {
       <div>
         {/* pc 화면 */}
         <PostContainer
-          allPosts={allPosts}
+          allPosts={posts}
           selectedIds={selectedIds}
           setSelectedIds={setSelectedIds}
           handleFilterChange={handleSharedFilterChange}
@@ -117,8 +112,8 @@ const AdminClient = () => {
 
         {/* 모바일 화면  */}
         <MobilePostContainer
-          allPosts={allPosts}
-          currentPagePosts={currentPagePosts}
+          allPosts={posts}
+          currentPagePosts={posts}
           selectedIds={selectedIds}
           setSelectedIds={setSelectedIds}
           handleFilterChange={handleSharedFilterChange}
