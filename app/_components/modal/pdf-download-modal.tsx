@@ -23,6 +23,8 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
   const { post } = usePostDetail(postId);
   const { downloadFiles } = useDownloadFiles();
 
+  // const { handleTrackEvent } = useTrackEvent();
+
   // 파일명을 폼에 설정
   useEffect(() => {
     if (post?.files) {
@@ -37,6 +39,14 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
     // 폼 유효성 검사
     const isValid = await form.trigger();
     if (!isValid) return;
+
+    // todo: amplitude 추가 후 사용
+    // 앰플리튜드 이벤트
+    // handleTrackEvent(
+    //   AMPLITUDE_EVENT_LOG_NAME.BUTTON_CLICK,
+    //   AMPLITUDE_EVENT_DISPLAY_NAME.BUTTON_CLICK,
+    //   { button_name: "PDF 다운로드" },
+    // );
 
     // 파일 URL 추출
     const fileUrls = post?.files?.map((file) => file.fileUrl) || [];
@@ -69,7 +79,7 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
             className="absolute right-4 top-4 z-50 border-none bg-transparent"
             onClick={onClickClose}
           >
-            <X className="h-[24px] w-[24px] text-[#A7A9B4]" />
+            <X className="size-[24px] text-[#A7A9B4]" />
           </Button>
 
           <div className="max-h-[calc(100vh-40px)] overflow-y-auto web:max-h-[calc(100vh-102px)]">
@@ -78,7 +88,7 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
               className="relative flex h-[204px] flex-col overflow-hidden bg-cover bg-center px-[16px] py-[24px] tablet:h-auto tablet:px-[40px] tablet:pb-[40px] tablet:pt-[80px]"
               style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
             >
-              <div className="tablet:gibson-h1-m pretendard-h1-m mt-auto">
+              <div className="mt-auto pretendard-h1-m tablet:gibson-h1-m">
                 Global No.1
                 <br />
                 Digital Twin Platform
@@ -161,10 +171,10 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
                     name="agreeToPrivacyPolicy"
                     label={
                       <>
-                        <span className="text-primary pretendard-title-s pb-[0.1562rem]">
+                        <span className="pb-[0.1562rem] text-primary pretendard-title-s">
                           [필수] 개인정보 수집 동의
                         </span>
-                        <span className="pretendard-body-3 pb-[0.1562rem]">
+                        <span className="pb-[0.1562rem] pretendard-body-3">
                           : 개인정보 수집 및 이용약관을 확인하였으며, 이에
                           동의합니다.
                         </span>

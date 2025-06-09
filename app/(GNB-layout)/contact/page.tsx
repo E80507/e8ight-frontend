@@ -14,23 +14,35 @@ import CustomCheckboxGroupField from "@/components/shared/form/custom-checkbox-g
 const ContactPage = () => {
   const { form, onSubmit } = usePostContact();
   const formRef = useRef<HTMLFormElement>(null);
+  // const { handleTrackEvent } = useTrackEvent();
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    onSubmit(e);
+
+    // todo: amplitude 추가 후 사용
+    // 앰플리튜드 이벤트
+    // handleTrackEvent(
+    //   AMPLITUDE_EVENT_LOG_NAME.BUTTON_CLICK,
+    //   AMPLITUDE_EVENT_DISPLAY_NAME.BUTTON_CLICK,
+    //   { button_name: "문의하기" },
+    // );
+  };
   return (
-    <div className="web:px-[120px] web:py-[179px] tablet:px-[30px] tablet:py-[88px] bg-[#FBFBFC]">
-      <div className="max-w-[1200px] mx-auto tablet:rounded-[20px] overflow-hidden">
+    <div className="bg-[#FBFBFC] tablet:px-[30px] tablet:py-[88px] web:px-[120px] web:py-[179px]">
+      <div className="mx-auto max-w-[1200px] overflow-hidden tablet:rounded-[20px]">
         {/* 배너 */}
         <div
-          className="flex items-center relative overflow-hidden bg-cover bg-center bg-cover bg-center"
+          className="relative flex items-center overflow-hidden bg-cover bg-center"
           style={{ backgroundImage: `url("/images/bg-contact.webp")` }}
         >
-          <div className="flex flex-col web:pt-[80px] web:pb-[40px] tablet:px-[40px] tablet:pt-[60px] tablet:pb-[40px] tablet:h-auto h-[229px] pt-[60px] px-[16px] pb-[24px]">
-            <div className="flex flex-col gap-[8px] mt-auto tablet:mt-0">
-              <div className="tablet:gibson-h1-m gibson-h1-s">
+          <div className="flex h-[229px] flex-col px-[16px] pb-[24px] pt-[60px] tablet:h-auto tablet:px-[40px] tablet:pb-[40px] tablet:pt-[60px] web:pb-[40px] web:pt-[80px]">
+            <div className="mt-auto flex flex-col gap-[8px] tablet:mt-0">
+              <div className="gibson-h1-s tablet:gibson-h1-m">
                 Global No.1
                 <br />
                 Digital Twin Platform
               </div>
-              <div className="web:pretendard-body-1 tablet:pretendard-body-2 pretendard-body-3">
+              <div className="pretendard-body-3 tablet:pretendard-body-2 web:pretendard-body-1">
                 문의를 주시면 자세한 상담이 가능합니다.
               </div>
             </div>
@@ -38,10 +50,10 @@ const ContactPage = () => {
         </div>
 
         {/* 폼 영역 */}
-        <div className="pt-[16px] pb-[24px] px-[16px] tablet:p-[24px] bg-white">
+        <div className="bg-white px-[16px] pb-[24px] pt-[16px] tablet:p-[24px]">
           <Form {...form}>
             <form
-              onSubmit={onSubmit}
+              // onSubmit={onSubmit}
               ref={formRef}
               className="flex flex-col gap-[32px]"
             >
@@ -182,10 +194,10 @@ const ContactPage = () => {
                 name="agreeToPrivacyPolicy"
                 label={
                   <>
-                    <span className="text-primary pretendard-title-s pb-[0.1562rem]">
+                    <span className="pb-[0.1562rem] text-primary pretendard-title-s">
                       [필수] 개인정보 수집 동의
                     </span>
-                    <span className="pretendard-body-3 pb-[0.1562rem]">
+                    <span className="pb-[0.1562rem] pretendard-body-3">
                       : 개인정보 수집 및 이용약관을 확인하였으며, 이에
                       동의합니다.
                     </span>
@@ -199,14 +211,14 @@ const ContactPage = () => {
                 form={form}
                 name="agreeToReceiveMarketing"
                 label={
-                  <span className="pretendard-body-3 pb-[0.1562rem]">
+                  <span className="pb-[0.1562rem] pretendard-body-3">
                     [선택] 이에이트 뉴스레터 수신에 동의합니다.
                   </span>
                 }
               />
 
               {/* 문의하기 버튼 */}
-              <Button type="submit" shape="round">
+              <Button type="submit" shape="round" onClick={handleSubmit}>
                 문의하기
               </Button>
             </form>
