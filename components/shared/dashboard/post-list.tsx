@@ -26,7 +26,9 @@ interface PostListProps {
 const PostList = ({ posts }: PostListProps) => {
   return (
     <section className="mt-6 flex flex-col  tablet:mt-10">
-      <p className="mb-6 pretendard-h1-m tablet:mb-10">최신글</p>
+      <p className="mb-6 tablet:pretendard-h1-m pretendard-h1-s tablet:mb-10">
+        최신글
+      </p>
 
       {posts.length > 0 ? (
         <div className="grid grid-cols-1 gap-y-[60px] tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 web:grid-cols-3 web:grid-rows-3">
