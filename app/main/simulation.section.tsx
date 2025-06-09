@@ -86,7 +86,6 @@ const SimulationSection = () => {
         plugins={!isLimitedCarousel ? [autoplayRef.current] : []}
         autoplayRef={!isLimitedCarousel ? autoplayRef : undefined}
         setApi={setApi}
-        className="w-full"
       >
         <div className="relative mx-auto flex w-full max-w-[1440px] flex-col px-4 pb-10 pt-[63px] text-white tablet:px-[30px] tablet:py-20 web:px-[120px] web:py-[100px]">
           {/* 헤더 영역 */}
@@ -129,20 +128,14 @@ const SimulationSection = () => {
 
           {/* 캐러셀 콘텐츠 */}
           <CarouselContent
-            className={`mx-auto mt-[59px] max-w-[1440px] gap-x-4 ${
-              isLimitedCarousel && data.length === 2
-                ? "tablet:grid tablet:grid-cols-2 tablet:gap-x-4 web:grid-cols-3"
-                : ""
-            } web:gap-x-0 web:pl-0`}
+            className={`mx-auto mt-[59px] max-w-[1440px] gap-x-4 web:gap-x-0 web:pl-0 ${
+              isLimitedCarousel ? "tablet:pl-0" : "tablet:gap-x-6 tablet:pl-6"
+            }`}
           >
-            {data.map((item, i) => (
+            {data?.map((item, i) => (
               <CarouselItem
                 key={i}
-                className={`basis-full !pl-0 tablet:basis-1/2 ${
-                  isLimitedCarousel && data.length === 2
-                    ? "!mr-0 tablet:!pl-0"
-                    : ""
-                } web:basis-1/3 ${(i % 2 === 0) & (i !== 0) ? "web:pr-0" : "web:!pr-3"}`}
+                className="basis-full !pl-0 tablet:basis-1/2 web:basis-1/3 web:!px-3"
               >
                 <Link href={`${item.linkUrl}`} target="_blank">
                   <div className="flex flex-col gap-y-4">
