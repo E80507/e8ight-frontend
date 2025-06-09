@@ -18,16 +18,28 @@ const SOCIAL_LINKS = [
   },
 ];
 
-export default function SocialLinks() {
+interface SocialLinksProps {
+  withTitle?: boolean;
+  inFooter?: boolean;
+}
+
+export default function SocialLinks({
+  withTitle = true,
+  inFooter = false,
+}: SocialLinksProps) {
   return (
-    <div className="flex flex-col tablet:gap-[24px] gap-[12px] tablet:mt-[40px] mt-[24px]">
+    <div
+      className={`flex flex-col gap-[12px] tablet:gap-[24px] ${withTitle ? "mt-6 tablet:mt-10" : ""}`}
+    >
       {/* 이에이트 SNS */}
-      <div className="tablet:pretendard-subtitle-l pretendard-subtitle-s text-[#A7A9B4]">
-        이에이트 SNS
-      </div>
+      {withTitle && (
+        <div className="text-[#A7A9B4] pretendard-subtitle-s tablet:pretendard-subtitle-l">
+          이에이트 SNS
+        </div>
+      )}
 
       {/* 소셜 링크 */}
-      <div className="flex items-center tablet:gap-[40px] gap-[24px]">
+      <div className="flex items-center gap-[24px] tablet:gap-[40px]">
         {SOCIAL_LINKS.map((social) => (
           <Link
             key={social.icon}
@@ -35,12 +47,18 @@ export default function SocialLinks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              src={`/svg/icon/${social.icon}.svg`}
-              alt={social.alt}
-              width={24}
-              height={24}
-            />
+            <div
+              className={`relative ${
+                inFooter ? "size-7" : "size-6 tablet:size-7"
+              }`}
+            >
+              <Image
+                src={`/svg/icon/${social.icon}.svg`}
+                alt={social.alt}
+                fill
+                className="object-contain"
+              />
+            </div>
           </Link>
         ))}
       </div>

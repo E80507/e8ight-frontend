@@ -149,7 +149,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
       try {
         const payload: CreatePostReq = {
           ...data,
-          fileId: fileIds,
+          fileIds: fileIds,
           content: data.content ?? "",
         };
 
@@ -217,7 +217,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
   };
 
   return (
-    <div className="web:h-full web:my-[40px] web:px-[120px]">
+    <div className="web:my-[40px] web:h-full web:px-[120px]">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
         <div className="hidden items-center justify-between web:flex">
           <h1 className="pretendard-title-m web:pretendard-title-l">
