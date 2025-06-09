@@ -20,8 +20,9 @@ const HistorySection = () => {
   const { data } = useSWR("historyData", getHistoryData);
 
   const handleCategoryClick = (category: string) => {
-    if (category === "tech-insight") router.push(TECH_INSIGHT_PAGE);
-    else if (category === "downloads") router.push(DOWNLOADS_PAGE);
+    console.log("카테고리?" + category);
+    if (category === "INSIGHT") router.push(TECH_INSIGHT_PAGE);
+    else if (category === "DOWNLOADS") router.push(DOWNLOADS_PAGE);
     else router.push(TECH_LIBRARY_PAGE);
   };
 
