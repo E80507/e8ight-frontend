@@ -28,7 +28,6 @@ interface MobilePostContainerProps {
 }
 
 const MobilePostContainer = ({
-  allPosts,
   currentPagePosts,
   selectedIds,
   setSelectedIds,

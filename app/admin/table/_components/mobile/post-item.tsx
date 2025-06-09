@@ -9,8 +9,8 @@ import { MouseEvent } from "react";
 const categoryMap: Record<string, BadgeColor> = {
   "Tech Insight": "green",
   "Tech Library": "blue",
-  "DX": "red",
-  "Downloads": "yellow",
+  DX: "red",
+  Downloads: "yellow",
 };
 
 interface PostItemProps {
