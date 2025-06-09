@@ -24,10 +24,10 @@ export const ADMIN_POST_CATEGORIES = [
 ];
 
 export const POST_CATEGORY_VALUES = {
-  LIBRARY: "LIBRARY",
-  INSIGHT: "INSIGHT",
+  LIBRARY: "Library",
+  INSIGHT: "Tech Insight",
   DX: "DX",
-  DOWNLOADS: "DOWNLOADS",
+  DOWNLOADS: "Downloads",
 };
 
 export const POST_CATEGORIES = [
