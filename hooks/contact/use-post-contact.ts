@@ -30,7 +30,7 @@ export const usePostContact = () => {
         // 0.4초 대기 (API 호출 시뮬레이션)
         await new Promise((resolve) => setTimeout(resolve, 400));
 
-        console.log("문의 데이터:", data); // 데이터 확인용 로그
+        console.log("문의 데이터:", JSON.stringify(data));
 
         // 관심 제품 처리
         const processedInterestedProducts = data.interestedProduct.map(
