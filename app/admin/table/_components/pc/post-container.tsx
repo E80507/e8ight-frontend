@@ -59,10 +59,7 @@ const PostContainer = ({
         <div className="flex flex-col gap-[40px]">
           {/* 테이블 */}
           <PostTable
-            data={allPosts.slice(
-              (params.page - 1) * params.limit,
-              params.page * params.limit,
-            )}
+            data={allPosts}
             selectedIds={selectedIds}
             setSelectedIds={setSelectedIds}
             totalCount={totalCount}

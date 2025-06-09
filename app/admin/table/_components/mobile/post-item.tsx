@@ -7,10 +7,10 @@ import Link from "next/link";
 import { MouseEvent } from "react";
 
 const categoryMap: Record<string, BadgeColor> = {
-  INSIGHT: "green",
-  LIBRARY: "blue",
+  "Tech Insight": "green",
+  "Tech Library": "blue",
   DX: "red",
-  DOWNLOADS: "yellow",
+  Downloads: "yellow",
 };
 
 interface PostItemProps {
