@@ -161,7 +161,7 @@ const CreatePostPage = () => {
   };
 
   return (
-    <div className="web:h-full">
+    <div className="web:h-full tablet:my-[40px] web:px-[120px]">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
         <div className="hidden items-center justify-between web:flex">
           <h1 className="pretendard-title-m web:pretendard-title-l">
