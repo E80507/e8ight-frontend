@@ -5,9 +5,13 @@ import "quill/dist/quill.snow.css";
 
 interface QuillViewerProps {
   content?: string;
+  className?: string;
 }
 
-export default function QuillViewer({ content = "" }: QuillViewerProps) {
+export default function QuillViewer({
+  content = "",
+  className = "",
+}: QuillViewerProps) {
   const viewerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,6 +21,9 @@ export default function QuillViewer({ content = "" }: QuillViewerProps) {
   }, [content]);
 
   return (
-    <div ref={viewerRef} className="quill-viewer ql-editor prose max-w-none" />
+    <div
+      ref={viewerRef}
+      className={`quill-viewer ql-editor prose max-w-none ${className}`}
+    />
   );
 }
