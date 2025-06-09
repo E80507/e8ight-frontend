@@ -28,6 +28,7 @@ export const usePostPdfDownload = () => {
           position: data.position,
           company: data.company,
           department: data.department,
+          phone: data.phone,
           email: data.email,
         }),
           setTimeout(() => {

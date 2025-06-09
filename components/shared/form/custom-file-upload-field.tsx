@@ -53,19 +53,6 @@ const CustomFileUploadField = ({
               className="flex h-[45px] items-center justify-between px-[16px] py-[12px]"
             >
               <div className="flex items-center gap-[10px] flex-1">
-                <div className="relative size-[24px] overflow-hidden rounded-[2px]">
-                  <Image
-                    src={getFileIcon(file.fileUrl)}
-                    alt={file.fileName}
-                    fill
-                    className={
-                      isPdf(file.fileUrl)
-                        ? "object-contain p-1"
-                        : "object-cover"
-                    }
-                  />
-                </div>
-
                 <div className="pretendard-body-3 text-[#474953]">
                   {file.fileName}
                 </div>
