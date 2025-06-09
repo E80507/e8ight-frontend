@@ -6,6 +6,7 @@ import {
   SERVICE_NAME,
   SERVICE_URL,
 } from "@/constants/service";
+import AmplitudeInitialiser from "./_components/amplitude-initialiser";
 
 const FAVICON_URL = "/favicon.ico";
 const OG_IMAGE_URL = "/images/og/og.png";
@@ -134,8 +135,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${gibson.variable} ${pretendard.variable} font-gibson w-screen min-w-full overflow-x-hidden bg-white antialiased`}
+        className={`${gibson.variable} ${pretendard.variable} w-screen min-w-full overflow-x-hidden bg-white font-gibson antialiased`}
       >
+        <AmplitudeInitialiser />
         <div className="relative min-h-screen">{children}</div>
       </body>
     </html>
