@@ -331,7 +331,10 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                   )}
 
                   {/* 썸네일 필드(공통) */}
-                  <ThumbnailUploader name="thumbnail" />
+                  <ThumbnailUploader
+                    name="thumbnail"
+                    category={selectedCategory}
+                  />
 
                   {/* 첨부하기(Downloads)  */}
                   {selectedCategory === POST_CATEGORY_VALUES.DOWNLOADS && (
