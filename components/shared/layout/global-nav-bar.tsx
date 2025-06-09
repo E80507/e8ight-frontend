@@ -134,12 +134,11 @@ const GlobalNavBar = () => {
       >
         {isHome ? (
           <Link href="/" onClick={handleLogoClick}>
-            <Image
-              src="/svg/logo.svg"
-              alt={SERVICE_NAME}
+            <object
+              data="/svg/logo.svg"
+              type="image/svg+xml"
               width={45}
               height={43}
-              priority
             />
           </Link>
         ) : (
