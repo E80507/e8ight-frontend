@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import {
   Carousel,
   CarouselNext,
@@ -22,7 +21,6 @@ import Link from "next/link";
 import { YOUTUBE_LINK } from "@/constants/service";
 
 const SimulationSection = () => {
-  const router = useRouter();
   const autoplayRef = useRef(
     Autoplay({
       delay: 3000,
@@ -148,7 +146,6 @@ const SimulationSection = () => {
               variant="outline"
               shape="round"
               className="w-[120px] border border-component-natural text-black tablet:h-12 tablet:w-40"
-              onClick={() => router.push(YOUTUBE_LINK)}
             >
               더보기
             </Button>
