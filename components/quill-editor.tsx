@@ -142,11 +142,7 @@ export default function QuillEditor({
 
   return (
     <div>
-      <div
-        ref={editorRef}
-        style={{ height }}
-        className="rounded-b-md border border-line-normal"
-      />
+      <div ref={editorRef} style={{ height }} className="rounded-b-md" />
     </div>
   );
 }

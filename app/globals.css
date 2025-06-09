@@ -147,15 +147,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .ql-toolbar {
   border-radius: 4px 4px 0 0 !important;
+  border-color: #eeeff1 !important;
 }
 
-.ql-editor {
+.ql-editor.ql-blank {
   padding: 0 !important;
   font-family: "Pretendard", sans-serif !important;
   font-size: 16px !important;
   line-height: 150% !important;
   padding: 12px !important;
   font-weight: 400 !important;
+  border: none !important;
 }
 
 .ql-editor.ql-blank::before {
@@ -168,4 +170,42 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   letter-spacing: -0.3% !important;
   font-family: "var(--font-pretendard)" !important;
   font-family: "Pretendard", sans-serif !important;
+}
+
+.ql-picker-label {
+  width: 28px !important;
+  height: 28px !important;
+  border: none !important;
+  padding: 2px !important;
+}
+
+.ql-picker-options {
+  width: 53px !important;
+  margin-top: 13px !important;
+  margin-left: -12px !important;
+  box-shadow: none !important;
+  border-color: #eeeff1 !important;
+}
+
+.ql-align {
+  height: 28px !important;
+}
+
+/* ql-picker-label의 svg 아이콘 stroke 색상 변경 */
+.ql-picker-label svg .ql-stroke {
+  stroke: #a7a9b4 !important;
+}
+
+.ql-picker-item {
+  margin: 6px auto !important;
+  padding: 2px !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.ql-picker-item svg .ql-stroke {
+  stroke: #a7a9b4 !important;
+}
+.ql-container {
+  border-color: #eeeff1 !important;
 }
