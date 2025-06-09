@@ -5,6 +5,7 @@ import ArchiveSection from "@/app/main/archive-section";
 import SubscriptionSection from "../main/subscription-section";
 import HistorySection from "../main/history-section";
 import SimulationSection from "../main/simulation.section";
+import LazyLoad from "@/hooks/main/lazy-loading";
 
 const Home = () => {
   return (
@@ -12,17 +13,19 @@ const Home = () => {
       {/* 히어로 섹션 */}
       <HeroSection />
 
-      {/* 역사 섹션 */}
-      <HistorySection />
+      <LazyLoad>
+        {/* 역사 섹션 */}
+        <HistorySection />
 
-      {/* 시뮬레이션 섹션 */}
-      <SimulationSection />
+        {/* 시뮬레이션 섹션 */}
+        <SimulationSection />
 
-      {/* 아카이브 섹션 */}
-      <ArchiveSection />
+        {/* 아카이브 섹션 */}
+        <ArchiveSection />
 
-      {/* 구독 섹션 */}
-      <SubscriptionSection />
+        {/* 구독 섹션 */}
+        <SubscriptionSection />
+      </LazyLoad>
     </>
   );
 };
