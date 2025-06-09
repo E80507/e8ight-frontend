@@ -16,6 +16,3 @@ export const ADMIN_PAGE = "/admin";
 
 // 어드민 생성 페이지
 export const CREATE_POST_PAGE = "/admin/create-post";
-
-// 어드민 수정 페이지
-export const EDIT_POST_PAGE = "/admin/edit-post";

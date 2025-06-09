@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import NextImage from "next/image";
 import { Button, IconButton } from "@/components/ui/button";
 import { FormControl, FormLabel, FormMessage } from "@/components/ui/form";
@@ -19,17 +19,8 @@ const ThumbnailUploader = ({ name }: ThumbnailUploaderProps) => {
 
   const {
     setValue,
-    watch,
     formState: { errors },
   } = useFormContext();
-
-  // 초기 썸네일 URL 감시
-  const thumbnailUrl = watch(name);
-  useEffect(() => {
-    if (thumbnailUrl && typeof thumbnailUrl === "string") {
-      setPreview(thumbnailUrl);
-    }
-  }, [thumbnailUrl]);
 
   const { onPostS3PresignedUrl } = usePostS3PresignedUrl(Domain.ANNOUNCEMENT);
 

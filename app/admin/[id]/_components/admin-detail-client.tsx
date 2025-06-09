@@ -8,7 +8,6 @@ import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
 import Image from "next/image";
 import Loading from "@/components/shared/loading/loading";
-import { EDIT_POST_PAGE } from "@/constants/path";
 
 interface AdminDetailContentProps {
   params: { id: string };
@@ -80,7 +79,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             </Button>
             <Button
               className="h-[48px] w-[97px]"
-              onClick={() => router.push(`${EDIT_POST_PAGE}/${id}`)}
+              onClick={() => {}}
             >
               수정하기
             </Button>
@@ -275,7 +274,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             {/* 수정하기 */}
             <Button
               className="h-[48px] w-[97px] flex-1"
-              onClick={() => router.push(`${EDIT_POST_PAGE}/${id}`)}
+              onClick={() => {}}
             >
               수정하기
             </Button>
