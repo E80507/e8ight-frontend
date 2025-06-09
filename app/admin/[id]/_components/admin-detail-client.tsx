@@ -77,10 +77,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             >
               삭제하기
             </Button>
-            <Button
-              className="h-[48px] w-[97px]"
-              onClick={() => {}}
-            >
+            <Button className="h-[48px] w-[97px]" onClick={() => {}}>
               수정하기
             </Button>
           </div>
@@ -272,10 +269,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             </Button>
 
             {/* 수정하기 */}
-            <Button
-              className="h-[48px] w-[97px] flex-1"
-              onClick={() => {}}
-            >
+            <Button className="h-[48px] w-[97px] flex-1" onClick={() => {}}>
               수정하기
             </Button>
           </div>
