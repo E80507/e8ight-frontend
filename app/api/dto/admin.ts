@@ -30,7 +30,7 @@ export interface CreatePostReq {
   tags?: string[];
   keywords?: string[];
   linkUrl?: string;
-  fileId?: string[];
+  fileIds?: string[];
 }
 
 // 키워드 태그 생성
