@@ -133,14 +133,20 @@ const GlobalNavBar = () => {
         } ${isHome ? "h-[67px]" : "h-12"}`}
       >
         {isHome ? (
-          <Link href="/" onClick={handleLogoClick}>
+          <div className="relative h-[43px] w-[45px]">
             <object
               data="/svg/logo.svg"
               type="image/svg+xml"
-              width={45}
-              height={43}
+              width="45"
+              height="43"
             />
-          </Link>
+            <button
+              type="button"
+              onClick={handleLogoClick}
+              className="absolute inset-0 z-10"
+              aria-label="홈으로 이동"
+            ></button>
+          </div>
         ) : (
           <IconButton
             src="/svg/icon/chevron-left.svg"
