@@ -12,7 +12,7 @@ const ExternalLinksNav = ({ className }: ExternalLinksNavProps) => {
     <nav
       className={
         className ||
-        "flex justify-center gap-x-10 text-label-alternative body-3"
+        "flex justify-center gap-x-10 text-label-normal body-3"
       }
     >
       {GNB_EXTERNAL_LINKS.map(({ label, href, target }) => (
