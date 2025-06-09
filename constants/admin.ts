@@ -24,7 +24,7 @@ export const ADMIN_POST_CATEGORIES = [
 ];
 
 export const POST_CATEGORY_VALUES = {
-  LIBRARY: "Library",
+  LIBRARY: "Tech Library",
   INSIGHT: "Tech Insight",
   DX: "DX",
   DOWNLOADS: "Downloads",
