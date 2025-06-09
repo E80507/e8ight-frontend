@@ -30,7 +30,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
 
   return (
     <div className="fixed inset-0 z-[101] flex items-center justify-center bg-black/70 px-[16px]">
-      <div className="relative w-full overflow-hidden rounded-[20px] tablet:w-[627px]">
+      <div className="relative w-full overflow-hidden rounded-[20px] tablet:w-[600px]">
         <button
           type="button"
           onClick={onClickClose}
