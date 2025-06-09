@@ -1,5 +1,4 @@
 import { formatBytes } from "@/util/file";
-import Image from "next/image";
 
 interface FileInfo {
   id: string;
@@ -19,18 +18,6 @@ const CustomFileUploadField = ({
   isEssential,
   files,
 }: CustomFileUploadFieldProps) => {
-  const getFileIcon = (fileUrl: string) => {
-    const extension = fileUrl.split(".").pop()?.toLowerCase();
-    if (extension === "pdf") {
-      return "/svg/icon/pdf.svg"; // PDF 아이콘 경로
-    }
-    return fileUrl; // 이미지 파일인 경우 원래 URL 반환
-  };
-
-  const isPdf = (fileUrl: string) => {
-    return fileUrl.toLowerCase().endsWith(".pdf");
-  };
-
   return (
     <div>
       {label && (
