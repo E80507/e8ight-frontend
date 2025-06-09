@@ -169,10 +169,10 @@ const SimulationSection = () => {
             className="mt-[66px] self-center"
           >
             <Button
-              size="md"
+              size="lg"
               variant="outline"
               shape="round"
-              className="w-[120px] border border-component-natural text-black tablet:h-12 tablet:w-40"
+              className="h-[37px] w-[120px] pretendard-title-s tablet:h-12 tablet:w-40"
             >
               더보기
             </Button>
