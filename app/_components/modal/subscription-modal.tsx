@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import OneButtonModal from "./one-button-modal";
 import { useState } from "react";
 import { usePostSubscribe } from "@/hooks/subscribe/use-post-subscribe";
+import ReactDOM from "react-dom";
 
 interface SubscriptionModalProps {
   onClickClose: () => void;
@@ -28,9 +29,17 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
     onClickClose();
   };
 
-  return (
-    <div className="fixed inset-0 z-[101] flex items-center justify-center bg-black/70 px-[16px]">
-      <div className="relative w-full overflow-hidden rounded-[20px] tablet:w-[627px]">
+  return ReactDOM.createPortal(
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 px-[16px]"
+      onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+    >
+      <div
+        className="relative w-full overflow-hidden rounded-[20px] tablet:w-[627px]"
+        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+      >
         <button
           type="button"
           onClick={onClickClose}
@@ -70,7 +79,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
               </div>
 
               <Form {...form}>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="w-full">
                   <div className="w-full">
                     <CustomInputField
                       form={form}
@@ -105,7 +114,8 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
           onClickConfirm={handleCompleteModalClose}
         />
       )}
-    </div>
+    </div>,
+    document.body,
   );
 };
 

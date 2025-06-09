@@ -480,19 +480,19 @@ const config: Config = {
         ".display-1": {
           fontSize: "48px",
           lineHeight: "150%",
-          fontWeight: "700",
+          fontWeight: "800",
           letterSpacing: "-0.3%",
         },
         ".display-2": {
           fontSize: "40px",
           lineHeight: "160%",
-          fontWeight: "700",
+          fontWeight: "800",
           letterSpacing: "-0.3%",
         },
         ".display-3": {
           fontSize: "32px",
           lineHeight: "160%",
-          fontWeight: "700",
+          fontWeight: "800",
           letterSpacing: "-0.3%",
         },
         ".hide-scroll-bar": {

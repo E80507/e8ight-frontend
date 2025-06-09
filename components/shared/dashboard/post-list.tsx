@@ -56,7 +56,7 @@ const PostList = ({ posts }: PostListProps) => {
           })}
         </div>
       ) : (
-        <div className="text-[#A7A9B4]tablet:pretendard-body-1 pretendard-body-3">
+        <div className="flex items-center justify-center tablet:pretendard-subtitle-l pretendard-subtitle-m w-full h-[360px] text-[#C8C9D0]">
           작성된 게시글이 없습니다.
         </div>
       )}
