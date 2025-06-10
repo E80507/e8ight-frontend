@@ -81,7 +81,7 @@ export async function POST(req: Request) {
         const lastRow = checkResponse.data.values
           ? checkResponse.data.values.length
           : 0;
-        url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!J${lastRow + 1}:append`;
+        url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!K${lastRow + 1}:append`;
       } else {
         url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!A1:append`;
       }
