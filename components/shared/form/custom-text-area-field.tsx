@@ -71,7 +71,7 @@ const CustomTextareaField = <T extends FieldValues>({
                   {...field}
                   className={`min-h-[160px] disabled:mt-3 disabled:bg-black/10 outline outline-1 outline-transparent ${
                     error
-                      ? "border-error outline-error focus-visible:border-error focus-visible:outline-error"
+                      ? "border-error outline-error focus-visible:border-error focus-visible:ring-1 focus-visible:ring-error"
                       : ""
                   } ${textAreaClass}`}
                   onChange={(e) => onChangeTextarea(e.target.value, field)}

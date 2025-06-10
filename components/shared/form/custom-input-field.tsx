@@ -97,7 +97,7 @@ const CustomInputField = <T extends FieldValues>({
                 maxLength={maxLength}
                 className={`disabled:mt-3 disabled:bg-black/10 outline outline-1 outline-transparent ${
                   error
-                    ? "border-error outline-error focus-visible:border-error focus-visible:outline-error"
+                    ? "border-error outline-error focus-visible:border-error focus-visible:ring-1 focus-visible:ring-error"
                     : ""
                 } ${className}`}
                 {...field}
