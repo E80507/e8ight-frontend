@@ -45,6 +45,7 @@ export default function PostContent({ post }: PostContentProps) {
             <div className="w-full overflow-hidden rounded-xl border border-line-normal">
               <div className="flex w-full items-center justify-between bg-gray-100 px-4 py-3">
                 <p className="text-label-normal pretendard-body-3">파일명</p>
+
                 <div className="flex items-center gap-[32px]">
                   <p className="text-label-normal pretendard-body-3">용량</p>
                   <p className="text-label-normal pretendard-body-3">
@@ -58,6 +59,7 @@ export default function PostContent({ post }: PostContentProps) {
                 </div>
               </div>
 
+              {/* 파일목록 */}
               <div>
                 {post.files.map((file, index) => (
                   <div
