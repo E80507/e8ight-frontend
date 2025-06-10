@@ -12,6 +12,7 @@ import {
   DOWNLOADS_PAGE,
 } from "@/constants/path";
 import { useRouter } from "next/navigation";
+import { POST_CATEGORY_VALUES } from "@/constants/admin";
 
 const HistorySection = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -20,9 +21,10 @@ const HistorySection = () => {
   const { data } = useSWR("historyData", getHistoryData);
 
   const handleCategoryClick = (category: string) => {
-    console.log("카테고리?" + category);
-    if (category === "INSIGHT") router.push(TECH_INSIGHT_PAGE);
-    else if (category === "DOWNLOADS") router.push(DOWNLOADS_PAGE);
+    if (category === POST_CATEGORY_VALUES.INSIGHT)
+      router.push(TECH_INSIGHT_PAGE);
+    else if (category === POST_CATEGORY_VALUES.DOWNLOADS)
+      router.push(DOWNLOADS_PAGE);
     else router.push(TECH_LIBRARY_PAGE);
   };
 
@@ -41,7 +43,7 @@ const HistorySection = () => {
       api.off("select", handleSelect);
     };
   }, [api]);
-  if (!data) return null;
+  if (!data || data.length === 0) return null;
 
   return (
     <section className="mx-auto max-w-[1440px] px-4 py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
@@ -49,7 +51,7 @@ const HistorySection = () => {
         {/* 텍스트 영역 */}
         <div className="flex min-w-0 flex-col web:h-[523px] web:basis-[38%] web:justify-between">
           <div className="hidden items-start gap-x-2 web:flex">
-            <h3 className="pretendard-display-3 tablet:pretendard-display-2  web:pretendard-display-1">
+            <h3 className="web:pretendard-display-1">
               이에이트의 <br />
               기술 이야기를
               <br />
@@ -66,10 +68,10 @@ const HistorySection = () => {
           <div>
             <div className="mb-8 font-pretendard">
               <p className="mb-4 text-primary subtitle-s tablet:subtitle-m web:subtitle-l">
-                {data[current]?.category}
+                {data[current].category}
               </p>
-              <p className="break-words leading-relaxed h2-r tablet:h2-l">
-                {data[current]?.title}
+              <p className="line-clamp-2 break-words leading-relaxed h2-r tablet:h2-l">
+                {data[current].title}
               </p>
             </div>
 

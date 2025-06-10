@@ -25,7 +25,7 @@ interface PostListProps {
 
 const PostList = ({ posts }: PostListProps) => {
   return (
-    <section className="mt-6 flex flex-col  tablet:mt-10">
+    <section className="mt-6 flex flex-col tablet:mt-10">
       <p className="mb-6 pretendard-h1-s tablet:mb-10 tablet:pretendard-h1-m">
         최신글
       </p>

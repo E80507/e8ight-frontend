@@ -34,7 +34,7 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
       autoplayRef={autoplayRef}
     >
       <div className="flex items-start justify-between gap-x-2 web:mb-6 web:flex-col">
-        <h3 className="display-3 tablet:display-2 web:hidden web:display-1">
+        <h3 className="pretendard-display-3 tablet:pretendard-display-2 web:hidden">
           이에이트의 <br />
           기술 이야기를
           <br />
