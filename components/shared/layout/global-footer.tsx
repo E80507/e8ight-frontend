@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import ActionButtons from "@/components/shared/layout/action-buttons";
 import {
