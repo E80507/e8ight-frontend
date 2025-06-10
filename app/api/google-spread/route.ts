@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     }
 
     // 시트 이름 결정
-    const sheetName = type === "contact" ? "테스트" : "테스트2";
+    const sheetName = "테스트";
     console.log("[구글 스프레드시트 API] 선택된 시트 이름:", sheetName);
 
     console.log("[구글 스프레드시트 API] 구글 인증 초기화 중...");
@@ -60,7 +60,18 @@ export async function POST(req: Request) {
 
     console.log("[구글 스프레드시트 API] 인증 클라이언트 생성 중...");
     const client = await auth.getClient();
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!A1:append`;
+    let url = ''; 
+    
+    // 뉴스레터 구독 신청
+    if (type === "newsletter") {
+      url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!A1:append`;
+    }
+
+    // 문의하기
+    if (type === "contact") {
+      url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!K1:append`;
+    }
+    
     console.log("[구글 스프레드시트 API] API 요청 URL:", url);
 
     try {
@@ -68,7 +79,7 @@ export async function POST(req: Request) {
         url,
         method: "POST",
         data: {
-          values: [values],
+          values: [[type, ...values]],
         },
         headers: {
           "Content-Type": "application/json",
