@@ -17,6 +17,7 @@ export default function useAddCellForLead() {
       phone?: string;
       email: string;
       inquiryType: string;
+      otherInquiryType?: string;
       industry?: string;
       interestedProduct?: string;
       message?: string;
@@ -29,6 +30,7 @@ export default function useAddCellForLead() {
         phone,
         email,
         inquiryType,
+        otherInquiryType,
         industry,
         interestedProduct,
         message,
@@ -42,7 +44,9 @@ export default function useAddCellForLead() {
         department || "-",
         phone || "-",
         email || "-",
-        inquiryType || "-",
+        inquiryType === "기타"
+          ? `${inquiryType} - ${otherInquiryType}`
+          : inquiryType || "-",
         industry || "-",
         interestedProduct || "-",
         message || "-",

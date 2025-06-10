@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Form } from "@/components/ui/form";
 import { usePostContact } from "@/hooks/contact/use-post-contact";
 import CustomInputField from "@/components/shared/form/custom-input-field";
@@ -14,6 +14,7 @@ import CustomCheckboxGroupField from "@/components/shared/form/custom-checkbox-g
 const ContactPage = () => {
   const { form, onSubmit } = usePostContact();
   const formRef = useRef<HTMLFormElement>(null);
+  const [showOtherInput, setShowOtherInput] = useState(false);
   // const { handleTrackEvent } = useTrackEvent();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -114,18 +115,35 @@ const ContactPage = () => {
               />
 
               {/* 문의 유형 */}
-              <CustomSelectField
-                form={form}
-                name="inquiryType"
-                placeholder="문의 유형을 선택해주세요."
-                label="문의 유형"
-                selectValue={[
-                  { value: "문의", text: "문의" },
-                  { value: "제품 문의", text: "제품 문의" },
-                  { value: "기타", text: "기타" },
-                ]}
-                isEssential={true}
-              />
+              <div className="flex flex-col gap-y-[4px]">
+                <CustomSelectField
+                  selectValue={[
+                    { value: "일반 문의", text: "일반 문의" },
+                    { value: "구매 문의", text: "구매 문의" },
+                    { value: "기술 문의", text: "기술 문의" },
+                    { value: "기타", text: "기타" },
+                  ]}
+                  form={form}
+                  name="inquiryType"
+                  placeholder="문의 유형을 선택해주세요."
+                  label="문의 유형"
+                  isEssential
+                  onChange={(value) => {
+                    setShowOtherInput(value === "기타");
+                  }}
+                  className="placeholder:text-[#BBBDC6]"
+                />
+
+                {showOtherInput && (
+                  <CustomInputField
+                    form={form}
+                    name="otherInquiryType"
+                    placeholder="내용을 입력해주세요."
+                    isEssential
+                    noIcon
+                  />
+                )}
+              </div>
 
               {/* 산업 분야 */}
               <CustomInputField

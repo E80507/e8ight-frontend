@@ -62,7 +62,9 @@ const ArchiveSection = () => {
                   className="-mt-px h-[29px] w-[68px]"
                   loading="lazy"
                 />
-                <div className="text-white pretendard-h1-m">{post.title}</div>
+                <div className="text-white pretendard-h1-m line-clamp-2">
+                  {post.title}
+                </div>
               </div>
 
               <Button

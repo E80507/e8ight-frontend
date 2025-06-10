@@ -18,6 +18,7 @@ export const usePostContact = () => {
       agreeToReceiveMarketing: false,
       pix4dProduct: "",
       otherProduct: "",
+      otherInquiryType: "",
     },
   });
 
@@ -56,6 +57,7 @@ export const usePostContact = () => {
             phone: data.phone,
             email: data.email,
             inquiryType: data.inquiryType,
+            otherInquiryType: data.otherInquiryType,
             industry: data.industry,
             interestedProduct: processedInterestedProducts.join(", "),
             message: data.message,
