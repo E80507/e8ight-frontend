@@ -29,9 +29,14 @@ export const ContactSchema = z.object({
 
   inquiryType: z
     .string({ required_error: "문의 유형을 선택해주세요." })
-    .refine((val) => ["문의", "제품 문의", "기타"].includes(val), {
-      message: "문의 유형을 선택해주세요.",
-    }),
+    .refine(
+      (val) => ["일반 문의", "구매 문의", "기술 문의", "기타"].includes(val),
+      {
+        message: "문의 유형을 선택해주세요.",
+      },
+    ),
+
+  otherInquiryType: z.string().optional(),
 
   industry: z
     .string({ required_error: "산업 분야를 선택해주세요." })
