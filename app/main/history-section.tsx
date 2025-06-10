@@ -61,7 +61,11 @@ const HistorySection = () => {
 
           {/* 캐러셀: tablet 이하에만 보이게 */}
           <div className="mb-[26px] w-full web:hidden">
-            <CarouselBox setApi={setApi} items={data} />
+            <CarouselBox
+              setApi={setApi}
+              items={data}
+              onChange={(index) => setCurrent(index)}
+            />
           </div>
 
           {/* 텍스트 본문 */}
@@ -98,7 +102,11 @@ const HistorySection = () => {
 
         {/* 캐러셀: web 이상에만 보이게 */}
         <div className="hidden basis-[41%] web:block">
-          <CarouselBox setApi={setApi} items={data} />
+          <CarouselBox
+            setApi={setApi}
+            items={data}
+            onChange={(index) => setCurrent(index)}
+          />
         </div>
       </div>
     </section>

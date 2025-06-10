@@ -8,15 +8,17 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HistoryRes, SiumlationRes } from "../api/dto/main";
 
 interface CarouselBoxProps {
-  setApi: (api: CarouselApi) => void;
   items: HistoryRes[] | SiumlationRes[];
+  onChange?: (index: number) => void;
+  setApi: (api: CarouselApi) => void;
 }
 
-const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
+const CarouselBox = ({ items, onChange, setApi }: CarouselBoxProps) => {
+  const [localApi, setLocalApi] = useState<CarouselApi | null>(null);
   const autoplayRef = useRef(
     Autoplay({
       delay: 3000,
@@ -25,10 +27,27 @@ const CarouselBox = ({ setApi, items }: CarouselBoxProps) => {
     }),
   );
 
+  useEffect(() => {
+    if (!localApi) return;
+
+    setApi(localApi); // 부모로도 전달
+
+    const handleSelect = () => {
+      const index = localApi.selectedScrollSnap();
+      onChange?.(index);
+    };
+
+    localApi.on("select", handleSelect);
+
+    return () => {
+      localApi.off("select", handleSelect);
+    };
+  }, [localApi, onChange, setApi]);
+
   return (
     <Carousel
       opts={{ loop: true }}
-      setApi={setApi}
+      setApi={setLocalApi}
       className="flex size-full flex-col gap-y-[26px] web:gap-y-0"
       plugins={[autoplayRef.current]}
       autoplayRef={autoplayRef}
