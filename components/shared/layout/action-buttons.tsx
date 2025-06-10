@@ -3,17 +3,22 @@
 import SubscriptionModal from "@/app/_components/modal/subscription-modal";
 import { Button } from "@/components/ui/button";
 import { CONTACT_PAGE } from "@/constants/path";
-import { useState } from "react";
 import Link from "next/link";
 // import { useTrackEvent } from "@/hooks/use-track-event";
 
 interface ActionButtonsProps {
   className?: string;
   onClick?: () => void;
+  isSubscriptionModalOpen?: boolean;
+  setIsSubscriptionModalOpen?: (open: boolean) => void;
 }
 
-const ActionButtons = ({ className, onClick }: ActionButtonsProps) => {
-  const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
+const ActionButtons = ({
+  className,
+  onClick,
+  isSubscriptionModalOpen,
+  setIsSubscriptionModalOpen,
+}: ActionButtonsProps) => {
   // const { handleTrackEvent } = useTrackEvent();
 
   const onClickContact = async () => {
@@ -27,7 +32,10 @@ const ActionButtons = ({ className, onClick }: ActionButtonsProps) => {
     // );
   };
   const onClickSubscription = async () => {
-    setIsSubscriptionModalOpen(true);
+    if (setIsSubscriptionModalOpen) {
+      setIsSubscriptionModalOpen(true);
+    }
+    onClick?.();
     // todo: amplitude 추가 후 사용
     // 앰플리튜드 이벤트
     // handleTrackEvent(
@@ -61,7 +69,7 @@ const ActionButtons = ({ className, onClick }: ActionButtonsProps) => {
 
       {isSubscriptionModalOpen && (
         <SubscriptionModal
-          onClickClose={() => setIsSubscriptionModalOpen(false)}
+          onClickClose={() => setIsSubscriptionModalOpen?.(false)}
         />
       )}
     </div>

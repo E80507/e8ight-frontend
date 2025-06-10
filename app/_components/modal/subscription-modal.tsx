@@ -31,7 +31,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
 
   return ReactDOM.createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 px-[16px]"
+      className="fixed inset-0 z-[101] flex items-center justify-center bg-black/70 px-[16px]"
       onClick={(e) => e.stopPropagation()}
       onMouseDown={(e) => e.stopPropagation()}
     >
