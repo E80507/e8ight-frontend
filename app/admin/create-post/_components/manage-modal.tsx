@@ -9,7 +9,7 @@ import {
 } from "@/schema/post";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import CustomCheckboxField from "@/components/shared/form/custom-checkbox-field";
+import Check from "@/components/shared/check";
 import { FormMessage } from "@/components/ui/form";
 import {
   createKeyword,
@@ -18,7 +18,6 @@ import {
   deleteTag,
 } from "@/app/api/admin";
 import { mutate } from "swr";
-import { cn } from "@/lib/utils";
 
 export interface OptionItem {
   id: string;
@@ -108,12 +107,6 @@ const ManageModal = ({
 
     setOptions((prev) => [...prev, newOption]);
     setAddedItems((prev) => [...prev, trimmed]);
-
-    const selected = form.getValues(modalType) || [];
-    if (!selected.includes(trimmed)) {
-      form.setValue(modalType, [...selected, trimmed]);
-    }
-
     setNewItem("");
     setError(null);
     setIsAdding(false);
@@ -124,7 +117,14 @@ const ManageModal = ({
     if (!item) return;
 
     setOptions((prev) => prev.filter((o) => o.id !== id));
-    if (!id.startsWith("temp-id")) {
+
+    // 새로 추가된 임시 아이템이면 addedItems에서 제거
+    if (id.startsWith("temp-id")) {
+      setAddedItems((prev) =>
+        prev.filter((content) => content !== item.content),
+      );
+    } else {
+      // 기존 아이템이면 삭제 아이디 목록에 추가
       setDeletedItemIds((prev) => [...prev, id]);
     }
 
@@ -221,26 +221,47 @@ const ManageModal = ({
             {options.map((item) => (
               <div
                 key={item.content}
-                className={cn(
-                  "flex items-center justify-between gap-x-2",
-                  !isSetting && "pointer-events-none",
-                )}
+                className="flex items-center justify-between"
               >
-                <CustomCheckboxField
-                  form={form}
-                  name={modalType}
-                  value={item.content}
-                  label={item.content}
-                />
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (isSetting) handleDeleteItem(item.id);
-                  }}
-                  className="whitespace-nowrap text-label-assistive pretendard-body-2"
-                >
-                  삭제
-                </button>
+                <div className="flex items-center gap-x-2">
+                  {!isSetting && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const selected = form.getValues(modalType) || [];
+                        const isSelected = selected.includes(item.content);
+
+                        if (isSelected) {
+                          form.setValue(
+                            modalType,
+                            selected.filter((v) => v !== item.content),
+                          );
+                        } else {
+                          form.setValue(modalType, [...selected, item.content]);
+                        }
+                      }}
+                    >
+                      <Check
+                        type="square"
+                        isChecked={form
+                          .getValues(modalType)
+                          ?.includes(item.content)}
+                      />
+                    </button>
+                  )}
+                  <p className="pretendard-body-2">{item.content}</p>
+                </div>
+                {isSetting && (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (isSetting) handleDeleteItem(item.id);
+                    }}
+                    className="whitespace-nowrap text-label-assistive pretendard-body-2"
+                  >
+                    삭제
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -249,13 +270,6 @@ const ManageModal = ({
         {isSetting && isAdding && (
           <div className="flex flex-col gap-y-2">
             <div className="flex gap-2">
-              <div className="size-5">
-                <CustomCheckboxField
-                  form={form}
-                  name={modalType}
-                  value={newItem}
-                />
-              </div>
               <label htmlFor={modalType} className="w-full">
                 <input
                   id={modalType}
@@ -279,16 +293,33 @@ const ManageModal = ({
         <Button
           size="lg"
           variant="outline"
-          disabled={!isSetting}
-          className="w-full pretendard-subtitle-l"
+          className={`w-full pretendard-subtitle-l ${
+            data?.length === 0 && !isSetting
+              ? "!bg-component-natural !text-label-alternative"
+              : ""
+          }`}
           onClick={(e) => {
             e.preventDefault();
+
+            if (!isSetting) {
+              // 선택만 완료하는 경우
+              const selectedItems = options.filter((item) =>
+                form.getValues(modalType)?.includes(item.content),
+              );
+              form.setValue(
+                modalType,
+                selectedItems.map((item) => item.content),
+              );
+              setModalType(null); // 모달 닫기
+              return;
+            }
+
             if (!isAdding) {
               setIsAdding(true);
               return;
             }
 
-            handleAddItem();
+            handleAddItem(); // 새로운 항목 추가
           }}
         >
           {!isSetting ? "선택완료" : "추가하기"}

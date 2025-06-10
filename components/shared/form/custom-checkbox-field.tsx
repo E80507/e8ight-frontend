@@ -77,7 +77,7 @@ const CustomCheckboxField = <T extends FieldValues>({
                 </div>
               </FormControl>
               {label && (
-                <span className="inline-flex items-center select-none pretendard-body-2">
+                <span className="inline-flex select-none items-center pretendard-body-2">
                   {label}
                   {isEssential && <span className="ml-1 text-red-500">*</span>}
                 </span>
