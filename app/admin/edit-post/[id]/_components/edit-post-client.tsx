@@ -99,7 +99,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
           tags: post.tags || [],
           keywords: post.keywords || [],
           linkUrl: post.linkUrl || "",
-          file: post.files || [],
+          file: post.files?.map((file) => file.fileUrl) || [],
         };
 
         // 폼 초기화
@@ -147,6 +147,17 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
   const handleSubmit = form.handleSubmit(
     async (data) => {
       try {
+        console.log("[폼 제출 성공]");
+        console.log("[폼 데이터 전체]", data);
+        console.log("[file 필드 타입]", typeof data.file);
+        console.log("[file 필드 값]", data.file);
+        if (Array.isArray(data.file)) {
+          console.log(
+            "[file 필드 배열 각 항목 타입]",
+            data.file.map((item) => typeof item),
+          );
+        }
+
         const payload: CreatePostReq = {
           ...data,
           fileIds: fileIds,
@@ -162,7 +173,10 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
       }
     },
     (errors) => {
-      console.log("유효성 오류:", errors);
+      console.log("[폼 제출 실패] 유효성 검사 오류:");
+      console.log("[현재 폼 데이터]", form.getValues());
+      console.log("[file 필드 현재 값]", form.getValues("file"));
+      console.log("[유효성 검사 오류]", errors);
     },
   );
 
@@ -209,6 +223,19 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
 
         // 4. 상태에 파일 정보 저장
         setFileDetails((prev) => [...(prev || []), ...uploadedFileDetails]);
+
+        // 5. form의 file 필드에 URL 설정
+        const currentUrls = form.getValues("file") || [];
+        const newUrls = [
+          ...currentUrls,
+          ...uploadedFileDetails.map((file) => file.url),
+        ];
+        console.log("[파일 업로드] 설정할 URL 배열:", newUrls);
+        form.setValue("file", newUrls, { shouldValidate: true });
+        console.log(
+          "[파일 업로드] form.getValues('file'):",
+          form.getValues("file"),
+        );
       } catch (error) {
         console.error("파일 업로드 실패", error);
         setErrorMessage("파일 업로드 중 문제가 발생했습니다.");
@@ -394,6 +421,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     setFileDetails(null);
+                                    setFileIds([]);
                                     form.setValue("file", []);
                                   }}
                                 />
@@ -446,10 +474,9 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                                         );
                                         form.setValue(
                                           "file",
-                                          form
-                                            .watch("file")
-                                            ?.filter((_, i) => i !== index) ??
-                                            [],
+                                          fileDetails
+                                            ?.filter((_, i) => i !== index)
+                                            .map((file) => file.url) ?? [],
                                         );
                                       }}
                                     />
