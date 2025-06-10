@@ -4,7 +4,7 @@ import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ADMIN_PAGE, CREATE_POST_PAGE } from "@/constants/path";
+import { HOME_PAGE, CREATE_POST_PAGE } from "@/constants/path";
 
 const AdminGNBDrawer = ({
   open,
@@ -21,7 +21,7 @@ const AdminGNBDrawer = ({
 
   // 메인 페이지로 이동
   const handleBackToMain = () => {
-    router.push(ADMIN_PAGE);
+    router.push(HOME_PAGE);
     setIsMobileMenuOpen(false);
   };
 
@@ -38,7 +38,7 @@ const AdminGNBDrawer = ({
       <DrawerContent
         className={`flex h-full flex-col items-center bg-white ${isHome ? "pt-[67px]" : "pt-12"} font-pretendard`}
       >
-        <div className="flex flex-col gap-[24px] items-center mt-[180px]">
+        <div className="mt-[180px] flex flex-col items-center gap-[24px]">
           <Image
             src="/svg/logo-with-text.svg"
             alt="logo"
@@ -51,7 +51,7 @@ const AdminGNBDrawer = ({
               type="button"
               variant="outline"
               shape="round"
-              className="w-[240px] h-[48px]"
+              className="h-[48px] w-[240px]"
               onClick={handleBackToMain}
             >
               Back to Main
@@ -60,7 +60,7 @@ const AdminGNBDrawer = ({
             <Button
               type="button"
               shape="round"
-              className="w-[240px] h-[48px]"
+              className="h-[48px] w-[240px]"
               onClick={handleCreatePost}
             >
               추가하기

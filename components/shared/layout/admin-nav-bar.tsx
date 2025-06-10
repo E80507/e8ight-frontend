@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import AdminGNBDrawer from "@/app/admin/_components/drawer";
 import { useState } from "react";
+import { HOME_PAGE } from "@/constants/path";
 
 interface AdminNavBarProps {
   isEditMode?: boolean;
@@ -25,7 +26,7 @@ const AdminNavBar = ({ isEditMode = false }: AdminNavBarProps) => {
     <header
       className={`fixed inset-x-0 top-0 z-50 w-full bg-white font-pretendard`}
     >
-      <div className="flex max-w-[1440px] web:h-[96px] items-center justify-between mx-auto p-4 web:px-[120px]">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between p-4 web:h-[96px] web:px-[120px]">
         {/* 왼쪽 영역 */}
         <div className="flex items-center">
           {/* 모바일 뒤로가기 */}
@@ -68,8 +69,8 @@ const AdminNavBar = ({ isEditMode = false }: AdminNavBarProps) => {
         </p>
 
         {/* 오른쪽 영역 */}
-        <div className="flex items-center web:gap-0 mobile:gap-4">
-          <Link href={"/"} prefetch>
+        <div className="mobile:gap-4 flex items-center web:gap-0">
+          <Link href={HOME_PAGE} prefetch>
             <Button
               variant="outline"
               size="lg"
