@@ -211,7 +211,7 @@ const ContactPage = () => {
                 form={form}
                 name="agreeToPrivacyPolicy"
                 label={
-                  <span className="pb-[0.1562rem] pretendard-body-3">
+                  <span className="pb-[0.1562rem] tablet:pt-0 pt-[20px] pretendard-body-3">
                     <span className="text-primary pretendard-title-s">
                       [필수] 개인정보 수집 동의
                     </span>
