@@ -284,7 +284,7 @@ const ManageModal = ({
                 />
               </label>
             </div>
-            <FormMessage className="ml-6 text-error !pretendard-subtitle-s">
+            <FormMessage className="text-error !pretendard-subtitle-s">
               {error}
             </FormMessage>
           </div>
