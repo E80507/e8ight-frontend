@@ -243,6 +243,27 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
     }
   };
 
+  // 파일 삭제
+  const handleRemoveFile = (index: number) => {
+    const newFileDetails = fileDetails?.filter((_, i) => i !== index) ?? [];
+    const newFileIds = fileIds.filter((_, i) => i !== index);
+
+    setFileDetails(newFileDetails);
+    setFileIds(newFileIds);
+    form.setValue(
+      "file",
+      newFileDetails.map((file) => file.url),
+      { shouldValidate: true },
+    );
+  };
+
+  // 전체 파일 삭제
+  const handleRemoveAllFiles = () => {
+    setFileDetails(null);
+    setFileIds([]);
+    form.setValue("file", [], { shouldValidate: true });
+  };
+
   return (
     <div className="web:my-[40px] web:h-full web:px-[120px]">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
@@ -413,17 +434,13 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                                 />
                               ) : (
                                 <IconButton
+                                  type="button"
                                   src={"/svg/icon/close.svg"}
                                   width={18}
                                   height={18}
                                   variant="normal"
                                   size="xs"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    setFileDetails(null);
-                                    setFileIds([]);
-                                    form.setValue("file", []);
-                                  }}
+                                  onClick={handleRemoveAllFiles}
                                 />
                               )}
                             </div>
@@ -444,41 +461,35 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                                 >
                                   <div className="flex w-[calc(100%-90px)] items-center">
                                     <div className="relative mr-2.5 size-6 overflow-hidden rounded-[2px]">
-                                      <Image
-                                        src={file.url}
-                                        alt={file.name}
-                                        fill
-                                        className="object-cover"
-                                      />
+                                      {!file.name
+                                        .toLowerCase()
+                                        .endsWith(".pdf") && (
+                                        <Image
+                                          src={file.url}
+                                          alt={file.name}
+                                          fill
+                                          className="object-cover"
+                                        />
+                                      )}
                                     </div>
+
                                     <p className="line-clamp-1 max-w-[calc(100%-100px)] overflow-hidden truncate text-label-normal pretendard-body-3">
                                       {file.name}
                                     </p>
                                   </div>
+
                                   <div className="flex items-center gap-x-6">
                                     <p className="whitespace-nowrap text-label-normal pretendard-body-3">
                                       {formatBytes(file.size)}
                                     </p>
                                     <IconButton
+                                      type="button"
                                       src={"/svg/icon/close.svg"}
                                       width={18}
                                       height={18}
                                       variant="normal"
                                       size="xs"
-                                      onClick={() => {
-                                        setFileDetails(
-                                          (prevDetails) =>
-                                            prevDetails?.filter(
-                                              (_, i) => i !== index,
-                                            ) ?? [],
-                                        );
-                                        form.setValue(
-                                          "file",
-                                          fileDetails
-                                            ?.filter((_, i) => i !== index)
-                                            .map((file) => file.url) ?? [],
-                                        );
-                                      }}
+                                      onClick={() => handleRemoveFile(index)}
                                     />
                                   </div>
                                 </div>
