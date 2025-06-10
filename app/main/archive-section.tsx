@@ -40,7 +40,7 @@ const ArchiveSection = () => {
           {posts.map((post: Post) => (
             <div
               key={post.id}
-              className="relative flex aspect-[1/1] flex-col justify-between overflow-hidden rounded-[20px] border p-[32px] tablet:aspect-[1.8/1] web:aspect-[1.39/1]"
+              className="relative flex aspect-[323/328] flex-col justify-between overflow-hidden rounded-[20px] border p-[32px] tablet:aspect-[540/297.21] web:aspect-[558/323.63]"
             >
               <Image
                 src={post.thumbnail}
