@@ -2,8 +2,12 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { CONTACT_PAGE } from "@/constants/path";
 
 export default function SubscriptionBanner() {
+  const router = useRouter();
+
   return (
     <div className="flex justify-center items-center relative tablet:h-[360px] h-[425px] overflow-hidden">
       {/* 배경 이미지 */}
@@ -33,9 +37,11 @@ export default function SubscriptionBanner() {
         </div>
 
         <Button
+          type="button"
           variant="outline"
           shape="round"
           className="relative w-[200px] h-[59px]"
+          onClick={() => router.push(CONTACT_PAGE)}
         >
           기술 문의
         </Button>
