@@ -10,8 +10,12 @@ import {
   BUSINESS_NUMBER,
 } from "@/constants/service";
 import SocialLinks from "@/app/(GNB-layout)/detail/[id]/_components/social-links";
+import SubscriptionModal from "@/app/_components/modal/subscription-modal";
+import { useState } from "react";
 
 const GlobalFooter = () => {
+  const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
+
   return (
     <footer className="bg-toast-bg px-4 py-10 font-pretendard text-label-alternative caption2-400 tablet:px-6 tablet:py-[30px] web:px-[120px] web:py-6">
       <div className="mx-auto w-full max-w-[1200px]">
@@ -34,7 +38,19 @@ const GlobalFooter = () => {
           </div>
           <SocialLinks withTitle={false} inFooter />
         </div>
-        <ActionButtons className="mb-6 border-white bg-transparent text-white" />
+
+        <ActionButtons
+          className="mb-6 border-white bg-transparent text-white"
+          isSubscriptionModalOpen={isSubscriptionModalOpen}
+          setIsSubscriptionModalOpen={setIsSubscriptionModalOpen}
+        />
+
+        {isSubscriptionModalOpen && (
+          <SubscriptionModal
+            onClickClose={() => setIsSubscriptionModalOpen(false)}
+          />
+        )}
+
         <p className="mb-1 mt-[14px] web:mt-0">{COMPANY_NAME}</p>
         <div className="flex flex-col">
           <p>
