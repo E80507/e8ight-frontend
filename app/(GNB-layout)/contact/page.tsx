@@ -211,17 +211,13 @@ const ContactPage = () => {
                 form={form}
                 name="agreeToPrivacyPolicy"
                 label={
-                  <>
-                    <span className="pb-[0.1562rem] text-primary pretendard-title-s">
+                  <span className="pb-[0.1562rem] pretendard-body-3">
+                    <span className="text-primary pretendard-title-s">
                       [필수] 개인정보 수집 동의
                     </span>
-                    <span className="pb-[0.1562rem] pretendard-body-3">
-                      : 개인정보 수집 및 이용약관을 확인하였으며, 이에
-                      동의합니다.
-                    </span>
-                  </>
+                    : 개인정보 수집 및 이용약관을 확인하였으며, 이에 동의합니다.
+                  </span>
                 }
-                isEssential={true}
               />
 
               {/* 마케팅 수신 동의 */}

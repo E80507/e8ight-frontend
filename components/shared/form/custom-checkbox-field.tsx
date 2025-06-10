@@ -57,7 +57,7 @@ const CustomCheckboxField = <T extends FieldValues>({
         const id = `checkbox-${name}-${value || "single"}`;
 
         return (
-          <FormItem className="flex flex-row items-center space-x-2">
+          <FormItem className="flex flex-col">
             <label
               htmlFor={id}
               className="flex flex-1 cursor-pointer items-center gap-2"
@@ -83,7 +83,8 @@ const CustomCheckboxField = <T extends FieldValues>({
                 </span>
               )}
             </label>
-            {showMessage && <FormMessage />}
+
+            <div className="mt-2">{showMessage && <FormMessage />}</div>
           </FormItem>
         );
       }}
