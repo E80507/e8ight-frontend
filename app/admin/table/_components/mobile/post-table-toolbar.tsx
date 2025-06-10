@@ -42,13 +42,17 @@ const PostTableToolbar = ({
   return (
     <div className="flex items-center justify-between px-[16px]">
       {/* 전체 선택 버튼 */}
-      <button type="button" className="flex items-center gap-[8px]">
+      <button
+        type="button"
+        className="flex items-center gap-[8px]"
+        onClick={handleSelectAll}
+      >
         <div className="relative">
           <input
             type="checkbox"
             checked={isAllSelected}
             onChange={handleSelectAll}
-            className="peer absolute opacity-0 size-[20px] cursor-pointer z-10"
+            className="peer absolute z-10 size-[20px] cursor-pointer opacity-0"
           />
           <Check type="square" isChecked={isAllSelected} />
         </div>
