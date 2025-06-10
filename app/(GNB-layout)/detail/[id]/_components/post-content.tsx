@@ -28,6 +28,21 @@ export default function PostContent({ post }: PostContentProps) {
     }
   };
 
+  // 전체 파일 다운로드
+  const handleDownloadAll = async () => {
+    if (!post?.files) return;
+
+    try {
+      for (const file of post.files) {
+        await handleDownload(file.fileUrl, file.fileName);
+
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
+    } catch (error) {
+      console.error("전체 파일 다운로드 중 오류 발생:", error);
+    }
+  };
+
   return (
     <>
       {post?.category !== "Downloads" && (
@@ -48,14 +63,18 @@ export default function PostContent({ post }: PostContentProps) {
 
                 <div className="flex items-center gap-[32px]">
                   <p className="text-label-normal pretendard-body-3">용량</p>
-                  <p className="text-label-normal pretendard-body-3">
+                  <button
+                    type="button"
+                    onClick={handleDownloadAll}
+                    className="hover:opacity-80"
+                  >
                     <Image
                       src="/svg/icon/download.svg"
-                      alt="download"
+                      alt="전체 다운로드"
                       width={18}
                       height={18}
                     />
-                  </p>
+                  </button>
                 </div>
               </div>
 
