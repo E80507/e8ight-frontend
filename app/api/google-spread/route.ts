@@ -52,8 +52,17 @@ export async function POST(req: Request) {
     }
 
     // 시트 이름 결정
-    const sheetName = "테스트";
-    console.log("[구글 스프레드시트 API] 선택된 시트 이름:", sheetName);
+    const sheetName = encodeURIComponent(
+      process.env.NEXT_PUBLIC_SHEET_NAME || "",
+    );
+    console.log(
+      "[구글 스프레드시트 API] 선택된 시트 이름:",
+      process.env.NEXT_PUBLIC_SHEET_NAME,
+    );
+
+    if (!sheetName) {
+      throw new Error("시트 이름이 설정되지 않았습니다.");
+    }
 
     console.log("[구글 스프레드시트 API] 구글 인증 초기화 중...");
     const auth = new GoogleAuth({
