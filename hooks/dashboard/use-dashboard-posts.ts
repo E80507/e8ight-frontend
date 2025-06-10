@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { fetchPostsBySearch, getPosts } from "@/app/api/dashboard";
 import { usePathname } from "next/navigation";
 import { POST_CATEGORY_VALUES } from "@/constants/admin";
+import { useCallback } from "react";
 
 export interface Post {
   id: string;
@@ -24,8 +25,8 @@ export interface Post {
 }
 
 export const useDashboardPosts = () => {
-  const [keyword, setKeyword] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [keyword, setKeyword] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const pathname = usePathname();
 
@@ -56,27 +57,30 @@ export const useDashboardPosts = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const fetcher = async (
-    keyword: string,
-    page: number,
-    limit: number,
-    category: string,
-  ): Promise<{ posts: Post[]; totalPages: number }> => {
-    if (keyword) {
-      return await fetchPostsBySearch({
-        page,
-        limit,
-        category,
-        keyword,
-      });
-    } else {
-      return await getPosts({
-        page,
-        limit,
-        category,
-      });
-    }
-  };
+  const fetcher = useCallback(
+    async (
+      keyword: string,
+      page: number,
+      limit: number,
+      category: string,
+    ): Promise<{ posts: Post[]; totalPages: number }> => {
+      if (keyword) {
+        return await fetchPostsBySearch({
+          page,
+          limit,
+          category,
+          keyword,
+        });
+      } else {
+        return await getPosts({
+          page,
+          limit,
+          category,
+        });
+      }
+    },
+    [],
+  );
 
   // SWR key는 keyword, page, limit 조합
   const { data, mutate, isLoading, error } = useSWR(
@@ -85,24 +89,23 @@ export const useDashboardPosts = () => {
     { keepPreviousData: true },
   );
 
-  // 검색 실행 시 keyword + page 초기화 → re-fetch 유도
   const handleSearch = (value: string) => {
+    if (keyword === value) return;
     setKeyword(value);
     setCurrentPage(1);
   };
 
   return {
-    keyword,
-    setKeyword,
-    handleSearch,
     posts: data?.posts ?? [],
-    currentPage,
     totalPages: data?.totalPages ?? 1,
-    setCurrentPage,
     isLoading,
     error,
     mutate,
     title,
     text,
+    handleSearch,
+    currentPage,
+    keyword,
+    setCurrentPage,
   };
 };

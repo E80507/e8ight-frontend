@@ -26,13 +26,13 @@ interface PostListProps {
 const PostList = ({ posts }: PostListProps) => {
   return (
     <section className="mt-6 flex flex-col  tablet:mt-10">
-      <p className="mb-6 tablet:pretendard-h1-m pretendard-h1-s tablet:mb-10">
+      <p className="mb-6 pretendard-h1-s tablet:mb-10 tablet:pretendard-h1-m">
         최신글
       </p>
 
       {posts.length > 0 ? (
         <div className="grid grid-cols-1 gap-y-[60px] tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 web:grid-cols-3 web:grid-rows-3">
-          {posts.map((post) => {
+          {posts.map((post, index) => {
             const { id, thumbnail, title, createdAt } = post;
             return (
               <Link key={id} href={`/detail/${id}`} className="w-full">
@@ -43,6 +43,7 @@ const PostList = ({ posts }: PostListProps) => {
                     fill
                     className="rounded-[20px] object-cover"
                     sizes="(max-width: 600px) 100vw, (max-width: 1025px) 50vw, 33vw"
+                    priority={index < 3}
                   />
                 </div>
                 <div className="flex flex-col gap-y-2 px-3">
@@ -56,7 +57,7 @@ const PostList = ({ posts }: PostListProps) => {
           })}
         </div>
       ) : (
-        <div className="flex items-center justify-center tablet:pretendard-subtitle-l pretendard-subtitle-m w-full h-[360px] text-[#C8C9D0]">
+        <div className="flex h-[360px] w-full items-center justify-center text-[#C8C9D0] pretendard-subtitle-m tablet:pretendard-subtitle-l">
           작성된 게시글이 없습니다.
         </div>
       )}
