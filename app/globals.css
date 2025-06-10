@@ -134,15 +134,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ql-picker-label {
   color: #a7a9b4 !important;
 }
+.ql-size .ql-picker-label {
+  color: #a7a9b4 !important;
+  border-right: 1px solid #eeeff1 !important;
+}
 
 .ql-snow {
   padding: 0 !important;
 }
 
-.ql-formats {
+.ql-formats:not(:nth-child(3)) {
   margin-right: 0 !important;
   padding: 12px !important;
   border-right: 1px solid #eeeff1 !important;
+}
+.ql-formats:last-child {
+  border-left: 1px solid #eeeff1 !important;
 }
 
 .ql-toolbar {
@@ -171,14 +178,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-family: "Pretendard", sans-serif !important;
 }
 
-.ql-picker-label {
+.ql-align .ql-picker-label {
   width: 28px !important;
   height: 28px !important;
   border: none !important;
   padding: 2px !important;
 }
 
-.ql-picker-options {
+.ql-align .ql-picker-options {
   width: 54px !important;
   margin-top: 13px !important;
   margin-left: -13px !important;
@@ -196,7 +203,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   stroke: #a7a9b4 !important;
 }
 
-.ql-picker-item {
+.ql-align .ql-picker-item {
   margin: 6px auto !important;
   padding: 2px !important;
   width: 28px !important;
@@ -206,10 +213,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ql-picker-item svg .ql-stroke {
   stroke: #a7a9b4 !important;
 }
+
 .ql-container {
   border-color: #eeeff1 !important;
 }
 
 .admin-detail-content .ql-editor {
   padding: 0 !important;
+}
+
+.ql-size .ql-picker-options {
+  margin-top: 15px !important;
+  box-shadow: none !important;
+  border-color: #eeeff1 !important;
+  width: 113px !important;
+  border-top: none !important;
+  margin-left: -0.5px !important;
+}
+
+.ql-size .ql-picker-label {
+  border: none !important;
+}
+.ql-snow .ql-picker {
+  color: #a7a9b4 !important;
 }
