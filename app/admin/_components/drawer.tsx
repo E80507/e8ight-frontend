@@ -4,7 +4,7 @@ import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { HOME_PAGE, CREATE_POST_PAGE } from "@/constants/path";
+import { ADMIN_PAGE, CREATE_POST_PAGE } from "@/constants/path";
 
 const AdminGNBDrawer = ({
   open,
@@ -21,7 +21,7 @@ const AdminGNBDrawer = ({
 
   // 메인 페이지로 이동
   const handleBackToMain = () => {
-    router.push(HOME_PAGE);
+    router.push(ADMIN_PAGE);
     setIsMobileMenuOpen(false);
   };
 

@@ -40,7 +40,7 @@ const CustomFileUploadField = ({
               className="flex h-[45px] items-center justify-between px-[16px] py-[12px]"
             >
               <div className="flex items-center gap-[10px] flex-1">
-                <div className="pretendard-body-3 text-[#474953]">
+                <div className="pretendard-body-3 text-[#474953] tablet:max-w-auto max-w-[150px] truncate">
                   {file.fileName}
                 </div>
               </div>
