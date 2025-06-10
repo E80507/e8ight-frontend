@@ -54,7 +54,7 @@ const ContactPage = () => {
         <div className="bg-white px-[16px] pb-[24px] pt-[16px] tablet:p-[24px]">
           <Form {...form}>
             <form
-              // onSubmit={onSubmit}
+              onSubmit={handleSubmit}
               ref={formRef}
               className="flex flex-col gap-[32px]"
             >
@@ -134,6 +134,7 @@ const ContactPage = () => {
                   className="placeholder:text-[#BBBDC6]"
                 />
 
+                {/* 기타 인풋 */}
                 {showOtherInput && (
                   <CustomInputField
                     form={form}
@@ -232,7 +233,7 @@ const ContactPage = () => {
               />
 
               {/* 문의하기 버튼 */}
-              <Button type="submit" shape="round" onClick={handleSubmit}>
+              <Button type="submit" shape="round">
                 문의하기
               </Button>
             </form>

@@ -54,6 +54,8 @@ const PostTableToolbar = ({
             onChange={handleSelectAll}
             className="peer absolute z-10 size-[20px] cursor-pointer opacity-0"
           />
+
+          {/* 체크박스 아이콘 */}
           <Check type="square" isChecked={isAllSelected} />
         </div>
 

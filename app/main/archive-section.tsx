@@ -20,11 +20,15 @@ const ArchiveSection = () => {
     category: "Downloads",
   });
 
+  // 게시글 목록 조회
   const { posts = [] } = usePost(params);
 
+  // PDF 다운로드 핸들러
   const onClickPdfDownload = (postId: string) => {
     setSelectedPostId(postId);
   };
+
+  // 게시글이 없을 경우 렌더링 안함
   if (posts.length === 0) return null;
 
   return (
@@ -51,8 +55,11 @@ const ArchiveSection = () => {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 quality={90}
               />
+
+              {/* 썸네일 오버레이 */}
               <div className="absolute inset-0 z-0 bg-black opacity-[0.21]" />
 
+              {/* 썸네일 오버레이 내부 */}
               <div className="relative z-10 flex flex-col gap-[16px]">
                 <Image
                   src="/svg/archive-logo.svg"
@@ -62,11 +69,14 @@ const ArchiveSection = () => {
                   className="h-[29px] w-[68px]"
                   loading="lazy"
                 />
+
+                {/* 제목 */}
                 <div className="text-white pretendard-h1-m line-clamp-2">
                   {post.title}
                 </div>
               </div>
 
+              {/* PDF 다운로드 버튼 */}
               <Button
                 size="lg"
                 variant="outline"

@@ -39,6 +39,7 @@ const AdminGNBDrawer = ({
         className={`flex h-full flex-col items-center bg-white ${isHome ? "pt-[67px]" : "pt-12"} font-pretendard`}
       >
         <div className="mt-[180px] flex flex-col items-center gap-[24px]">
+          {/* 로고 */}
           <Image
             src="/svg/logo-with-text.svg"
             alt="logo"
@@ -47,6 +48,7 @@ const AdminGNBDrawer = ({
           />
 
           <div className="flex flex-col gap-[12px]">
+            {/* Back to Main 버튼 */}
             <Button
               type="button"
               variant="outline"
@@ -57,6 +59,7 @@ const AdminGNBDrawer = ({
               Back to Main
             </Button>
 
+            {/* 추가하기 버튼 */}
             <Button
               type="button"
               shape="round"

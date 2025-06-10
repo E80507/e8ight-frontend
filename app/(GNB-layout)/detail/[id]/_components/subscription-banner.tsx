@@ -36,6 +36,7 @@ export default function SubscriptionBanner() {
           </div>
         </div>
 
+        {/* 기술 문의 버튼 */}
         <Button
           type="button"
           variant="outline"

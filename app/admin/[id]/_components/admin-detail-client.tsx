@@ -8,7 +8,7 @@ import { useDeletePosts } from "@/hooks/post/use-delete-posts";
 import { mutate } from "swr";
 import Image from "next/image";
 import Loading from "@/components/shared/loading/loading";
-import { EDIT_POST_PAGE } from "@/constants/path";
+import { ADMIN_PAGE, EDIT_POST_PAGE } from "@/constants/path";
 
 interface AdminDetailContentProps {
   params: { id: string };
@@ -33,14 +33,14 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
         await mutate(
           (key) => typeof key === "string" && key.startsWith("posts"),
         );
-        router.push("/admin");
+
+        // 어드민 메인 페이지로 이동
+        router.push(ADMIN_PAGE);
       }
     }
   };
 
-  if (isError) return <div>에러가 발생했습니다.</div>;
-  if (!post) return <Loading />;
-
+  // 필드 표시 여부 결정
   const showField = (field: string): boolean => {
     switch (post?.category) {
       case "Tech Library":
@@ -63,6 +63,9 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
     }
   };
 
+  if (isError) return <div>에러가 발생했습니다.</div>;
+  if (!post) return <Loading />;
+
   return (
     <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-[1440px] web:px-[120px] tablet:pt-[24px] tablet:pb-[40px] tablet:px-[30px]">
@@ -71,6 +74,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
           <h3 className="pretendard-title-l">게시글 상세정보</h3>
 
           <div className="flex items-center gap-[8px]">
+            {/* 삭제하기 버튼 */}
             <Button
               variant="outline"
               className="h-[48px] w-[97px]"
@@ -78,6 +82,8 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
             >
               삭제하기
             </Button>
+
+            {/* 수정하기 버튼 */}
             <Button
               className="h-[48px] w-[97px]"
               onClick={() => {

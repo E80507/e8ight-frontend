@@ -91,6 +91,7 @@ const PostFilterBar = ({
       />
 
       <div className="flex items-center justify-between">
+        {/* 총 게시글 수 */}
         <p className="pretendard-subtitle-m">총 {totalCount}건</p>
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -112,10 +113,12 @@ const PostFilterBar = ({
               <div className="flex flex-col gap-[24px]">
                 {/* 생성 일자 필터 */}
                 <div className="flex flex-col gap-[8px]">
+                  {/* 생성 일자 필터 라벨 */}
                   <label className="pretendard-body-3 text-[#5E616E]">
                     생성 일자
                   </label>
 
+                  {/* 생성 일자 선택 캘린더 */}
                   <CalendarDouble
                     date={date}
                     setDate={handleDateChange}
@@ -125,9 +128,12 @@ const PostFilterBar = ({
 
                 {/* 카테고리 필터 */}
                 <div className="flex flex-col gap-[8px]">
+                  {/* 카테고리 필터 라벨 */}
                   <label className="pretendard-body-3 text-[#5E616E]">
                     카테고리
                   </label>
+
+                  {/* 카테고리 선택 드롭다운 */}
                   <select
                     value={selectedCategoryText}
                     onChange={(e) => handleCategoryChange(e.target.value)}

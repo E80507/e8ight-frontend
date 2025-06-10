@@ -21,6 +21,7 @@ const PostSearchBar = ({
     setInputValue(e.target.value);
   };
 
+  // 엔터 키 이벤트 핸들러
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -34,6 +35,7 @@ const PostSearchBar = ({
     onReset();
   };
 
+  // 검색 제출 핸들러
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setKeyword(inputValue);

@@ -127,6 +127,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
 
   const { onPostS3PresignedUrl } = usePostS3PresignedUrl(Domain.ANNOUNCEMENT);
 
+  // 이미지 업로드
   const handleImageUpload = async (file: File): Promise<string> => {
     try {
       const [fileUrl] = await onPostS3PresignedUrl([file]);
@@ -137,6 +138,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
     }
   };
 
+  // 게시글 수정
   const { trigger: updateTrigger, isMutating: isUpdating } = useSWRMutation(
     "updatePost",
     async (key, { arg }: { arg: { id: string; data: CreatePostReq } }) => {
@@ -144,6 +146,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
     },
   );
 
+  // 게시글 수정 제출
   const handleSubmit = form.handleSubmit(
     async (data) => {
       try {
@@ -180,6 +183,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
     },
   );
 
+  // 파일 변경
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -268,10 +272,12 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
     <div className="web:my-[40px] web:h-full web:px-[120px]">
       <div className="mx-auto flex size-full max-w-[1200px] flex-col bg-white px-4 py-6 web:gap-y-8 web:rounded-lg web:p-10">
         <div className="hidden items-center justify-between web:flex">
+          {/* 제목 */}
           <h1 className="pretendard-title-m web:pretendard-title-l">
             컨텐츠 수정
           </h1>
 
+          {/* 수정하기 버튼 */}
           <Button
             size="lg"
             className="w-[97px]"
@@ -309,6 +315,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                 className="web:w-[177px]"
               />
 
+              {/* 카테고리 선택 시 표시되는 필드 */}
               {isCategorySelected && (
                 <div
                   className={`flex flex-col gap-y-4 web:gap-y-8 ${
@@ -330,11 +337,12 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                       />
                     )}
 
+                  {/* 라이브러리, 인사이트 카테고리 선택 시 표시되는 필드 */}
                   {(selectedCategory === POST_CATEGORY_VALUES.LIBRARY ||
                     selectedCategory === POST_CATEGORY_VALUES.INSIGHT) && (
                     <>
                       <div className="flex flex-col gap-y-4 web:flex-row web:gap-x-1 web:gap-y-4">
-                        {/* 제목, 저자 필드(라이브러리, 인사이트) */}
+                        {/* 제목 필드(라이브러리, 인사이트) */}
                         <CustomInputField
                           form={form}
                           name="title"
@@ -343,6 +351,8 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                           isEssential
                           noIcon
                         />
+
+                        {/* 저자 필드(라이브러리, 인사이트) */}
                         <div className="web:w-[226px]">
                           <CustomInputField
                             form={form}
@@ -355,6 +365,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                         </div>
                       </div>
 
+                      {/* 내용 필드(라이브러리, 인사이트) */}
                       <div>
                         <div
                           className={`${form.formState.errors.content ? "rounded-md border-2 border-error" : ""}`}
@@ -371,6 +382,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                             height={isMobile ? "401px" : "468px"}
                           />
                         </div>
+
                         <FormMessage className="!mt-2">
                           {form.formState.errors.content?.message}
                         </FormMessage>
@@ -384,7 +396,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                     category={selectedCategory}
                   />
 
-                  {/* 첨부하기(Downloads)  */}
+                  {/* 첨부하기 (Downloads)  */}
                   {selectedCategory === POST_CATEGORY_VALUES.DOWNLOADS && (
                     <div>
                       <div className="flex flex-col gap-y-3">
@@ -396,6 +408,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                             </span>
                           </p>
 
+                          {/* 추가하기 버튼 (Downloads) */}
                           <Button
                             variant="outline"
                             size="lg"
@@ -410,16 +423,21 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                           </Button>
                         </div>
 
+                        {/* 첨부파일 목록 */}
                         <div className="w-full overflow-hidden rounded-xl border border-line-normal">
                           <div className="flex w-full items-center justify-between bg-gray-100 px-4 py-3">
+                            {/* 파일명 */}
                             <p className="text-label-normal pretendard-body-3">
                               파일명
                             </p>
 
                             <div className="flex items-center gap-x-8">
+                              {/* 용량 */}
                               <p className="text-label-normal pretendard-body-3">
                                 용량
                               </p>
+
+                              {/* 다운로드 버튼 */}
                               {!fileDetails || fileDetails.length === 0 ? (
                                 <IconButton
                                   src={"/svg/icon/download.svg"}
@@ -446,6 +464,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                             </div>
                           </div>
 
+                          {/* 등록된 파일이 없을 경우 */}
                           {!fileDetails || fileDetails.length === 0 ? (
                             <div className="px-4 py-3">
                               <p className="text-label-assistive pretendard-body-2">
@@ -454,6 +473,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                             </div>
                           ) : (
                             <div>
+                              {/* 등록된 파일 목록 */}
                               {fileDetails?.map((file, index) => (
                                 <div
                                   key={index}
@@ -473,15 +493,19 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                                       )}
                                     </div>
 
+                                    {/* 파일명 */}
                                     <p className="line-clamp-1 max-w-[calc(100%-100px)] overflow-hidden truncate text-label-normal pretendard-body-3">
                                       {file.name}
                                     </p>
                                   </div>
 
                                   <div className="flex items-center gap-x-6">
+                                    {/* 용량 */}
                                     <p className="whitespace-nowrap text-label-normal pretendard-body-3">
                                       {formatBytes(file.size)}
                                     </p>
+
+                                    {/* 삭제 버튼 */}
                                     <IconButton
                                       type="button"
                                       src={"/svg/icon/close.svg"}
@@ -498,6 +522,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                           )}
                         </div>
 
+                        {/* 파일 업로드 인풋 */}
                         <input
                           type="file"
                           ref={fileInputRef}
@@ -506,6 +531,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                         />
                       </div>
 
+                      {/* 오류 메시지 */}
                       {errorMessage && (
                         <p className="mt-2 text-error pretendard-body-2">
                           {errorMessage}
@@ -514,6 +540,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                     </div>
                   )}
 
+                  {/* 태그 키워드 필드 */}
                   {selectedCategory !== POST_CATEGORY_VALUES.DX && (
                     <TagKeyword form={form} />
                   )}
@@ -522,6 +549,7 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                   {selectedCategory === POST_CATEGORY_VALUES.DX && (
                     <div className="flex flex-col web:mt-0 web:flex-row web:gap-y-0">
                       <div className="web:flex web:w-[453px] web:items-end">
+                        {/* 링크 연결 필드 */}
                         <CustomInputField
                           form={form}
                           name="linkUrl"
@@ -531,6 +559,8 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                           placeholder="링크를 해당 링크로 이동할 URL을 입력해주세요."
                           className="h-[57px] p-4 placeholder:text-gray-40 web:mb-0 web:rounded-r-none"
                         />
+
+                        {/* 링크 확인 버튼 */}
                         <Button
                           className={`h-[57px] web:w-[107px] web:rounded-l-none web:border-l-0 ${
                             form.formState.errors.linkUrl

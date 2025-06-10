@@ -91,7 +91,10 @@ const AdminClient = () => {
 
   return (
     <div className="relative">
+      {/* 로딩 컴포넌트 */}
       {isLoading && <Loading />}
+
+      {/* 화면 컴포넌트 */}
       <div>
         {/* pc 화면 */}
         <PostContainer

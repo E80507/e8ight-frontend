@@ -45,24 +45,32 @@ export default function PostContent({ post }: PostContentProps) {
 
   return (
     <>
+      {/* 카테고리가 다운로드가 아닐 경우 QuillViewer 표시 */}
       {post?.category !== "Downloads" && (
         <div className="tablet:mt-[40px] mt-[24px] admin-detail-content">
           <QuillViewer content={post?.content} />
         </div>
       )}
 
+      {/* 카테고리가 다운로드일 경우 첨부파일 목록 표시 */}
       {post?.files &&
         post.files.length > 0 &&
         post?.category === "Downloads" && (
           <div className="tablet:mt-[40px] mt-[24px] flex flex-col gap-y-3">
+            {/* 첨부파일 제목 */}
             <p className="pretendard-subtitle-m">첨부파일</p>
 
+            {/* 첨부파일 내용 */}
             <div className="w-full overflow-hidden rounded-xl border border-line-normal">
               <div className="flex w-full items-center justify-between bg-gray-100 px-4 py-3">
+                {/* 파일명 */}
                 <p className="text-label-normal pretendard-body-3">파일명</p>
 
                 <div className="flex items-center gap-[32px]">
+                  {/* 용량 */}
                   <p className="text-label-normal pretendard-body-3">용량</p>
+
+                  {/* 전체 다운로드 버튼 */}
                   <button
                     type="button"
                     onClick={handleDownloadAll}
@@ -85,17 +93,21 @@ export default function PostContent({ post }: PostContentProps) {
                     key={index}
                     className="flex cursor-pointer justify-between px-4 py-3"
                   >
+                    {/* 파일명 */}
                     <div className="flex w-[calc(100%-90px)] items-center">
                       <p className="line-clamp-1 tablet:max-w-none max-w-[140px] overflow-hidden truncate text-label-normal pretendard-body-3">
                         {file.fileName}
                       </p>
                     </div>
 
+                    {/* 용량 및 다운로드 버튼 */}
                     <div className="flex items-center gap-[24px]">
+                      {/* 용량 */}
                       <p className="whitespace-nowrap text-label-normal pretendard-body-3">
                         {formatBytes(file.fileSize)}
                       </p>
 
+                      {/* 다운로드 버튼 */}
                       <button
                         className="relative size-[18px] overflow-hidden rounded-[2px] hover:opacity-80"
                         onClick={(e) => {
