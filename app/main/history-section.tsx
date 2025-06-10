@@ -49,7 +49,7 @@ const HistorySection = () => {
         {/* 텍스트 영역 */}
         <div className="flex min-w-0 flex-col web:h-[523px] web:basis-[38%] web:justify-between">
           <div className="hidden items-start gap-x-2 web:flex">
-            <h3 className="pretendard-display-3 tablet:pretendard-display-2  web:pretendard-display-1">
+            <h3 className="web:pretendard-display-1">
               이에이트의 <br />
               기술 이야기를
               <br />
