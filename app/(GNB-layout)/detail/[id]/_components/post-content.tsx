@@ -86,7 +86,7 @@ export default function PostContent({ post }: PostContentProps) {
                     className="flex cursor-pointer justify-between px-4 py-3"
                   >
                     <div className="flex w-[calc(100%-90px)] items-center">
-                      <p className="line-clamp-1 max-w-[calc(100%-100px)] overflow-hidden truncate text-label-normal pretendard-body-3">
+                      <p className="line-clamp-1 tablet:max-w-auto max-w-[140px] overflow-hidden truncate text-label-normal pretendard-body-3">
                         {file.fileName}
                       </p>
                     </div>
