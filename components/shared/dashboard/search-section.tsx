@@ -25,7 +25,7 @@ const SearchSection = ({ keyword, onSearch, text }: SearchSectionProps) => {
 
   return (
     <section className="flex flex-col gap-y-[14px] font-pretendard tablet:gap-y-6">
-      <p className=" break-words  subtitle-m tablet:subtitle-l">
+      <p className="break-words subtitle-m tablet:subtitle-l">
         {text}디지털 자료를 자유롭게 찾아보세요.
       </p>
       <div className="relative flex h-[54px] w-full items-center">
@@ -35,6 +35,7 @@ const SearchSection = ({ keyword, onSearch, text }: SearchSectionProps) => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
+          className="!rounded-none"
         />
         <SearchIcon className="absolute inset-y-0 left-0 my-auto mr-4 size-6 text-gray-200" />
       </div>
