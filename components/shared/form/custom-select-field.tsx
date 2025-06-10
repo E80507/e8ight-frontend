@@ -76,7 +76,7 @@ const CustomSelectField = <T extends FieldValues>({
                         field.value ? "" : "[&>span]:text-black/40"
                       } outline outline-1 outline-transparent ${
                         error
-                          ? "border-error outline-error focus:border-error focus:outline-error"
+                          ? "border-error outline-error focus-visible:border-error focus-visible:ring-1 focus-visible:ring-error"
                           : ""
                       }`}
                     >
