@@ -29,7 +29,7 @@ const ContactPage = () => {
     // );
   };
   return (
-    <div className="bg-[#FBFBFC] tablet:px-[30px] tablet:py-[88px] web:px-[120px] web:py-[179px]">
+    <div className="bg-[#FBFBFC] tablet:px-[30px] tablet:pt-[88px] web:px-[120px] web:pt-[179px] tablet:pb-[40px]">
       <div className="mx-auto max-w-[1200px] overflow-hidden tablet:rounded-[20px]">
         {/* 배너 */}
         <div
