@@ -43,7 +43,7 @@ const HistorySection = () => {
       api.off("select", handleSelect);
     };
   }, [api]);
-  if (!data) return null;
+  if (!data || data.length === 0) return null;
 
   return (
     <section className="mx-auto max-w-[1440px] px-4 py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
@@ -68,10 +68,10 @@ const HistorySection = () => {
           <div>
             <div className="mb-8 font-pretendard">
               <p className="mb-4 text-primary subtitle-s tablet:subtitle-m web:subtitle-l">
-                {data[current]?.category}
+                {data[current].category}
               </p>
-              <p className="break-words leading-relaxed h2-r tablet:h2-l">
-                {data[current]?.title}
+              <p className="line-clamp-2 break-words leading-relaxed h2-r tablet:h2-l">
+                {data[current].title}
               </p>
             </div>
 
