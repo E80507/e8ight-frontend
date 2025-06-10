@@ -45,11 +45,10 @@ const Home = () => {
 
           {/* 히어로 섹션 */}
           <HeroSection />
+          {/* 역사 섹션 */}
+          <HistorySection />
 
           <LazyLoad>
-            {/* 역사 섹션 */}
-            <HistorySection />
-
             {/* 시뮬레이션 섹션 */}
             <SimulationSection />
 
