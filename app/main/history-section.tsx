@@ -12,6 +12,7 @@ import {
   DOWNLOADS_PAGE,
 } from "@/constants/path";
 import { useRouter } from "next/navigation";
+import { POST_CATEGORY_VALUES } from "@/constants/admin";
 
 const HistorySection = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -20,9 +21,10 @@ const HistorySection = () => {
   const { data } = useSWR("historyData", getHistoryData);
 
   const handleCategoryClick = (category: string) => {
-    console.log("카테고리?" + category);
-    if (category === "INSIGHT") router.push(TECH_INSIGHT_PAGE);
-    else if (category === "DOWNLOADS") router.push(DOWNLOADS_PAGE);
+    if (category === POST_CATEGORY_VALUES.INSIGHT)
+      router.push(TECH_INSIGHT_PAGE);
+    else if (category === POST_CATEGORY_VALUES.DOWNLOADS)
+      router.push(DOWNLOADS_PAGE);
     else router.push(TECH_LIBRARY_PAGE);
   };
 
