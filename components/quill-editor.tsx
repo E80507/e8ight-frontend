@@ -66,7 +66,12 @@ export default function QuillEditor({
       placeholder,
       modules: {
         toolbar: {
-          container: [["image"], ["bold"], [{ align: [] }]],
+          container: [
+            ["image"],
+            ["bold"],
+            [{ size: ["small", false, "large", "huge"] }],
+            [{ align: [] }],
+          ],
           handlers: {
             image: async () => {
               const input = document.createElement("input");
