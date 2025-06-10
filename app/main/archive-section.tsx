@@ -59,7 +59,7 @@ const ArchiveSection = () => {
                   alt=""
                   width={68}
                   height={29}
-                  className="-mt-px h-[29px] w-[68px]"
+                  className="h-[29px] w-[68px]"
                   loading="lazy"
                 />
                 <div className="text-white pretendard-h1-m line-clamp-2">
