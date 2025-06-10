@@ -43,8 +43,8 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
 
   const showField = (field: string): boolean => {
     switch (post?.category) {
-      case "LIBRARY":
-      case "INSIGHT":
+      case "Tech Library":
+      case "Tech Insight":
         return [
           "category",
           "author",
@@ -56,7 +56,7 @@ const AdminDetailClient = ({ params }: AdminDetailContentProps) => {
         ].includes(field);
       case "DX":
         return ["category", "title", "thumbnail", "linkUrl"].includes(field);
-      case "DOWNLOADS":
+      case "Downloads":
         return ["category", "title", "thumbnail", "files"].includes(field);
       default:
         return false;
