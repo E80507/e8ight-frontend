@@ -50,7 +50,9 @@ const PostList = ({ posts }: PostListProps) => {
                   <p className="text-label-natural pretendard-body-2">
                     {formattedDate(createdAt, "INPUT_DATE")}
                   </p>
-                  <p className="font-pretendard h2-m tablet:h2-l">{title}</p>
+                  <p className="font-pretendard h2-m tablet:h2-l line-clamp-2">
+                    {title}
+                  </p>
                 </div>
               </Link>
             );
