@@ -14,16 +14,19 @@ export default function AdminAuthGate({
   children: React.ReactNode;
 }) {
   const [input, setInput] = useState("");
-  const [isAuthed, setIsAuthed] = useState(false);
+  const [isAuthed, setIsAuthed] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isChecking, setIsChecking] = useState(true);
 
   // 이미 인증된 경우 건너뛰기
   useEffect(() => {
     const stored = localStorage.getItem("adminAuth");
-
     if (stored === "true") {
       setIsAuthed(true);
+    } else {
+      setIsAuthed(false);
     }
+    setIsChecking(false);
   }, []);
 
   // 인증 코드 입력 후 로그인 버튼 클릭 시 실행
@@ -51,6 +54,10 @@ export default function AdminAuthGate({
       handleSubmit();
     }
   };
+
+  if (isChecking) {
+    return null;
+  }
 
   if (!isAuthed) {
     return (
