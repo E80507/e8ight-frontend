@@ -14,12 +14,16 @@ const GNBDrawer = ({
   isHome,
   setIsMobileMenuOpen,
   NAV_LINKS,
+  isSubscriptionModalOpen,
+  setIsSubscriptionModalOpen,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   isHome: boolean;
   setIsMobileMenuOpen: (open: boolean) => void;
   NAV_LINKS: { label: string; path: string }[];
+  isSubscriptionModalOpen: boolean;
+  setIsSubscriptionModalOpen: (open: boolean) => void;
 }) => {
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
@@ -40,10 +44,13 @@ const GNBDrawer = ({
             </Link>
           ))}
         </div>
+
         <DrawerFooter className="flex flex-col justify-center gap-y-[26px] py-10">
           <ActionButtons
             className="border-black-1 bg-white text-black hover:border-primary hover:bg-primary"
             onClick={() => setIsMobileMenuOpen(false)}
+            isSubscriptionModalOpen={isSubscriptionModalOpen}
+            setIsSubscriptionModalOpen={setIsSubscriptionModalOpen}
           />
           <ExternalLinksNav />
         </DrawerFooter>

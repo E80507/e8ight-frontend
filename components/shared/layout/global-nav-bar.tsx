@@ -17,6 +17,7 @@ import ExternalLinksNav from "@/components/shared/layout/external-links-nav";
 import GNBDrawer from "@/app/(GNB-layout)/_components/drawer";
 import { Share2Icon } from "lucide-react";
 import { shareUrl } from "@/utils/share";
+import SubscriptionModal from "@/app/_components/modal/subscription-modal";
 
 const NAV_LINKS = [
   { label: "Tech Library", path: TECH_LIBRARY_PAGE },
@@ -28,6 +29,7 @@ const GlobalNavBar = () => {
   const path = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const clickTimer = useRef<NodeJS.Timeout>();
   const clickTimeRef = useRef<number>(0);
@@ -178,7 +180,14 @@ const GlobalNavBar = () => {
         isHome={isHome}
         setIsMobileMenuOpen={setIsMobileMenuOpen}
         NAV_LINKS={NAV_LINKS}
+        isSubscriptionModalOpen={isSubscriptionModalOpen}
+        setIsSubscriptionModalOpen={setIsSubscriptionModalOpen}
       />
+      {isSubscriptionModalOpen && (
+        <SubscriptionModal
+          onClickClose={() => setIsSubscriptionModalOpen(false)}
+        />
+      )}
     </>
   );
 };
