@@ -15,6 +15,12 @@ interface GoogleSheetsError {
   message: string;
 }
 
+interface GoogleSheetsResponse {
+  data: {
+    values?: string[][];
+  };
+}
+
 const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 const privateKey = process.env.SPREADSHEET_PRIVATE_KEY as string;
 
@@ -60,26 +66,31 @@ export async function POST(req: Request) {
 
     console.log("[구글 스프레드시트 API] 인증 클라이언트 생성 중...");
     const client = await auth.getClient();
-    let url = "";
-
-    // 뉴스레터 구독 신청
-    if (type === "newsletter") {
-      url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!A1:append`;
-    }
-
-    // 문의하기
-    if (type === "contact") {
-      url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!J1:append`;
-    }
-
-    console.log("[구글 스프레드시트 API] API 요청 URL:", url);
 
     try {
+      let url;
+      if (type === "contact") {
+        // K열의 데이터를 먼저 확인
+        const checkUrl = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!K:K`;
+        const checkResponse = (await client.request({
+          url: checkUrl,
+          method: "GET",
+        })) as GoogleSheetsResponse;
+
+        // J열의 마지막 데이터 위치 + 1 을 시작점으로 사용
+        const lastRow = checkResponse.data.values
+          ? checkResponse.data.values.length
+          : 0;
+        url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!J${lastRow + 1}:append`;
+      } else {
+        url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.NEXT_PUBLIC_SPREADSHEET_ID}/values/${sheetName}!A1:append`;
+      }
+
       const result = await client.request({
         url,
         method: "POST",
         data: {
-          values: [[type, ...values]],
+          values: [values],
         },
         headers: {
           "Content-Type": "application/json",
