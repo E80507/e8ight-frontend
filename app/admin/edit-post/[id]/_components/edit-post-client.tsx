@@ -27,7 +27,6 @@ import { FormMessage } from "@/components/ui/form";
 import { ADMIN_PAGE } from "@/constants/path";
 import { useRef } from "react";
 import { formatBytes } from "@/util/file";
-import Image from "next/image";
 import { uploadS3FileMetadata } from "@/app/api/s3";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
 import Loading from "@/components/shared/loading/loading";
@@ -480,21 +479,8 @@ const EditPostClient = ({ params }: EditPostClientProps) => {
                                   className="flex justify-between px-4 py-3"
                                 >
                                   <div className="flex w-[calc(100%-90px)] items-center">
-                                    <div className="relative mr-2.5 size-6 overflow-hidden rounded-[2px]">
-                                      {!file.name
-                                        .toLowerCase()
-                                        .endsWith(".pdf") && (
-                                        <Image
-                                          src={file.url}
-                                          alt={file.name}
-                                          fill
-                                          className="object-cover"
-                                        />
-                                      )}
-                                    </div>
-
                                     {/* 파일명 */}
-                                    <p className="line-clamp-1 max-w-[calc(100%-100px)] overflow-hidden truncate text-label-normal pretendard-body-3">
+                                    <p className="line-clamp-1 tablet:max-w-none max-w-[140px] overflow-hidden truncate text-label-normal pretendard-body-3">
                                       {file.name}
                                     </p>
                                   </div>
