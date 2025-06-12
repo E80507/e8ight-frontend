@@ -1,4 +1,6 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+"use client";
+
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 const LazyLoad = ({ children }: { children: ReactNode }) => {
   const [isIntersecting, setIsIntersecting] = useState(false);

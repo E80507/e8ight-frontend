@@ -1,3 +1,5 @@
+"use client";
+
 import ActionButtons from "@/components/shared/layout/action-buttons";
 import { useState } from "react";
 import SubscriptionModal from "../_components/modal/subscription-modal";

@@ -10,26 +10,30 @@ import CustomSelectField from "@/components/shared/form/custom-select-field";
 import CustomEmailField from "@/components/shared/form/custom-email-field";
 import CustomCheckboxField from "@/components/shared/form/custom-checkbox-field";
 import CustomCheckboxGroupField from "@/components/shared/form/custom-checkbox-group-field";
+import {
+  AMPLITUDE_EVENT_DISPLAY_NAME,
+  AMPLITUDE_EVENT_LOG_NAME,
+} from "@/constants/amplitude";
+import useTrackEvent from "@/hooks/amplitude/use-track-event";
 
 const ContactPage = () => {
   const { form, onSubmit } = usePostContact();
   const formRef = useRef<HTMLFormElement>(null);
   const [showOtherInput, setShowOtherInput] = useState(false);
-  // const { handleTrackEvent } = useTrackEvent();
+  const { handleTrackEvent } = useTrackEvent();
 
   const handleSubmit = async (e: React.FormEvent) => {
     onSubmit(e);
 
-    // todo: amplitude 추가 후 사용
     // 앰플리튜드 이벤트
-    // handleTrackEvent(
-    //   AMPLITUDE_EVENT_LOG_NAME.BUTTON_CLICK,
-    //   AMPLITUDE_EVENT_DISPLAY_NAME.BUTTON_CLICK,
-    //   { button_name: "문의하기" },
-    // );
+    handleTrackEvent(
+      AMPLITUDE_EVENT_LOG_NAME.CTA_BUTTON_CLICK,
+      AMPLITUDE_EVENT_DISPLAY_NAME.CTA_BUTTON_CLICK,
+      { button_name: "문의하기" },
+    );
   };
   return (
-    <div className="bg-[#FBFBFC] tablet:px-[30px] tablet:pt-[88px] web:px-[120px] web:pt-[179px] tablet:pb-[40px]">
+    <div className="bg-[#FBFBFC] tablet:px-[30px] tablet:pb-[40px] tablet:pt-[88px] web:px-[120px] web:pt-[179px]">
       <div className="mx-auto max-w-[1200px] overflow-hidden tablet:rounded-[20px]">
         {/* 배너 */}
         <div
@@ -212,7 +216,7 @@ const ContactPage = () => {
                 form={form}
                 name="agreeToPrivacyPolicy"
                 label={
-                  <span className="pb-[0.1562rem] tablet:pt-0 pt-[20px] pretendard-body-3">
+                  <span className="pb-[0.1562rem] pt-[20px] pretendard-body-3 tablet:pt-0">
                     <span className="text-primary pretendard-title-s">
                       [필수] 개인정보 수집 동의
                     </span>
