@@ -10,10 +10,12 @@ import {
   CEO_INFO,
   PRIVACY_OFFICER,
   BUSINESS_NUMBER,
+  SERVICE_MAIN_URL,
 } from "@/constants/service";
 import SocialLinks from "@/app/(GNB-layout)/detail/[id]/_components/social-links";
 import SubscriptionModal from "@/app/_components/modal/subscription-modal";
 import { useState } from "react";
+import Link from "next/link";
 
 const GlobalFooter = () => {
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
@@ -22,7 +24,11 @@ const GlobalFooter = () => {
     <footer className="bg-toast-bg px-4 py-10 font-pretendard text-label-alternative caption2-400 tablet:px-6 tablet:py-[30px] web:px-[120px] web:py-6">
       <div className="mx-auto w-full max-w-[1200px]">
         <div className="mb-6 flex justify-between web:items-center web:gap-y-0">
-          <div className="flex items-center gap-x-1">
+          <Link
+            className="flex items-center gap-x-1"
+            href={SERVICE_MAIN_URL}
+            target="_blank"
+          >
             <Image
               src="/svg/footer-logo.svg"
               alt="logo"
@@ -37,7 +43,7 @@ const GlobalFooter = () => {
               height={26}
               style={{ width: 59, height: 26 }}
             />
-          </div>
+          </Link>
           <SocialLinks withTitle={false} inFooter />
         </div>
 

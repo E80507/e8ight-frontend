@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 import { IconButton, Button } from "@/components/ui/button";
 import {
   TECH_INSIGHT_PAGE,
@@ -12,7 +12,7 @@ import {
   CONTACT_PAGE,
   ADMIN_PAGE,
 } from "@/constants/path";
-import { SERVICE_NAME } from "@/constants/service";
+import { SERVICE_MAIN_URL, SERVICE_NAME } from "@/constants/service";
 import ExternalLinksNav from "@/components/shared/layout/external-links-nav";
 import GNBDrawer from "@/app/(GNB-layout)/_components/drawer";
 import { Share2Icon } from "lucide-react";
@@ -30,28 +30,21 @@ const GlobalNavBar = () => {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
-  const clickTimer = useRef<NodeJS.Timeout>();
   const clickTimeRef = useRef<number>(0);
-
-  useEffect(() => {
-    if (clickCount === 1) {
-      router.push("/");
-    } else if (clickCount >= 5) {
-      router.push(ADMIN_PAGE);
-      setClickCount(0);
-    }
-  }, [clickCount, router]);
+  const clickCountRef = useRef<number>(0);
+  const clickTimer = useRef<NodeJS.Timeout>();
 
   const handleLogoClick = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
 
       const now = Date.now();
-      if (now - clickTimeRef.current > 2000) {
-        setClickCount(1);
+      const timeDiff = now - clickTimeRef.current;
+
+      if (timeDiff > 2000) {
+        clickCountRef.current = 1;
       } else {
-        setClickCount((prev) => prev + 1);
+        clickCountRef.current += 1;
       }
 
       clickTimeRef.current = now;
@@ -60,11 +53,21 @@ const GlobalNavBar = () => {
         clearTimeout(clickTimer.current);
       }
 
+      // 5번 누르면 바로 관리자 페이지 이동
+      if (clickCountRef.current >= 5) {
+        clickCountRef.current = 0;
+        return router.push(ADMIN_PAGE);
+      }
+
+      // 2초 후에 단일 클릭만 있으면 메인 페이지 열기
       clickTimer.current = setTimeout(() => {
-        setClickCount(0);
+        if (clickCountRef.current === 1) {
+          window.open(SERVICE_MAIN_URL, "_blank");
+        }
+        clickCountRef.current = 0;
       }, 2000);
     },
-    [clickCount],
+    [router],
   );
 
   const isHome = path === "/";
@@ -74,7 +77,7 @@ const GlobalNavBar = () => {
     <>
       {/* 홈페이지 데스크톱 GNB */}
       <header
-        className={`fixed z-[100] hidden w-full web:flex bg-white/[0.8] backdrop-blur-sm`}
+        className={`fixed z-[100] hidden w-full bg-white/[0.8] backdrop-blur-sm web:flex`}
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col px-[120px] py-4 font-pretendard">
           <div className="flex items-center justify-between">
@@ -119,7 +122,7 @@ const GlobalNavBar = () => {
 
       {/* 홈페이지 모바일 GNB */}
       <header
-        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between tablet:px-[30px] px-4 py-3 web:hidden bg-white/[0.8] backdrop-blur-sm ${isHome ? "h-[67px]" : "h-12"}`}
+        className={`pointer-events-auto fixed inset-x-0 top-0 z-[100] flex w-full items-center justify-between bg-white/[0.8] px-4 py-3 backdrop-blur-sm tablet:px-[30px] web:hidden ${isHome ? "h-[67px]" : "h-12"}`}
       >
         {isHome ? (
           <div className="relative h-[43px] w-[45px]">
