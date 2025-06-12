@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { LoadIcon } from "../shared/loading/loading";
 import Image from "next/image";
+
 const buttonVariants = cva(
   "flex w-full items-center justify-center whitespace-nowrap rounded-[100px] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:text-black/40",
   {
@@ -15,6 +16,8 @@ const buttonVariants = cva(
         outline:
           "border bg-white text-black disabled:bg-component-natural disabled:text-label-alternative",
         "outline-black": "border border-black disabled:border-gray-300",
+        outlineGray:
+          "border bg-white text-black disabled:bg-component-natural disabled:text-label-alternative hover:bg-[#F7F8FA] active:bg-label-disabled",
       },
       size: {
         default: "h-12 px-[15px] pretendard-title-s",
