@@ -9,23 +9,23 @@ import LazyLoad from "@/hooks/main/lazy-loading";
 import { useEffect, useState } from "react";
 import Loading from "@/components/shared/loading/loading";
 import BackgroundSection from "../main/background-section";
-// import {
-//       AMPLITUDE_EVENT_DISPLAY_NAME,
-//       AMPLITUDE_EVENT_LOG_NAME,
-// } from "@/constant/amplitude";
+import {
+  AMPLITUDE_EVENT_DISPLAY_NAME,
+  AMPLITUDE_EVENT_LOG_NAME,
+} from "@/constants/amplitude";
+import useTrackPageView from "@/hooks/amplitude/ust-track-page-view-with-UTM";
 
 const Home = () => {
-  // todo: amplitude 추가 후 사용
-  // const { trackPageView } = useTrackPageViewWithUTM();
+  const { trackPageView } = useTrackPageView();
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   if (typeof window === "undefined") return;
-  //   trackPageView(
-  //     AMPLITUDE_EVENT_LOG_NAME.MAIN_PAGE_VIEW,
-  //     AMPLITUDE_EVENT_DISPLAY_NAME.MAIN_PAGE_VIEW,
-  //   );
-  // }, [trackPageView]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    trackPageView(
+      AMPLITUDE_EVENT_LOG_NAME.LANDING_PAGE_VIEW,
+      AMPLITUDE_EVENT_DISPLAY_NAME.LANDING_PAGE_VIEW,
+    );
+  }, [trackPageView]);
 
   useEffect(() => {
     const timer = setTimeout(() => {

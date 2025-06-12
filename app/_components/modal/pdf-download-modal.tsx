@@ -11,6 +11,11 @@ import { usePostPdfDownload } from "@/hooks/pdf-download/use-post-pdf-download";
 import CustomFileUploadField from "@/components/shared/form/custom-file-upload-field";
 import { usePostDetail } from "@/hooks/post/use-post-detail";
 import { useDownloadFiles } from "@/hooks/s3/use-download-files";
+import {
+  AMPLITUDE_EVENT_DISPLAY_NAME,
+  AMPLITUDE_EVENT_LOG_NAME,
+} from "@/constants/amplitude";
+import useTrackEvent from "@/hooks/amplitude/use-track-event";
 
 interface PdfDownloadModalProps {
   postId: string;
@@ -23,7 +28,7 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
   const { post } = usePostDetail(postId);
   const { downloadFiles } = useDownloadFiles();
 
-  // const { handleTrackEvent } = useTrackEvent();
+  const { handleTrackEvent } = useTrackEvent();
 
   // 파일명을 폼에 설정
   useEffect(() => {
@@ -40,13 +45,12 @@ const PdfDownloadModal = ({ postId, onClickClose }: PdfDownloadModalProps) => {
     const isValid = await form.trigger();
     if (!isValid) return;
 
-    // todo: amplitude 추가 후 사용
     // 앰플리튜드 이벤트
-    // handleTrackEvent(
-    //   AMPLITUDE_EVENT_LOG_NAME.BUTTON_CLICK,
-    //   AMPLITUDE_EVENT_DISPLAY_NAME.BUTTON_CLICK,
-    //   { button_name: "PDF 다운로드" },
-    // );
+    handleTrackEvent(
+      AMPLITUDE_EVENT_LOG_NAME.CTA_BUTTON_CLICK,
+      AMPLITUDE_EVENT_DISPLAY_NAME.CTA_BUTTON_CLICK,
+      { button_name: "PDF 다운로드" },
+    );
 
     // 파일 URL 추출
     const fileUrls = post?.files?.map((file) => file.fileUrl) || [];
