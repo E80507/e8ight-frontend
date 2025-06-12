@@ -9,6 +9,7 @@ export interface HistoryRes {
 }
 
 export interface SiumlationRes {
+  id: string;
   title: string;
   thumbnail: string;
   createdAt: string;

@@ -10,9 +10,11 @@ import {
   TECH_INSIGHT_PAGE,
   TECH_LIBRARY_PAGE,
   DOWNLOADS_PAGE,
+  DETAIL_POST_PAGE,
 } from "@/constants/path";
 import { useRouter } from "next/navigation";
 import { POST_CATEGORY_VALUES } from "@/constants/admin";
+import Link from "next/link";
 
 const HistorySection = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -74,9 +76,13 @@ const HistorySection = () => {
               <p className="mb-4 text-primary subtitle-s tablet:subtitle-m web:subtitle-l">
                 {data[current].category}
               </p>
-              <p className="line-clamp-2 break-words leading-relaxed h2-r tablet:h2-l">
+
+              <Link
+                href={`${DETAIL_POST_PAGE}/${data[current].id}`}
+                className="line-clamp-2 break-words leading-relaxed h2-r tablet:h2-l"
+              >
                 {data[current].title}
-              </p>
+              </Link>
             </div>
 
             <Button
@@ -88,6 +94,7 @@ const HistorySection = () => {
             >
               더보기
             </Button>
+
             <Button
               size="md"
               variant="outline"
