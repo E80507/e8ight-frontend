@@ -47,3 +47,6 @@ export const GNB_EXTERNAL_LINKS = [
 ];
 
 export const YOUTUBE_LINK = "https://www.youtube.com/e8korea";
+
+export const SERVICE_MAIN_URL =
+  "https://e8ight.co.kr/?utm_source=techblog&utm_medium=mainlogo&utm_campaign=click";
