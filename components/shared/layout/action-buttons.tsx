@@ -3,12 +3,12 @@
 import SubscriptionModal from "@/app/_components/modal/subscription-modal";
 import { Button } from "@/components/ui/button";
 import { CONTACT_PAGE } from "@/constants/path";
-import Link from "next/link";
 import useTrackEvent from "@/hooks/amplitude/use-track-event";
 import {
   AMPLITUDE_EVENT_DISPLAY_NAME,
   AMPLITUDE_EVENT_LOG_NAME,
 } from "@/constants/amplitude";
+import { useRouter } from "next/navigation";
 
 interface ActionButtonsProps {
   className?: string;
@@ -24,6 +24,7 @@ const ActionButtons = ({
   setIsSubscriptionModalOpen,
 }: ActionButtonsProps) => {
   const { handleTrackEvent } = useTrackEvent();
+  const router = useRouter();
 
   const onClickContact = async () => {
     onClick?.();
@@ -34,6 +35,8 @@ const ActionButtons = ({
       AMPLITUDE_EVENT_DISPLAY_NAME.CTA_BUTTON_CLICK,
       { button_name: "1:1 상담" },
     );
+
+    router.push(CONTACT_PAGE);
   };
   const onClickSubscription = async () => {
     if (setIsSubscriptionModalOpen) {
@@ -51,22 +54,22 @@ const ActionButtons = ({
 
   return (
     <div className="flex gap-x-3">
-      <Link href={CONTACT_PAGE} prefetch>
-        <Button
-          size="lg"
-          shape="round"
-          className={`border web:w-[160px] ${className}`}
-          onClick={onClickContact}
-        >
-          1:1 상담
-        </Button>
-      </Link>
+      <Button
+        size="lg"
+        shape="round"
+        className={`border web:w-[160px] ${className}`}
+        onClick={onClickContact}
+        variant="outlineGray"
+      >
+        1:1 상담
+      </Button>
 
       <Button
         size="lg"
         shape="round"
         onClick={onClickSubscription}
         className={`border web:w-[160px] ${className}`}
+        variant="outlineGray"
       >
         뉴스레터 구독
       </Button>

@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/carousel";
 import { useEffect, useRef, useState } from "react";
 import { HistoryRes, SiumlationRes } from "../api/dto/main";
+import Link from "next/link";
+import { DETAIL_POST_PAGE } from "@/constants/path";
 
 interface CarouselBoxProps {
   items: HistoryRes[] | SiumlationRes[];
@@ -73,7 +75,10 @@ const CarouselBox = ({ items, onChange, setApi }: CarouselBoxProps) => {
       <CarouselContent className="flex-1">
         {items.map((item, i) => (
           <CarouselItem key={i}>
-            <div className="relative aspect-[7/8] size-full overflow-hidden rounded-[20px]">
+            <Link
+              href={`${DETAIL_POST_PAGE}/${item.id}`}
+              className="relative block aspect-[7/8] size-full overflow-hidden rounded-[20px]"
+            >
               <Image
                 src={item.thumbnail ?? "/images/main/default-thumbnail.png"}
                 alt="이미지"
@@ -82,7 +87,7 @@ const CarouselBox = ({ items, onChange, setApi }: CarouselBoxProps) => {
                 sizes="(max-width:600px) 100vw, (max-width: 1025px) 50vw, 33vw h-full"
                 priority
               />
-            </div>
+            </Link>
           </CarouselItem>
         ))}
       </CarouselContent>

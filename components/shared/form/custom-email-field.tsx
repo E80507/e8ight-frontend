@@ -135,7 +135,7 @@ const CustomEmailField = <T extends FieldValues>({
                     <div onClick={(e) => e.stopPropagation()}>
                       <Input
                         type="text"
-                        className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                        className="border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0 tablet:max-w-none max-w-[100px]"
                         placeholder="직접 입력"
                         onChange={(e) =>
                           handleCustomDomainChange(e.target.value, field)
