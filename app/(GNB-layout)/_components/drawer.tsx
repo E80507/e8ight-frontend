@@ -37,7 +37,7 @@ const GNBDrawer = ({
               key={href}
               prefetch={false}
               href={href}
-              className="h1-m"
+              className="h1-m text-label-strong hover:text-label-alternative active:text-label-strong transition-colors duration-300 ease-in-out"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {label}
@@ -47,7 +47,7 @@ const GNBDrawer = ({
 
         <DrawerFooter className="flex flex-col justify-center gap-y-[26px] py-10">
           <ActionButtons
-            className="border-black-1 bg-white text-black hover:border-primary hover:bg-primary"
+            className="border-black-1 bg-white text-black hover:bg-[#F7F8FA] active:bg-[#D6D7DC]"
             onClick={() => setIsMobileMenuOpen(false)}
             isSubscriptionModalOpen={isSubscriptionModalOpen}
             setIsSubscriptionModalOpen={setIsSubscriptionModalOpen}
