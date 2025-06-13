@@ -49,7 +49,7 @@ const HistorySection = () => {
 
   return (
     <section className="mx-auto max-w-[1440px] px-4 py-[80px] tablet:px-[30px] web:px-[120px] web:py-[100px]">
-      <div className="flex flex-col  web:flex-row web:justify-between web:gap-x-[21%]">
+      <div className="flex flex-col web:flex-row web:justify-between web:gap-x-[21%]">
         {/* 텍스트 영역 */}
         <div className="flex min-w-0 flex-col web:basis-[38%] web:justify-between">
           <h3 className="hidden web:block web:pretendard-display-1">
@@ -76,7 +76,7 @@ const HistorySection = () => {
               </p>
               <Link
                 href={`${DETAIL_POST_PAGE}/${data[current].id}`}
-                className="line-clamp-2 break-words leading-relaxed h2-r tablet:h2-l"
+                className="line-clamp-1 break-words leading-relaxed h2-r tablet:h2-l"
               >
                 {data[current].title}
               </Link>
