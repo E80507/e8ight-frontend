@@ -39,7 +39,7 @@ export default function SocialLinks({
       )}
 
       {/* 소셜 링크 */}
-      <div className="flex items-center gap-[24px] tablet:gap-[40px]">
+      <div className="flex items-center gap-[18px] tablet:gap-[40px]">
         {SOCIAL_LINKS.map((social) => (
           <Link
             key={social.icon}

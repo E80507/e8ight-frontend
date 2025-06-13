@@ -23,9 +23,9 @@ const GlobalFooter = () => {
   return (
     <footer className="bg-toast-bg px-4 py-10 font-pretendard text-label-alternative caption2-400 tablet:px-6 tablet:py-[30px] web:px-[120px] web:py-6">
       <div className="mx-auto w-full max-w-[1200px]">
-        <div className="mb-6 flex justify-between web:items-center web:gap-y-0">
+        <div className="web:mb-6 mb-[32px] flex justify-between web:items-center web:gap-y-0">
           <Link
-            className="flex items-center gap-x-1"
+            className="flex items-center gap-x-[4px]"
             href={SERVICE_MAIN_URL}
             target="_blank"
           >
@@ -47,36 +47,41 @@ const GlobalFooter = () => {
           <SocialLinks withTitle={false} inFooter />
         </div>
 
-        <ActionButtons
-          className="mb-6 border-white bg-transparent text-white"
-          isSubscriptionModalOpen={isSubscriptionModalOpen}
-          setIsSubscriptionModalOpen={setIsSubscriptionModalOpen}
-        />
-
         {isSubscriptionModalOpen && (
           <SubscriptionModal
             onClickClose={() => setIsSubscriptionModalOpen(false)}
           />
         )}
 
-        <p className="mb-1 mt-[14px] web:mt-0">{COMPANY_NAME}</p>
-        <div className="flex flex-col">
-          <p>
-            {PRIVACY_OFFICER.title} : {PRIVACY_OFFICER.name} | 개인정보처리방침
-          </p>
-          <p>
-            {CEO_INFO.title} : {CEO_INFO.name} | 사업자등록번호 :{" "}
-            {BUSINESS_NUMBER}
-          </p>
-          <div>
-            문의하기 :{" "}
-            <a href={`mailto:${CONTACT_INFO.email}`}>{CONTACT_INFO.email}</a>
-            <span> | </span>
-            고객지원 :{" "}
-            <a href={`tel:${CONTACT_INFO.phone}`}>{CONTACT_INFO.phone}</a>
+        <div className="flex web:flex-row flex-col web:items-end justify-between">
+          <div className="flex flex-col">
+            <p className="mb-[4px]">{COMPANY_NAME}</p>
+            <p>
+              {PRIVACY_OFFICER.title} : {PRIVACY_OFFICER.name} |
+              개인정보처리방침
+            </p>
+            <p>
+              {CEO_INFO.title} : {CEO_INFO.name} | 사업자등록번호 :{" "}
+              {BUSINESS_NUMBER}
+            </p>
+            <div>
+              문의하기 :{" "}
+              <a href={`mailto:${CONTACT_INFO.email}`}>{CONTACT_INFO.email}</a>
+              <span> | </span>
+              고객지원 :{" "}
+              <a href={`tel:${CONTACT_INFO.phone}`}>{CONTACT_INFO.phone}</a>
+            </div>
+            <p>{COMPANY_ADDRESS.fullAddress}</p>
+            <p className="mt-4">{COPYRIGHT}</p>
           </div>
-          <p>{COMPANY_ADDRESS.fullAddress}</p>
-          <p className="mt-4">{COPYRIGHT}</p>
+
+          <div className="web:ml-0 ml-auto">
+            <ActionButtons
+              className="web:mt-0 mt-[32px] border-white bg-transparent text-white"
+              isSubscriptionModalOpen={isSubscriptionModalOpen}
+              setIsSubscriptionModalOpen={setIsSubscriptionModalOpen}
+            />
+          </div>
         </div>
       </div>
     </footer>
