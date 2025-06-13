@@ -81,7 +81,7 @@ const ArchiveSection = () => {
                 size="lg"
                 variant="outline"
                 shape="round"
-                className="relative z-10 ml-auto h-[37px] w-[120px] pretendard-title-s tablet:h-[48px] tablet:w-[160px]"
+                className="relative z-10 h-[37px] w-[120px] pretendard-title-s tablet:h-[48px] tablet:w-[160px]"
                 onClick={() => onClickPdfDownload(post.id)}
               >
                 PDF 다운로드

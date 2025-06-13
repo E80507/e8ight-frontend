@@ -1,28 +1,21 @@
 "use client";
 
-import CustomInputField from "@/components/shared/form/custom-input-field";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
 import Image from "next/image";
-import { usePostSubscribe } from "@/hooks/subscribe/use-post-subscribe";
 import OneButtonModal from "../_components/modal/one-button-modal";
 import { useState } from "react";
 
 const SubscriptionSection = () => {
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
-  const { onSubmit, form } = usePostSubscribe(() =>
-    setIsCompleteModalOpen(true),
-  );
-
-  // 구독 신청 핸들러
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await onSubmit(e);
-  };
 
   // 구독 완료 모달 닫기 핸들러
   const handleCompleteModalClose = () => {
     setIsCompleteModalOpen(false);
+  };
+
+  // 뉴스레터 신청 버튼 클릭 핸들러
+  const handleMoveStibee = () => {
+    window.open(process.env.NEXT_PUBLIC_STIBEE_URL, "_blank");
   };
 
   return (
@@ -56,30 +49,16 @@ const SubscriptionSection = () => {
             </p>
           </div>
 
-          <Form {...form}>
-            <form onSubmit={handleSubmit}>
-              {/* 이메일 인풋 */}
-              <CustomInputField
-                form={form}
-                name="email"
-                placeholder="이메일을 입력해주세요."
-                className="w-[328px] rounded-[100px] px-[24px] text-black pretendard-body-2"
-              />
-
-              {/* 뉴스레터 신청 버튼 */}
-              <div className="mt-[32px] flex justify-center">
-                <Button
-                  type="submit"
-                  size="lg"
-                  variant="outline"
-                  shape="round"
-                  className="w-[160px] pretendard-title-s placeholder:text-[#C8C9D0]"
-                >
-                  뉴스레터 신청하기
-                </Button>
-              </div>
-            </form>
-          </Form>
+          <Button
+            type="button"
+            size="lg"
+            variant="outline"
+            shape="round"
+            className="w-[160px] pretendard-title-s placeholder:text-[#C8C9D0]"
+            onClick={handleMoveStibee}
+          >
+            뉴스레터 신청하기
+          </Button>
 
           {/* 구독 완료 모달 */}
           {isCompleteModalOpen && (
