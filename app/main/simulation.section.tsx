@@ -157,7 +157,7 @@ const SimulationSection = () => {
                     </div>
                     {/* 텍스트 */}
                     <div className="px-3">
-                      <p className="text-label-natural pretendard-body-2">
+                      <p className="!leading-[150%] text-label-natural pretendard-body-1">
                         {formattedDate(item.createdAt, "INPUT_DATE")}
                       </p>
                       <p className="break-keep font-pretendard text-black h2-l">
