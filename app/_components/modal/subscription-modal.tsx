@@ -45,7 +45,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
         </button>
 
         <div className="flex flex-col gap-5">
-          <div className="relative h-[423px] overflow-hidden px-[16px] pb-[60px] pt-[84px] tablet:h-[464px] tablet:px-[40px] tablet:pt-[84px]">
+          <div className="relative flex items-center justify-center h-[423px] overflow-hidden px-[16px] tablet:h-[464px] tablet:px-[40px]">
             <Image
               src="/images/subscription.webp"
               alt="Subscription background"
@@ -60,7 +60,7 @@ const SubscriptionModal = ({ onClickClose }: SubscriptionModalProps) => {
             <div className="absolute inset-0 z-0 bg-black/70" />
 
             {/* 콘텐츠 */}
-            <div className="relative z-10 flex h-full flex-col items-center gap-[20px] text-center text-white tablet:gap-[32px]">
+            <div className="relative z-10 flex flex-col items-center gap-[20px] text-center text-white tablet:gap-[32px]">
               <div className="flex flex-col gap-[17px]">
                 <h2 className="gibson-heading-3 tablet:gibson-heading-2 web:gibson-heading-1">
                   Global No.1
