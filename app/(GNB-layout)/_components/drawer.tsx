@@ -37,7 +37,7 @@ const GNBDrawer = ({
               key={href}
               prefetch={false}
               href={href}
-              className="h1-m text-label-strong hover:text-label-alternative active:text-label-strong transition-colors duration-300 ease-in-out"
+              className="text-black transition-colors duration-300 ease-in-out h1-m hover:text-label-alternative active:text-black"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {label}
