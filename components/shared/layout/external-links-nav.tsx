@@ -17,7 +17,7 @@ const ExternalLinksNav = ({ className }: ExternalLinksNavProps) => {
           key={label}
           href={href}
           target={target}
-          className="text-label-normal hover:text-label-alternative active:text-label-strong transition-colors duration-300 ease-in-out"
+          className="text-label-normal transition-colors duration-300 ease-in-out hover:text-label-alternative active:text-black"
         >
           {label}
         </Link>

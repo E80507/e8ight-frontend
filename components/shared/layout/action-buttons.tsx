@@ -53,7 +53,7 @@ const ActionButtons = ({
   };
 
   return (
-    <div className="flex web:gap-x-3 gap-x-[16px]">
+    <div className="flex gap-x-[16px] web:gap-x-3">
       <Button
         size="lg"
         shape="round"
