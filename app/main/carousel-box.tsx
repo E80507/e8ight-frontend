@@ -54,14 +54,14 @@ const CarouselBox = ({ items, onChange, setApi }: CarouselBoxProps) => {
       plugins={[autoplayRef.current]}
       autoplayRef={autoplayRef}
     >
-      <div className="flex items-start justify-between gap-x-2 web:mb-6 web:flex-col">
+      <div className="flex items-start justify-between gap-x-2">
         <h3 className="pretendard-display-3 tablet:pretendard-display-2 web:hidden">
           이에이트의 <br />
           기술 이야기를
           <br />
           전합니다.
         </h3>
-        <div className="flex gap-x-4 self-end">
+        <div className="flex gap-x-4 self-end web:absolute web:-top-14 web:right-0">
           <CarouselPrevious
             className="border-none bg-transparent"
             svgColor="text-black"
