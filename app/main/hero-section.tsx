@@ -17,7 +17,7 @@ const HeroSection = () => {
         </h1>
 
         <ActionButtons
-          className="border-black-1 bg-white text-black hover:border-primary hover:bg-primary"
+          className="border-white bg-transparent text-white hover:bg-white hover:text-black"
           isSubscriptionModalOpen={isSubscriptionModalOpen}
           setIsSubscriptionModalOpen={setIsSubscriptionModalOpen}
         />
