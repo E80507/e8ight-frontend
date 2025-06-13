@@ -16,6 +16,7 @@ const SubscriptionSection = () => {
   // 뉴스레터 신청 버튼 클릭 핸들러
   const handleMoveStibee = () => {
     window.open(process.env.NEXT_PUBLIC_STIBEE_URL, "_blank");
+    console.log("STIBEE_URL", process.env.NEXT_PUBLIC_STIBEE_URL);
   };
 
   return (
