@@ -8,9 +8,9 @@ const HeroSection = () => {
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
 
   return (
-    <section className="relative mx-auto min-h-screen w-full max-w-[1440px] px-4 tablet:px-[30px] web:h-[calc(100vh-139px)] web:px-[120px] web:pt-[100px]">
-      <div className="absolute bottom-0 mb-[100px] flex flex-col gap-x-2 text-center text-white ">
-        <h1 className="mb-8 text-left !leading-[140%] text-white gibson-h1-s tablet:gibson-h1-m web:gibson-h1-l">
+    <section className="relative mx-auto flex min-h-screen w-full max-w-[1440px] items-center justify-center px-4 tablet:px-[30px] web:h-[calc(100vh-139px)] web:px-[120px] web:pt-[100px]">
+      <div className=" flex flex-col items-center gap-x-2 text-center text-white">
+        <h1 className="mb-8 !leading-[140%] text-white gibson-h1-m web:gibson-h1-l">
           Global No.1
           <br />
           Digital Twin Platform
